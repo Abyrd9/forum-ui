@@ -1,6 +1,6 @@
 const hexRegex = /^#[0-9a-zA-Z]{6}$/;
 
-export const changeColor = (hexCode, int = 0) => {
+export const changeColor = (hexCode, int = 0, opacity = 1) => {
   const multiplier = Math.abs(int) * 0.85;
   if (!hexRegex.test(hexCode)) return hexCode;
   const hex = hexCode.replace('#', '');
@@ -21,5 +21,5 @@ export const changeColor = (hexCode, int = 0) => {
   const GG = getValue(parseInt(hex.slice(2, 4), 16));
   const BB = getValue(parseInt(hex.slice(4, 8), 16));
 
-  return `rgba(${RR}, ${GG}, ${BB})`;
+  return `rgba(${RR}, ${GG}, ${BB}, ${opacity})`;
 };
