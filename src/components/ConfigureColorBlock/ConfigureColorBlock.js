@@ -1,11 +1,35 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { ConfigureColorBlockContainer, PaletteBlock } from './ConfigureColorBlock.styles';
 import PencilIcon from '../Icons/PencilIcon';
 import EditIcon from '../Icons/EditIcon';
 import TitleInput from '../TitleInput/TitleInput';
 import generatePalette from '../../helpers/generatePalette';
+
+const isHexRegex = /^#[0-9a-zA-Z]{0,6}$/;
+const isFullHexRegex = /^#[0-9a-zA-Z]{6}$/;
+
+const genItem = (title, val, flatten = false) => {
+  const item = flatten
+    ? {
+        title,
+        flat: true,
+        ignore: true,
+        draft: val,
+        value: '#F1F1F0',
+        palette: '#F1F1F0',
+      }
+    : {
+        title,
+        flat: false,
+        ignore: false,
+        draft: val,
+        value: val,
+        palette: generatePalette(val),
+      };
+  return item;
+};
 
 const ConfigureColorBlock = ({
   title,
@@ -18,41 +42,66 @@ const ConfigureColorBlock = ({
   handleChangeDraft,
   handleEditColor,
   handleRemoveColor,
+  handleAddColor,
+  creator,
 }) => {
-  const handleOnChangeDraft = ({ target }) => {
-    const val = target.value;
-    const isHex = /^#[0-9a-zA-Z]{0,6}$/.test(val);
-    if (isHex) {
-      handleChangeDraft(target.value);
-    }
-  };
+  const [creatorDraft, setCreatorDraft] = useState('');
 
-  const handleOnBlurDraft = ({ target }) => {
-    const val = target.value;
-    const isHex = /^#[0-9a-zA-Z]{6}$/.test(val);
-    if (val === '#') {
-      handleRemoveColor();
-    } else if (isHex) {
-      handleEditColor({ title, draft: val, value: val, palette: generatePalette(val) });
-    } else {
-      handleEditColor({ title, draft: val, value: '#F1F1F0', flat: true, palette: '#F1F1F0' });
-    }
-  };
-
-  const handleOnChangeTitle = ({ target }) => {
-    handleChangeTitle(target.value);
-  };
-
-  const handleOnBlurTitle = ({ target }) => {
+  const handleChange = ({ target }, type) => {
     let val = target.value;
-    if (val === '') val = `color${index + 1}`;
-    handleChangeTitle(val);
+    let isHex = isHexRegex.test(val);
+    const isFullHex = isFullHexRegex.test(val);
+
+    switch (type) {
+      case 'CHANGE_CREATOR_DRAFT':
+        if (val.length === 1 && val !== '#') val = `#${val}`;
+        isHex = isHexRegex.test(val);
+        if (isHex) setCreatorDraft(val);
+        break;
+      case 'BLUR_CREATOR_DRAFT':
+        if (isFullHex) handleAddColor(genItem(`color${index}`, val));
+        if (val === '#') setCreatorDraft('');
+        break;
+      case 'CHANGE_DRAFT':
+        if (isFullHex) {
+          handleEditColor(genItem(title, val));
+        } else if (isHex) {
+          handleChangeDraft(val);
+        }
+        break;
+      case 'BLUR_DRAFT':
+        if (val === '#') {
+          handleRemoveColor();
+        } else if (isFullHex) {
+          handleEditColor(genItem(title, val));
+        } else {
+          handleEditColor(genItem(title, val, true));
+        }
+        break;
+      case 'CHANGE_TITLE':
+        handleChangeTitle(val);
+        break;
+      case 'BLUR_TITLE':
+        if (val === '') val = `color${index + 1}`;
+        handleChangeTitle(val);
+        break;
+      default:
+        break;
+    }
   };
+
+  const draftChangeType = creator ? 'CHANGE_CREATOR_DRAFT' : 'CHANGE_DRAFT';
+  const draftBlurType = creator ? 'BLUR_CREATOR_DRAFT' : 'BLUR_DRAFT';
 
   return (
-    <ConfigureColorBlockContainer hex={value} palette={palette} flat={flat}>
+    <ConfigureColorBlockContainer hex={value} palette={palette} flat={flat} creator={creator}>
       <label className="configure-color-block__title-block">
-        <TitleInput value={title} onChange={handleOnChangeTitle} onBlur={handleOnBlurTitle} />
+        <TitleInput
+          value={title}
+          onChange={e => handleChange(e, 'CHANGE_TITLE')}
+          onBlur={e => handleChange(e, 'BLUR_TITLE')}
+          disabled={creator}
+        />
         <EditIcon className="configure-color-block__title-icon" />
       </label>
       <label className="configure-color-block__color-block">
@@ -60,10 +109,11 @@ const ConfigureColorBlock = ({
           <PencilIcon className="configure-color-block__color-icon" />
         </span>
         <input
-          value={draft}
-          onChange={handleOnChangeDraft}
-          onBlur={handleOnBlurDraft}
+          value={creator ? creatorDraft : draft}
+          onChange={e => handleChange(e, draftChangeType)}
+          onBlur={e => handleChange(e, draftBlurType)}
           className="configure-color-block__color-input"
+          placeholder={creator ? '#000000' : ''}
         />
       </label>
       <div className="configure-color-block__palette-block">

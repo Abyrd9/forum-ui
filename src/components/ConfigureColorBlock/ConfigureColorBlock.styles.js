@@ -3,8 +3,10 @@ import lightOrDark from '../../helpers/lightOrDark';
 
 export const ConfigureColorBlockContainer = styled.div`
   ${props => {
-    const { theme = {}, hex = '', palette = {}, flat = false } = props;
+    const { theme = {}, hex = '', palette = {}, flat = false, creator = false } = props;
     const { colors = {}, font = {}, spacing = {} } = theme;
+
+    const color = creator ? colors.neutral[300] : hex;
     return css`
       margin-bottom: ${spacing[400]};
       input:active,
@@ -21,36 +23,33 @@ export const ConfigureColorBlockContainer = styled.div`
           border-bottom: 1px solid rgba(0, 0, 0, 0);
           &:hover,
           &:focus-within {
-            border-bottom: 1px solid ${hex};
-            cursor: text;
+            border-bottom: 1px solid ${creator ? 'rgba(0, 0, 0, 0)' : color};
+            cursor: ${creator ? 'pointer' : 'text'};
           }
-        }
-        &__title-input {
-          text-transform: capitalize;
-          font-size: ${font[400]};
-          color: ${colors.black};
         }
         &__title-icon {
           padding-left: 4px;
           height: 8px;
           width: 8px;
+          ${creator && 'display none;'};
         }
         &__color-block {
           cursor: text;
           display: flex;
           align-items: center;
-          border: 1px solid ${flat ? hex : colors.black};
+          border: 1px solid ${flat ? color : colors.black};
           padding: 16px;
           border-radius: 5px;
           margin-bottom: ${spacing[200]};
           transition: all 200ms ease;
+          ${creator && `border: 1px solid ${colors.neutral[100]}`}
           &:hover {
-            border: 1px solid ${hex};
-            box-shadow: ${hex} 0px 0px 2px;
+            border: 1px solid ${color};
+            box-shadow: ${color} 0px 0px 2px;
           }
           &:focus-within {
-            border: 1px solid ${hex};
-            box-shadow: ${hex} 0px 0px 6px;
+            border: 1px solid ${color};
+            box-shadow: ${color} 0px 0px 6px;
           }
         }
         &__color-icon-container {
@@ -60,13 +59,14 @@ export const ConfigureColorBlockContainer = styled.div`
           display: flex;
           justify-content: center;
           align-items: center;
-          background-color: ${hex};
+          background-color: ${creator ? 'transparent' : color};
         }
         &__color-icon {
           height: 14px;
           width: 14px;
           path {
             fill: ${lightOrDark(hex) === 'light' ? palette[800] : palette[100]};
+            ${creator && `fill: ${color}`};
           }
         }
         &__color-input {
@@ -74,6 +74,10 @@ export const ConfigureColorBlockContainer = styled.div`
           max-width: 100px;
           margin-left: 25%;
           margin-bottom: -5px;
+          color: ${creator ? colors.neutral[800] : colors.black};
+          &::placeholder {
+            color: ${creator ? color : colors.black};
+          }
         }
         &__palette-block {
           display: flex;

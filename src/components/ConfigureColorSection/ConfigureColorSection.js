@@ -10,6 +10,7 @@ const palettes = [
   {
     title: 'primary',
     flat: false,
+    ignore: false,
     draft: '#84DCC6',
     value: '#84DCC6',
     palette: generatePalette('#84DCC6'),
@@ -17,6 +18,7 @@ const palettes = [
   {
     title: 'secondary',
     flat: false,
+    ignore: false,
     draft: '#FE5F55',
     value: '#FE5F55',
     palette: generatePalette('#FE5F55'),
@@ -24,6 +26,7 @@ const palettes = [
   {
     title: 'tertiary',
     flat: false,
+    ignore: false,
     draft: '#006989',
     value: '#006989',
     palette: generatePalette('#006989'),
@@ -31,6 +34,7 @@ const palettes = [
   {
     title: 'neutral',
     flat: false,
+    ignore: false,
     draft: '#BEBEBE',
     value: '#BEBEBE',
     palette: generatePalette('#BEBEBE'),
@@ -72,19 +76,30 @@ const ConfigureColorSection = () => {
         {state.map((colorBlock, index) => (
           <Column col={4}>
             <ConfigureColorBlock
+              handleChangeTitle={value => dispatch({ type: 'EDIT_COLOR_TITLE', index, value })}
+              handleChangeDraft={value => dispatch({ type: 'EDIT_COLOR_DRAFT', index, value })}
+              handleEditColor={payload => dispatch({ type: 'EDIT_COLOR_ITEM', index, payload })}
+              handleRemoveColor={() => dispatch({ type: 'REMOVE_COLOR_ITEM', index })}
+              handleAddColor={payload => dispatch({ type: 'ADD_COLOR_ITEM', payload })}
               title={colorBlock.title}
               value={colorBlock.value}
               draft={colorBlock.draft}
               palette={colorBlock.palette}
               flat={colorBlock.flat}
               index={index}
-              handleChangeTitle={value => dispatch({ type: 'EDIT_COLOR_TITLE', index, value })}
-              handleChangeDraft={value => dispatch({ type: 'EDIT_COLOR_DRAFT', index, value })}
-              handleEditColor={payload => dispatch({ type: 'EDIT_COLOR_ITEM', index, payload })}
-              handleRemoveColor={() => dispatch({ type: 'REMOVE_COLOR_ITEM', index })}
             />
           </Column>
         ))}
+        <Column col={4}>
+          <ConfigureColorBlock
+            handleAddColor={payload => dispatch({ type: 'ADD_COLOR_ITEM', payload })}
+            title="Create New Color"
+            palette="#F1F1F0"
+            index={state.length}
+            creator
+            flat
+          />
+        </Column>
       </Row>
     </ConfigureColorSectionContainer>
   );
