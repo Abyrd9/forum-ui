@@ -21,7 +21,7 @@ const styleMap = obj => props => {
     return acc;
   }, []);
 
-  value = styleMapArr.find(([key, val]) => (key === 'default' ? val : ''));
+  value = styleMapArr.find(([key, val]) => key === 'default');
 
   value = filteredProps.reduce((acc, [key, val]) => {
     const map = Object.fromEntries(styleMapArr);
