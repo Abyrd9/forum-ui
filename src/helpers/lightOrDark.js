@@ -5,8 +5,9 @@ const lightOrDark = color => {
   let r;
   let g;
   let b;
-  if (color.match(/^rgb/)) {
+  if (/^rgb/.test(newColor)) {
     newColor = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
+    if (!newColor) return '';
     r = newColor[1];
     g = newColor[2];
     b = newColor[3];

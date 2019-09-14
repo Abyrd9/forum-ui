@@ -17,6 +17,7 @@ const calculate = (base, ratio, multiplier, type) => {
 
 const fontBase = 16;
 const fontRatio = 1.25;
+const lineHeightRatio = 1.5;
 
 const spacingBase = 24;
 const spacingRatio = 1.5;
@@ -35,7 +36,7 @@ export const theme = {
     white: '#F1F1F0',
     default: '#0C0C0C',
   },
-  font: {
+  fontSize: {
     100: calculate(fontBase, fontRatio, 3, 'decrement'),
     200: calculate(fontBase, fontRatio, 2, 'decrement'),
     300: calculate(fontBase, fontRatio, 1, 'decrement'),
@@ -44,6 +45,17 @@ export const theme = {
     600: calculate(fontBase, fontRatio, 2, 'increment'),
     700: calculate(fontBase, fontRatio, 3, 'increment'),
     800: calculate(fontBase, fontRatio, 4, 'increment'),
+    default: calculate(fontBase),
+  },
+  lineHeight: {
+    100: calculate(fontBase, lineHeightRatio, 4, 'increment'),
+    200: calculate(fontBase, lineHeightRatio, 3, 'increment'),
+    300: calculate(fontBase, lineHeightRatio, 2, 'increment'),
+    400: calculate(fontBase, lineHeightRatio, 1, 'increment'),
+    500: calculate(fontBase, lineHeightRatio, 2, 'decrement'),
+    600: calculate(fontBase, lineHeightRatio, 3, 'decrement'),
+    700: calculate(fontBase, lineHeightRatio, 4, 'decrement'),
+    800: calculate(fontBase, lineHeightRatio, 5, 'decrement'),
     default: calculate(fontBase),
   },
   spacing: {
@@ -155,24 +167,24 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: ${theme.font.md};
+    font-size: ${theme.fontSize.md};
     font-family: 'Josefin Sans', sans-serif;
     vertical-align: baseline;
   }
   h1 {
-    font-size: ${theme.font.xxxl};
+    font-size: ${theme.fontSize.xxxl};
   }
   h2 {
-    font-size: ${theme.font.xxl};
+    font-size: ${theme.fontSize.xxl};
   }
   h3 {
-    font-size: ${theme.font.xl};
+    font-size: ${theme.fontSize.xl};
   }
   h4 {
-    font-size: ${theme.font.lg};
+    font-size: ${theme.fontSize.lg};
   }
   h5 {
-    font-size: ${theme.font.md};
+    font-size: ${theme.fontSize.md};
     text-transform: uppercase;
   }
   /* HTML5 display-role reset for older browsers */

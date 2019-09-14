@@ -74,7 +74,7 @@ const ConfigureColorSection = () => {
     <ConfigureColorSectionContainer>
       <Row stretch>
         {state.map((colorBlock, index) => (
-          <Column col={4}>
+          <Column xsUp={12} mdUp={6} lgUp={4}>
             <ConfigureColorBlock
               handleChangeTitle={value => dispatch({ type: 'EDIT_COLOR_TITLE', index, value })}
               handleChangeDraft={value => dispatch({ type: 'EDIT_COLOR_DRAFT', index, value })}

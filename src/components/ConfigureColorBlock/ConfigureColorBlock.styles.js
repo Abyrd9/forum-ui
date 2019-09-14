@@ -4,7 +4,7 @@ import lightOrDark from '../../helpers/lightOrDark';
 export const ConfigureColorBlockContainer = styled.div`
   ${props => {
     const { theme = {}, hex = '', palette = {}, flat = false, creator = false } = props;
-    const { colors = {}, font = {}, spacing = {} } = theme;
+    const { colors = {}, fontSize = {}, spacing = {} } = theme;
 
     const color = creator ? colors.neutral[300] : hex;
     return css`
@@ -25,6 +25,9 @@ export const ConfigureColorBlockContainer = styled.div`
           &:focus-within {
             border-bottom: 1px solid ${creator ? 'rgba(0, 0, 0, 0)' : color};
             cursor: ${creator ? 'pointer' : 'text'};
+          }
+          input {
+            ${creator && `color: ${color} !important`};
           }
         }
         &__title-icon {
@@ -66,17 +69,17 @@ export const ConfigureColorBlockContainer = styled.div`
           width: 14px;
           path {
             fill: ${lightOrDark(hex) === 'light' ? palette[800] : palette[100]};
-            ${creator && `fill: ${color}`};
+            ${creator && `fill: ${colors.neutral[600]}`};
           }
         }
         &__color-input {
-          font-size: ${font[500]};
+          font-size: ${fontSize[500]};
           max-width: 100px;
           margin-left: 25%;
           margin-bottom: -5px;
           color: ${creator ? colors.neutral[800] : colors.black};
           &::placeholder {
-            color: ${creator ? color : colors.black};
+            color: ${creator ? colors.neutral[600] : colors.black};
           }
         }
         &__palette-block {
@@ -93,13 +96,13 @@ export const ConfigureColorBlockContainer = styled.div`
 export const PaletteBlock = styled.div`
   ${props => {
     const { theme = {}, color = '' } = props;
-    const { font, colors } = theme;
+    const { fontSize = {}, colors = {} } = theme;
     return css`
       max-height: 40px;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: ${font[200]};
+      font-size: ${fontSize[200]};
       height: 100%;
       flex: 1;
       background-color: ${color};

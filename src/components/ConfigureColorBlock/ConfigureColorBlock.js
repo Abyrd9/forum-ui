@@ -59,7 +59,10 @@ const ConfigureColorBlock = ({
         if (isHex) setCreatorDraft(val);
         break;
       case 'BLUR_CREATOR_DRAFT':
-        if (isFullHex) handleAddColor(genItem(`color${index}`, val));
+        if (isFullHex) {
+          handleAddColor(genItem(`color${index}`, val));
+          setCreatorDraft('');
+        }
         if (val === '#') setCreatorDraft('');
         break;
       case 'CHANGE_DRAFT':
