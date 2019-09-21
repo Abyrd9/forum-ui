@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import rowStyles from './constants';
 
-import styleMap from '../../../helpers/styleMap';
+import buildStyleMap from '../../../helpers/buildStyleMap';
 
 const buildStyles = (prefix = '', device = {}, props) => {
   let styles = '';
@@ -80,10 +80,12 @@ export const RowContainer = styled.div`
     Object.values(media).forEach(query => {
       breakpoints += `${query.only} {
         width: 100%;
-        ${stretch && `
+        ${stretch &&
+          `
           width: calc(100% + ${(query.gutter || 0) * 2}px);
           margin-left: ${stretch ? `-${query.gutter || 0}px` : '0px'}`};
-        ${fill && `
+        ${fill &&
+          `
           width: 100vw;
           position: relative;
           left: 50%;
@@ -110,10 +112,10 @@ export const RowContainer = styled.div`
       display: flex;
       flex: 0 1 auto;
       /* prop styles */
-      flex-direction: ${styleMap(rowStyles.flexDirection)};
-      flex-wrap: ${styleMap(rowStyles.flexWrap)};
-      justify-content: ${styleMap(rowStyles.justifyContent)};
-      align-items: ${styleMap(rowStyles.alignItems)};
+      flex-direction: ${buildStyleMap(rowStyles.flexDirection)};
+      flex-wrap: ${buildStyleMap(rowStyles.flexWrap)};
+      justify-content: ${buildStyleMap(rowStyles.justifyContent)};
+      align-items: ${buildStyleMap(rowStyles.alignItems)};
       ${breakpoints};
     `;
   }}

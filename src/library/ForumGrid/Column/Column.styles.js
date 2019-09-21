@@ -1,16 +1,16 @@
 import styled, { css } from 'styled-components';
-import getColumnPercent from '../../../helpers/getColumnPercent';
+import calculateColumnWidth from '../../../helpers/calculateColumnWidth';
 
 const buildStyles = (prefix = '', device = {}, props) => {
   let styles = '';
   styles += `padding: 0 ${device.gutter || 0}px;`;
   if (props[prefix]) {
-    styles += `flex-basis: ${getColumnPercent(props[prefix], device.columns)};
-    max-width: ${getColumnPercent(props[prefix], device.columns)};`;
+    styles += `flex-basis: ${calculateColumnWidth(props[prefix], device.columns)};
+    max-width: ${calculateColumnWidth(props[prefix], device.columns)};`;
   }
   const isNum = value => typeof value === 'number';
   if (isNum(props[`${prefix}Offset`])) {
-    styles += `margin-left: ${getColumnPercent(props[`${prefix}Offset`], device.columns)};`;
+    styles += `margin-left: ${calculateColumnWidth(props[`${prefix}Offset`], device.columns)};`;
   }
   if (isNum(props[`${prefix}Order`])) {
     styles += `order: ${props[`${prefix}Order`]};`;
@@ -55,13 +55,13 @@ export const ColumnContainer = styled.div`
       box-sizing: border-box;
       flex: 1 0 0;
       max-width: 100%;
-      ${offset && `margin-left: ${getColumnPercent(offset, desktop.columns)} !important;`};
+      ${offset && `margin-left: ${calculateColumnWidth(offset, desktop.columns)} !important;`};
       ${order && `order: ${order}`};
       ${shrink && 'flex: 0 1 auto;'};
       ${fill && 'flex: 1 1 auto'};
       ${col &&
-        `flex-basis: ${getColumnPercent(col, desktop.columns)};
-         max-width: ${getColumnPercent(col, desktop.columns)};`};
+        `flex-basis: ${calculateColumnWidth(col, desktop.columns)};
+         max-width: ${calculateColumnWidth(col, desktop.columns)};`};
       ${typeof gutter === 'number' && `padding: 0 ${gutter}px !important;`};
       ${typeof gutterLeft === 'number' && `padding-left: ${gutterLeft}px !important;`};
       ${typeof gutterRight === 'number' && `padding-right: ${gutterRight}px !important;`};

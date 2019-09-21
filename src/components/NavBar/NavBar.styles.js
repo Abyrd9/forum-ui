@@ -4,7 +4,7 @@ export const NavBarContainer = styled.div`
   ${props => {
     const { theme = {}, active } = props;
     console.log(theme);
-    const { spacing = {}, colors = {}, fontSize = {}, media = {} } = theme;
+    const { spacing = {}, colors = {}, font = {}, media = {} } = theme;
     return css`
       width: 100%;
       padding: ${spacing[400]} 0px;
@@ -32,7 +32,7 @@ export const NavBarContainer = styled.div`
             padding-top: 3px;
             font-weight: 600;
             margin-left: 4px;
-            font-size: ${fontSize[500]};
+            font-size: ${font[500].size};
             color: ${colors.black};
           }
           svg {

@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 export const TitleInputContainer = styled.div`
   ${props => {
     const { theme = {}, width = 'null' } = props;
-    const { fontSize = {}, colors = {} } = theme;
+    const { font = {}, colors = {} } = theme;
     return css`
       position: relative;
       input,
@@ -15,7 +15,7 @@ export const TitleInputContainer = styled.div`
       .title-input {
         &__input {
           color: ${colors.black};
-          font-size: ${fontSize[400]};
+          font-size: ${font[400].size};
           width: ${width}px;
           &:disabled {
             background-color: transparent;

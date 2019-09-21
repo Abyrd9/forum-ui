@@ -1,7 +1,6 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
-import { GlobalStyle, theme } from './assets/theme';
 
+import ForumUiProvider from './assets/ForumUiProvider';
 import Grid from './library/ForumGrid/Grid';
 import Row from './library/ForumGrid/Row';
 
@@ -12,22 +11,19 @@ import ConfigureColorSection from './components/ConfigureColorSection';
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <>
-        <GlobalStyle />
-        <Grid>
-          <Row mdDownFill>
-            <NavBar />
-          </Row>
-          <PageTitle title="ForumUi" subtitle="A design system cookbook for React Developers." />
-          <BlockTitle
-            title="Colors"
-            description="A ForumUi color palette has a primary, secondary, tertiary, and neutral color value, each spread into eight shade/tints. While also adding a black and white flat color value."
-          />
-          <ConfigureColorSection />
-        </Grid>
-      </>
-    </ThemeProvider>
+    <ForumUiProvider>
+      <Grid>
+        <Row mdDownFill>
+          <NavBar />
+        </Row>
+        <PageTitle title="ForumUi" subtitle="A design system cookbook for React Developers." />
+        <BlockTitle
+          title="Colors"
+          description="A ForumUi color palette has a primary, secondary, tertiary, and neutral color value, each spread into eight shade/tints. While also adding a black and white flat color value."
+        />
+        <ConfigureColorSection />
+      </Grid>
+    </ForumUiProvider>
   );
 }
 

@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-prototype-builtins */
-const styleMap = obj => props => {
+const buildStyleMap = obj => props => {
   const propsArr = Object.entries(props);
   const objArr = Object.entries(obj);
   let value = '';
@@ -16,15 +16,15 @@ const styleMap = obj => props => {
     return acc;
   }, []);
 
-  const styleMapArr = objArr.reduce((acc, [key, val]) => {
+  const buildStyleMapArr = objArr.reduce((acc, [key, val]) => {
     if (isNum(val) || isVal(val) || isObj(val)) acc.push([key, val]);
     return acc;
   }, []);
 
-  value = styleMapArr.find(([key, val]) => key === 'default');
+  value = buildStyleMapArr.find(([key]) => key === 'default');
 
   value = filteredProps.reduce((acc, [key, val]) => {
-    const map = Object.fromEntries(styleMapArr);
+    const map = Object.fromEntries(buildStyleMapArr);
     if (map.hasOwnProperty(key) && val) {
       if (isObj(map[key]) && map[key].hasOwnProperty(val)) {
         acc = map[key][val];
@@ -39,4 +39,4 @@ const styleMap = obj => props => {
   return value;
 };
 
-export default styleMap;
+export default buildStyleMap;

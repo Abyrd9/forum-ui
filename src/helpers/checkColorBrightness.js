@@ -1,6 +1,6 @@
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-bitwise */
-const lightOrDark = color => {
+const checkColorBrightness = color => {
   let newColor = color;
   let r;
   let g;
@@ -24,4 +24,4 @@ const lightOrDark = color => {
   return 'dark';
 };
 
-export default lightOrDark;
+export default checkColorBrightness;
