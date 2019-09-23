@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import checkColorBrightness from '../../helpers/checkColorBrightness';
-import buildStyleMap from '../../helpers/buildStyleMap';
 
 export const ConfigureColorBlockContainer = styled.div`
   ${props => {

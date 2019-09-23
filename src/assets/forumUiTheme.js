@@ -27,8 +27,8 @@ const columnAmount = 12;
 
 const forumUiTheme = {
   colors: {
-    primary: buildColorPalette('#84DCC6'),
-    secondary: buildColorPalette('#FE5F55'),
+    primary: buildColorPalette('#FE5F55'),
+    secondary: buildColorPalette('#84DCC6'),
     tertiary: buildColorPalette('#006989'),
     success: buildColorPalette('#9CEC5B'),
     error: buildColorPalette('#E01A4F'),

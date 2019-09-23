@@ -1,4 +1,4 @@
-const generateUniqueKey = arr => {
+const generateUniqueKey = (arr = []) => {
   const keyList = arr.length > 0 ? arr.filter(item => item.key) : [];
 
   let text = '';
