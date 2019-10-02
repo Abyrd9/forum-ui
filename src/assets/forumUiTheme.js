@@ -77,6 +77,14 @@ const forumUiTheme = {
     }
     return spacing;
   },
+  get zIndex() {
+    const zIndex = {};
+    for (let i = 0; i <= 8; i++) {
+      const key = ((i + 4) * 100).toString();
+      zIndex[key] = i * 1000;
+    }
+    return zIndex;
+  },
   grid: {
     xs: {
       min: 0,

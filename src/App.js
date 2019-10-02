@@ -22,6 +22,10 @@ function App() {
           description="A ForumUi color palette has a primary, secondary, tertiary, and neutral color value, each spread into eight shade/tints. While also adding a black and white flat color value."
         />
         <ConfigureColorSection />
+        <BlockTitle
+          title="Typography"
+          description="A ForumUi Typography system has eight levels of font sizing."
+        />
       </Grid>
     </ForumUiProvider>
   );
