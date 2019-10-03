@@ -59,7 +59,7 @@ const Select = ({
     // an item in the list array.
     const filteredItem = listRefCollection.find(item => {
       const { innerText = '' } = item;
-      return innerText.includes(target.value);
+      return innerText.toLowerCase().includes(target.value.toLowerCase());
     });
 
     // Make sure the list item that matches the search

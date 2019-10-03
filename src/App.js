@@ -8,6 +8,7 @@ import NavBar from './components/NavBar';
 import PageTitle from './components/PageTitle';
 import BlockTitle from './components/BlockTitle';
 import ConfigureColorSection from './components/ConfigureColorSection';
+import ConfigureTypographySection from './components/ConfigureTypographySection';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
           title="Typography"
           description="A ForumUi Typography system has eight levels of font sizing."
         />
+				<ConfigureTypographySection />
         <h1 style={{ marginBottom: '50px', maxWidth: '600px' }}>
           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
           been the industrys standard dummy text ever since the 1500s.
