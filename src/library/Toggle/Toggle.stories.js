@@ -1,15 +1,44 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { storiesOf } from '@storybook/react';
 import Toggle from './Toggle';
+import { StoryBlock } from '../../../.storybook/config';
 
-storiesOf('Toggle', module)
-  .addDecorator(storyFn => <div style={{ padding: '100px' }}>{storyFn()}</div>)
-  .add('Stories', () => (
-    <div>
-      <Toggle />
-      <Toggle small />
+const FocusedToggle = () => {
+  const ToggleRef = useRef();
+
+  useEffect(() => {
+    ToggleRef.current.focus();
+  }, []);
+
+  return <Toggle ref={ToggleRef} />;
+};
+
+storiesOf('Toggle', module).add('Stories', () => (
+  <>
+    <StoryBlock>
+      <p>Large</p>
       <Toggle large />
+    </StoryBlock>
+    <StoryBlock>
+      <p>Default</p>
+      <Toggle />
+    </StoryBlock>
+    <StoryBlock>
+      <p>Focused</p>
+      <FocusedToggle />
+    </StoryBlock>
+    <StoryBlock>
+      <p>Active</p>
+      <Toggle checked />
+    </StoryBlock>
+    <StoryBlock>
+      <p>Disabled</p>
       <Toggle disabled />
-    </div>
-  ));
+    </StoryBlock>
+    <StoryBlock>
+      <p>Small</p>
+      <Toggle small />
+    </StoryBlock>
+  </>
+));

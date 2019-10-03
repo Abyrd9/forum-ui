@@ -18,30 +18,44 @@ const palettes = {
   custom: [
     {
       title: 'primary',
-      value: '#84DCC6',
+      value: '#FE5F55',
       inProgress: false,
-      palette: buildColorPalette('#84DCC6'),
+      palette: buildColorPalette('#FE5F55'),
       key: `${generateUniqueKey([])}1`,
     },
     {
       title: 'secondary',
-      value: '#FE5F55',
+      value: '#84DCC6',
       inProgress: false,
-      palette: buildColorPalette('#FE5F55'),
+      palette: buildColorPalette('#84DCC6'),
       key: `${generateUniqueKey([])}2`,
-    },
-    {
-      title: 'tertiary',
-      value: '#006989',
-      inProgress: false,
-      palette: buildColorPalette('#006989'),
-      key: `${generateUniqueKey([])}3`,
     },
     {
       title: 'neutral',
       value: '#BEBEBE',
       inProgress: false,
       palette: buildColorPalette('#BEBEBE'),
+      key: `${generateUniqueKey([])}3`,
+    },
+    {
+      title: 'warning',
+      value: '#FDE74C',
+      inProgress: false,
+      palette: buildColorPalette('#FDE74C'),
+      key: `${generateUniqueKey([])}4`,
+    },
+    {
+      title: 'success',
+      value: '#A5D836',
+      inProgress: false,
+      palette: buildColorPalette('#A5D836'),
+      key: `${generateUniqueKey([])}4`,
+    },
+    {
+      title: 'error',
+      value: '#E50F00',
+      inProgress: false,
+      palette: buildColorPalette('#E50F00'),
       key: `${generateUniqueKey([])}4`,
     },
   ],
@@ -98,7 +112,7 @@ const ConfigureColorSection = () => {
             />
           </Column>
         ))}
-        <Column col={4}>
+        <Column xsUp={12} mdUp={6} lgUp={4}>
           <ConfigureColorBlock
             colorPaletteObj={creator}
             handleAddColorPaletteObj={handleAddColorPaletteObj}

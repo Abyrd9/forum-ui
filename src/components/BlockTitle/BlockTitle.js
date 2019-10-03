@@ -9,18 +9,17 @@ const BlockTitle = ({ title, description }) => {
       <span className="block-title__divider" />
       <p className="block-title__description">{description}</p>
     </BlockTitleContainer>
-  )
+  );
 };
 
 BlockTitle.defaultProps = {
   title: '',
   description: '',
-}
+};
 
 BlockTitle.propTypes = {
   title: PropTypes.string,
-  description: PropTypes.string
-}
-
+  description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+};
 
 export default BlockTitle;

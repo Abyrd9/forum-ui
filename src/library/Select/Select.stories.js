@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import Select from './Select';
+import { StoryBlock } from '../../../.storybook/config';
 
 const Story = () => {
   const [value, updateValue] = useState('');
@@ -18,7 +19,6 @@ const Story = () => {
       value={value}
       handleOnChange={updateValue}
       list={list}
-      disabled
       infoShow
       infoMssg={{ message: 'There was a problem with your input value.', color: '#FF1053' }}
     />
@@ -26,7 +26,18 @@ const Story = () => {
 };
 
 storiesOf('Select', module).add('Stories', () => (
-  <div>
-    <Story />
-  </div>
+  <>
+    <StoryBlock>
+      <p>Base</p>
+      <Story />
+    </StoryBlock>
+    <StoryBlock>
+      <p>Focused</p>
+      <Story />
+    </StoryBlock>
+    <StoryBlock>
+      <p>Disabled</p>
+      <Story />
+    </StoryBlock>
+  </>
 ));

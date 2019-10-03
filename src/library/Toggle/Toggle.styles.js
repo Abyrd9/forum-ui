@@ -104,7 +104,6 @@ export const ToggleContainer = styled.span`
           border-radius: 20px;
           background-color: transparent;
           box-shadow: 0 0 3px ${colors.primary[400]};
-          z-index: -1;
         }
       }
 

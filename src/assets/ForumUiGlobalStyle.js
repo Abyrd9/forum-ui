@@ -3,6 +3,7 @@ import { createGlobalStyle, css } from 'styled-components';
 const ForumUiGlobalStyle = createGlobalStyle`
   ${props => {
     const { theme } = props;
+    const { colors = {} } = theme;
     return css`
       /* http://meyerweb.com/eric/tools/css/reset/ 
         v2.0 | 20110126
@@ -94,6 +95,7 @@ const ForumUiGlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         border: 0;
+        color: ${colors.black};
         font-size: ${theme.font[400].size};
         font-family: 'Josefin Sans', sans-serif;
         vertical-align: baseline;
@@ -122,6 +124,15 @@ const ForumUiGlobalStyle = createGlobalStyle`
       p {
         font-size: ${theme.font[400].size};
         line-height: ${theme.font[400].height};
+      }
+      a {
+        font-size: ${theme.font[400].size};
+        line-height: ${theme.font[400].height};
+        color: ${colors.primary[400]};
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
       }
       /* HTML5 display-role reset for older browsers */
       article,

@@ -18,6 +18,7 @@ export const BlockTitleContainer = styled.div`
         }
         &__description {
           max-width: 640px;
+          white-space: pre-wrap;
         }
       }
     `;

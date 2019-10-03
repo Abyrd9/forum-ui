@@ -94,6 +94,7 @@ export const SelectContainer = styled.div`
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
         background-color: #ffffff;
+        z-index: 1000;
         max-height: 160px;
         overflow-y: scroll;
         visibility: hidden;

@@ -53,7 +53,7 @@ const forumUiTheme = {
         height = `${parseInt(size, 10) * 1.5}px`;
       } else if (i > 0) {
         size = calc(base, 1.25, Math.abs(i), 'increment');
-        height = `${parseInt(size, 10) / 1.25}px`;
+        height = `${parseInt(size, 10) / 0.85}px`;
       }
       font[key] = { size, height };
     }
