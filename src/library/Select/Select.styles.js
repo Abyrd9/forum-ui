@@ -32,6 +32,9 @@ export const SelectContainer = styled.div`
         height: 55px;
         padding: 0 1em;
         cursor: text;
+        &--read-only {
+          cursor: pointer;
+        }
         &--is-disabled {
           cursor: default;
           background-color: ${colors.neutral[100]};
@@ -52,6 +55,9 @@ export const SelectContainer = styled.div`
         &:active,
         &:focus {
           outline: none;
+        }
+        &--read-only {
+          cursor: pointer;
         }
       }
       .forum-ui-select-placeholder {

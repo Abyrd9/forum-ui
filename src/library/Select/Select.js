@@ -27,6 +27,7 @@ const Select = ({
   handleOnBlur,
   ...props
 }) => {
+
   /* Element Refs */
   const ContainerRef = useRef(null);
   const ListRef = useRef(null);
@@ -167,6 +168,12 @@ const Select = ({
     classNames.placeholder += ` ${classNames.placeholder}--is-active`;
   }
 
+  if (readOnly) {
+    Object.entries(classNames).forEach(([key, classNameValue]) => {
+      classNames[key] += ` ${classNameValue}--read-only`;
+    });
+  }
+
   return (
     <>
       <SelectContainer
@@ -245,9 +252,9 @@ Select.defaultProps = {
     color: '',
   },
   list: [{ value: '', name: '' }],
-  handleOnChange: () => {},
-  handleOnFocus: () => {},
-  handleOnBlur: () => {},
+  handleOnChange: () => { },
+  handleOnFocus: () => { },
+  handleOnBlur: () => { },
 };
 
 Select.propTypes = {

@@ -41,9 +41,9 @@ function App() {
         <ConfigureColorSection />
         <BlockTitle
           title="Typography"
-          description="A ForumUi Typography system has eight levels of font sizing."
+          description="A ForumUi Typography system has eight levels of font sizing. Currently we only support the use of the top 100 most popular google fonts."
         />
-				<ConfigureTypographySection />
+        <ConfigureTypographySection />
         <h1 style={{ marginBottom: '50px', maxWidth: '600px' }}>
           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
           been the industrys standard dummy text ever since the 1500s.

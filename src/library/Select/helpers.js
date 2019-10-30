@@ -27,6 +27,7 @@ export const onKeyDownEvent = (list, inputNode, callback) => ({ code }) => {
         callback({ type: 'ArrowDown', value: nextItem });
       }
     } else {
+      console.log(list);
       const nextItem = list[0].value;
       callback({ type: 'ArrowDown', value: nextItem });
     }

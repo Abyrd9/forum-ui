@@ -34,7 +34,7 @@ const forumUiTheme = {
     error: buildColorPalette('#E01A4F'),
     neutral: buildColorPalette('#BEBEBE'),
     black: '#0C0C0C',
-    white: '#F1F1F0',
+    white: '#FFFFFF',
     default: '#0C0C0C',
   },
   get font() {

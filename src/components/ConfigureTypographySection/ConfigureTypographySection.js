@@ -8,15 +8,16 @@ import Select from '../../library/Select';
 
 const ConfigureTypographySection = () => {
 	const [fontsList, updateFontsList] = useState([]);
-  const [config, updateConfig] = useState({ family: '', size: 16, ratio: 1.25 });
-	
+	const [config, updateConfig] = useState({ family: '', size: 16, ratio: 1.25 });
+
 	useEffect(() => {
 		const getGoogleFonts = async () => {
 			try {
-				const response = await fetch(`https://www.googleapis.com/webfonts/v1/webfonts?key=${googleFontsApiKey}`);
+				const response = await fetch(`https://www.googleapis.com/webfonts/v1/webfonts?key=${googleFontsApiKey}&sort=popularity`);
 				const data = await response.json();
 				if (data && data.items.length > 0) {
-					const fontItems = data.items.reduce((acc, { family }) => {
+					let fontItems = data.items.slice(0, 100);
+					fontItems = fontItems.reduce((acc, { family }) => {
 						return [...acc, { value: family, name: family }];
 					}, []);
 					updateFontsList(fontItems);
@@ -28,13 +29,13 @@ const ConfigureTypographySection = () => {
 		getGoogleFonts();
 	}, []);
 
-  return (
-    <ConfigureTypographySectionContainer>
-      <div className="typography-configurations__container">
-			<Select placeholder="Choose Font Family..." list={fontsList} value={config.family} handleOnChange={val => updateConfig({ ...config, family: val })} />
-      </div>
-    </ConfigureTypographySectionContainer>
-  );
+	return (
+		<ConfigureTypographySectionContainer>
+			<div className="typography-configurations__container">
+				{fontsList && fontsList.length > 0 && <Select readOnly placeholder="Choose Font Family..." list={fontsList} value={config.family} handleOnChange={val => updateConfig({ ...config, family: val })} />}
+			</div>
+		</ConfigureTypographySectionContainer>
+	);
 };
 
 ConfigureTypographySection.defaultProps = {};
