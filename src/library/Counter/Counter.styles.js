@@ -29,11 +29,23 @@ export const CounterContainer = styled.div`
         }
         &:focus,
         &:hover {
-          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.14), 0 2px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1px 5px rgba(0, 0, 0, 0.14), 0 1px 5px rgba(0, 0, 0, 0.2);
           outline: none;
+        }
+        &:active {
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.1);
+        }
+        &:disabled {
+          box-shadow: none;
+          border: 2px solid ${colors.neutral[300]};
+          background-color: ${colors.neutral[200]};
+          svg path {
+            fill: ${colors.neutral[300]};
+          }
         }
       }
       .forum-ui-counter-input-label {
+        cursor: text;
         position: relative;
         display: inline-block;
         box-sizing: border-box;
@@ -47,6 +59,11 @@ export const CounterContainer = styled.div`
         display: flex;
         justify: center;
         align-items: center;
+        &--is-disabled {
+          border: 2px solid ${colors.neutral[300]};
+          background-color: ${colors.neutral[200]};
+          box-shadow: none;
+        }
         &:focus-within {
           &:before {
             opacity: 1;
@@ -67,12 +84,18 @@ export const CounterContainer = styled.div`
           height: 58px;
           border-radius: 15px;
           background-color: transparent;
-          box-shadow: 0 0 3px ${colors.primary[400]};
+          box-shadow: 0 0 5px ${colors.primary[400]};
         }
       }
       .forum-ui-counter-input {
+        background-color: transparent;
         width: 100%;
         text-align: center;
+        font-weight: bold;
+        color: ${colors.neutral[600]};
+        &:disabled {
+          color: ${colors.neutral[300]};
+        }
       }
     `;
   }}

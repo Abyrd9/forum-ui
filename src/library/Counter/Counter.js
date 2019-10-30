@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { CounterContainer } from './Counter.styles';
 import Minus from './Icons/MinusIcon';
@@ -15,11 +15,13 @@ const Counter = ({
   value,
   max,
   min,
+  multiplier,
   className,
   handleOnChange,
   handleOnFocus,
   handleOnBlur,
 }) => {
+  const CounterInputRef = useRef(null);
   const [count, updateCount] = useState(value);
 
   const handleOnInputChange = e => {
@@ -32,12 +34,18 @@ const Counter = ({
 
   const handleOnMinusClick = () => {
     const val = parseInt(count, 10);
-    if (!min || val >= min) updateCount(val - 1);
+    if (!min || val > min) {
+      handleOnChange({ target: CounterInputRef.current });
+      updateCount(val - multiplier);
+    }
   };
 
   const handleOnPlusClick = () => {
     const val = parseInt(count, 10);
-    if (!max || val <= max) updateCount(val + 1);
+    if (!max || val < max) {
+      handleOnChange({ target: CounterInputRef.current });
+      updateCount(val + multiplier);
+    }
   };
 
   /* class variables */
@@ -47,17 +55,21 @@ const Counter = ({
     input: 'forum-ui-counter-input',
   };
 
+  if (disabled) classNames.label += ` ${classNames.label}--is-disabled`;
+
   return (
     <CounterContainer className={className}>
       <button
         type="button"
         className={`${classNames.button} ${classNames.button}__left`}
+        disabled={disabled}
         onClick={handleOnMinusClick}
       >
         <Minus />
       </button>
       <label className={classNames.label}>
         <input
+          ref={CounterInputRef}
           autoComplete="off"
           disabled={disabled}
           form={form}
@@ -76,6 +88,7 @@ const Counter = ({
       <button
         type="button"
         className={`${classNames.button} ${classNames.button}__right`}
+        disabled={disabled}
         onClick={handleOnPlusClick}
       >
         <Plus />
@@ -94,6 +107,7 @@ Counter.defaultProps = {
   value: 0,
   max: null,
   min: null,
+  multiplier: 1,
   className: '',
   handleOnChange: () => {},
   handleOnFocus: () => {},
@@ -110,6 +124,7 @@ Counter.propTypes = {
   value: PropTypes.number,
   max: PropTypes.number,
   min: PropTypes.number,
+  multiplier: PropTypes.number,
   className: PropTypes.string,
   handleOnChange: PropTypes.func,
   handleOnFocus: PropTypes.func,
