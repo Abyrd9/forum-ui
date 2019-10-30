@@ -88,8 +88,7 @@ const Select = ({
 
     const listItemTop = listItemElement.offsetTop;
     const listItemBottom = listItemTop + listItemElement.clientHeight;
-    const listBottom = current.offsetTop + current.clientHeight;
-
+    const listBottom = current.scrollTop + current.clientHeight;
     if (flow === 'down') {
       if (listItemBottom > listBottom) {
         current.scrollTop = listItemBottom - current.clientHeight;
@@ -198,16 +197,7 @@ const Select = ({
             onChange={handleOnInputChange}
             onFocus={handleOnInputFocus}
           />
-          <span
-            className={classNames.arrow}
-            onClick={event => {
-              event.preventDefault();
-              if (active) {
-                toggleActive(false);
-                InputRef.current.blur();
-              }
-            }}
-          >
+          <span className={classNames.arrow}>
             <ChevronDown />
           </span>
           <span className={classNames.placeholder}>{placeholder}</span>
