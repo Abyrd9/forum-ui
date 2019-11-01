@@ -39,6 +39,7 @@ export const ConfigureColorBlockContainer = styled.div`
           width: 8px;
         }
         &__color-block {
+          position: relative;
           cursor: text;
           display: flex;
           align-items: center;
@@ -64,6 +65,9 @@ export const ConfigureColorBlockContainer = styled.div`
           justify-content: center;
           align-items: center;
           background-color: ${inProgress ? 'transparent' : color};
+          position: absolute;
+          top: 14px;
+          left: 14px;
         }
         &__color-icon {
           height: 14px;
@@ -82,10 +86,11 @@ export const ConfigureColorBlockContainer = styled.div`
         }
         &__color-input {
           font-size: ${font[500].size};
-          max-width: 100px;
-          margin-left: 25%;
-          margin-bottom: -5px;
           color: ${colors.black};
+          width: 100%;
+          height: 28px;
+          text-align: center;
+          margin-bottom: -5px;
           &::placeholder {
             color: ${colors.neutral[400]};
           }

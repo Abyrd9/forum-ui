@@ -27,7 +27,6 @@ const Select = ({
   handleOnBlur,
   ...props
 }) => {
-
   /* Element Refs */
   const ContainerRef = useRef(null);
   const ListRef = useRef(null);
@@ -242,9 +241,9 @@ Select.defaultProps = {
     color: '',
   },
   list: [{ value: '', name: '' }],
-  handleOnChange: () => { },
-  handleOnFocus: () => { },
-  handleOnBlur: () => { },
+  handleOnChange: () => {},
+  handleOnFocus: () => {},
+  handleOnBlur: () => {},
 };
 
 Select.propTypes = {

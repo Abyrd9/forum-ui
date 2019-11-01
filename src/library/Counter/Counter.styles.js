@@ -7,7 +7,6 @@ export const CounterContainer = styled.div`
 
     return css`
       display: flex;
-      justify-content: center;
       align-items: center;
       .forum-ui-counter-button {
         transition: all 200ms ease-in-out;
@@ -91,8 +90,6 @@ export const CounterContainer = styled.div`
         background-color: transparent;
         width: 100%;
         text-align: center;
-        font-weight: bold;
-        color: ${colors.neutral[600]};
         &:disabled {
           color: ${colors.neutral[300]};
         }

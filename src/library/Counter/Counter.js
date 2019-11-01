@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { CounterContainer } from './Counter.styles';
 import Minus from './Icons/MinusIcon';
@@ -28,22 +28,24 @@ const Counter = ({
     const val = e.target.value;
     if (/^[0-9]+$/g.test(val)) {
       handleOnChange(e);
-      updateCount(parseInt(val, 10));
+      updateCount(parseFloat(parseFloat(val).toFixed(2)));
     }
   };
 
+  useEffect(() => {
+    handleOnChange({ target: CounterInputRef.current });
+  }, [count]);
+
   const handleOnMinusClick = () => {
-    const val = parseInt(count, 10);
-    if (!min || val > min) {
-      handleOnChange({ target: CounterInputRef.current });
+    const val = parseFloat(parseFloat(count).toFixed(2));
+    if (typeof min !== 'number' || val > min) {
       updateCount(val - multiplier);
     }
   };
 
   const handleOnPlusClick = () => {
-    const val = parseInt(count, 10);
-    if (!max || val < max) {
-      handleOnChange({ target: CounterInputRef.current });
+    const val = parseFloat(parseFloat(count).toFixed(2));
+    if (typeof max !== 'number' || val < max) {
       updateCount(val + multiplier);
     }
   };
@@ -105,8 +107,8 @@ Counter.defaultProps = {
   required: false,
   pattern: '',
   value: 0,
-  max: null,
-  min: null,
+  max: 99,
+  min: 0,
   multiplier: 1,
   className: '',
   handleOnChange: () => {},

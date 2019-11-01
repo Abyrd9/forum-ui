@@ -1,27 +1,5 @@
 import buildColorPalette from '../helpers/buildColorPalette';
-
-const getBrowserFontSize = () => {
-  let base = '16px';
-  if (window && document.body) {
-    const browserFontSize = window.getComputedStyle(document.body).getPropertyValue('font-size');
-    if (browserFontSize) base = browserFontSize;
-  }
-  return base;
-};
-
-const calc = (base, ratio, multiplier, type) => {
-  let num = 0;
-  switch (type) {
-    case 'increment':
-      num = Math.round(base * ratio ** multiplier);
-      return num % 2 === 0 ? `${num}px` : `${num + 1}px`;
-    case 'decrement':
-      num = Math.round(base / ratio ** multiplier);
-      return num % 2 === 0 ? `${num}px` : `${num + 1}px`;
-    default:
-      return `${base}px`;
-  }
-};
+import { getSizingVariations, getBrowserFontSize } from '../helpers/buildTheme';
 
 const columnAmount = 12;
 
@@ -38,44 +16,18 @@ const forumUiTheme = {
     default: '#0C0C0C',
   },
   get font() {
-    const font = {};
-    const base = parseInt(getBrowserFontSize(), 10);
-
-    for (let i = -3; i <= 4; i++) {
-      const key = ((i + 4) * 100).toString();
-      let size = 0;
-      let height = 0;
-      if (i < 0) {
-        size = calc(base, 1.25, Math.abs(i), 'decrement');
-        height = `${parseInt(size, 10) * 1.5}px`;
-      } else if (i === 0) {
-        size = calc(base);
-        height = `${parseInt(size, 10) * 1.5}px`;
-      } else if (i > 0) {
-        size = calc(base, 1.25, Math.abs(i), 'increment');
-        height = `${parseInt(size, 10) / 0.85}px`;
+    const sizes = getSizingVariations(parseInt(getBrowserFontSize(), 10));
+    return Object.entries(sizes).reduce((acc, [key, value]) => {
+      if (parseInt(key, 10) <= 400) {
+        acc[key] = { size: value, height: `${Math.round(parseInt(value, 10) * 1.5)}px` };
+      } else {
+        acc[key] = { size: value, height: `${Math.round(parseInt(value, 10) * 0.75)}px` };
       }
-      font[key] = { size, height };
-    }
-    return font;
+      return acc;
+    }, {});
   },
   get spacing() {
-    const spacing = {};
-    const base = 24;
-
-    for (let i = -3; i <= 4; i++) {
-      const key = ((i + 4) * 100).toString();
-      let space = 0;
-      if (i < 0) {
-        space = calc(base, 1.5, Math.abs(i), 'decrement');
-      } else if (i === 0) {
-        space = calc(base);
-      } else if (i > 0) {
-        space = calc(base, 1.5, Math.abs(i), 'increment');
-      }
-      spacing[key] = space;
-    }
-    return spacing;
+    return getSizingVariations(24, { positive: 1.5, negative: 1.5 });
   },
   get zIndex() {
     const zIndex = {};
