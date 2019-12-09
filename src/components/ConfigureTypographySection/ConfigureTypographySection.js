@@ -98,28 +98,7 @@ const ConfigureTypographySection = () => {
             )}
           </ConfigurationBlock>
         </Column>
-        <Column shrink lgUpGutter={15}>
-          <ConfigurationBlock title="Base Font Size">
-            <Counter
-              value={config.size}
-              multiplier={2}
-              handleOnChange={({ target }) => updateConfig({ ...config, size: target.value })}
-            />
-          </ConfigurationBlock>
-        </Column>
-        <Column shrink gutter={15}>
-          <ConfigurationBlock title="Font Size Ratio">
-            <Counter
-              value={config.ratio}
-              multiplier={0.05}
-              max={5}
-              handleOnChange={({ target }) => updateConfig({ ...config, ratio: target.value })}
-            />
-          </ConfigurationBlock>
-        </Column>
-      </Row>
-      <Row stretch>
-        <Column smUp={12}>
+        <Column shrink>
           <TypographyBlock title="Font Weights">
             <Row stretch>
               {config.variants
@@ -143,6 +122,19 @@ const ConfigureTypographySection = () => {
                 ))}
             </Row>
           </TypographyBlock>
+        </Column>
+      </Row>
+      <Row stretch>
+        <Column shrink lgUpGutter={15}>
+          <ConfigurationBlock title="Base Font Size">
+            <Counter
+              value={config.size}
+              multiplier={2}
+              handleOnChange={({ target }) => updateConfig({ ...config, size: target.value })}
+            />
+          </ConfigurationBlock>
+        </Column>
+        <Column>
           <TypographyBlock title="Paragraph">
             <p style={{ fontFamily: config.family }}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -159,6 +151,20 @@ const ConfigureTypographySection = () => {
             </p>
           </TypographyBlock>
         </Column>
+      </Row>
+      <Row>
+        <Column shrink gutter={15}>
+          <ConfigurationBlock title="Font Size Ratio">
+            <Counter
+              value={config.ratio}
+              multiplier={0.05}
+              max={5}
+              handleOnChange={({ target }) => updateConfig({ ...config, ratio: target.value })}
+            />
+          </ConfigurationBlock>
+        </Column>
+      </Row>
+      <Row>
         <Column smUp={12}>
           <TypographyBlock title="Font Sizing">
             {Object.entries(

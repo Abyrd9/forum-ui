@@ -1,60 +1,51 @@
 import styled, { css } from 'styled-components';
+import chroma from 'chroma-js';
 import checkColorBrightness from '../../helpers/checkColorBrightness';
 
 export const ConfigureColorBlockContainer = styled.div`
   ${props => {
-    const {
-      theme = {},
-      colorValue = '',
-      colorPalette = {},
-      inProgress = false,
-      isFlatColor = false,
-    } = props;
+    const { theme = {}, color = '', inProgress = false } = props;
 
     const { colors = {}, font = {}, spacing = {} } = theme;
-    const color = inProgress ? colors.neutral[200] : colorValue;
+    const hex = inProgress || !chroma.valid(color) ? colors.neutral[300] : color;
     return css`
       margin-bottom: ${spacing[400]};
       input:active,
       input:focus {
         outline: none;
       }
-      .color-block {
-        &__title-block {
-          width: fit-content;
-          display: flex;
-          align-items: baseline;
-          margin-bottom: ${spacing[100]};
-          transition: all 200ms ease;
-          border-bottom: 1px solid rgba(0, 0, 0, 0);
-          &:hover,
-          &:focus-within {
-            border-bottom: 1px solid ${color};
-            cursor: 'text';
+      .title-section {
+        display: flex;
+        align-items: center;
+        margin-bottom: ${spacing[100]};
+        .times-icon {
+          height: 22px;
+          width: auto;
+          margin-left: auto;
+          margin-right: ${spacing[100]};
+          path {
+            fill: ${colors.error[200]};
           }
         }
-        &__title-icon {
-          padding-left: 4px;
-          height: 8px;
-          width: 8px;
-        }
+      }
+      .color-block {
         &__color-block {
           position: relative;
           cursor: text;
           display: flex;
           align-items: center;
-          border: 1px solid ${color};
+          border: 1px solid ${hex};
           padding: 16px;
           border-radius: 5px;
           margin-bottom: ${spacing[200]};
           transition: all 200ms ease;
           &:hover {
-            border: 1px solid ${color};
-            box-shadow: ${color} 0px 0px 2px;
+            border: 1px solid ${hex};
+            box-shadow: ${hex} 0px 0px 2px;
           }
           &:focus-within {
-            border: 1px solid ${color};
-            box-shadow: ${color} 0px 0px 6px;
+            border: 1px solid ${hex};
+            box-shadow: ${hex} 0px 0px 6px;
           }
         }
         &__color-icon-container {
@@ -64,7 +55,7 @@ export const ConfigureColorBlockContainer = styled.div`
           display: flex;
           justify-content: center;
           align-items: center;
-          background-color: ${inProgress ? 'transparent' : color};
+          background-color: ${inProgress ? 'transparent' : hex};
           position: absolute;
           top: 14px;
           left: 14px;
@@ -73,15 +64,13 @@ export const ConfigureColorBlockContainer = styled.div`
           height: 14px;
           width: 14px;
           path {
-            ${(inProgress || isFlatColor) && `fill: ${colors.neutral[400]}`};
+            ${inProgress && `fill: ${colors.neutral[400]}`};
             ${!inProgress &&
-              !isFlatColor &&
-              colorPalette &&
-              `
-              fill: ${
-                checkColorBrightness(color) === 'light' ? colorPalette[800] : colorPalette[100]
-              };
-            `}
+              `fill: ${
+                checkColorBrightness(hex) === 'light'
+                  ? chroma(hex).darken(3)
+                  : chroma(hex).brighten(3)
+              }`}
           }
         }
         &__color-input {
@@ -92,7 +81,7 @@ export const ConfigureColorBlockContainer = styled.div`
           text-align: center;
           margin-bottom: -5px;
           &::placeholder {
-            color: ${colors.neutral[400]};
+            color: ${colors.neutral[300]};
           }
         }
         &__palette-block {
@@ -101,6 +90,16 @@ export const ConfigureColorBlockContainer = styled.div`
           height: 40px;
         }
       }
+    `;
+  }}
+`;
+
+export const TitleBlock = styled.div`
+  ${props => {
+    const { theme = {} } = props;
+    return css`
+      display: flex;
+      align-items: center;
     `;
   }}
 `;
@@ -115,10 +114,13 @@ export const PaletteBlock = styled.div`
       justify-content: center;
       align-items: center;
       font-size: ${font[200].size};
+      font-weight: 600;
       height: 100%;
       flex: 1;
-      background-color: ${inProgress ? colors.neutral[100] : color};
-      color: ${checkColorBrightness(color) === 'light' ? colors.black : colors.white};
+      background-color: ${inProgress ? colors.neutral[300] : color};
+      color: ${chroma.valid(color) && chroma.contrast(colors.black, color) > 4.5
+        ? colors.black
+        : colors.white};
     `;
   }}
 `;

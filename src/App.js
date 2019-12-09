@@ -7,8 +7,8 @@ import Row from './library/ForumGrid/Row';
 import NavBar from './components/NavBar';
 import PageTitle from './components/PageTitle';
 import BlockTitle from './components/BlockTitle';
-import ConfigureColorSection from './components/ConfigureColorSection';
-import ConfigureTypographySection from './components/ConfigureTypographySection';
+import ConfigureColorSection from './components/ConfigureColors/ConfigureColorSection';
+// import ConfigureTypographySection from './components/ConfigureTypographySection';
 
 function App() {
   return (
@@ -39,11 +39,11 @@ function App() {
           }
         />
         <ConfigureColorSection />
-        <BlockTitle
+        {/* <BlockTitle
           title="Typography"
           description="A ForumUi Typography system has eight levels of font sizing. Currently we only support the use of the top 100 most popular google fonts."
         />
-        <ConfigureTypographySection />
+        <ConfigureTypographySection /> */}
       </Grid>
     </ForumUiProvider>
   );

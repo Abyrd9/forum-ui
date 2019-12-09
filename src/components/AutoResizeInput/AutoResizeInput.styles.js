@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
-export const TitleInputContainer = styled.div`
+export const AutoResizeInputContainer = styled.div`
   ${props => {
-    const { theme = {}, width = 'null' } = props;
+    const { theme = {}, width = 'null', value } = props;
     const { font = {}, colors = {} } = theme;
     return css`
       position: relative;
@@ -17,6 +17,8 @@ export const TitleInputContainer = styled.div`
           color: ${colors.black};
           font-size: ${font[400].size};
           width: ${width}px;
+          max-width: 160px;
+          min-width: ${!value || value === '' ? '80px' : '0px'}
           &:disabled {
             background-color: transparent;
             color: ${colors.black};
