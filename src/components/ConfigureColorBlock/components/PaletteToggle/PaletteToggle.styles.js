@@ -15,7 +15,7 @@ export const PaletteToggleContainer = styled.label`
       align-items: center;
       padding: 4px;
       margin-left: auto;
-      margin-right: ${spacing[100]};
+      margin-right: ${spacing[200]};
       &:focus-within {
         &:before {
           opacity: 1;

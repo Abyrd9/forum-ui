@@ -19,12 +19,12 @@ export const ConfigureColorBlockContainer = styled.div`
         align-items: center;
         margin-bottom: ${spacing[100]};
         .times-icon {
+          cursor: pointer;
           height: 22px;
           width: auto;
-          margin-left: auto;
           margin-right: ${spacing[100]};
           path {
-            fill: ${colors.error[200]};
+            fill: ${colors.black};
           }
         }
       }
@@ -118,7 +118,7 @@ export const PaletteBlock = styled.div`
       height: 100%;
       flex: 1;
       background-color: ${inProgress ? colors.neutral[300] : color};
-      color: ${chroma.valid(color) && chroma.contrast(colors.black, color) > 4.5
+      color: ${chroma.valid(color) && chroma.contrast(colors.black, color) > 6.5
         ? colors.black
         : colors.white};
     `;

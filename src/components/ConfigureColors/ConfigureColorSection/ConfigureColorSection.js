@@ -11,7 +11,8 @@ const ConfigureColorSection = () => {
 
   const handleUpdateColorObj = (key, value) => {
     const obj = { ...colors };
-    obj[key] = value;
+    if (value) obj[key] = value;
+    if (!value) delete obj[key];
     updateColors(obj);
   };
 

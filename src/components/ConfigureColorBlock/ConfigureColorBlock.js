@@ -48,7 +48,8 @@ const ConfigureColorBlock = ({ colorId, colorObj, handleUpdateColorObj }) => {
     <ConfigureColorBlockContainer color={color} inProgress={inProgress}>
       <div className="title-section">
         <TitleInput value={title} handleOnChange={handleUpdateTitle} />
-        <TimesIcon className="times-icon" />
+        <PaletteToggle color={color} isFlat={isFlat} toggleIsFlat={toggleIsFlat} />
+        <TimesIcon className="times-icon" onClick={() => handleUpdateColorObj(colorId)} />
       </div>
       <label className="color-block__color-block">
         <span className="color-block__color-icon-container">
@@ -63,19 +64,15 @@ const ConfigureColorBlock = ({ colorId, colorObj, handleUpdateColorObj }) => {
       </label>
       <div className="color-block__palette-block">
         {inProgress ? (
-          <>
-            <PaletteBlock inProgress={inProgress} />
-            <PaletteToggle color={color} isFlat={isFlat} toggleIsFlat={toggleIsFlat} />
-          </>
+          <PaletteBlock inProgress={inProgress} />
         ) : (
-          <>
-            {palette &&
-              Object.entries(palette).map(([key, shade]) => {
-                return <PaletteBlock color={shade}>{key}</PaletteBlock>;
-              })}
-            <PaletteToggle color={color} isFlat={isFlat} toggleIsFlat={toggleIsFlat} />
-          </>
-        )}
+            <>
+              {palette &&
+                Object.entries(palette).map(([key, shade]) => {
+                  return <PaletteBlock color={shade}>{key}</PaletteBlock>;
+                })}
+            </>
+          )}
       </div>
     </ConfigureColorBlockContainer>
   );
@@ -88,7 +85,7 @@ ConfigureColorBlock.defaultProps = {
     color: '',
     palette: {},
   },
-  handleUpdateColorObj: () => {},
+  handleUpdateColorObj: () => { },
 };
 
 ConfigureColorBlock.propTypes = {
