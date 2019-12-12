@@ -3,8 +3,6 @@ import styled, { css } from 'styled-components';
 export const TypographyBlockContainer = styled.div`
   ${props => {
     const { theme = {} } = props;
-    console.log(theme);
-
     const { colors = {}, spacing = {} } = theme;
     return css`
       margin-bottom: ${spacing[400]};

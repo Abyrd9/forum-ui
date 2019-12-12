@@ -8,10 +8,12 @@ import TimesIcon from '../Icons/TimesIcon';
 import TitleInput from './components/TitleInput';
 import buildColorPalette from '../../helpers/buildColorPalette';
 import PaletteToggle from './components/PaletteToggle';
+import DeleteOverlay from './components/DeleteOverlay/DeleteOverlay';
 
 const isPossibleHex = /^$|^#([A-Fa-f0-9]{0,6})$/i;
 
 const ConfigureColorBlock = ({ colorId, colorObj, handleUpdateColorObj }) => {
+  const [deleteOverlayVisible, setDeleteOverlayVisible] = useState(false);
   const { title, color, palette } = colorObj;
 
   const flat = Object.keys(palette).length === 1 && Object.keys(palette)[0] === '400';
@@ -46,10 +48,15 @@ const ConfigureColorBlock = ({ colorId, colorObj, handleUpdateColorObj }) => {
 
   return (
     <ConfigureColorBlockContainer color={color} inProgress={inProgress}>
+      <DeleteOverlay
+        isVisible={deleteOverlayVisible}
+        setIsVisible={setDeleteOverlayVisible}
+        handleOnDelete={() => handleUpdateColorObj(colorId)}
+      />
       <div className="title-section">
         <TitleInput value={title} handleOnChange={handleUpdateTitle} />
         <PaletteToggle color={color} isFlat={isFlat} toggleIsFlat={toggleIsFlat} />
-        <TimesIcon className="times-icon" onClick={() => handleUpdateColorObj(colorId)} />
+        <TimesIcon className="times-icon" onClick={() => setDeleteOverlayVisible(true)} />
       </div>
       <label className="color-block__color-block">
         <span className="color-block__color-icon-container">
@@ -66,13 +73,13 @@ const ConfigureColorBlock = ({ colorId, colorObj, handleUpdateColorObj }) => {
         {inProgress ? (
           <PaletteBlock inProgress={inProgress} />
         ) : (
-            <>
-              {palette &&
-                Object.entries(palette).map(([key, shade]) => {
-                  return <PaletteBlock color={shade}>{key}</PaletteBlock>;
-                })}
-            </>
-          )}
+          <>
+            {palette &&
+              Object.entries(palette).map(([key, shade]) => {
+                return <PaletteBlock color={shade}>{key}</PaletteBlock>;
+              })}
+          </>
+        )}
       </div>
     </ConfigureColorBlockContainer>
   );
@@ -85,7 +92,7 @@ ConfigureColorBlock.defaultProps = {
     color: '',
     palette: {},
   },
-  handleUpdateColorObj: () => { },
+  handleUpdateColorObj: () => {},
 };
 
 ConfigureColorBlock.propTypes = {

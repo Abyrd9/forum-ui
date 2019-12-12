@@ -5,7 +5,7 @@ const buildStyleMap = obj => props => {
   const objArr = Object.entries(obj);
   let value = '';
 
-  const valRegex = /^[^ ]+$/;
+  const valRegex = /^[^]+$/;
   const isBool = val => typeof val === 'boolean';
   const isNum = val => typeof val === 'number';
   const isVal = val => typeof val === 'string' && valRegex.test(val);

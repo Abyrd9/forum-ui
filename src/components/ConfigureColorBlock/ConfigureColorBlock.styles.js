@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components';
 import chroma from 'chroma-js';
 import checkColorBrightness from '../../helpers/checkColorBrightness';
 
+const { isLight } = checkColorBrightness;
+
 export const ConfigureColorBlockContainer = styled.div`
   ${props => {
     const { theme = {}, color = '', inProgress = false } = props;
@@ -9,6 +11,7 @@ export const ConfigureColorBlockContainer = styled.div`
     const { colors = {}, font = {}, spacing = {} } = theme;
     const hex = inProgress || !chroma.valid(color) ? colors.neutral[300] : color;
     return css`
+      position: relative;
       margin-bottom: ${spacing[400]};
       input:active,
       input:focus {
@@ -66,11 +69,7 @@ export const ConfigureColorBlockContainer = styled.div`
           path {
             ${inProgress && `fill: ${colors.neutral[400]}`};
             ${!inProgress &&
-              `fill: ${
-                checkColorBrightness(hex) === 'light'
-                  ? chroma(hex).darken(3)
-                  : chroma(hex).brighten(3)
-              }`}
+              `fill: ${isLight(hex) ? chroma(hex).darken(3) : chroma(hex).brighten(3)}`}
           }
         }
         &__color-input {
@@ -118,9 +117,7 @@ export const PaletteBlock = styled.div`
       height: 100%;
       flex: 1;
       background-color: ${inProgress ? colors.neutral[300] : color};
-      color: ${chroma.valid(color) && chroma.contrast(colors.black, color) > 6.5
-        ? colors.black
-        : colors.white};
+      color: ${isLight(color) ? colors.black : colors.white};
     `;
   }}
 `;

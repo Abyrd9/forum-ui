@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components';
 export const NavBarContainer = styled.div`
   ${props => {
     const { theme = {}, active } = props;
-    console.log(theme);
     const { spacing = {}, colors = {}, font = {}, media = {} } = theme;
     return css`
       width: 100%;
