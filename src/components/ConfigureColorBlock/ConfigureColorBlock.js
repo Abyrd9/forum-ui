@@ -76,7 +76,11 @@ const ConfigureColorBlock = ({ colorId, colorObj, handleUpdateColorObj }) => {
           <>
             {palette &&
               Object.entries(palette).map(([key, shade]) => {
-                return <PaletteBlock color={shade}>{key}</PaletteBlock>;
+                return (
+                  <PaletteBlock color={shade} isSingleColor={Object.keys(palette).length === 1}>
+                    {key}
+                  </PaletteBlock>
+                );
               })}
           </>
         )}

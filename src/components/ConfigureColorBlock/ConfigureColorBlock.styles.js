@@ -105,14 +105,14 @@ export const TitleBlock = styled.div`
 
 export const PaletteBlock = styled.div`
   ${props => {
-    const { theme = {}, color = '', inProgress = false } = props;
+    const { theme = {}, color = '', inProgress = false, isSingleColor = false, } = props;
     const { font = {}, colors = {} } = theme;
     return css`
       max-height: 40px;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: ${font[200].size};
+      font-size: ${isSingleColor ? font[300].size : font[200].size};
       font-weight: 600;
       height: 100%;
       flex: 1;
