@@ -48,11 +48,12 @@ const ConfigureColorBlock = ({ colorId, colorObj, handleUpdateColorObj }) => {
 
   return (
     <ConfigureColorBlockContainer color={color} inProgress={inProgress}>
-      <DeleteOverlay
-        isVisible={deleteOverlayVisible}
-        setIsVisible={setDeleteOverlayVisible}
-        handleOnDelete={() => handleUpdateColorObj(colorId)}
-      />
+      {deleteOverlayVisible && (
+        <DeleteOverlay
+          handleOnClose={() => setDeleteOverlayVisible(false)}
+          handleOnDelete={() => handleUpdateColorObj(colorId)}
+        />
+      )}
       <div className="title-section">
         <TitleInput value={title} handleOnChange={handleUpdateTitle} />
         <PaletteToggle color={color} isFlat={isFlat} toggleIsFlat={toggleIsFlat} />

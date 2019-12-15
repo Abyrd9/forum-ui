@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export const DeleteOverlayContainer = styled.div`
-  ${({ theme = {}, isVisible = false }) => {
+  ${({ theme = {}, mounted = false }) => {
     const { colors = {}, spacing = {}, zIndex = {} } = theme;
     return css`
       z-index: ${zIndex[500]};
@@ -21,7 +21,7 @@ export const DeleteOverlayContainer = styled.div`
       visibility: hidden;
       transform: translateY(-5px);
       transition: opacity 150ms ease, transform 150ms ease, visibility 0ms linear 150ms;
-      ${isVisible &&
+      ${mounted &&
         `
         opacity: 1;
         visibility: visible;

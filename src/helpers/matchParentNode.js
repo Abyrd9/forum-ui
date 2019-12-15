@@ -1,11 +1,11 @@
-const matchParentNode = (targetNode, sourceNode, limiter = 5) => {
-  // sourceNode is the element that was clicked, targetNode is the possible
+const matchParentNode = (parentNode, clickedNode, limiter = 5) => {
+  // clickedNode is the element that was clicked, parentNode is the possible
   // parent element. We are checking to see if the source node is a child
   // of the target node (return true), or outside of it (return false).
-  if (!!targetNode && !!sourceNode) {
+  if (!!parentNode && !!clickedNode) {
     let isSameDomNode = false;
     let index = 0;
-    let domNode = sourceNode;
+    let domNode = clickedNode;
 
     // if isSameDomNode is still false and the index value is less than
     // the limiter number, then continue to traverse up the dom tree
@@ -13,7 +13,7 @@ const matchParentNode = (targetNode, sourceNode, limiter = 5) => {
     // every time, but only up to a certain number of dom elements
     while (!isSameDomNode && index < limiter) {
       index++;
-      if (domNode === targetNode) {
+      if (domNode === parentNode) {
         isSameDomNode = true;
       } else if (domNode.parentNode === null) {
         // If null, it means we've reached the top of the dom tree,
@@ -25,8 +25,8 @@ const matchParentNode = (targetNode, sourceNode, limiter = 5) => {
         domNode = domNode.parentNode;
       }
     }
-    // if the eventual domNode matches the targetNode, it means
-    // the source node is a child of the targetNode, so return true.
+    // if the eventual domNode matches the parentNode, it means
+    // the source node is a child of the parentNode, so return true.
     // if it's not a child of it, return false.
     return isSameDomNode;
   }
