@@ -13,10 +13,16 @@ const DeleteOverlay = ({ isVisible, setIsVisible, handleOnDelete }) => {
     <DeleteOverlayContainer isVisible={isVisible}>
       <p className="delete-text">Are you sure you want to delete this color?</p>
       <div className="button-container">
-        <Button small className="button-container__delete" onClick={() => handleClick(true)}>
+        <Button small error className="button-container__delete" onClick={() => handleClick(true)}>
           Delete
         </Button>
-        <Button small className="button-container__cancel" onClick={() => handleClick(false)}>
+        <Button
+          outline
+          small
+          error
+          className="button-container__cancel"
+          onClick={() => handleClick(false)}
+        >
           Cancel
         </Button>
       </div>

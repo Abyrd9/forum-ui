@@ -7,10 +7,10 @@ const forumUiTheme = {
   colors: {
     primary: buildColorPalette('#FE5F55'),
     secondary: buildColorPalette('#84DCC6'),
-    tertiary: buildColorPalette('#006989'),
-    success: buildColorPalette('#9CEC5B'),
-    error: buildColorPalette('#E01A4F'),
     neutral: buildColorPalette('#BEBEBE'),
+    warning: buildColorPalette('#FDE74C'),
+    success: buildColorPalette('#A5D836'),
+    error: buildColorPalette('#E50F00'),
     black: '#0C0C0C',
     white: '#FFFFFF',
     default: '#0C0C0C',

@@ -1,27 +1,27 @@
 import styled, { css } from 'styled-components';
 import chroma from 'chroma-js';
 import buildStyleMap from '../../helpers/buildStyleMap';
+import buildColorStyleMap from '../../helpers/buildColorStyleMap';
 
 const isDark = color => chroma.valid(color) && chroma(color).luminance() < 0.4;
 
 export const ButtonContainer = styled.button`
   ${props => {
-    const { theme = {}, color = '' } = props;
+    const { theme = {}, outline = false } = props;
     const { font = {}, colors = {} } = theme;
 
-    const colorVal = color ? colors[color] : colors.primary;
-
+    const color = buildColorStyleMap()(props);
     return css`
       transition: box-shadow 100ms ease, background-color 50ms ease;
       cursor: pointer;
       position: relative;
-      border: none;
+      border: ${outline ? `2px solid ${color}` : 'none'};
       outline: none;
       border-radius: 4px;
       padding: ${buildStyleMap({
-        small: '8px 14px',
-        large: '16px 28px',
-        default: '12px 24px',
+        small: outline ? '6px 12px' : '8px 14px',
+        large: outline ? '14px 26px' : '16px 28px',
+        default: outline ? '10px 22px' : '12px 24px',
       })};
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0), 0 3px 6px rgba(0, 0, 0, 0);
       font-size: ${buildStyleMap({
@@ -34,8 +34,10 @@ export const ButtonContainer = styled.button`
         large: '400',
         default: '500',
       })};
-      color: ${isDark(colorVal[400]) ? colors.white : colors.black};
-      background-color: ${colorVal[400]};
+      ${outline && 'font-weight: bold'};
+      ${outline && `color: ${color}`};
+      ${!outline && `color: ${isDark(color) ? colors.white : colors.black}`};
+      background-color: ${outline ? 'transparent' : color};
       &:before {
         transition: all 100ms ease-in-out;
         opacity: 0;
@@ -48,7 +50,7 @@ export const ButtonContainer = styled.button`
         height: calc(100% + 4px);
         border-radius: 4px;
         background-color: transparent;
-        box-shadow: 0 0 3px ${colorVal[400]}, 0 0 5px ${colorVal[400]};
+        box-shadow: 0 0 3px ${color}, 0 0 5px ${color};
       }
       &:focus {
         &:before {
@@ -63,7 +65,13 @@ export const ButtonContainer = styled.button`
       }
       &:active {
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0), 0 3px 6px rgba(0, 0, 0, 0);
-        background-color: ${colorVal[500]};
+        ${outline && `color: ${chroma.valid(color) && chroma(color).darken(0.5)}`};
+        border: ${outline
+          ? `2px solid ${chroma.valid(color) && chroma(color).darken(0.5)}`
+          : 'none'};
+        background-color: ${outline
+          ? 'transparent'
+          : chroma.valid(color) && chroma(color).darken(0.5)};
         &:before {
           opacity: 0;
         }
