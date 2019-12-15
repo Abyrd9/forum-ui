@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import chroma from 'chroma-js';
-import checkColorBrightness from '../../helpers/checkColorBrightness';
+import checkColorBrightness from '../../../helpers/checkColorBrightness';
 
 const { isLight } = checkColorBrightness;
 
@@ -21,15 +21,6 @@ export const ConfigureColorBlockContainer = styled.div`
         display: flex;
         align-items: center;
         margin-bottom: ${spacing[100]};
-        .times-icon {
-          cursor: pointer;
-          height: 22px;
-          width: auto;
-          margin-right: ${spacing[100]};
-          path {
-            fill: ${colors.black};
-          }
-        }
       }
       .color-block {
         &__color-block {

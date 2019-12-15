@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TitleInputContainer } from './TitleInput.styles';
-import AutoResizeInput from '../../../AutoResizeInput';
-import EditIcon from '../../../Icons/EditIcon';
+import AutoResizeInput from '../../../../AutoResizeInput';
+import EditIcon from '../../../../Icons/EditIcon';
 
 const TitleInput = ({ value, handleOnChange }) => {
   return (

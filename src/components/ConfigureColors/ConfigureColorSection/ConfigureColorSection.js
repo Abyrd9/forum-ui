@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import React, { useState } from 'react';
 import { ConfigureColorSectionContainer } from './ConfigureColorSection.styles';
-import ConfigureColorBlock from '../../ConfigureColorBlock/ConfigureColorBlock';
+import ConfigureColorBlock from '../ConfigureColorBlock';
 import Row from '../../../library/ForumGrid/Row';
 import Column from '../../../library/ForumGrid/Column';
 import { INITIAL_COLORS } from '../../../constants';

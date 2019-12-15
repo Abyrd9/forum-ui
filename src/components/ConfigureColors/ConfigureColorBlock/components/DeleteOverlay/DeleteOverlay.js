@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { DeleteOverlayContainer } from './DeleteOverlay.styles';
-import Button from '../../../../library/Button/Button';
+import Button from '../../../../../library/Button/Button';
 
 const DeleteOverlay = ({ isVisible, setIsVisible, handleOnDelete }) => {
   const handleClick = remove => {

@@ -3,12 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { ConfigureColorBlockContainer, PaletteBlock } from './ConfigureColorBlock.styles';
-import PencilIcon from '../Icons/PencilIcon';
-import TimesIcon from '../Icons/TimesIcon';
+import PencilIcon from '../../Icons/PencilIcon';
 import TitleInput from './components/TitleInput';
-import buildColorPalette from '../../helpers/buildColorPalette';
+import buildColorPalette from '../../../helpers/buildColorPalette';
 import PaletteToggle from './components/PaletteToggle';
 import DeleteOverlay from './components/DeleteOverlay/DeleteOverlay';
+import DeleteButton from './components/DeleteButton';
 
 const isPossibleHex = /^$|^#([A-Fa-f0-9]{0,6})$/i;
 
@@ -56,7 +56,7 @@ const ConfigureColorBlock = ({ colorId, colorObj, handleUpdateColorObj }) => {
       <div className="title-section">
         <TitleInput value={title} handleOnChange={handleUpdateTitle} />
         <PaletteToggle color={color} isFlat={isFlat} toggleIsFlat={toggleIsFlat} />
-        <TimesIcon className="times-icon" onClick={() => setDeleteOverlayVisible(true)} />
+        <DeleteButton handleOnClick={() => setDeleteOverlayVisible(true)} />
       </div>
       <label className="color-block__color-block">
         <span className="color-block__color-icon-container">
