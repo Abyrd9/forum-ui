@@ -27,11 +27,11 @@ const colors = [
 
 export const INITIAL_COLORS = colors.reduce(
   (acc, { title = '', color = '', isFlat = false }, index) => {
-    const key = `${generateUniqueKey([])}${index}`;
-    acc[key] = {
+    const colorId = `${generateUniqueKey([])}${index}`;
+    acc[colorId] = {
       title,
       color,
-      palette: isFlat ?  { 400: color } : buildColorPalette(color),
+      palette: isFlat ? { 400: color } : buildColorPalette(color),
     };
     return acc;
   },

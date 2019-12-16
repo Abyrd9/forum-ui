@@ -13,6 +13,7 @@ export const ConfigureColorBlockContainer = styled.div`
     return css`
       position: relative;
       margin-bottom: ${spacing[400]};
+      min-height: 140px;
       input:active,
       input:focus {
         outline: none;
@@ -85,18 +86,13 @@ export const ConfigureColorBlockContainer = styled.div`
 `;
 
 export const TitleBlock = styled.div`
-  ${props => {
-    const { theme = {} } = props;
-    return css`
-      display: flex;
-      align-items: center;
-    `;
-  }}
+  display: flex;
+  align-items: center;
 `;
 
 export const PaletteBlock = styled.div`
   ${props => {
-    const { theme = {}, color = '', inProgress = false, isSingleColor = false, } = props;
+    const { theme = {}, color = '', inProgress = false, isSingleColor = false } = props;
     const { font = {}, colors = {} } = theme;
     return css`
       max-height: 40px;

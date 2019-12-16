@@ -48,44 +48,47 @@ const ConfigureColorBlock = ({ colorId, colorObj, handleUpdateColorObj }) => {
 
   return (
     <ConfigureColorBlockContainer color={color} inProgress={inProgress}>
-      {deleteOverlayVisible && (
+      {deleteOverlayVisible ? (
         <DeleteOverlay
           handleOnClose={() => setDeleteOverlayVisible(false)}
           handleOnDelete={() => handleUpdateColorObj(colorId)}
         />
+      ) : (
+        <>
+          <div className="title-section">
+            <TitleInput value={title} handleOnChange={handleUpdateTitle} />
+            <PaletteToggle color={color} isFlat={isFlat} toggleIsFlat={toggleIsFlat} />
+            <DeleteButton handleOnClick={() => setDeleteOverlayVisible(true)} />
+          </div>
+          <label className="color-block__color-block">
+            <span className="color-block__color-icon-container">
+              <PencilIcon className="color-block__color-icon" />
+            </span>
+            <input
+              value={draft}
+              onChange={handleUpdateDraft}
+              className="color-block__color-input"
+              placeholder="#000000"
+            />
+          </label>
+          <div className="color-block__palette-block">
+            {inProgress ? (
+              <PaletteBlock inProgress={inProgress} />
+            ) : (
+              <>
+                {palette &&
+                  Object.entries(palette).map(([key, shade]) => {
+                    return (
+                      <PaletteBlock color={shade} isSingleColor={Object.keys(palette).length === 1}>
+                        {key}
+                      </PaletteBlock>
+                    );
+                  })}
+              </>
+            )}
+          </div>
+        </>
       )}
-      <div className="title-section">
-        <TitleInput value={title} handleOnChange={handleUpdateTitle} />
-        <PaletteToggle color={color} isFlat={isFlat} toggleIsFlat={toggleIsFlat} />
-        <DeleteButton handleOnClick={() => setDeleteOverlayVisible(true)} />
-      </div>
-      <label className="color-block__color-block">
-        <span className="color-block__color-icon-container">
-          <PencilIcon className="color-block__color-icon" />
-        </span>
-        <input
-          value={draft}
-          onChange={handleUpdateDraft}
-          className="color-block__color-input"
-          placeholder="#000000"
-        />
-      </label>
-      <div className="color-block__palette-block">
-        {inProgress ? (
-          <PaletteBlock inProgress={inProgress} />
-        ) : (
-          <>
-            {palette &&
-              Object.entries(palette).map(([key, shade]) => {
-                return (
-                  <PaletteBlock color={shade} isSingleColor={Object.keys(palette).length === 1}>
-                    {key}
-                  </PaletteBlock>
-                );
-              })}
-          </>
-        )}
-      </div>
     </ConfigureColorBlockContainer>
   );
 };
