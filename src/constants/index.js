@@ -25,6 +25,13 @@ const colors = [
   { title: 'white', color: '#FFFFFF', isFlat: true },
 ];
 
+export const INITIAL_CREATOR = {
+  title: 'CreateColor',
+  color: '',
+  isFlat: false,
+  palette: { inProgress: true },
+};
+
 export const INITIAL_COLORS = colors.reduce(
   (acc, { title = '', color = '', isFlat = false }, index) => {
     const colorId = `${generateUniqueKey([])}${index}`;
@@ -35,5 +42,5 @@ export const INITIAL_COLORS = colors.reduce(
     };
     return acc;
   },
-  {},
+  { creator: INITIAL_CREATOR },
 );

@@ -12,7 +12,13 @@ import DeleteButton from './components/DeleteButton';
 
 const isPossibleHex = /^$|^#([A-Fa-f0-9]{0,6})$/i;
 
-const ConfigureColorBlock = ({ colorId, colorObj, handleUpdateColorObj }) => {
+const ConfigureColorBlock = ({
+  colorId,
+  colorObj,
+  handleUpdateColorObj,
+  handleCreatorColorObj,
+  isCreator,
+}) => {
   const [deleteOverlayVisible, setDeleteOverlayVisible] = useState(false);
   const { title, color, palette } = colorObj;
 
@@ -28,12 +34,17 @@ const ConfigureColorBlock = ({ colorId, colorObj, handleUpdateColorObj }) => {
     updateInProgress(palette.inProgress);
   }, [palette.inProgress]);
 
-  const handleUpdateTitle = ({ target: { value = '' } }) => {
+  const handleUpdateTitle = event => {
+    const { value = '' } = event.target;
     handleUpdateColorObj(colorId, { ...colorObj, title: value });
   };
 
   const [draft, setDraft] = useState(color);
-  const handleUpdateDraft = ({ target: { value = '' } }) => {
+  const handleUpdateDraft = event => {
+    const { value = '' } = event.target;
+    if (isCreator && event.key === 'Enter') {
+      event.preventDefault();
+    }
     const val = draft.length === 0 ? `#${value}` : value;
     if (isPossibleHex.test(val)) setDraft(val);
   };
@@ -101,6 +112,8 @@ ConfigureColorBlock.defaultProps = {
     palette: {},
   },
   handleUpdateColorObj: () => {},
+  handleCreatorColorObj: () => {},
+  isCreator: false,
 };
 
 ConfigureColorBlock.propTypes = {
@@ -111,6 +124,8 @@ ConfigureColorBlock.propTypes = {
     palette: PropTypes.objectOf(PropTypes.string),
   }),
   handleUpdateColorObj: PropTypes.func,
+  handleCreatorColorObj: PropTypes.func,
+  isCreator: PropTypes.bool,
 };
 
 export default ConfigureColorBlock;

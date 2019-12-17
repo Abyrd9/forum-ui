@@ -20,7 +20,7 @@ const ConfigureColorSection = () => {
     <ConfigureColorSectionContainer>
       <Row stretch>
         {Object.entries(colors)
-          .slice(0, -1)
+          .slice(1)
           .map(([key, colorObj]) => (
             <Column xsUp={12} mdUp={6} lgUp={4}>
               <ConfigureColorBlock
@@ -32,12 +32,13 @@ const ConfigureColorSection = () => {
             </Column>
           ))}
         <Column xsUp={12} mdUp={6} lgUp={4}>
-          {/* <ConfigureColorBlock
-              key="color-creator"
-              colorId="color-creator"
-              colorObj={{ title: '', color: '', palette:  }}
-              handleUpdateColorObj={handleUpdateColorObj}
-            /> */}
+          <ConfigureColorBlock
+            key="creator"
+            colorId="creator"
+            colorObj={colors.creator}
+            handleUpdateColorObj={handleUpdateColorObj}
+            isCreator
+          />
         </Column>
       </Row>
     </ConfigureColorSectionContainer>
