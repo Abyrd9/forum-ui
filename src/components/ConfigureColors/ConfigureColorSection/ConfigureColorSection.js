@@ -4,16 +4,26 @@ import { ConfigureColorSectionContainer } from './ConfigureColorSection.styles';
 import ConfigureColorBlock from '../ConfigureColorBlock';
 import Row from '../../../library/ForumGrid/Row';
 import Column from '../../../library/ForumGrid/Column';
-import { INITIAL_COLORS } from '../../../constants';
+import { INITIAL_COLORS, INITIAL_CREATOR } from '../../../constants';
+import generateUniqueKey from '../../../helpers/generateUniqueKey';
 
 const ConfigureColorSection = () => {
   const [colors, updateColors] = useState(INITIAL_COLORS);
 
-  const handleUpdateColorObj = (key, value) => {
-    const obj = { ...colors };
-    if (value) obj[key] = value;
-    if (!value) delete obj[key];
-    updateColors(obj);
+  const handleUpdateColorObj = (colorId, colorObj) => {
+    const colorsListObj = { ...colors };
+    if (colorObj) colorsListObj[colorId] = colorObj;
+    if (!colorObj) delete colorsListObj[colorId];
+    updateColors(colorsListObj);
+  };
+
+  const handleCreateColorObj = newColorObj => {
+    const colorsArr = Object.keys(colors).reduce((acc, key) => [...acc, { key }], []);
+    const newKey = generateUniqueKey(colorsArr);
+    const colorsListObj = { ...colors };
+    if (newColorObj) colorsListObj[newKey] = newColorObj;
+    colorsListObj.creator = INITIAL_CREATOR;
+    updateColors(colorsListObj);
   };
 
   return (
@@ -37,6 +47,7 @@ const ConfigureColorSection = () => {
             colorId="creator"
             colorObj={colors.creator}
             handleUpdateColorObj={handleUpdateColorObj}
+            handleCreateColorObj={handleCreateColorObj}
             isCreator
           />
         </Column>

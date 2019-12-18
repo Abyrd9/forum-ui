@@ -26,7 +26,7 @@ const colors = [
 ];
 
 export const INITIAL_CREATOR = {
-  title: 'CreateColor',
+  title: 'NewColor',
   color: '',
   isFlat: false,
   palette: { inProgress: true },

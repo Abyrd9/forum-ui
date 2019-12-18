@@ -16,7 +16,7 @@ export const AutoResizeInputContainer = styled.div`
         &__input {
           color: ${colors.black};
           font-size: ${font[400].size};
-          width: ${width}px;
+          width: ${width + 1}px;
           max-width: 180px;
           min-width: ${!value || value === '' ? '80px' : '0px'};
           text-overflow: ellipsis;

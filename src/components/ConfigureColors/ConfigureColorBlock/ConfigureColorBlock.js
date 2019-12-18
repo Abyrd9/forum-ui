@@ -2,12 +2,14 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import chroma from 'chroma-js';
 import { ConfigureColorBlockContainer, PaletteBlock } from './ConfigureColorBlock.styles';
 import PencilIcon from '../../Icons/PencilIcon';
 import TitleInput from './components/TitleInput';
 import buildColorPalette from '../../../helpers/buildColorPalette';
 import PaletteToggle from './components/PaletteToggle';
-import DeleteOverlay from './components/DeleteOverlay/DeleteOverlay';
+import DeleteOverlay from './components/DeleteOverlay';
+import AddButton from './components/AddButton';
 import DeleteButton from './components/DeleteButton';
 
 const isPossibleHex = /^$|^#([A-Fa-f0-9]{0,6})$/i;
@@ -16,7 +18,7 @@ const ConfigureColorBlock = ({
   colorId,
   colorObj,
   handleUpdateColorObj,
-  handleCreatorColorObj,
+  handleCreateColorObj,
   isCreator,
 }) => {
   const [deleteOverlayVisible, setDeleteOverlayVisible] = useState(false);
@@ -39,23 +41,35 @@ const ConfigureColorBlock = ({
     handleUpdateColorObj(colorId, { ...colorObj, title: value });
   };
 
-  const [draft, setDraft] = useState(color);
+  const [colorDraft, setColorDraft] = useState(color);
   const handleUpdateDraft = event => {
     const { value = '' } = event.target;
-    if (isCreator && event.key === 'Enter') {
-      event.preventDefault();
+    const val = colorDraft.length === 0 ? `#${value}` : value;
+    if (isPossibleHex.test(val)) setColorDraft(val);
+  };
+
+  const createColor = () => {
+    if (chroma.valid(color)) {
+      setColorDraft('');
+      handleCreateColorObj({
+        title,
+        color,
+        palette: isFlat ? { 400: color } : buildColorPalette(color),
+      });
     }
-    const val = draft.length === 0 ? `#${value}` : value;
-    if (isPossibleHex.test(val)) setDraft(val);
+  };
+
+  const handleKeyPress = event => {
+    if (isCreator && event.key === 'Enter') createColor();
   };
 
   useEffect(() => {
     handleUpdateColorObj(colorId, {
       ...colorObj,
-      color: draft,
-      palette: buildColorPalette(draft),
+      color: colorDraft,
+      palette: buildColorPalette(colorDraft),
     });
-  }, [draft]);
+  }, [colorDraft]);
 
   return (
     <ConfigureColorBlockContainer color={color} inProgress={inProgress}>
@@ -68,15 +82,25 @@ const ConfigureColorBlock = ({
         <>
           <div className="title-section">
             <TitleInput value={title} handleOnChange={handleUpdateTitle} />
-            <PaletteToggle color={color} isFlat={isFlat} toggleIsFlat={toggleIsFlat} />
-            <DeleteButton handleOnClick={() => setDeleteOverlayVisible(true)} />
+            <PaletteToggle
+              color={color}
+              isFlat={isFlat}
+              toggleIsFlat={toggleIsFlat}
+              disabled={inProgress}
+            />
+            {isCreator ? (
+              <AddButton handleOnClick={() => createColor()} disabled={inProgress} />
+            ) : (
+              <DeleteButton handleOnClick={() => setDeleteOverlayVisible(true)} />
+            )}
           </div>
           <label className="color-block__color-block">
             <span className="color-block__color-icon-container">
               <PencilIcon className="color-block__color-icon" />
             </span>
             <input
-              value={draft}
+              value={colorDraft}
+              onKeyPress={handleKeyPress}
               onChange={handleUpdateDraft}
               className="color-block__color-input"
               placeholder="#000000"
@@ -112,7 +136,7 @@ ConfigureColorBlock.defaultProps = {
     palette: {},
   },
   handleUpdateColorObj: () => {},
-  handleCreatorColorObj: () => {},
+  handleCreateColorObj: () => {},
   isCreator: false,
 };
 
@@ -124,7 +148,7 @@ ConfigureColorBlock.propTypes = {
     palette: PropTypes.objectOf(PropTypes.string),
   }),
   handleUpdateColorObj: PropTypes.func,
-  handleCreatorColorObj: PropTypes.func,
+  handleCreateColorObj: PropTypes.func,
   isCreator: PropTypes.bool,
 };
 

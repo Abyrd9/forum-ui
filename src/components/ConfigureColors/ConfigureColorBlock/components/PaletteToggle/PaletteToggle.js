@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import { PaletteToggleContainer } from './PaletteToggle.styles';
 import PaletteIcon from '../../../../Icons/PaletteIcon';
 
-const PaletteToggle = ({ color, isFlat, toggleIsFlat }) => {
+const PaletteToggle = ({ color, isFlat, toggleIsFlat, disabled }) => {
   return (
-    <PaletteToggleContainer isFlat={isFlat} color={color}>
+    <PaletteToggleContainer isFlat={isFlat} color={color} disabled={disabled}>
       <input
         className="palette-toggle-input"
         type="checkbox"
         checked={isFlat}
         onChange={() => toggleIsFlat(!isFlat)}
+        disabled={disabled}
       />
       <PaletteIcon className="palette-toggle-icon" />
     </PaletteToggleContainer>

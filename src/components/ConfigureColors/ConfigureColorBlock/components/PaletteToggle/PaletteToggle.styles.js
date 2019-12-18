@@ -1,9 +1,10 @@
 import styled, { css } from 'styled-components';
 
 export const PaletteToggleContainer = styled.label`
-  ${({ theme = {}, isFlat = false, color = '' }) => {
+  ${({ theme = {}, isFlat = false, color = '', disabled = false }) => {
     const { colors = {}, spacing = {} } = theme;
     return css`
+      ${disabled && 'visibility: hidden;'};
       cursor: pointer;
       transition: background-color 150ms ease;
       position: relative;
