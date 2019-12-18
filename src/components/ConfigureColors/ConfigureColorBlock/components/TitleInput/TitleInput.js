@@ -4,10 +4,10 @@ import { TitleInputContainer } from './TitleInput.styles';
 import AutoResizeInput from '../../../../AutoResizeInput';
 import EditIcon from '../../../../Icons/EditIcon';
 
-const TitleInput = ({ value, handleOnChange }) => {
+const TitleInput = ({ value, placeholder, handleOnChange }) => {
   return (
     <TitleInputContainer>
-      <AutoResizeInput placeholder="ColorTitle" value={value} handleOnChange={handleOnChange} />
+      <AutoResizeInput placeholder={placeholder} value={value} handleOnChange={handleOnChange} />
       <EditIcon className="edit-icon" />
     </TitleInputContainer>
   );
@@ -15,11 +15,13 @@ const TitleInput = ({ value, handleOnChange }) => {
 
 TitleInput.defaultProps = {
   value: '',
+  placeholder: '',
   handleOnChange: () => {},
 };
 
 TitleInput.propTypes = {
   value: PropTypes.string,
+  placeholder: PropTypes.string,
   handleOnChange: PropTypes.func,
 };
 

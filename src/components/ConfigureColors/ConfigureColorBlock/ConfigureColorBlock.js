@@ -81,7 +81,11 @@ const ConfigureColorBlock = ({
       ) : (
         <>
           <div className="title-section">
-            <TitleInput value={title} handleOnChange={handleUpdateTitle} />
+            <TitleInput
+              placeholder={isCreator ? '' : ''}
+              value={title}
+              handleOnChange={handleUpdateTitle}
+            />
             <PaletteToggle
               color={color}
               isFlat={isFlat}
