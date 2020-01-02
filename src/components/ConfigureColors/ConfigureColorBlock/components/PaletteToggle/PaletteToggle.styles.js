@@ -1,8 +1,14 @@
 import styled, { css } from 'styled-components';
+import chroma from 'chroma-js';
 
 export const PaletteToggleContainer = styled.label`
   ${({ theme = {}, isFlat = false, color = '', disabled = false }) => {
     const { colors = {}, spacing = {} } = theme;
+
+    const colorVal =
+      chroma.valid(color) && chroma.contrast(color, '#FFFFFF') < 1.2
+        ? chroma(color).darken(0.5)
+        : color;
     return css`
       ${disabled && 'visibility: hidden;'};
       cursor: pointer;
@@ -11,7 +17,7 @@ export const PaletteToggleContainer = styled.label`
       height: 14px;
       width: 30px;
       border-radius: 20px;
-      background-color: ${isFlat ? colors.neutral[300] : color};
+      background-color: ${isFlat ? colors.neutral[300] : colorVal};
       display: flex;
       align-items: center;
       padding: 4px;
@@ -33,9 +39,9 @@ export const PaletteToggleContainer = styled.label`
         width: calc(100% + 4px);
         height: calc(100% + 4px);
         background-color: transparent;
-        border: 1px solid ${isFlat ? colors.neutral[500] : color};
+        border: 1px solid ${isFlat ? colors.neutral[500] : colorVal};
         border-radius: 20px;
-        box-shadow: 0 0 4px ${isFlat ? colors.neutral[500] : color};
+        box-shadow: 0 0 4px ${isFlat ? colors.neutral[500] : colorVal};
       }
       .palette-toggle-input {
         height: 0;

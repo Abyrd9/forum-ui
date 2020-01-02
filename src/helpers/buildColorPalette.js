@@ -5,13 +5,15 @@ const buildColorPalette = hex => {
   if (!chroma.valid(hex)) return { inProgress: true };
 
   const dark = chroma
-    .scale([hex, chroma(hex).darken(2.5)])
-    .colors(5)
-    .slice(1);
+    .bezier([hex, '#000000'])
+    .scale()
+    .colors(8)
+    .slice(1, 5);
   const light = chroma
-    .scale([hex, chroma(hex).brighten(2)])
-    .colors(4)
-    .slice(1)
+    .bezier([hex, '#FFFFFF'])
+    .scale()
+    .colors(5)
+    .slice(1, 4)
     .reverse();
 
   return [...light, hex, ...dark].reduce((acc, color, index) => {

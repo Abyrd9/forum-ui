@@ -21,8 +21,6 @@ const colors = [
   { title: 'warning', color: '#FDE74C', isFlat: false },
   { title: 'success', color: '#A5D836', isFlat: false },
   { title: 'error', color: '#E50F00', isFlat: false },
-  { title: 'black', color: '#0C0C0C', isFlat: true },
-  { title: 'white', color: '#FFFFFF', isFlat: true },
 ];
 
 export const INITIAL_CREATOR = {
