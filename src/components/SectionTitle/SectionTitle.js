@@ -1,25 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BlockTitleContainer } from './BlockTitle.styles';
+import { SectionTitleContainer } from './SectionTitle.styles';
 
-const BlockTitle = ({ title, description }) => {
+const SectionTitle = ({ title, description }) => {
   return (
-    <BlockTitleContainer>
+    <SectionTitleContainer>
       <h2 className="block-title__title">{title}</h2>
       <span className="block-title__divider" />
       <p className="block-title__description">{description}</p>
-    </BlockTitleContainer>
+    </SectionTitleContainer>
   );
 };
 
-BlockTitle.defaultProps = {
+SectionTitle.defaultProps = {
   title: '',
   description: '',
 };
 
-BlockTitle.propTypes = {
+SectionTitle.propTypes = {
   title: PropTypes.string,
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
 
-export default BlockTitle;
+export default SectionTitle;

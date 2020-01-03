@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const BlockTitleContainer = styled.div`
+export const SectionTitleContainer = styled.div`
   ${props => {
     const { theme = {} } = props;
     const { colors = {}, spacing = {} } = theme;

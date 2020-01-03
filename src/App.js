@@ -6,7 +6,7 @@ import Row from './library/ForumGrid/Row';
 
 import NavBar from './components/NavBar';
 import PageTitle from './components/PageTitle';
-import BlockTitle from './components/BlockTitle';
+import SectionTitle from './components/SectionTitle';
 import ConfigureColorSection from './components/ConfigureThemePage/Colors/ConfigureColorSection';
 // import ConfigureTypographySection from './components/ConfigureTypographySection';
 
@@ -21,7 +21,7 @@ function App() {
           title="ForumUi"
           subtitle="A simplified design system generator for React Developers."
         />
-        <BlockTitle
+        <SectionTitle
           title="Colors"
           description={
             <span>
@@ -39,7 +39,7 @@ function App() {
           }
         />
         <ConfigureColorSection />
-        {/* <BlockTitle
+        {/* <SectionTitle
           title="Typography"
           description="A ForumUi Typography system has eight levels of font sizing. Currently we only support the use of the top 100 most popular google fonts."
         />

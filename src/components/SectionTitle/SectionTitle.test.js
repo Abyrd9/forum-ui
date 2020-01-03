@@ -1,4 +1,4 @@
 import React from 'react';
-import BlockTitle from './BlockTitle';
+import SectionTitle from './SectionTitle';
 
 it('', () => {});
