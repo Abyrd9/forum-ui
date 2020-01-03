@@ -11,6 +11,7 @@ import PaletteToggle from './components/PaletteToggle';
 import DeleteOverlay from './components/DeleteOverlay';
 import AddButton from './components/AddButton';
 import DeleteButton from './components/DeleteButton';
+import Transition from '../../Transition/Transition';
 
 const isPossibleHex = /^$|^#([A-Fa-f0-9]{0,6})$/i;
 
@@ -73,61 +74,58 @@ const ConfigureColorBlock = ({
 
   return (
     <ConfigureColorBlockContainer color={color} inProgress={inProgress}>
-      {deleteOverlayVisible ? (
+      <Transition show={deleteOverlayVisible}>
         <DeleteOverlay
           handleOnClose={() => setDeleteOverlayVisible(false)}
           handleOnDelete={() => handleUpdateColorObj(colorId)}
         />
-      ) : (
-        <>
-          <div className="title-section">
-            <TitleInput
-              placeholder={isCreator ? '' : ''}
-              value={title}
-              handleOnChange={handleUpdateTitle}
-            />
-            <PaletteToggle
-              color={color}
-              isFlat={isFlat}
-              toggleIsFlat={toggleIsFlat}
-              disabled={inProgress}
-            />
-            {isCreator ? (
-              <AddButton handleOnClick={() => createColor()} disabled={inProgress} />
-            ) : (
-              <DeleteButton handleOnClick={() => setDeleteOverlayVisible(true)} />
-            )}
-          </div>
-          <label className="color-block__color-block">
-            <span className="color-block__color-icon-container">
-              <PencilIcon className="color-block__color-icon" />
-            </span>
-            <input
-              value={colorDraft}
-              onKeyPress={handleKeyPress}
-              onChange={handleUpdateDraft}
-              className="color-block__color-input"
-              placeholder="#000000"
-            />
-          </label>
-          <div className="color-block__palette-block">
-            {inProgress ? (
-              <PaletteBlock inProgress={inProgress} />
-            ) : (
-              <>
-                {palette &&
-                  Object.entries(palette).map(([key, shade]) => {
-                    return (
-                      <PaletteBlock color={shade} isSingleColor={Object.keys(palette).length === 1}>
-                        {key}
-                      </PaletteBlock>
-                    );
-                  })}
-              </>
-            )}
-          </div>
-        </>
-      )}
+      </Transition>
+      <div className="title-section">
+        <TitleInput
+          placeholder={isCreator ? '' : ''}
+          value={title}
+          handleOnChange={handleUpdateTitle}
+        />
+        <PaletteToggle
+          color={color}
+          isFlat={isFlat}
+          toggleIsFlat={toggleIsFlat}
+          disabled={inProgress}
+        />
+        {isCreator ? (
+          <AddButton handleOnClick={() => createColor()} disabled={inProgress} />
+        ) : (
+          <DeleteButton handleOnClick={() => setDeleteOverlayVisible(true)} />
+        )}
+      </div>
+      <label className="color-block__color-block">
+        <span className="color-block__color-icon-container">
+          <PencilIcon className="color-block__color-icon" />
+        </span>
+        <input
+          value={colorDraft}
+          onKeyPress={handleKeyPress}
+          onChange={handleUpdateDraft}
+          className="color-block__color-input"
+          placeholder="#000000"
+        />
+      </label>
+      <div className="color-block__palette-block">
+        {inProgress ? (
+          <PaletteBlock inProgress={inProgress} />
+        ) : (
+          <>
+            {palette &&
+              Object.entries(palette).map(([key, shade]) => {
+                return (
+                  <PaletteBlock color={shade} isSingleColor={Object.keys(palette).length === 1}>
+                    {key}
+                  </PaletteBlock>
+                );
+              })}
+          </>
+        )}
+      </div>
     </ConfigureColorBlockContainer>
   );
 };

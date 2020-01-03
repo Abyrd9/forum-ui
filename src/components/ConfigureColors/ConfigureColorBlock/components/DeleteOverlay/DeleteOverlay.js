@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { DeleteOverlayContainer } from './DeleteOverlay.styles';
 import Button from '../../../../../library/Button/Button';
@@ -6,7 +6,6 @@ import matchParentNode from '../../../../../helpers/matchParentNode';
 
 const DeleteOverlay = ({ handleOnClose, handleOnDelete }) => {
   const DeleteOverlayRef = useRef(null);
-  const [mounted, setMounted] = useState(false);
 
   const handleClick = remove => {
     handleOnClose();
@@ -22,13 +21,12 @@ const DeleteOverlay = ({ handleOnClose, handleOnDelete }) => {
   };
 
   useEffect(() => {
-    setMounted(true);
     document.addEventListener('click', handleDocumentClick);
     return () => document.removeEventListener('click', handleDocumentClick);
   }, []);
 
   return (
-    <DeleteOverlayContainer mounted={mounted} ref={DeleteOverlayRef}>
+    <DeleteOverlayContainer ref={DeleteOverlayRef}>
       <p className="delete-text">Are you sure you want to delete this color?</p>
       <div className="button-container">
         <Button small error className="button-container__delete" onClick={() => handleClick(true)}>
