@@ -1,7 +1,7 @@
-import HomeIcon from '../components/Icons/HomeIcon';
-import GridIcon from '../components/Icons/GridIcon';
-import ComponentsIcon from '../components/Icons/ComponentsIcon';
-import ThemeIcon from '../components/Icons/ThemeIcon';
+import HomeIcon from '../components/Utilities/Icons/HomeIcon';
+import GridIcon from '../components/Utilities/Icons/GridIcon';
+import ComponentsIcon from '../components/Utilities/Icons/ComponentsIcon';
+import ThemeIcon from '../components/Utilities/Icons/ThemeIcon';
 import generateUniqueKey from '../helpers/generateUniqueKey';
 import buildColorPalette from '../helpers/buildColorPalette';
 

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { NavBarContainer } from './NavBar.styles';
 import { NAV_LIST } from '../../constants';
-import ForumIcon from '../Icons/ForumIcon';
+import ForumIcon from '../Utilities/Icons/ForumIcon';
 
 const NavBar = () => {
   const [active, toggleActive] = useState(false);

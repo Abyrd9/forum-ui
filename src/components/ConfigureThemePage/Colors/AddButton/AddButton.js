@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AddButtonContainer } from './AddButton.styles';
-import PlusIcon from '../../../../Icons/PlusIcon';
+import PlusIcon from '../../../Utilities/Icons/PlusIcon';
 
 const AddButton = ({ handleOnClick, disabled }) => {
   return (

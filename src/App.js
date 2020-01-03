@@ -7,7 +7,7 @@ import Row from './library/ForumGrid/Row';
 import NavBar from './components/NavBar';
 import PageTitle from './components/PageTitle';
 import BlockTitle from './components/BlockTitle';
-import ConfigureColorSection from './components/ConfigureColors/ConfigureColorSection';
+import ConfigureColorSection from './components/ConfigureThemePage/Colors/ConfigureColorSection';
 // import ConfigureTypographySection from './components/ConfigureTypographySection';
 
 function App() {

@@ -2,10 +2,10 @@
 import React, { useState } from 'react';
 import { ConfigureColorSectionContainer } from './ConfigureColorSection.styles';
 import ConfigureColorBlock from '../ConfigureColorBlock';
-import Row from '../../../library/ForumGrid/Row';
-import Column from '../../../library/ForumGrid/Column';
-import { INITIAL_COLORS, INITIAL_CREATOR } from '../../../constants';
-import generateUniqueKey from '../../../helpers/generateUniqueKey';
+import Row from '../../../../library/ForumGrid/Row';
+import Column from '../../../../library/ForumGrid/Column';
+import { INITIAL_COLORS, INITIAL_CREATOR } from '../../../../constants';
+import generateUniqueKey from '../../../../helpers/generateUniqueKey';
 
 const ConfigureColorSection = () => {
   const [colors, updateColors] = useState(INITIAL_COLORS);

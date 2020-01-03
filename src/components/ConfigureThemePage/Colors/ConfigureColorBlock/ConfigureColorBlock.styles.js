@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import chroma from 'chroma-js';
-import checkColorBrightness from '../../../helpers/checkColorBrightness';
+import checkColorBrightness from '../../../../helpers/checkColorBrightness';
 
 const { isLight } = checkColorBrightness;
 

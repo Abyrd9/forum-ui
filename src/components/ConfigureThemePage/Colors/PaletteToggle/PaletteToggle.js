@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { PaletteToggleContainer } from './PaletteToggle.styles';
-import PaletteIcon from '../../../../Icons/PaletteIcon';
+import PaletteIcon from '../../../Utilities/Icons/PaletteIcon';
 
 const PaletteToggle = ({ color, isFlat, toggleIsFlat, disabled }) => {
   return (

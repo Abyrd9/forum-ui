@@ -4,14 +4,14 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import chroma from 'chroma-js';
 import { ConfigureColorBlockContainer, PaletteBlock } from './ConfigureColorBlock.styles';
-import PencilIcon from '../../Icons/PencilIcon';
-import TitleInput from './components/TitleInput';
-import buildColorPalette from '../../../helpers/buildColorPalette';
-import PaletteToggle from './components/PaletteToggle';
-import DeleteOverlay from './components/DeleteOverlay';
-import AddButton from './components/AddButton';
-import DeleteButton from './components/DeleteButton';
-import Transition from '../../Transition/Transition';
+import buildColorPalette from '../../../../helpers/buildColorPalette';
+import PencilIcon from '../../../Utilities/Icons/PencilIcon';
+import Transition from '../../../Utilities/Transition';
+import TitleInput from '../TitleInput';
+import PaletteToggle from '../PaletteToggle';
+import DeleteOverlay from '../DeleteOverlay';
+import AddButton from '../AddButton';
+import DeleteButton from '../DeleteButton';
 
 const isPossibleHex = /^$|^#([A-Fa-f0-9]{0,6})$/i;
 

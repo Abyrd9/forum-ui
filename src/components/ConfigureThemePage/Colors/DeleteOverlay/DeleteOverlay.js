@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { DeleteOverlayContainer } from './DeleteOverlay.styles';
-import Button from '../../../../../library/Button/Button';
-import matchParentNode from '../../../../../helpers/matchParentNode';
+import Button from '../../../../library/Button';
+import matchParentNode from '../../../../helpers/matchParentNode';
 
 const DeleteOverlay = ({ handleOnClose, handleOnDelete }) => {
   const DeleteOverlayRef = useRef(null);
