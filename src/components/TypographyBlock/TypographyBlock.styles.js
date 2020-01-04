@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import chroma from 'chroma-js';
 
 export const TypographyBlockContainer = styled.div`
   ${props => {
@@ -8,7 +9,7 @@ export const TypographyBlockContainer = styled.div`
       margin-bottom: ${spacing[600]};
       .typography-block-title {
         margin-bottom: ${spacing[400]};
-        color: ${colors.neutral[300]};
+        color: ${chroma(colors.black).brighten(2)};
       }
       .typography-block-content {
         width: 100%;

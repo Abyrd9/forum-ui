@@ -63,7 +63,7 @@ export const SelectContainer = styled.div`
       .forum-ui-select-placeholder {
         transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
         transform-origin: left;
-        color: ${colors.neutral[600]};
+        color: ${colors.neutral[800]};
         position: absolute;
         left: calc(1em + 0.5px);
         user-select: none;

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import chroma from 'chroma-js';
 import checkColorBrightness from '../../../../helpers/checkColorBrightness';
 
-const { isLight } = checkColorBrightness;
+const { isLight, isReadableLight } = checkColorBrightness;
 
 export const ColorBlockContainer = styled.div`
   ${props => {
@@ -104,7 +104,7 @@ export const PaletteBlock = styled.div`
       height: 100%;
       flex: 1;
       background-color: ${inProgress ? colors.neutral[300] : color};
-      color: ${isLight(color) ? colors.black : colors.white};
+      color: ${isReadableLight(color) ? colors.white : colors.black};
     `;
   }}
 `;

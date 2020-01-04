@@ -129,6 +129,7 @@ const ForumUiGlobalStyle = createGlobalStyle`
         font-size: ${theme.font[400].size};
         line-height: ${theme.font[400].height};
         color: ${colors.primary[400]};
+        font-weight: bold;
         text-decoration: none;
         &:hover {
           text-decoration: underline;
