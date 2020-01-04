@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import WebFont from 'webfontloader';
 import { ConfigureTypographySectionContainer } from './ConfigureTypographySection.styles';
-import googleFontsApiKey from '../../assets/constants/googleFontsApiKey';
+import { GOOGLE_FONTS_API_KEY } from '../../constants';
 import Select from '../../library/Select';
 import Counter from '../../library/Counter';
 import Row from '../../library/ForumGrid/Row';
@@ -24,7 +24,7 @@ const ConfigureTypographySection = () => {
   });
 
   useEffect(() => {
-    WebFont.load({ google: { families: ['Josefin+Sans:100,300,400,600,700'] } });
+    WebFont.load({ google: { families: ['Josefin+Sans:100,300,400,600,700'] }, classes: false, events: false });
     updateConfig({
       ...config,
       name: 'Josefin Sans',
@@ -37,7 +37,7 @@ const ConfigureTypographySection = () => {
     const getGoogleFonts = async () => {
       try {
         const response = await fetch(
-          `https://www.googleapis.com/webfonts/v1/webfonts?key=${googleFontsApiKey}&sort=popularity`,
+          `https://www.googleapis.com/webfonts/v1/webfonts?key=${GOOGLE_FONTS_API_KEY}&sort=popularity`,
         );
         const data = await response.json();
         if (data && data.items.length > 0) {
@@ -78,7 +78,7 @@ const ConfigureTypographySection = () => {
       }
       url = url.join('');
     }
-    WebFont.load({ google: { families: [url] } });
+    WebFont.load({ google: { families: [url] }, classes: false, events: false });
     updateConfig({ ...config, name: value, family: `${font.family}, ${font.category}`, variants });
   };
 
