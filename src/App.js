@@ -44,6 +44,10 @@ function App() {
           description="A ForumUi Typography system has eight levels of font sizing. Currently we only support the use of the top 100 most popular google fonts."
         />
         <ConfigureTypographySection />
+        <SectionTitle
+          title="Spacing"
+          description="A ForumUi Sizing system has eight levels of sizing to space out elements on the page."
+        />
       </Grid>
     </ForumUiProvider>
   );

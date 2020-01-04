@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 export const SelectContainer = styled.div`
   ${props => {
     const { theme = {}, info = {} } = props;
-    const { colors = {}, spacing = {}, font = {} } = theme;
+    const { colors = {}, spacing = {}, font = {}, zIndex = {} } = theme;
     const { show = false, color = '' } = info;
     return css`
       position: relative;
@@ -108,6 +108,7 @@ export const SelectContainer = styled.div`
         width: 100%;
         top: 100%;
         left: 0;
+        z-index: ${zIndex[600]};
         &--is-active {
           visibility: visible;
         }

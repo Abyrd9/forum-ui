@@ -10,7 +10,7 @@ export const LoadingStyled = styled.div`
       width: 100%;
       height: ${minHeight || '100%'};
       background-color: ${colors.white};
-      z-index: ${zIndex[700]};
+      z-index: ${zIndex[500]};
       display: flex;
       justify-content: center;
       align-items: center;
