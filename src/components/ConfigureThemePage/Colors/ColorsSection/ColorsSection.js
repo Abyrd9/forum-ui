@@ -1,13 +1,13 @@
 /* eslint-disable no-param-reassign */
 import React, { useState } from 'react';
-import { ConfigureColorSectionContainer } from './ConfigureColorSection.styles';
-import ConfigureColorBlock from '../ConfigureColorBlock';
+import { ColorsSectionContainer } from './ColorsSection.styles';
+import ColorBlock from '../ColorBlock';
 import Row from '../../../../library/ForumGrid/Row';
 import Column from '../../../../library/ForumGrid/Column';
 import { INITIAL_COLORS, INITIAL_CREATOR } from '../../../../constants';
 import generateUniqueKey from '../../../../helpers/generateUniqueKey';
 
-const ConfigureColorSection = () => {
+const ColorsSection = () => {
   const [colors, updateColors] = useState(INITIAL_COLORS);
 
   const handleUpdateColorObj = (colorId, colorObj) => {
@@ -27,13 +27,13 @@ const ConfigureColorSection = () => {
   };
 
   return (
-    <ConfigureColorSectionContainer>
+    <ColorsSectionContainer>
       <Row stretch>
         {Object.entries(colors)
           .slice(1)
           .map(([key, colorObj]) => (
             <Column xsUp={12} mdUp={6} lgUp={4}>
-              <ConfigureColorBlock
+              <ColorBlock
                 key={key}
                 colorId={key}
                 colorObj={colorObj}
@@ -42,7 +42,7 @@ const ConfigureColorSection = () => {
             </Column>
           ))}
         <Column xsUp={12} mdUp={6} lgUp={4}>
-          <ConfigureColorBlock
+          <ColorBlock
             key="creator"
             colorId="creator"
             colorObj={colors.creator}
@@ -52,8 +52,8 @@ const ConfigureColorSection = () => {
           />
         </Column>
       </Row>
-    </ConfigureColorSectionContainer>
+    </ColorsSectionContainer>
   );
 };
 
-export default ConfigureColorSection;
+export default ColorsSection;

@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import WebFont from 'webfontloader';
+// import PropTypes from 'prop-types';
 import { ConfigureTypographySectionContainer } from './ConfigureTypographySection.styles';
 import { GOOGLE_FONTS_API_KEY } from '../../constants';
 import Select from '../../library/Select';
@@ -12,19 +11,29 @@ import Column from '../../library/ForumGrid/Column';
 import ConfigurationBlock from '../ConfigurationBlock/ConfigurationBlock';
 import TypographyBlock from '../TypographyBlock/TypographyBlock';
 import { getSizingVariations } from '../../helpers/buildTheme';
+import FontLegend from '../ConfigureThemePage/Typography/FontLegend';
+import loadWebFont from '../../helpers/loadWebFont';
 
 const ConfigureTypographySection = () => {
   const [googleFonts, updateGoogleFonts] = useState({ rawList: [], formattedList: [] });
+  const [loading, setLoading] = useState(true);
   const [config, updateConfig] = useState({
     name: '',
-    size: 16,
-    ratio: 1.25,
+    baseSize: 16,
+    upperRatio: (1.25).toFixed(2),
+    lowerRatio: (1.25).toFixed(2),
     family: '',
     variants: [],
   });
 
   useEffect(() => {
-    WebFont.load({ google: { families: ['Josefin+Sans:100,300,400,600,700'] }, classes: false, events: false });
+    const payload = {
+      google: { families: ['Josefin+Sans:100,300,400,600,700'] },
+      classes: false,
+    };
+    loadWebFont(payload, status => {
+      if (status === 'resolved') setLoading(false);
+    });
     updateConfig({
       ...config,
       name: 'Josefin Sans',
@@ -53,14 +62,13 @@ const ConfigureTypographySection = () => {
           }, []);
           updateGoogleFonts({ rawList, formattedList });
         }
-      } catch (error) {
-        console.error(error);
-      }
+      } catch (error) {}
     };
     getGoogleFonts();
   }, []);
 
   const handleOnFamilyChange = value => {
+    setLoading(true);
     const font = googleFonts.rawList.find(({ family }) => family === value);
     const variants = font.variants
       .filter(variant => !variant.includes('italic'))
@@ -78,14 +86,21 @@ const ConfigureTypographySection = () => {
       }
       url = url.join('');
     }
-    WebFont.load({ google: { families: [url] }, classes: false, events: false });
+
+    const payload = {
+      google: { families: [url] },
+      classes: false,
+    };
+    loadWebFont(payload, status => {
+      if (status === 'resolved') setLoading(false);
+    });
     updateConfig({ ...config, name: value, family: `${font.family}, ${font.category}`, variants });
   };
 
   return (
     <ConfigureTypographySectionContainer family={config.family}>
       <Row stretch>
-        <Column xsUp={12} lgUp={6} mdUpGutterRight={15}>
+        <Column xsUp={12} lgUp={6}>
           <ConfigurationBlock title="Font Family">
             {googleFonts.formattedList && googleFonts.formattedList.length > 0 && (
               <Select
@@ -98,8 +113,27 @@ const ConfigureTypographySection = () => {
             )}
           </ConfigurationBlock>
         </Column>
-        <Column shrink>
-          <TypographyBlock title="Font Weights">
+      </Row>
+      <Row>
+        <Column gutterLeft={0} xsUp={12} lgUp={7}>
+          <TypographyBlock title="Paragraph" loading={loading}>
+            <p style={{ fontFamily: config.family }}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+            <br />
+            <p style={{ fontFamily: config.family }}>
+              <b>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              </b>
+            </p>
+          </TypographyBlock>
+        </Column>
+        <Column shrink xsUp={12} lgUp={5} gutter={0}>
+          <TypographyBlock title="Font Weights" loading={loading}>
             <Row stretch>
               {config.variants
                 .sort((a, b) => b - a)
@@ -124,55 +158,76 @@ const ConfigureTypographySection = () => {
           </TypographyBlock>
         </Column>
       </Row>
+
       <Row stretch>
-        <Column shrink lgUpGutter={15}>
+        <Column shrink smDown={12} smDownGutter={24}>
           <ConfigurationBlock title="Base Font Size">
             <Counter
-              value={config.size}
+              readOnly
+              roundToWholeNumber
+              value={config.baseSize}
               multiplier={2}
-              handleOnChange={({ target }) => updateConfig({ ...config, size: target.value })}
+              handleOnChange={({ target }) => updateConfig({ ...config, baseSize: target.value })}
             />
           </ConfigurationBlock>
         </Column>
-        <Column>
-          <TypographyBlock title="Paragraph">
-            <p style={{ fontFamily: config.family }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
-            <br />
-            <p style={{ fontFamily: config.family }}>
-              <b>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </b>
-            </p>
+        <Column shrink smDownGutter={24}>
+          <ConfigurationBlock title="Font Size Ratio (500 - 800)">
+            <Counter
+              readOnly
+              value={config.upperRatio}
+              multiplier={0.05}
+              min={1.1}
+              max={1.8}
+              handleOnChange={({ target }) => updateConfig({ ...config, upperRatio: target.value })}
+            />
+          </ConfigurationBlock>
+        </Column>
+        <Column shrink smDownGutter={24}>
+          <ConfigurationBlock title="Font Size Ratio (100 - 300)">
+            <Counter
+              readOnly
+              value={config.lowerRatio}
+              multiplier={0.05}
+              min={1.1}
+              max={1.8}
+              handleOnChange={({ target }) => updateConfig({ ...config, lowerRatio: target.value })}
+            />
+          </ConfigurationBlock>
+        </Column>
+      </Row>
+
+      <Row stretch>
+        <Column shrink gutterRight={100}>
+          <TypographyBlock title="Font Sizing Legend" loading={loading}>
+            <FontLegend
+              fontSizingArray={Object.entries(
+                getSizingVariations(config.baseSize, {
+                  positive: config.upperRatio,
+                  negative: config.lowerRatio,
+                }),
+              )}
+            />
           </TypographyBlock>
         </Column>
-      </Row>
-      <Row>
-        <Column shrink gutter={15}>
-          <ConfigurationBlock title="Font Size Ratio">
-            <Counter
-              value={config.ratio}
-              multiplier={0.05}
-              max={5}
-              handleOnChange={({ target }) => updateConfig({ ...config, ratio: target.value })}
-            />
-          </ConfigurationBlock>
-        </Column>
-      </Row>
-      <Row>
-        <Column smUp={12}>
-          <TypographyBlock title="Font Sizing">
+        <Column>
+          <TypographyBlock title="Font Sizing Scale" loading={loading}>
             {Object.entries(
-              getSizingVariations(config.size, { positive: config.ratio, negative: config.ratio }),
+              getSizingVariations(config.baseSize, {
+                positive: config.upperRatio,
+                negative: config.lowerRatio,
+              }),
             )
               .sort((a, b) => b[0] - a[0])
               .map(([key, value]) => (
-                <h2 style={{ fontSize: value, lineHeight: 1.5, fontFamily: config.family }}>
+                <h2
+                  style={{
+                    fontSize: value,
+                    lineHeight: 'normal',
+                    marginBottom: '8px',
+                    fontFamily: config.family,
+                  }}
+                >
                   Font Size {key}
                 </h2>
               ))}

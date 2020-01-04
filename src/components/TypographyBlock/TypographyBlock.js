@@ -1,12 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TypographyBlockContainer } from './TypographyBlock.styles';
+import Loading from '../Utilities/Loading';
 
-const TypographyBlock = ({ title, children }) => {
+const TypographyBlock = ({ title, loading, children }) => {
   return (
     <TypographyBlockContainer>
       <h3 className="typography-block-title">{title}</h3>
-      {children}
+      <div className="typography-block-content">
+        {loading && <Loading />}
+        {children}
+      </div>
     </TypographyBlockContainer>
   );
 };

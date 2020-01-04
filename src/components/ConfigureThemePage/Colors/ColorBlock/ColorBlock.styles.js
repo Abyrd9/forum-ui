@@ -4,7 +4,7 @@ import checkColorBrightness from '../../../../helpers/checkColorBrightness';
 
 const { isLight } = checkColorBrightness;
 
-export const ConfigureColorBlockContainer = styled.div`
+export const ColorBlockContainer = styled.div`
   ${props => {
     const { theme = {}, color = '', inProgress = false } = props;
 

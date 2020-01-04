@@ -7,7 +7,7 @@ import Row from './library/ForumGrid/Row';
 import NavBar from './components/NavBar';
 import PageTitle from './components/PageTitle';
 import SectionTitle from './components/SectionTitle';
-import ConfigureColorSection from './components/ConfigureThemePage/Colors/ConfigureColorSection';
+import ColorsSection from './components/ConfigureThemePage/Colors/ColorsSection';
 import ConfigureTypographySection from './components/ConfigureTypographySection';
 
 function App() {
@@ -38,7 +38,7 @@ function App() {
             </span>
           }
         />
-        <ConfigureColorSection />
+        <ColorsSection />
         <SectionTitle
           title="Typography"
           description="A ForumUi Typography system has eight levels of font sizing. Currently we only support the use of the top 100 most popular google fonts."

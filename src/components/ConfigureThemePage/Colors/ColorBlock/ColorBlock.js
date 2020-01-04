@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import chroma from 'chroma-js';
-import { ConfigureColorBlockContainer, PaletteBlock } from './ConfigureColorBlock.styles';
+import { ColorBlockContainer, PaletteBlock } from './ColorBlock.styles';
 import buildColorPalette from '../../../../helpers/buildColorPalette';
 import PencilIcon from '../../../Utilities/Icons/PencilIcon';
 import Transition from '../../../Utilities/Transition';
@@ -15,7 +15,7 @@ import DeleteButton from '../DeleteButton';
 
 const isPossibleHex = /^$|^#([A-Fa-f0-9]{0,6})$/i;
 
-const ConfigureColorBlock = ({
+const ColorBlock = ({
   colorId,
   colorObj,
   handleUpdateColorObj,
@@ -73,7 +73,7 @@ const ConfigureColorBlock = ({
   }, [colorDraft]);
 
   return (
-    <ConfigureColorBlockContainer color={color} inProgress={inProgress}>
+    <ColorBlockContainer color={color} inProgress={inProgress}>
       <Transition show={deleteOverlayVisible}>
         <DeleteOverlay
           handleOnClose={() => setDeleteOverlayVisible(false)}
@@ -126,11 +126,11 @@ const ConfigureColorBlock = ({
           </>
         )}
       </div>
-    </ConfigureColorBlockContainer>
+    </ColorBlockContainer>
   );
 };
 
-ConfigureColorBlock.defaultProps = {
+ColorBlock.defaultProps = {
   colorId: '',
   colorObj: {
     title: '',
@@ -142,7 +142,7 @@ ConfigureColorBlock.defaultProps = {
   isCreator: false,
 };
 
-ConfigureColorBlock.propTypes = {
+ColorBlock.propTypes = {
   colorId: PropTypes.string,
   colorObj: PropTypes.shape({
     title: PropTypes.string,
@@ -154,4 +154,4 @@ ConfigureColorBlock.propTypes = {
   isCreator: PropTypes.bool,
 };
 
-export default ConfigureColorBlock;
+export default ColorBlock;

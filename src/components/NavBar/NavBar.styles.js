@@ -12,6 +12,7 @@ export const NavBarContainer = styled.div`
       align-items: center;
       position: relative;
       margin-bottom: ${spacing[700]};
+      overflow: hidden;
       .nav-bar {
         &__icon {
           cursor: pointer;

@@ -16,6 +16,7 @@ const Counter = ({
   max,
   min,
   multiplier,
+  roundToWholeNumber,
   className,
   handleOnChange,
   handleOnFocus,
@@ -37,16 +38,20 @@ const Counter = ({
   }, [count]);
 
   const handleOnMinusClick = () => {
-    const val = parseFloat(parseFloat(count).toFixed(2));
+    let val = parseFloat(parseFloat(count).toFixed(2));
     if (typeof min !== 'number' || val > min) {
-      updateCount(val - multiplier);
+      val = parseFloat(val - multiplier).toFixed(2);
+      if (roundToWholeNumber) val = Math.round(val);
+      updateCount(val);
     }
   };
 
   const handleOnPlusClick = () => {
-    const val = parseFloat(parseFloat(count).toFixed(2));
+    let val = parseFloat(parseFloat(count).toFixed(2));
     if (typeof max !== 'number' || val < max) {
-      updateCount(val + multiplier);
+      val = parseFloat(val + multiplier).toFixed(2);
+      if (roundToWholeNumber) val = Math.round(val);
+      updateCount(val);
     }
   };
 
@@ -64,7 +69,7 @@ const Counter = ({
       <button
         type="button"
         className={`${classNames.button} ${classNames.button}__left`}
-        disabled={disabled}
+        disabled={count <= min}
         onClick={handleOnMinusClick}
       >
         <Minus />
@@ -90,7 +95,7 @@ const Counter = ({
       <button
         type="button"
         className={`${classNames.button} ${classNames.button}__right`}
-        disabled={disabled}
+        disabled={count >= max}
         onClick={handleOnPlusClick}
       >
         <Plus />
@@ -110,6 +115,7 @@ Counter.defaultProps = {
   max: 99,
   min: 0,
   multiplier: 1,
+  roundToWholeNumber: false,
   className: '',
   handleOnChange: () => {},
   handleOnFocus: () => {},
@@ -127,6 +133,7 @@ Counter.propTypes = {
   max: PropTypes.number,
   min: PropTypes.number,
   multiplier: PropTypes.number,
+  roundToWholeNumber: PropTypes.bool,
   className: PropTypes.string,
   handleOnChange: PropTypes.func,
   handleOnFocus: PropTypes.func,

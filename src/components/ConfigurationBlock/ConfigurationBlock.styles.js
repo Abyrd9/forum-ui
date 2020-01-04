@@ -1,9 +1,15 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const ConfigurationBlockContainer = styled.div`
-  width: 100%;
-  .configuration-block-title {
-    margin-bottom: 4px;
-    text-transform: capitalize;
-  }
+  ${({ theme = {} }) => {
+    const { spacing = {} } = theme;
+    return css`
+      width: 100%;
+      margin-bottom: ${spacing[600]};
+      .configuration-block-title {
+        margin-bottom: 4px;
+        text-transform: capitalize;
+      }
+    `;
+  }}
 `;

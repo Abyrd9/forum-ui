@@ -35,6 +35,7 @@ export const CounterContainer = styled.div`
           box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.1);
         }
         &:disabled {
+          cursor: default;
           box-shadow: none;
           border: 2px solid ${colors.neutral[300]};
           background-color: ${colors.neutral[200]};

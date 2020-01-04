@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const ConfigureColorSectionContainer = styled.div`
+export const ColorsSectionContainer = styled.div`
   ${props => {
     const { theme } = props;
     const { spacing = {} } = theme;

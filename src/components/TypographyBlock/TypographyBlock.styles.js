@@ -5,10 +5,14 @@ export const TypographyBlockContainer = styled.div`
     const { theme = {} } = props;
     const { colors = {}, spacing = {} } = theme;
     return css`
-      margin-bottom: ${spacing[400]};
+      margin-bottom: ${spacing[600]};
       .typography-block-title {
-        margin-bottom: ${spacing[200]};
+        margin-bottom: ${spacing[400]};
         color: ${colors.neutral[300]};
+      }
+      .typography-block-content {
+        width: 100%;
+        position: relative;
       }
     `;
   }}
