@@ -1,22 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ConfigurationBlockContainer } from './ConfigurationBlock.styles';
+import { InputContainerContainer } from './InputContainer.styles';
 
-const ConfigurationBlock = ({ title, children }) => {
+const InputContainer = ({ title, children }) => {
   return (
-    <ConfigurationBlockContainer>
+    <InputContainerContainer>
       {title && <p className="configuration-block-title">{title}</p>}
       {children}
-    </ConfigurationBlockContainer>
+    </InputContainerContainer>
   );
 };
 
-ConfigurationBlock.defaultProps = {
+InputContainer.defaultProps = {
   title: '',
-  children: 'ConfigurationBlock',
+  children: 'InputContainer',
 };
 
-ConfigurationBlock.propTypes = {
+InputContainer.propTypes = {
   title: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -25,4 +25,4 @@ ConfigurationBlock.propTypes = {
   ]),
 };
 
-export default ConfigurationBlock;
+export default InputContainer;

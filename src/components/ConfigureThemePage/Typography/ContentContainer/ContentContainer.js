@@ -1,26 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TypographyBlockContainer } from './TypographyBlock.styles';
-import Loading from '../Utilities/Loading';
+import { ContentContainerContainer } from './ContentContainer.styles';
+import Loading from '../../../Utilities/Loading';
 
-const TypographyBlock = ({ title, loading, children }) => {
+const ContentContainer = ({ title, loading, children }) => {
   return (
-    <TypographyBlockContainer>
+    <ContentContainerContainer>
       <h3 className="typography-block-title">{title}</h3>
       <div className="typography-block-content">
         {loading && <Loading />}
         {children}
       </div>
-    </TypographyBlockContainer>
+    </ContentContainerContainer>
   );
 };
 
-TypographyBlock.defaultProps = {
+ContentContainer.defaultProps = {
   title: '',
-  children: 'TypographyBlock',
+  children: 'ContentContainer',
 };
 
-TypographyBlock.propTypes = {
+ContentContainer.propTypes = {
   title: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -29,4 +29,4 @@ TypographyBlock.propTypes = {
   ]),
 };
 
-export default TypographyBlock;
+export default ContentContainer;

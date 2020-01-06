@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const ConfigureTypographySectionContainer = styled.div`
+export const TypographySectionContainer = styled.div`
   ${props => {
     const { theme = {}, familyCSS = '' } = props;
     return css`

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const ConfigurationBlockContainer = styled.div`
+export const InputContainerContainer = styled.div`
   ${({ theme = {} }) => {
     const { spacing = {} } = theme;
     return css`

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const NavBarContainer = styled.div`
+export const NavigationContainer = styled.div`
   ${props => {
     const { theme = {}, active } = props;
     const { spacing = {}, colors = {}, font = {}, media = {} } = theme;

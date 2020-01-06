@@ -4,18 +4,19 @@ import ForumUiProvider from './assets/ForumUiProvider';
 import Grid from './library/ForumGrid/Grid';
 import Row from './library/ForumGrid/Row';
 
-import NavBar from './components/NavBar';
+import Navigation from './components/Navigation';
 import PageTitle from './components/PageTitle';
 import SectionTitle from './components/SectionTitle';
 import ColorsSection from './components/ConfigureThemePage/Colors/ColorsSection';
-import ConfigureTypographySection from './components/ConfigureTypographySection';
+import TypographySection from './components/ConfigureThemePage/Typography/TypographySection';
+import SpacingSection from './components/ConfigureThemePage/Spacing/SpacingSection/SpacingSection';
 
 function App() {
   return (
     <ForumUiProvider>
       <Grid>
         <Row mdDownFill>
-          <NavBar />
+          <Navigation />
         </Row>
         <PageTitle
           title="ForumUi"
@@ -43,11 +44,12 @@ function App() {
           title="Typography"
           description="A ForumUi Typography system has eight levels of font sizing. Currently we only support the use of the top 100 most popular google fonts."
         />
-        <ConfigureTypographySection />
+        <TypographySection />
         <SectionTitle
           title="Spacing"
-          description="A ForumUi Sizing system has eight levels of sizing to space out elements on the page."
+          description="A ForumUi spacing system has eight levels to space out elements on the page."
         />
+        <SpacingSection />
       </Grid>
     </ForumUiProvider>
   );

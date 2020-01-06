@@ -1,20 +1,21 @@
+/* eslint-disable no-console */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from 'react';
 // import PropTypes from 'prop-types';
-import { ConfigureTypographySectionContainer } from './ConfigureTypographySection.styles';
-import { GOOGLE_FONTS_API_KEY } from '../../constants';
-import Select from '../../library/Select';
-import Counter from '../../library/Counter';
-import Row from '../../library/ForumGrid/Row';
-import Column from '../../library/ForumGrid/Column';
-import ConfigurationBlock from '../ConfigurationBlock/ConfigurationBlock';
-import TypographyBlock from '../TypographyBlock/TypographyBlock';
-import { getSizingVariations } from '../../helpers/buildTheme';
-import FontLegend from '../ConfigureThemePage/Typography/FontLegend';
-import loadWebFont from '../../helpers/loadWebFont';
+import { TypographySectionContainer } from './TypographySection.styles';
+import { GOOGLE_FONTS_API_KEY } from '../../../../constants';
+import Select from '../../../../library/Select';
+import Counter from '../../../../library/Counter';
+import Row from '../../../../library/ForumGrid/Row';
+import Column from '../../../../library/ForumGrid/Column';
+import InputContainer from '../InputContainer';
+import ContentContainer from '../ContentContainer';
+import { getSizingVariations } from '../../../../helpers/buildTheme';
+import FontLegend from '../FontLegend';
+import loadWebFont from '../../../../helpers/loadWebFont';
 
-const ConfigureTypographySection = () => {
+const TypographySection = () => {
   const [googleFonts, updateGoogleFonts] = useState({ rawList: [], formattedList: [] });
   const [loading, setLoading] = useState(true);
   const [config, updateConfig] = useState({
@@ -62,7 +63,9 @@ const ConfigureTypographySection = () => {
           }, []);
           updateGoogleFonts({ rawList, formattedList });
         }
-      } catch (error) {}
+      } catch (error) {
+        console.error(error);
+      }
     };
     getGoogleFonts();
   }, []);
@@ -98,10 +101,10 @@ const ConfigureTypographySection = () => {
   };
 
   return (
-    <ConfigureTypographySectionContainer family={config.family}>
+    <TypographySectionContainer family={config.family}>
       <Row stretch>
         <Column xsUp={12} lgUp={6}>
-          <ConfigurationBlock title="Font Family">
+          <InputContainer title="Font Family">
             {googleFonts.formattedList && googleFonts.formattedList.length > 0 && (
               <Select
                 readOnly
@@ -111,12 +114,12 @@ const ConfigureTypographySection = () => {
                 handleOnChange={handleOnFamilyChange}
               />
             )}
-          </ConfigurationBlock>
+          </InputContainer>
         </Column>
       </Row>
       <Row>
         <Column gutterLeft={0} xsUp={12} lgUp={7}>
-          <TypographyBlock title="Paragraph" loading={loading}>
+          <ContentContainer title="Paragraph" loading={loading}>
             <p style={{ fontFamily: config.family }}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
               incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -130,10 +133,10 @@ const ConfigureTypographySection = () => {
                 exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
               </b>
             </p>
-          </TypographyBlock>
+          </ContentContainer>
         </Column>
         <Column shrink xsUp={12} lgUp={5} gutter={0}>
-          <TypographyBlock title="Font Weights" loading={loading}>
+          <ContentContainer title="Font Weights" loading={loading}>
             <Row stretch>
               {config.variants
                 .sort((a, b) => b - a)
@@ -155,13 +158,13 @@ const ConfigureTypographySection = () => {
                   </Column>
                 ))}
             </Row>
-          </TypographyBlock>
+          </ContentContainer>
         </Column>
       </Row>
 
       <Row stretch>
         <Column shrink smDown={12} smDownGutter={24}>
-          <ConfigurationBlock title="Base Font Size">
+          <InputContainer title="Base Font Size">
             <Counter
               readOnly
               roundToWholeNumber
@@ -169,10 +172,10 @@ const ConfigureTypographySection = () => {
               multiplier={2}
               handleOnChange={({ target }) => updateConfig({ ...config, baseSize: target.value })}
             />
-          </ConfigurationBlock>
+          </InputContainer>
         </Column>
         <Column shrink smDownGutter={24}>
-          <ConfigurationBlock title="Font Size Ratio (500 - 800)">
+          <InputContainer title="Font Size Ratio (500 - 800)">
             <Counter
               readOnly
               value={config.upperRatio}
@@ -181,10 +184,10 @@ const ConfigureTypographySection = () => {
               max={1.8}
               handleOnChange={({ target }) => updateConfig({ ...config, upperRatio: target.value })}
             />
-          </ConfigurationBlock>
+          </InputContainer>
         </Column>
         <Column shrink smDownGutter={24}>
-          <ConfigurationBlock title="Font Size Ratio (100 - 300)">
+          <InputContainer title="Font Size Ratio (100 - 300)">
             <Counter
               readOnly
               value={config.lowerRatio}
@@ -193,13 +196,13 @@ const ConfigureTypographySection = () => {
               max={1.8}
               handleOnChange={({ target }) => updateConfig({ ...config, lowerRatio: target.value })}
             />
-          </ConfigurationBlock>
+          </InputContainer>
         </Column>
       </Row>
 
       <Row stretch>
         <Column shrink gutterRight={100}>
-          <TypographyBlock title="Font Sizing Legend" loading={loading}>
+          <ContentContainer title="Font Sizing Legend" loading={loading}>
             <FontLegend
               fontSizingArray={Object.entries(
                 getSizingVariations(config.baseSize, {
@@ -208,10 +211,10 @@ const ConfigureTypographySection = () => {
                 }),
               )}
             />
-          </TypographyBlock>
+          </ContentContainer>
         </Column>
         <Column>
-          <TypographyBlock title="Font Sizing Scale" loading={loading}>
+          <ContentContainer title="Font Sizing Scale" loading={loading}>
             {Object.entries(
               getSizingVariations(config.baseSize, {
                 positive: config.upperRatio,
@@ -231,15 +234,15 @@ const ConfigureTypographySection = () => {
                   Font Size {key}
                 </h2>
               ))}
-          </TypographyBlock>
+          </ContentContainer>
         </Column>
       </Row>
-    </ConfigureTypographySectionContainer>
+    </TypographySectionContainer>
   );
 };
 
-ConfigureTypographySection.defaultProps = {};
+TypographySection.defaultProps = {};
 
-ConfigureTypographySection.propTypes = {};
+TypographySection.propTypes = {};
 
-export default ConfigureTypographySection;
+export default TypographySection;

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import chroma from 'chroma-js';
 
-export const TypographyBlockContainer = styled.div`
+export const ContentContainerContainer = styled.div`
   ${props => {
     const { theme = {} } = props;
     const { colors = {}, spacing = {} } = theme;
