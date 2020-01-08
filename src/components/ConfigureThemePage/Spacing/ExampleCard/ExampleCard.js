@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { ExampleCardStyled } from './ExampleCard.styles';
+import WalterWhite from '../../../../assets/img/WalterWhite.png'
 import Facebook from '../../../Utilities/Icons/Facebook';
 import Twitter from '../../../Utilities/Icons/Twitter';
 import Menu from '../../../Utilities/Icons/Menu';
 import Star from '../../../Utilities/Icons/Star';
 import Play from '../../../Utilities/Icons/Play';
 import PlusCircle from '../../../Utilities/Icons/PlusCircle';
+import ExampleCardSpacing from '../ExampleCardSpacing/ExampleCardSpacing';
 
 const ExampleCard = ({ spacing }) => {
+  const ContainerRef = useRef(null);
+
   return (
-    <ExampleCardStyled spacing={spacing}>
-      <div className="spacing spacing-500" />
+    <ExampleCardStyled ref={ContainerRef}>
+      <img src={WalterWhite} alt="Walter White" className="image" />
+      <ExampleCardSpacing space={spacing[500]} ContainerRef={ContainerRef} />
       <div className="social-content-block">
         <span className="social-content-block__share">share</span>
         <span className="social-content-block__facebook">
@@ -24,23 +29,23 @@ const ExampleCard = ({ spacing }) => {
           <Menu />
         </span>
       </div>
-      <div className="spacing spacing-700" />
+      <ExampleCardSpacing space={spacing[700]} ContainerRef={ContainerRef} />
       <div className="main-content-block">
         <span className="main-content-block__title">Breaking Bad</span>
-        <div className="spacing spacing-300" />
+        <ExampleCardSpacing space={spacing[300]} ContainerRef={ContainerRef} />
         <div className="main-content-block__features-block">
           <span>9.5/10</span>
           <span>TV Series</span>
           <span>Crime, Drama, Thriller</span>
         </div>
-        <div className="spacing spacing-400" />
+        <ExampleCardSpacing space={spacing[400]} ContainerRef={ContainerRef} />
         <p className="main-content-block__description">
           A chemistry teacher diagnosed with a terminal lung cancer teams up with his former student
           to cook and sell crystal meth.
         </p>
-        <div className="spacing spacing-400" />
+        <ExampleCardSpacing space={spacing[400]} ContainerRef={ContainerRef} />
         <div className="main-content-block__divider" />
-        <div className="spacing spacing-300" />
+        <ExampleCardSpacing space={spacing[300]} ContainerRef={ContainerRef} />
         <div className="main-content-block__cta-block">
           <span className="primary-cta">
             <Play />
@@ -52,12 +57,12 @@ const ExampleCard = ({ spacing }) => {
               <PlusCircle />
               Add to Watchlist
             </p>
-            <div className="spacing spacing-100" />
+            <ExampleCardSpacing space={spacing[100]} ContainerRef={ContainerRef} />
             <p>546 of your friends have watched this</p>
           </span>
         </div>
       </div>
-      <div className="spacing spacing-800" />
+      <ExampleCardSpacing space={spacing[800]} ContainerRef={ContainerRef} />
     </ExampleCardStyled>
   );
 };

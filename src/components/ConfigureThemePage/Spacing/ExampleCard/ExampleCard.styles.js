@@ -1,36 +1,28 @@
 import styled, { css } from 'styled-components';
 import chroma from 'chroma-js';
-import WalterWhite from '../../../../assets/img/WalterWhite.png';
 
 export const ExampleCardStyled = styled.div`
-  ${({ theme = {}, spacing = {} }) => {
-    console.log(spacing);
-    const { media = {} } = theme;
+  ${({ theme = {} }) => {
+    const { media = {}, zIndex = {} } = theme;
     const colors = {
-      primary: '#F1FAEE',
+      primary: '#FDFDFD',
       black: '#0A090C',
     };
     return css`
       width: 950px;
       position: relative;
-      background-color: ${colors.primary};
       display: flex;
       flex-direction: column;
       align-items: flex-end;
       margin-right: 50px;
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
       margin-bottom: 300px;
-      &::before {
-        content: '';
+      .image {
         position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        background: url(${WalterWhite});
-        background-repeat: no-repeat;
-        background-position: -180px -50px;
-        background-size: auto;
+        top: -50px;
+        left: -150px;
+        height: calc(100% + 100px);
+        z-index: ${zIndex[100]};
         ${media.md.down} {
           opacity: 0;
         }
@@ -62,6 +54,10 @@ export const ExampleCardStyled = styled.div`
       .main-content-block {
         max-width: 500px;
         margin-right: 54px;
+        z-index: ${zIndex[200]};
+        ${media.md.down} {
+          margin: 0 auto;
+        }
         &__title {
           font-size: 62px;
           font-weight: 800;
@@ -79,6 +75,9 @@ export const ExampleCardStyled = styled.div`
           color: ${colors.black};
         }
         &__divider {
+          width: 100%;
+          height: 1px;
+          background-color: ${chroma(colors.black).alpha(0.5)};
         }
         &__cta-block {
           display: flex;
@@ -134,34 +133,6 @@ export const ExampleCardStyled = styled.div`
               }
             }
           }
-        }
-      }
-      .spacing {
-        width: 100%;
-        background-color: ${chroma('red').alpha(0.25)};
-        &-100 {
-          height: ${spacing[100]};
-        }
-        &-200 {
-          height: ${spacing[200]};
-        }
-        &-300 {
-          height: ${spacing[300]};
-        }
-        &-400 {
-          height: ${spacing[400]};
-        }
-        &-500 {
-          height: ${spacing[500]};
-        }
-        &-600 {
-          height: ${spacing[600]};
-        }
-        &-700 {
-          height: ${spacing[700]};
-        }
-        &-800 {
-          height: ${spacing[800]};
         }
       }
     `;

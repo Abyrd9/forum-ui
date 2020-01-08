@@ -32,7 +32,7 @@ const forumUiTheme = {
   get zIndex() {
     const zIndex = {};
     for (let i = 0; i <= 8; i++) {
-      const key = ((i + 4) * 100).toString();
+      const key = (i * 100).toString();
       zIndex[key] = i * 1000;
     }
     return zIndex;
