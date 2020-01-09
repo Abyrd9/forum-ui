@@ -102,32 +102,25 @@ const ForumUiGlobalStyle = createGlobalStyle`
       }
       h1 {
         font-size: ${theme.font[800].size};
-        line-height: ${theme.font[800].height};
       }
       h2 {
         font-size: ${theme.font[700].size};
-        line-height: ${theme.font[700].height};
       }
       h3 {
         font-size: ${theme.font[600].size};
-        line-height: ${theme.font[600].height};
       }
       h4 {
         font-size: ${theme.font[500].size};
-        line-height: ${theme.font[500].height};
       }
       h5 {
         font-size: ${theme.font[400].size};
-        line-height: ${theme.font[400].height};
         text-transform: uppercase;
       }
       p {
         font-size: ${theme.font[400].size};
-        line-height: ${theme.font[400].height};
       }
       a {
         font-size: ${theme.font[400].size};
-        line-height: ${theme.font[400].height};
         color: ${colors.primary[400]};
         font-weight: bold;
         text-decoration: none;
@@ -148,9 +141,6 @@ const ForumUiGlobalStyle = createGlobalStyle`
       nav,
       section {
         display: block;
-      }
-      body {
-        line-height: 1;
       }
       ol,
       ul {

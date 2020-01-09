@@ -17,7 +17,6 @@ export const DeleteOverlayContainer = styled.div`
         text-align: center;
         max-width: 220px;
         margin-bottom: ${spacing[300]};
-        line-height: 1.2;
       }
       .button-container {
         button:first-child {

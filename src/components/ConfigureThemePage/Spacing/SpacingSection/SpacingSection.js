@@ -5,7 +5,7 @@ import Row from '../../../../library/ForumGrid/Row';
 import Column from '../../../../library/ForumGrid/Column';
 import InputContainer from '../../Typography/InputContainer';
 import Counter from '../../../../library/Counter';
-import ExampleCard from '../ExampleCard/ExampleCard';
+import ExampleCard from '../ExampleCard';
 import { getSizingVariations } from '../../../../helpers/buildTheme';
 
 const SpacingSection = () => {

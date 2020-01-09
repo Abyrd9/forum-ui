@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { ToggleContainer } from './Toggle.styles';
-import TimesIcon from '../../components/Icons/TimesIcon';
-import CheckIcon from '../../components/Icons/CheckIcon';
+import TimesIcon from '../../components/Utilities/Icons/TimesIcon';
+import CheckIcon from '../../components/Utilities/Icons/CheckIcon';
 import generateUniqueKey from '../../helpers/generateUniqueKey';
 
 const Toggle = React.forwardRef((props, ref) => {

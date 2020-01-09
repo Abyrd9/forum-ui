@@ -9,26 +9,34 @@ export const ExampleCardStyled = styled.div`
       black: '#0A090C',
     };
     return css`
-      width: 950px;
+      width: 95%;
       position: relative;
       display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      margin-right: 50px;
+      justify-content: space-between;
+      margin-right: 25px;
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-      margin-bottom: 300px;
-      .image {
-        position: absolute;
-        top: -50px;
-        left: -150px;
-        height: calc(100% + 100px);
-        z-index: ${zIndex[100]};
+      .image-container {
+        display: block;
+        position: relative;
+        flex: 1;
+        overflow: hidden;
+        margin-right: -100%;
+        max-width: 1340px;
         ${media.md.down} {
-          opacity: 0;
+          display: none;
+        }
+        .image {
+          position: absolute;
+          top: -50px;
+          left: -150px;
+          height: calc(100% + 100px);
+          z-index: ${zIndex[100]};
         }
       }
       .social-content-block {
-        margin-right: 24px;
+        margin-right: -24px;
+        display: flex;
+        justify-content: flex-end;
         span {
           font-weight: bold;
           font-size: 12px;
@@ -52,9 +60,11 @@ export const ExampleCardStyled = styled.div`
         }
       }
       .main-content-block {
+        flex: 1;
         max-width: 500px;
         margin-right: 54px;
         z-index: ${zIndex[200]};
+        padding: 0 15px;
         ${media.md.down} {
           margin: 0 auto;
         }
@@ -64,6 +74,14 @@ export const ExampleCardStyled = styled.div`
           color: ${colors.black};
         }
         &__features-block {
+          svg {
+            height: 13px;
+            margin-top: 2px;
+            margin-right: 12px;
+            path {
+              fill: ${chroma(colors.black).alpha(0.5)};
+            }
+          }
           span {
             font-size: 14px;
             margin-right: 24px;
@@ -108,7 +126,6 @@ export const ExampleCardStyled = styled.div`
               text-transform: uppercase;
               color: #e1e0e0;
               font-size: 14px;
-              margin-bottom: -4px;
             }
           }
           .secondary-cta {
@@ -121,7 +138,6 @@ export const ExampleCardStyled = styled.div`
               }
             }
             p {
-              margin: -6px 0px;
               &:nth-child(1) {
                 font-weight: bold;
                 color: ${colors.black};

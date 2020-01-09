@@ -7,12 +7,12 @@ export const ExampleCardSpacingStyled = styled.div`
       display: flex;
       align-items: center;
       width: 100%;
-      background-color: ${chroma('red').alpha(0.25)};
+      background-color: ${chroma('red').alpha(0.05)};
       height: ${space};
       position: relative;
       .line {
         height: 1px;
-        background-color: red;
+        background-color: ${chroma('red').alpha(0.25)};
         width: ${width};
         position: absolute;
         left: 50%;

@@ -13,7 +13,6 @@ export const SelectContainer = styled.div`
         margin-top: 4px;
         margin-bottom: ${spacing[400]};
         font-size: ${font[200].size};
-        line-height: ${font[200].height};
         color: ${color};
         max-width: 75%;
         margin-left: auto;
