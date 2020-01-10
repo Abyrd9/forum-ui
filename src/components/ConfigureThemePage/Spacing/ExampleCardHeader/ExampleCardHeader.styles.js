@@ -25,6 +25,9 @@ export const ExampleCardHeaderStyled = styled.div`
         ${media.sm.down} {
           margin-right: 20%;
         }
+        ${media.xs.down} {
+          margin-right: 0;
+        }
         &__label {
           font-weight: bold;
           color: ${chroma(colors.black).brighten(2)};

@@ -3,8 +3,9 @@ import styled, { css } from 'styled-components';
 export const TabsContainer = styled.div`
   ${props => {
     const { theme = {} } = props;
-    const { colors = {} } = theme;
+    const { colors = {}, spacing = {} } = theme;
     return css`
+      margin-bottom: ${spacing[300]};
       .forum-ui-tabs-list {
         display: flex;
         align-items: center;
@@ -12,8 +13,11 @@ export const TabsContainer = styled.div`
         border-radius: 4px;
       }
       .forum-ui-tabs-list-item {
+        flex: 1;
         &-button {
-          padding: 18px 32px;
+          width: 100%;
+          min-height: 62px;
+          padding: 18px 0px;
           background: transparent;
           position: relative;
           border: none;
