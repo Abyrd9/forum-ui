@@ -12,7 +12,7 @@ const ExampleCardHeader = ({ title, toggleLabel, toggleValue, handleToggleChange
         <Toggle
           className="toggle-container__toggle"
           checked={toggleValue}
-          handleOnChange={({ target }) => handleToggleChange(!target.value)}
+          handleOnChange={() => handleToggleChange(!toggleValue)}
         />
       </div>
     </ExampleCardHeaderStyled>

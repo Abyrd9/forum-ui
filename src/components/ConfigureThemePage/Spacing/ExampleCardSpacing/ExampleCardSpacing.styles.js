@@ -2,13 +2,15 @@ import styled, { css } from 'styled-components';
 import chroma from 'chroma-js';
 
 export const ExampleCardSpacingStyled = styled.div`
-  ${({ theme = {}, space = '', position = '', width = '' }) => {
+  ${({ theme = {}, spacingValue = '', showSpacing = true, position = '', width = '' }) => {
     return css`
+      transition: opacity 150ms ease-in;
+      opacity: ${showSpacing ? 1 : 0};
       display: flex;
       align-items: center;
       width: 100%;
       background-color: ${chroma('red').alpha(0.05)};
-      height: ${space};
+      height: ${spacingValue};
       position: relative;
       .line {
         height: 1px;
@@ -17,9 +19,12 @@ export const ExampleCardSpacingStyled = styled.div`
         position: absolute;
         left: 50%;
       }
-      .space {
+      .spacing {
         position: absolute;
         right: -${position};
+        span {
+          font-size: 12px;
+        }
       }
     `;
   }}

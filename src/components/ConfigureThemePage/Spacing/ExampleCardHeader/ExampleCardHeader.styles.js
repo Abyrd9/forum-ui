@@ -11,12 +11,11 @@ export const ExampleCardHeaderStyled = styled.div`
       .header-title {
       }
       .toggle-container {
-        margin-right: 50px;
         display: flex;
         flex-direction: column;
         align-items: flex-end;
         &__label {
-          margin-bottom: 2px;
+          margin-bottom: ${spacing[100]};
         }
       }
     `;

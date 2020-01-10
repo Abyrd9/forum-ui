@@ -11,7 +11,8 @@ import { getSizingVariations } from '../../../../helpers/buildTheme';
 const SpacingSection = () => {
   const [config, updateConfig] = useState({
     baseSize: 16,
-    ratio: (1.5).toFixed(2),
+    upperRatio: (1.5).toFixed(2),
+    lowerRatio: (1.5).toFixed(2),
   });
 
   return (
@@ -24,7 +25,21 @@ const SpacingSection = () => {
               roundToWholeNumber
               value={config.baseSize}
               multiplier={2}
+              min={2}
+              max={50}
               handleOnChange={({ target }) => updateConfig({ ...config, baseSize: target.value })}
+            />
+          </InputContainer>
+        </Column>
+        <Column shrink smDownGutter={24}>
+          <InputContainer title="Spacing Size Ratio (100 - 300)">
+            <Counter
+              readOnly
+              value={config.lowerRatio}
+              multiplier={0.05}
+              min={1}
+              max={2}
+              handleOnChange={({ target }) => updateConfig({ ...config, lowerRatio: target.value })}
             />
           </InputContainer>
         </Column>
@@ -32,9 +47,11 @@ const SpacingSection = () => {
           <InputContainer title="Spacing Size Ratio (500 - 800)">
             <Counter
               readOnly
-              value={config.ratio}
+              value={config.upperRatio}
               multiplier={0.05}
-              handleOnChange={({ target }) => updateConfig({ ...config, ratio: target.value })}
+              min={1}
+              max={2}
+              handleOnChange={({ target }) => updateConfig({ ...config, upperRatio: target.value })}
             />
           </InputContainer>
         </Column>
@@ -42,8 +59,8 @@ const SpacingSection = () => {
       <Row>
         <ExampleCard
           spacing={getSizingVariations(config.baseSize, {
-            positive: config.ratio,
-            negative: config.ratio,
+            positive: config.upperRatio,
+            negative: config.lowerRatio,
           })}
         />
       </Row>
