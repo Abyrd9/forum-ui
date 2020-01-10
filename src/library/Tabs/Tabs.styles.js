@@ -20,6 +20,7 @@ export const TabsContainer = styled.div`
           color: ${colors.neutral[800]};
           font-weight: bold;
           cursor: pointer;
+          white-space: pre-wrap;
           &:after {
             transition: all 200ms ease-in-out;
             opacity: 0;

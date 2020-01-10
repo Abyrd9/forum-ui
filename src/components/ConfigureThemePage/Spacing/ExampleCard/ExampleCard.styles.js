@@ -21,6 +21,9 @@ export const ExampleCardStyled = styled.div`
       ${media.sm.down} {
         width: 80%;
       }
+      ${media.xs.down} {
+          width: 100%;
+        }
       .image-container {
         display: block;
         position: relative;

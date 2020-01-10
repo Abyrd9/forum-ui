@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { ExampleCardSpacingStyled } from './ExampleCardSpacing.styles';
-import useWindowResizeEffect from '../../../../hooks/useWindowResizeEffect';
+import useWindowResize from '../../../../hooks/useWindowResize';
 
 const ExampleCardSpacing = ({ spacingKey, spacingValue, showSpacing, ContainerRef, ...props }) => {
   const CardSpacingRef = useRef(null);
@@ -27,7 +27,7 @@ const ExampleCardSpacing = ({ spacingKey, spacingValue, showSpacing, ContainerRe
     getDimensions();
   }, []);
 
-  useWindowResizeEffect(() => {
+  useWindowResize(() => {
     getDimensions();
   }, 100);
 

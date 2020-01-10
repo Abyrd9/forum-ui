@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { TabsContainer } from './Tabs.styles';
 
-const Tabs = ({ tabsList, handleOnClick, children }) => {
-  const [activeTab, updateActiveTab] = useState({ index: 0 });
+const Tabs = ({ tabsList, tabActiveIndex, handleTabClick, className, children }) => {
+  const [activeTab, updateActiveTab] = useState({ index: tabActiveIndex });
 
   const onTabClick = (event, tabItem, index) => {
     updateActiveTab({ ...tabItem, index });
-    handleOnClick(event, tabItem);
+    handleTabClick(event, {...tabItem, index});
   };
 
   /* class variables */
@@ -19,7 +19,7 @@ const Tabs = ({ tabsList, handleOnClick, children }) => {
   };
 
   return (
-    <TabsContainer>
+    <TabsContainer className={className}>
       <ul className={classNames.list}>
         {tabsList &&
           tabsList.length > 0 &&
@@ -47,7 +47,8 @@ const Tabs = ({ tabsList, handleOnClick, children }) => {
 };
 
 Tabs.defaultProps = {
-  handleOnClick: () => null,
+  tabActiveIndex: 0,
+  handleTabClick: () => null,
 };
 
 Tabs.propTypes = {
@@ -58,7 +59,8 @@ Tabs.propTypes = {
       content: PropTypes.node,
     }),
   ]).isRequired,
-  handleOnClick: PropTypes.func,
+  tabActiveIndex: PropTypes.number,
+  handleTabClick: PropTypes.func,
 };
 
 export default Tabs;

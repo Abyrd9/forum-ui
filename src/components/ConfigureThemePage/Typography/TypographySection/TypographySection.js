@@ -3,7 +3,7 @@
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from 'react';
 // import PropTypes from 'prop-types';
-import { TypographySectionContainer } from './TypographySection.styles';
+import { TypographySectionContainer, ExtendedTabs } from './TypographySection.styles';
 import { GOOGLE_FONTS_API_KEY } from '../../../../constants';
 import Select from '../../../../library/Select';
 import Counter from '../../../../library/Counter';
@@ -14,6 +14,25 @@ import ContentContainer from '../ContentContainer';
 import { getSizingVariations } from '../../../../helpers/buildTheme';
 import FontLegend from '../FontLegend';
 import loadWebFont from '../../../../helpers/loadWebFont';
+import useMediaQuery from '../../../../hooks/useMediaQuery';
+
+const tabs = [
+  {
+    name: "base-font",
+    value: "Base Font",
+    content: null
+  },
+  {
+    name: "font-ratio-lower",
+    value: "Lower Ratio",
+    content: null,
+  },
+  {
+    name: "font-ratio-upper",
+    value: "Upper Ratio",
+    content: null,
+  },
+]
 
 const TypographySection = () => {
   const [googleFonts, updateGoogleFonts] = useState({ rawList: [], formattedList: [] });
@@ -26,6 +45,11 @@ const TypographySection = () => {
     family: '',
     variants: [],
   });
+
+  const [tabIndex, setTabIndex] = useState(0);
+  const handleSetTabIndex = (_, { index }) => setTabIndex(index);
+  const mobile = window.matchMedia("(max-width: 768px)");
+  const isMobile = useMediaQuery(mobile);
 
   useEffect(() => {
     const payload = {
@@ -100,6 +124,49 @@ const TypographySection = () => {
     updateConfig({ ...config, name: value, family: `${font.family}, ${font.category}`, variants });
   };
 
+  const BaseSize = (
+    <Column shrink>
+      <InputContainer title="Base Font Size">
+        <Counter
+          readOnly
+          roundToWholeNumber
+          value={config.baseSize}
+          multiplier={2}
+          handleOnChange={({ target }) => updateConfig({ ...config, baseSize: target.value })}
+        />
+      </InputContainer>
+    </Column>
+  );
+  const LowerRatio = (
+    <Column shrink>
+      <InputContainer title="Font Size Ratio (100 - 300)">
+        <Counter
+          readOnly
+          value={config.lowerRatio}
+          multiplier={0.05}
+          min={1.1}
+          max={1.8}
+          handleOnChange={({ target }) => updateConfig({ ...config, lowerRatio: target.value })}
+        />
+      </InputContainer>
+    </Column>
+  );
+  const UpperRatio = (
+    <Column shrink>
+      <InputContainer title="Font Size Ratio (500 - 800)">
+        <Counter
+          readOnly
+          value={config.upperRatio}
+          multiplier={0.05}
+          min={1.1}
+          max={1.8}
+          handleOnChange={({ target }) => updateConfig({ ...config, upperRatio: target.value })}
+        />
+      </InputContainer>
+    </Column>
+  );
+
+
   return (
     <TypographySectionContainer family={config.family}>
       <Row stretch>
@@ -162,43 +229,30 @@ const TypographySection = () => {
         </Column>
       </Row>
 
-      <Row stretch>
-        <Column shrink smDown={12} smDownGutter={24}>
-          <InputContainer title="Base Font Size">
-            <Counter
-              readOnly
-              roundToWholeNumber
-              value={config.baseSize}
-              multiplier={2}
-              handleOnChange={({ target }) => updateConfig({ ...config, baseSize: target.value })}
-            />
-          </InputContainer>
-        </Column>
-        <Column shrink smDownGutter={24}>
-          <InputContainer title="Font Size Ratio (500 - 800)">
-            <Counter
-              readOnly
-              value={config.upperRatio}
-              multiplier={0.05}
-              min={1.1}
-              max={1.8}
-              handleOnChange={({ target }) => updateConfig({ ...config, upperRatio: target.value })}
-            />
-          </InputContainer>
-        </Column>
-        <Column shrink smDownGutter={24}>
-          <InputContainer title="Font Size Ratio (100 - 300)">
-            <Counter
-              readOnly
-              value={config.lowerRatio}
-              multiplier={0.05}
-              min={1.1}
-              max={1.8}
-              handleOnChange={({ target }) => updateConfig({ ...config, lowerRatio: target.value })}
-            />
-          </InputContainer>
-        </Column>
-      </Row>
+
+      {isMobile ? (
+        <Row stretch>
+          <Column>
+            <ExtendedTabs tabsList={tabs} tabActiveIndex={tabIndex} handleTabClick={handleSetTabIndex} />
+          </Column>
+          {tabIndex === 0 && BaseSize}
+          {tabIndex === 1 && LowerRatio}
+          {tabIndex === 2 && UpperRatio}
+        </Row>
+      ) : (
+          <Row stretch>
+            <Column shrink gutter={0}>
+              {BaseSize}
+            </Column>
+            <Column shrink gutter={0}>
+              {LowerRatio}
+            </Column>
+            <Column shrink gutter={0}>
+              {UpperRatio}
+            </Column>
+          </Row >
+        )}
+
 
       <Row stretch>
         <Column shrink gutterRight={100}>
@@ -237,7 +291,7 @@ const TypographySection = () => {
           </ContentContainer>
         </Column>
       </Row>
-    </TypographySectionContainer>
+    </TypographySectionContainer >
   );
 };
 
