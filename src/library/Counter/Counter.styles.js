@@ -60,9 +60,13 @@ export const CounterContainer = styled.div`
         justify: center;
         align-items: center;
         &--is-disabled {
+          cursor: default;
           border: 2px solid ${colors.neutral[300]};
           background-color: ${colors.neutral[200]};
           box-shadow: none;
+        }
+        &--read-only {
+          cursor: default;
         }
         &:focus-within {
           &:before {

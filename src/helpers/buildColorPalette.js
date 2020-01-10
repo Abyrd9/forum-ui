@@ -7,7 +7,7 @@ const buildColorPalette = hex => {
   const dark = chroma
     .bezier([hex, '#000000'])
     .scale()
-    .colors(8)
+    .colors(6)
     .slice(1, 5);
   const light = chroma
     .bezier([hex, '#FFFFFF'])

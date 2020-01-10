@@ -1,6 +1,6 @@
-import React, { useRef, useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import { ExampleCardSpacingStyled } from "./ExampleCardSpacing.styles";
+import React, { useRef, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { ExampleCardSpacingStyled } from './ExampleCardSpacing.styles';
 import useWindowResizeEffect from '../../../../hooks/useWindowResizeEffect';
 
 const ExampleCardSpacing = ({ spacingKey, spacingValue, showSpacing, ContainerRef, ...props }) => {
@@ -16,10 +16,12 @@ const ExampleCardSpacing = ({ spacingKey, spacingValue, showSpacing, ContainerRe
 
       const posDiff = ContainerDimensions.right - CardSpacingDimensions.right;
       setPosition(`${posDiff + 85}px`);
-      const widthDiff = ContainerDimensions.right - (CardSpacingDimensions.right - (CardSpacingRef.current.clientWidth / 2));
+      const widthDiff =
+        ContainerDimensions.right -
+        (CardSpacingDimensions.right - CardSpacingRef.current.clientWidth / 2);
       setWidth(`${widthDiff + 10}px`);
     }
-  }
+  };
 
   useEffect(() => {
     getDimensions();
@@ -27,12 +29,21 @@ const ExampleCardSpacing = ({ spacingKey, spacingValue, showSpacing, ContainerRe
 
   useWindowResizeEffect(() => {
     getDimensions();
-  })
+  }, 100);
 
   return (
-    <ExampleCardSpacingStyled ref={CardSpacingRef} spacingValue={spacingValue} showSpacing={showSpacing} position={position} width={width} {...props}>
+    <ExampleCardSpacingStyled
+      ref={CardSpacingRef}
+      spacingValue={spacingValue}
+      showSpacing={showSpacing}
+      position={position}
+      width={width}
+      {...props}
+    >
       <div className="line" />
-      <p className="spacing">{spacingValue} <span>({spacingKey})</span></p>
+      <p className="spacing">
+        {spacingValue} <span>({spacingKey})</span>
+      </p>
     </ExampleCardSpacingStyled>
   );
 };

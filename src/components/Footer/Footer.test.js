@@ -1,4 +1,5 @@
 import React from 'react';
-import ExampleCard from './ExampleCard';
+import Footer from './Footer';
 
 it('', () => {});
+    

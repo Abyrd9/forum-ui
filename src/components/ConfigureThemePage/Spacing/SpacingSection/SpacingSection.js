@@ -6,7 +6,9 @@ import Column from '../../../../library/ForumGrid/Column';
 import InputContainer from '../../Typography/InputContainer';
 import Counter from '../../../../library/Counter';
 import ExampleCard from '../ExampleCard';
+import SpacingLegend from '../SpacingLegend';
 import { getSizingVariations } from '../../../../helpers/buildTheme';
+import ContentContainer from '../../Typography/ContentContainer';
 
 const SpacingSection = () => {
   const [config, updateConfig] = useState({
@@ -56,13 +58,29 @@ const SpacingSection = () => {
           </InputContainer>
         </Column>
       </Row>
-      <Row>
-        <ExampleCard
-          spacing={getSizingVariations(config.baseSize, {
-            positive: config.upperRatio,
-            negative: config.lowerRatio,
-          })}
-        />
+      <Row stretch>
+        <Column>
+          <ContentContainer title="Spacing Size Legend">
+            <SpacingLegend
+              spacingSizingArray={Object.entries(
+                getSizingVariations(config.baseSize, {
+                  positive: config.upperRatio,
+                  negative: config.lowerRatio,
+                }),
+              )}
+            />
+          </ContentContainer>
+        </Column>
+      </Row>
+      <Row stretch>
+        <Column>
+          <ExampleCard
+            spacing={getSizingVariations(config.baseSize, {
+              positive: config.upperRatio,
+              negative: config.lowerRatio,
+            })}
+          />
+        </Column>
       </Row>
     </SpacingSectionStyled>
   );

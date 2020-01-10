@@ -63,6 +63,7 @@ const Counter = ({
   };
 
   if (disabled) classNames.label += ` ${classNames.label}--is-disabled`;
+  if (readOnly) classNames.label += ` ${classNames.label}--read-only`;
 
   return (
     <CounterContainer className={className}>

@@ -15,7 +15,7 @@ const ExampleCard = ({ spacing }) => {
   const [showSpacing, toggleShowSpacing] = useState(true);
   const ContainerRef = useRef(null);
   return (
-    <div style={{ marginBottom: '400px', width: '100%' }}>
+    <div>
       <ExampleCardHeader
         title="Example Card:"
         toggleLabel="Toggle Legend:"
@@ -27,7 +27,12 @@ const ExampleCard = ({ spacing }) => {
           <img src={WalterWhite} alt="Walter White" className="image" />
         </div>
         <div className="main-content-block">
-          <ExampleCardSpacing spacingKey="500" spacingValue={spacing[500]} showSpacing={showSpacing} ContainerRef={ContainerRef} />
+          <ExampleCardSpacing
+            spacingKey="500"
+            spacingValue={spacing[500]}
+            showSpacing={showSpacing}
+            ContainerRef={ContainerRef}
+          />
           <div className="social-content-block">
             <span className="social-content-block__share">share</span>
             <span className="social-content-block__facebook">
@@ -40,23 +45,48 @@ const ExampleCard = ({ spacing }) => {
               <Menu />
             </span>
           </div>
-          <ExampleCardSpacing spacingKey="700" spacingValue={spacing[700]} showSpacing={showSpacing} ContainerRef={ContainerRef} />
+          <ExampleCardSpacing
+            spacingKey="700"
+            spacingValue={spacing[700]}
+            showSpacing={showSpacing}
+            ContainerRef={ContainerRef}
+          />
           <span className="main-content-block__title">Breaking Bad</span>
-          <ExampleCardSpacing spacingKey="300" spacingValue={spacing[300]} showSpacing={showSpacing} ContainerRef={ContainerRef} />
+          <ExampleCardSpacing
+            spacingKey="300"
+            spacingValue={spacing[300]}
+            showSpacing={showSpacing}
+            ContainerRef={ContainerRef}
+          />
           <div className="main-content-block__features-block">
             <Star />
             <span>9.5/10</span>
             <span>TV Series</span>
             <span>Crime, Drama, Thriller</span>
           </div>
-          <ExampleCardSpacing spacingKey="400" spacingValue={spacing[400]} showSpacing={showSpacing} ContainerRef={ContainerRef} />
+          <ExampleCardSpacing
+            spacingKey="400"
+            spacingValue={spacing[400]}
+            showSpacing={showSpacing}
+            ContainerRef={ContainerRef}
+          />
           <p className="main-content-block__description">
             A chemistry teacher diagnosed with a terminal lung cancer teams up with his former
             student to cook and sell crystal meth.
           </p>
-          <ExampleCardSpacing spacingKey="400" spacingValue={spacing[400]} showSpacing={showSpacing} ContainerRef={ContainerRef} />
+          <ExampleCardSpacing
+            spacingKey="400"
+            spacingValue={spacing[400]}
+            showSpacing={showSpacing}
+            ContainerRef={ContainerRef}
+          />
           <div className="main-content-block__divider" />
-          <ExampleCardSpacing spacingKey="300" spacingValue={spacing[300]} showSpacing={showSpacing} ContainerRef={ContainerRef} />
+          <ExampleCardSpacing
+            spacingKey="300"
+            spacingValue={spacing[300]}
+            showSpacing={showSpacing}
+            ContainerRef={ContainerRef}
+          />
           <div className="main-content-block__cta-block">
             <span className="primary-cta">
               <Play />
@@ -68,11 +98,21 @@ const ExampleCard = ({ spacing }) => {
                 <PlusCircle />
                 Add to Watchlist
               </p>
-              <ExampleCardSpacing spacingKey="100" spacingValue={spacing[100]} showSpacing={showSpacing} ContainerRef={ContainerRef} />
+              <ExampleCardSpacing
+                spacingKey="100"
+                spacingValue={spacing[100]}
+                showSpacing={showSpacing}
+                ContainerRef={ContainerRef}
+              />
               <p>546 of your friends have watched this</p>
             </span>
           </div>
-          <ExampleCardSpacing spacingKey="800" spacingValue={spacing[800]} showSpacing={showSpacing} ContainerRef={ContainerRef} />
+          <ExampleCardSpacing
+            spacingKey="800"
+            spacingValue={spacing[800]}
+            showSpacing={showSpacing}
+            ContainerRef={ContainerRef}
+          />
         </div>
       </ExampleCardStyled>
     </div>

@@ -16,11 +16,11 @@ export const ExampleCardStyled = styled.div`
       margin-right: 25px;
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
       ${media.md.down} {
-          width: 85%;
-        }
-        ${media.sm.down} {
-          width: 80%;
-        }
+        width: 85%;
+      }
+      ${media.sm.down} {
+        width: 80%;
+      }
       .image-container {
         display: block;
         position: relative;
@@ -86,14 +86,18 @@ export const ExampleCardStyled = styled.div`
           font-weight: 800;
           color: ${colors.black};
           ${media.sm.down} {
-          font-size: 36px;
-        }
+            font-size: 36px;
+          }
         }
         &__features-block {
           svg {
             height: 13px;
             margin-top: 2px;
             margin-right: 12px;
+            ${media.sm.down} {
+              margin-right: 8px;
+              height: 8px;
+            }
             path {
               fill: ${chroma(colors.black).alpha(0.5)};
             }
@@ -102,6 +106,10 @@ export const ExampleCardStyled = styled.div`
             font-size: 14px;
             margin-right: 24px;
             color: ${chroma(colors.black).alpha(0.5)};
+            ${media.sm.down} {
+              margin-right: 18px;
+              font-size: 10px;
+            }
           }
         }
         &__description {
@@ -116,10 +124,6 @@ export const ExampleCardStyled = styled.div`
         &__cta-block {
           display: flex;
           align-items: center;
-          ${media.sm.down} {
-            flex-direction: column;
-            align-items: flex-start;
-          }
           .primary-cta {
             margin-right: 16px;
             display: flex;
@@ -129,9 +133,16 @@ export const ExampleCardStyled = styled.div`
             padding: 14px 18px;
             max-width: 160px;
             border-radius: 25px;
+            ${media.sm.down} {
+              margin-right: 14px;
+              padding: 8px 12px;
+            }
             svg {
               height: 12px;
               margin-right: 10px;
+              ${media.sm.down} {
+                height: 10px;
+              }
               path {
                 fill: #e1e0e0;
               }
@@ -146,13 +157,23 @@ export const ExampleCardStyled = styled.div`
               text-transform: uppercase;
               color: #e1e0e0;
               font-size: 14px;
+              ${media.sm.down} {
+                margin-bottom: -4px;
+                font-size: 10px;
+              }
             }
           }
           .secondary-cta {
             margin-top: 2px;
+            ${media.sm.down} {
+              max-width: 160px;
+            }
             svg {
               height: 12px;
               margin-right: 6px;
+              ${media.sm.down} {
+                height: 10px;
+              }
               path {
                 fill: ${colors.balck};
               }
@@ -161,11 +182,17 @@ export const ExampleCardStyled = styled.div`
               &:nth-child(1) {
                 font-weight: bold;
                 color: ${colors.black};
+                ${media.sm.down} {
+                  font-size: 12px;
+                }
               }
               &:nth-child(3) {
                 font-size: 14px;
                 font-weight: bold;
                 color: ${chroma(colors.black).alpha(0.5)};
+                ${media.sm.down} {
+                  font-size: 10px;
+                }
               }
             }
           }

@@ -118,6 +118,7 @@ const ForumUiGlobalStyle = createGlobalStyle`
       }
       p {
         font-size: ${theme.font[400].size};
+        line-height: 1.25;
       }
       a {
         font-size: ${theme.font[400].size};
