@@ -32,7 +32,7 @@ export const NavigationContainer = styled.div`
             padding-top: 3px;
             font-weight: 600;
             margin-left: 4px;
-            font-size: ${font[500].size};
+            font-size: ${font[500]};
             color: ${colors.black};
           }
           svg {

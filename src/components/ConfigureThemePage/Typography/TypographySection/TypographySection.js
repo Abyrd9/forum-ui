@@ -9,8 +9,8 @@ import Select from '../../../../library/Select';
 import Counter from '../../../../library/Counter';
 import Row from '../../../../library/ForumGrid/Row';
 import Column from '../../../../library/ForumGrid/Column';
-import InputContainer from '../InputContainer';
-import ContentContainer from '../ContentContainer';
+import InputContainer from '../../../InputContainer';
+import ContentContainer from '../../../ContentContainer';
 import { getSizingVariations } from '../../../../helpers/buildTheme';
 import FontLegend from '../FontLegend';
 import loadWebFont from '../../../../helpers/loadWebFont';
@@ -41,8 +41,8 @@ const TypographySection = () => {
   const [config, updateConfig] = useState({
     name: '',
     baseSize: 16,
-    upperRatio: (1.25).toFixed(2),
-    lowerRatio: (1.25).toFixed(2),
+    upperRatio: 1,
+    lowerRatio: 1,
     family: '',
     variants: [],
   });
@@ -140,6 +140,7 @@ const TypographySection = () => {
     <InputContainer title="Font Size Ratio (100 - 300)">
       <Counter
         readOnly
+        roundToWholeNumber
         value={config.lowerRatio}
         multiplier={0.05}
         min={1.1}
@@ -152,6 +153,7 @@ const TypographySection = () => {
     <InputContainer title="Font Size Ratio (500 - 800)">
       <Counter
         readOnly
+        roundToWholeNumber
         value={config.upperRatio}
         multiplier={0.05}
         min={1.1}
@@ -203,9 +205,9 @@ const TypographySection = () => {
                 .sort((a, b) => b - a)
                 .map(weight => (
                   <Column shrink gutterRight={0}>
-                    <h2 style={{ fontWeight: weight, lineHeight: 1, fontFamily: config.family }}>
+                    <h3 style={{ fontWeight: weight, lineHeight: 1, fontFamily: config.family }}>
                       Aa
-                    </h2>
+                    </h3>
                     <p
                       style={{
                         fontWeight: weight,
@@ -248,8 +250,8 @@ const TypographySection = () => {
             <FontLegend
               fontSizingArray={Object.entries(
                 getSizingVariations(config.baseSize, {
-                  positive: config.upperRatio,
-                  negative: config.lowerRatio,
+                  upper: config.upperRatio,
+                  lower: config.lowerRatio,
                 }),
               )}
             />
@@ -259,8 +261,8 @@ const TypographySection = () => {
           <ContentContainer title="Font Sizing Scale" loading={loading}>
             {Object.entries(
               getSizingVariations(config.baseSize, {
-                positive: config.upperRatio,
-                negative: config.lowerRatio,
+                upper: config.upperRatio,
+                lower: config.lowerRatio,
               }),
             )
               .sort((a, b) => b[0] - a[0])

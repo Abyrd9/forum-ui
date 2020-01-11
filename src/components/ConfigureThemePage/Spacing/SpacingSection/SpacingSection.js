@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { SpacingSectionStyled } from './SpacingSection.styles';
 import Row from '../../../../library/ForumGrid/Row';
 import Column from '../../../../library/ForumGrid/Column';
-import InputContainer from '../../Typography/InputContainer';
+import InputContainer from '../../../InputContainer';
 import Counter from '../../../../library/Counter';
 import ExampleCard from '../ExampleCard';
 import SpacingLegend from '../SpacingLegend';
 import { getSizingVariations } from '../../../../helpers/buildTheme';
-import ContentContainer from '../../Typography/ContentContainer';
+import ContentContainer from '../../../ContentContainer';
 import useMediaQuery from '../../../../hooks/useMediaQuery';
 import Tabs from '../../../../library/Tabs';
 
@@ -33,8 +33,8 @@ const tabs = [
 const SpacingSection = () => {
   const [config, updateConfig] = useState({
     baseSize: 16,
-    upperRatio: (1.5).toFixed(2),
-    lowerRatio: (1.5).toFixed(2),
+    upperRatio: 1,
+    lowerRatio: 1,
   });
 
   const [tabIndex, setTabIndex] = useState(0);
@@ -61,9 +61,8 @@ const SpacingSection = () => {
       <Counter
         readOnly
         value={config.lowerRatio}
-        multiplier={0.05}
+        multiplier={1}
         min={1}
-        max={2}
         handleOnChange={({ target }) => updateConfig({ ...config, lowerRatio: target.value })}
       />
     </InputContainer>
@@ -74,9 +73,8 @@ const SpacingSection = () => {
       <Counter
         readOnly
         value={config.upperRatio}
-        multiplier={0.05}
+        multiplier={1}
         min={1}
-        max={2}
         handleOnChange={({ target }) => updateConfig({ ...config, upperRatio: target.value })}
       />
     </InputContainer>
@@ -109,8 +107,8 @@ const SpacingSection = () => {
             <SpacingLegend
               spacingSizingArray={Object.entries(
                 getSizingVariations(config.baseSize, {
-                  positive: config.upperRatio,
-                  negative: config.lowerRatio,
+                  upper: config.upperRatio,
+                  lower: config.lowerRatio,
                 }),
               )}
             />
@@ -121,8 +119,8 @@ const SpacingSection = () => {
         <Column>
           <ExampleCard
             spacing={getSizingVariations(config.baseSize, {
-              positive: config.upperRatio,
-              negative: config.lowerRatio,
+              upper: config.upperRatio,
+              lower: config.lowerRatio,
             })}
           />
         </Column>

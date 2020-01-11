@@ -1,5 +1,5 @@
 import buildColorPalette from '../helpers/buildColorPalette';
-import { getSizingVariations, getBrowserFontSize } from '../helpers/buildTheme';
+import { getBrowserFontSize, getSizingVariations } from '../helpers/buildTheme';
 
 const columnAmount = 12;
 
@@ -16,18 +16,11 @@ const forumUiTheme = {
     default: '#0C0C0C',
   },
   get font() {
-    const sizes = getSizingVariations(parseInt(getBrowserFontSize(), 10));
-    return Object.entries(sizes).reduce((acc, [key, value]) => {
-      if (parseInt(key, 10) <= 400) {
-        acc[key] = { size: value, height: `${Math.round(parseInt(value, 10) * 1.5)}px` };
-      } else {
-        acc[key] = { size: value, height: `${Math.round(parseInt(value, 10) * 0.75)}px` };
-      }
-      return acc;
-    }, {});
+    const base = parseInt(getBrowserFontSize(), 10);
+    return getSizingVariations(base, { upper: 1, lower: 3 });
   },
   get spacing() {
-    return getSizingVariations(24, { positive: 1.5, negative: 1.5 });
+    return getSizingVariations(24, { upper: 6, lower: 1 });
   },
   get zIndex() {
     const zIndex = {};

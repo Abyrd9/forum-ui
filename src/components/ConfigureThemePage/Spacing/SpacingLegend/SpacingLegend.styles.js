@@ -16,7 +16,7 @@ export const SpacingLegendStyled = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
-        font-size: ${font[500].size};
+        font-size: ${font[500]};
         font-weight: 800;
         ${media.sm.down} {
           padding-right: ${spacing[100]};
@@ -25,9 +25,10 @@ export const SpacingLegendStyled = styled.div`
           border-right: 1px solid ${colors.neutral[300]};
           align-items: flex-start;
         }
-        &__key, &__value {
+        &__key,
+        &__value {
           ${media.sm.down} {
-            font-size: ${font[300].size};
+            font-size: ${font[300]};
           }
         }
         &__divider {

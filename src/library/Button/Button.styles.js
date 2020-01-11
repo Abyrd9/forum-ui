@@ -25,9 +25,9 @@ export const ButtonContainer = styled.button`
       })};
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0), 0 3px 6px rgba(0, 0, 0, 0);
       font-size: ${buildStyleMap({
-        small: font[300].size,
-        large: font[500].size,
-        default: font[400].size,
+        small: font[300],
+        large: font[500],
+        default: font[400],
       })};
       font-weight: ${buildStyleMap({
         small: '400',

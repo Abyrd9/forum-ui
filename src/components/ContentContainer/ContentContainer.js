@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ContentContainerContainer } from './ContentContainer.styles';
-import Loading from '../../../Utilities/Loading';
+import Loading from '../../components/Utilities/Loading';
 
 const ContentContainer = ({ title, loading, children }) => {
   return (

@@ -24,9 +24,9 @@ export const FooterStyled = styled.div`
       }
       p {
         color: ${colors.white};
-        font-size: ${font[300].size};
+        font-size: ${font[300]};
         ${media.md.down} {
-          font-size: ${font[200].size};
+          font-size: ${font[200]};
         }
       }
     `;

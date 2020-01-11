@@ -12,7 +12,7 @@ export const SelectContainer = styled.div`
       & + .forum-ui-select-info {
         margin-top: 4px;
         margin-bottom: ${spacing[400]};
-        font-size: ${font[200].size};
+        font-size: ${font[200]};
         color: ${color};
         max-width: 75%;
         margin-left: auto;

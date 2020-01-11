@@ -15,7 +15,7 @@ export const AutoResizeInputContainer = styled.div`
       .title-input {
         &__input {
           color: ${colors.black};
-          font-size: ${font[400].size};
+          font-size: ${font[400]};
           width: ${width + 2}px;
           max-width: 180px;
           min-width: ${!value || value === '' ? '80px' : '0px'};

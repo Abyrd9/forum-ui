@@ -11,7 +11,7 @@ export const FontLegendStyled = styled.div`
         justify-content: flex-start;
       }
       .font-legend-title {
-        font-size: ${font[500].size};
+        font-size: ${font[500]};
         font-weight: 800;
         ${media.sm.down} {
           display: none;
@@ -23,7 +23,7 @@ export const FontLegendStyled = styled.div`
       .font-legend-item {
         display: flex;
         align-items: center;
-        font-size: ${font[500].size};
+        font-size: ${font[500]};
         font-weight: 800;
         border-bottom: 1px solid ${colors.neutral[300]};
         ${media.sm.down} {
@@ -38,7 +38,7 @@ export const FontLegendStyled = styled.div`
         &__key,
         &__value {
           ${media.sm.down} {
-            font-size: ${font[300].size};
+            font-size: ${font[300]};
           }
         }
         &__divider {

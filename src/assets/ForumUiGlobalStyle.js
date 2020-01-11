@@ -96,32 +96,32 @@ const ForumUiGlobalStyle = createGlobalStyle`
         padding: 0;
         border: 0;
         color: ${colors.black};
-        font-size: ${theme.font[400].size};
+        font-size: ${theme.font[400]};
         font-family: 'Josefin Sans', sans-serif;
         vertical-align: baseline;
       }
       h1 {
-        font-size: ${theme.font[800].size};
+        font-size: ${theme.font[800]};
       }
       h2 {
-        font-size: ${theme.font[700].size};
+        font-size: ${theme.font[700]};
       }
       h3 {
-        font-size: ${theme.font[600].size};
+        font-size: ${theme.font[600]};
       }
       h4 {
-        font-size: ${theme.font[500].size};
+        font-size: ${theme.font[500]};
       }
       h5 {
-        font-size: ${theme.font[400].size};
+        font-size: ${theme.font[400]};
         text-transform: uppercase;
       }
       p {
-        font-size: ${theme.font[400].size};
+        font-size: ${theme.font[400]};
         line-height: 1.25;
       }
       a {
-        font-size: ${theme.font[400].size};
+        font-size: ${theme.font[400]};
         color: ${colors.primary[400]};
         font-weight: bold;
         text-decoration: none;

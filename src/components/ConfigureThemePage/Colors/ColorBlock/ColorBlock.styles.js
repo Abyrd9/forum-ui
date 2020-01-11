@@ -65,7 +65,7 @@ export const ColorBlockContainer = styled.div`
           }
         }
         &__color-input {
-          font-size: ${font[500].size};
+          font-size: ${font[500]};
           color: ${colors.black};
           width: 100%;
           height: 28px;
@@ -99,7 +99,7 @@ export const PaletteBlock = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: ${isSingleColor ? font[300].size : font[200].size};
+      font-size: ${isSingleColor ? font[300] : font[200]};
       font-weight: 600;
       height: 100%;
       flex: 1;
