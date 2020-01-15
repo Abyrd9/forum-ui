@@ -142,9 +142,8 @@ const TypographySection = () => {
         readOnly
         roundToWholeNumber
         value={config.lowerRatio}
-        multiplier={0.05}
-        min={1.1}
-        max={1.8}
+        multiplier={1}
+        min={1}
         handleOnChange={({ target }) => updateConfig({ ...config, lowerRatio: target.value })}
       />
     </InputContainer>
@@ -155,9 +154,8 @@ const TypographySection = () => {
         readOnly
         roundToWholeNumber
         value={config.upperRatio}
-        multiplier={0.05}
-        min={1.1}
-        max={1.8}
+        multiplier={1}
+        min={1}
         handleOnChange={({ target }) => updateConfig({ ...config, upperRatio: target.value })}
       />
     </InputContainer>

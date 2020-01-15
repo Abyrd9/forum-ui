@@ -1,6 +1,4 @@
 import React from 'react';
-import admin from 'firebase-admin';
-import permissions from '../firebase-permissions.json';
 
 import ForumUiProvider from './assets/ForumUiProvider';
 import Grid from './library/ForumGrid/Grid';
@@ -13,13 +11,6 @@ import ColorsSection from './components/ConfigureThemePage/Colors/ColorsSection'
 import TypographySection from './components/ConfigureThemePage/Typography/TypographySection';
 import SpacingSection from './components/ConfigureThemePage/Spacing/SpacingSection/SpacingSection';
 import Footer from './components/Footer';
-
-admin.initializeApp({
-  credential: admin.credential.cert(permissions),
-  databaseURL: 'https://forumui-92814.firebaseio.com',
-});
-
-// get authentication
 
 function App() {
   return (
