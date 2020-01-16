@@ -2,13 +2,13 @@
 /* eslint-disable consistent-return */
 import React from 'react';
 import { useImmerReducer } from 'use-immer';
+import ACTION_TYPES from './actionTypes';
 import {
   INITIAL_COLORS,
   INITIAL_CREATOR,
   INITIAL_TYPOGRAPHY_CONFIG,
   INITIAL_SPACING_CONFIG,
 } from '../constants';
-import ACTION_TYPES from './actionTypes';
 
 const initialState = {
   colors: { ...INITIAL_COLORS },
