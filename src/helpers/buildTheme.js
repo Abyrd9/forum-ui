@@ -1,17 +1,3 @@
-export const calculateVariation = (base, ratio, multiplier, type) => {
-  let num = 0;
-  switch (type) {
-    case 'increment':
-      num = Math.round(base * ratio ** multiplier);
-      return num % 2 === 0 ? `${num}px` : `${num + 1}px`;
-    case 'decrement':
-      num = Math.round(base / ratio ** multiplier);
-      return num % 2 === 0 ? `${num}px` : `${num + 1}px`;
-    default:
-      return `${base}px`;
-  }
-};
-
 export const getBrowserFontSize = () => {
   let base = '16px';
   if (window && document.body) {
@@ -32,7 +18,7 @@ export const getUpperValues = (base, step = 1) => {
   }
 
   const min = fontSize + multiplier;
-  const max = (step - 1) * 12 + 32 + fontSize;
+  const max = (step - 1) * 12 + 20 + fontSize;
 
   const arr = [];
   for (let i = min; i <= max; i++) {

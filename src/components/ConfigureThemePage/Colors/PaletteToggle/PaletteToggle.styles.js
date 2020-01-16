@@ -4,7 +4,6 @@ import chroma from 'chroma-js';
 export const PaletteToggleContainer = styled.label`
   ${({ theme = {}, isFlat = false, color = '', disabled = false }) => {
     const { colors = {}, spacing = {} } = theme;
-
     const colorVal =
       chroma.valid(color) && chroma.contrast(color, '#FFFFFF') < 1.2
         ? chroma(color).darken(0.5)
@@ -22,7 +21,7 @@ export const PaletteToggleContainer = styled.label`
       align-items: center;
       padding: 4px;
       margin-left: auto;
-      margin-right: ${spacing[200]};
+      margin-right: ${spacing[100]};
       &:focus-within {
         &:before {
           opacity: 1;

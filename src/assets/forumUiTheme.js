@@ -20,7 +20,7 @@ const forumUiTheme = {
     return getSizingVariations(base, { upper: 1, lower: 3 });
   },
   get spacing() {
-    return getSizingVariations(24, { upper: 6, lower: 1 });
+    return getSizingVariations(24, { upper: 6, lower: 5 });
   },
   get zIndex() {
     const zIndex = {};

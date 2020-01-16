@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 export const DeleteButtonContainer = styled.button`
   ${props => {
     const { theme = {} } = props;
-    const { spacing = {}, colors = {} } = theme;
+    const { colors = {} } = theme;
     return css`
       cursor: pointer;
       border: none;
@@ -13,13 +13,12 @@ export const DeleteButtonContainer = styled.button`
       width: auto;
       display: inline-flex;
       padding: 0;
-      margin-right: ${spacing[100]};
       &:focus .delete-icon {
         box-shadow: 0 0 2px ${colors.neutral[800]}, 0 0 4px ${colors.neutral[800]};
         border-radius: 2px;
       }
       &:active .delete-icon {
-          box-shadow: none;
+        box-shadow: none;
       }
       .delete-icon {
         height: 20px;

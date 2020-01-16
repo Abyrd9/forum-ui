@@ -1,15 +1,17 @@
-import HomeIcon from '../components/Utilities/Icons/HomeIcon';
-import GridIcon from '../components/Utilities/Icons/GridIcon';
-import ComponentsIcon from '../components/Utilities/Icons/ComponentsIcon';
-import ThemeIcon from '../components/Utilities/Icons/ThemeIcon';
+import {
+  faHomeLg,
+  faGripHorizontal,
+  faPencilPaintbrush,
+  faUserCircle,
+} from '@fortawesome/pro-duotone-svg-icons';
 import generateUniqueKey from '../helpers/generateUniqueKey';
 import buildColorPalette from '../helpers/buildColorPalette';
 
 export const NAV_LIST = [
-  { image: HomeIcon, name: 'Home' },
-  { image: GridIcon, name: 'Forum Grid' },
-  { image: ComponentsIcon, name: 'Components' },
-  { image: ThemeIcon, name: 'Theme' },
+  { icon: faHomeLg, class: 'home' },
+  { icon: faGripHorizontal, class: 'grid' },
+  { icon: faPencilPaintbrush, class: 'theme' },
+  { icon: faUserCircle, class: 'user' },
 ];
 
 export const GOOGLE_FONTS_API_KEY = 'AIzaSyAP4JRmnXRwmd21aGgTmcfwjNv246Y5Cu8';
@@ -18,9 +20,9 @@ const colors = [
   { title: 'primary', color: '#FE5F55', isFlat: false },
   { title: 'secondary', color: '#84DCC6', isFlat: false },
   { title: 'neutral', color: '#BEBEBE', isFlat: false },
-  { title: 'warning', color: '#FDE74C', isFlat: false },
-  { title: 'success', color: '#A5D836', isFlat: false },
-  { title: 'error', color: '#E50F00', isFlat: false },
+  { title: 'warning', color: '#FDE74C', isFlat: true },
+  { title: 'success', color: '#A5D836', isFlat: true },
+  { title: 'error', color: '#E50F00', isFlat: true },
 ];
 
 export const INITIAL_CREATOR = {
@@ -42,3 +44,18 @@ export const INITIAL_COLORS = colors.reduce(
   },
   { creator: INITIAL_CREATOR },
 );
+
+export const INITIAL_TYPOGRAPHY_CONFIG = {
+  name: '',
+  baseSize: 16,
+  upperRatio: 1,
+  lowerRatio: 1,
+  family: '',
+  variants: [],
+};
+
+export const INITIAL_SPACING_CONFIG = {
+  baseSize: 16,
+  lowerRatio: 1,
+  upperRatio: 4,
+};

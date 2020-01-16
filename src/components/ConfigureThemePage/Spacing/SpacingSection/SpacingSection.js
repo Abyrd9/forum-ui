@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+/* eslint-disable import/no-named-as-default */
+import React, { useState, useContext } from 'react';
 import { SpacingSectionStyled } from './SpacingSection.styles';
 import Row from '../../../../library/ForumGrid/Row';
 import Column from '../../../../library/ForumGrid/Column';
@@ -11,6 +11,8 @@ import { getSizingVariations } from '../../../../helpers/buildTheme';
 import ContentContainer from '../../../ContentContainer';
 import useMediaQuery from '../../../../hooks/useMediaQuery';
 import Tabs from '../../../../library/Tabs';
+import { StoreContext } from '../../../../state';
+import ACTION_TYPES from '../../../../state/actionTypes';
 
 const tabs = [
   {
@@ -31,11 +33,8 @@ const tabs = [
 ];
 
 const SpacingSection = () => {
-  const [config, updateConfig] = useState({
-    baseSize: 16,
-    upperRatio: 1,
-    lowerRatio: 1,
-  });
+  const { store, dispatch } = useContext(StoreContext);
+  const { spacing } = store;
 
   const [tabIndex, setTabIndex] = useState(0);
   const handleSetTabIndex = (_, { index }) => setTabIndex(index);
@@ -47,11 +46,17 @@ const SpacingSection = () => {
       <Counter
         readOnly
         roundToWholeNumber
-        value={config.baseSize}
+        value={spacing.baseSize}
         multiplier={2}
         min={2}
         max={50}
-        handleOnChange={({ target }) => updateConfig({ ...config, baseSize: target.value })}
+        handleOnChange={({ target }) =>
+          dispatch({
+            type: ACTION_TYPES.UPDATE_SPACING_CONFIG,
+            key: 'baseSize',
+            payload: target.value,
+          })
+        }
       />
     </InputContainer>
   );
@@ -60,10 +65,16 @@ const SpacingSection = () => {
     <InputContainer title="Spacing Size Ratio (100 - 300)">
       <Counter
         readOnly
-        value={config.lowerRatio}
+        value={spacing.lowerRatio}
         multiplier={1}
         min={1}
-        handleOnChange={({ target }) => updateConfig({ ...config, lowerRatio: target.value })}
+        handleOnChange={({ target }) =>
+          dispatch({
+            type: ACTION_TYPES.UPDATE_SPACING_CONFIG,
+            key: 'lowerRatio',
+            payload: target.value,
+          })
+        }
       />
     </InputContainer>
   );
@@ -72,10 +83,16 @@ const SpacingSection = () => {
     <InputContainer title="Spacing Size Ratio (500 - 800)">
       <Counter
         readOnly
-        value={config.upperRatio}
+        value={spacing.upperRatio}
         multiplier={1}
         min={1}
-        handleOnChange={({ target }) => updateConfig({ ...config, upperRatio: target.value })}
+        handleOnChange={({ target }) =>
+          dispatch({
+            type: ACTION_TYPES.UPDATE_SPACING_CONFIG,
+            key: 'upperRatio',
+            payload: target.value,
+          })
+        }
       />
     </InputContainer>
   );
@@ -106,9 +123,9 @@ const SpacingSection = () => {
           <ContentContainer title="Spacing Size Legend">
             <SpacingLegend
               spacingSizingArray={Object.entries(
-                getSizingVariations(config.baseSize, {
-                  upper: config.upperRatio,
-                  lower: config.lowerRatio,
+                getSizingVariations(spacing.baseSize, {
+                  upper: spacing.upperRatio,
+                  lower: spacing.lowerRatio,
                 }),
               )}
             />
@@ -118,9 +135,9 @@ const SpacingSection = () => {
       <Row stretch>
         <Column>
           <ExampleCard
-            spacing={getSizingVariations(config.baseSize, {
-              upper: config.upperRatio,
-              lower: config.lowerRatio,
+            spacing={getSizingVariations(spacing.baseSize, {
+              upper: spacing.upperRatio,
+              lower: spacing.lowerRatio,
             })}
           />
         </Column>

@@ -1,29 +1,26 @@
 /* eslint-disable no-param-reassign */
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { ColorsSectionContainer } from './ColorsSection.styles';
 import ColorBlock from '../ColorBlock';
 import Row from '../../../../library/ForumGrid/Row';
 import Column from '../../../../library/ForumGrid/Column';
-import { INITIAL_COLORS, INITIAL_CREATOR } from '../../../../constants';
 import generateUniqueKey from '../../../../helpers/generateUniqueKey';
+import { StoreContext } from '../../../../state';
+import ACTION_TYPES from '../../../../state/actionTypes';
 
 const ColorsSection = () => {
-  const [colors, updateColors] = useState(INITIAL_COLORS);
+  const { store, dispatch } = useContext(StoreContext);
+  const { colors } = store;
 
   const handleUpdateColorObj = (colorId, colorObj) => {
-    const colorsListObj = { ...colors };
-    if (colorObj) colorsListObj[colorId] = colorObj;
-    if (!colorObj) delete colorsListObj[colorId];
-    updateColors(colorsListObj);
+    if (colorObj) dispatch({ type: ACTION_TYPES.UPDATE_COLOR, colorId, colorObj });
+    if (!colorObj) dispatch({ type: ACTION_TYPES.REMOVE_COLOR, colorId });
   };
 
-  const handleCreateColorObj = newColorObj => {
+  const handleCreateColorObj = colorObj => {
     const colorsArr = Object.keys(colors).reduce((acc, key) => [...acc, { key }], []);
-    const newKey = generateUniqueKey(colorsArr);
-    const colorsListObj = { ...colors };
-    if (newColorObj) colorsListObj[newKey] = newColorObj;
-    colorsListObj.creator = INITIAL_CREATOR;
-    updateColors(colorsListObj);
+    const key = generateUniqueKey(colorsArr);
+    if (colorObj) dispatch({ type: ACTION_TYPES.REMOVE_COLOR, key, colorObj });
   };
 
   return (

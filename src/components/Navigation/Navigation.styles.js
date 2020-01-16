@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 export const NavigationContainer = styled.div`
   ${props => {
     const { theme = {}, active } = props;
-    const { spacing = {}, colors = {}, font = {}, media = {} } = theme;
+    const { spacing = {}, colors = {}, media = {} } = theme;
     return css`
       width: 100%;
       padding: ${spacing[400]} 0px;
@@ -14,11 +14,6 @@ export const NavigationContainer = styled.div`
       margin-bottom: ${spacing[700]};
       overflow: hidden;
       .nav-bar {
-        &__icon {
-          cursor: pointer;
-          height: 42px;
-          width: 40px;
-        }
         &__list {
           display: flex;
           align-items: center;
@@ -28,18 +23,14 @@ export const NavigationContainer = styled.div`
           margin-left: ${spacing[500]};
           display: flex;
           align-items: center;
-          p {
-            padding-top: 3px;
-            font-weight: 600;
-            margin-left: 4px;
-            font-size: ${font[500]};
-            color: ${colors.black};
-          }
-          svg {
-            width: 16px;
-            path {
-              fill: ${colors.black};
+          .icon {
+            height: 20px;
+            width: auto;
+            &--grid, &--user {
+              width: 24px;
+              height: auto;
             }
+            color: ${colors.black};
           }
         }
         &__list-toggle-container {
@@ -60,8 +51,8 @@ export const NavigationContainer = styled.div`
             margin-right: -${spacing[400]};
             border-bottom-left-radius: 50px;
             border-top-left-radius: 50px;
-            transition: transform 400ms ease-in, opacity 400ms ease-in 100ms;
-            transform: ${active ? 'translateX(0)' : 'translateX(280px)'};
+            transition: transform 150ms ease-in, opacity 150ms ease-in 50ms;
+            transform: ${active ? 'translateX(0)' : 'translateX(15px)'};
             opacity: ${active ? '1' : '0'};
           }
           &__list-item {
@@ -75,6 +66,7 @@ export const NavigationContainer = styled.div`
             }
           }
           &__list-toggle-container {
+            cursor: pointer;
             display: block;
             position: absolute;
             right: ${spacing[400]};

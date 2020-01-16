@@ -1,7 +1,8 @@
+/* eslint-disable import/no-named-as-default */
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-undef */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // import PropTypes from 'prop-types';
 import { TypographySectionContainer } from './TypographySection.styles';
 import { GOOGLE_FONTS_API_KEY } from '../../../../constants';
@@ -16,6 +17,8 @@ import FontLegend from '../FontLegend';
 import loadWebFont from '../../../../helpers/loadWebFont';
 import useMediaQuery from '../../../../hooks/useMediaQuery';
 import Tabs from '../../../../library/Tabs';
+import { StoreContext } from '../../../../state';
+import ACTION_TYPES from '../../../../state/actionTypes';
 
 const tabs = [
   {
@@ -38,14 +41,8 @@ const tabs = [
 const TypographySection = () => {
   const [googleFonts, updateGoogleFonts] = useState({ rawList: [], formattedList: [] });
   const [loading, setLoading] = useState(true);
-  const [config, updateConfig] = useState({
-    name: '',
-    baseSize: 16,
-    upperRatio: 1,
-    lowerRatio: 1,
-    family: '',
-    variants: [],
-  });
+  const { store, dispatch } = useContext(StoreContext);
+  const { typography } = store;
 
   const [tabIndex, setTabIndex] = useState(0);
   const handleSetTabIndex = (_, { index }) => setTabIndex(index);
@@ -53,19 +50,19 @@ const TypographySection = () => {
   const isMobile = useMediaQuery(mobile);
 
   useEffect(() => {
-    const payload = {
+    const config = {
       google: { families: ['Josefin+Sans:100,300,400,600,700'] },
       classes: false,
     };
-    loadWebFont(payload, status => {
+    loadWebFont(config, status => {
       if (status === 'resolved') setLoading(false);
     });
-    updateConfig({
-      ...config,
+    const payload = {
       name: 'Josefin Sans',
       family: 'Josefin Sans, sans-serif',
       variants: ['100', '300', '400', '600', '700'],
-    });
+    };
+    dispatch({ type: ACTION_TYPES.UPDATE_TYPOGRAPHY_CONFIG, payload });
   }, []);
 
   useEffect(() => {
@@ -115,14 +112,20 @@ const TypographySection = () => {
       url = url.join('');
     }
 
-    const payload = {
+    const config = {
       google: { families: [url] },
       classes: false,
     };
-    loadWebFont(payload, status => {
+    loadWebFont(config, status => {
       if (status === 'resolved') setLoading(false);
     });
-    updateConfig({ ...config, name: value, family: `${font.family}, ${font.category}`, variants });
+    const payload = {
+      ...config,
+      name: value,
+      family: `${font.family}, ${font.category}`,
+      variants,
+    };
+    dispatch({ type: ACTION_TYPES.UPDATE_TYPOGRAPHY_CONFIG, payload });
   };
 
   const BaseSize = (
@@ -130,9 +133,14 @@ const TypographySection = () => {
       <Counter
         readOnly
         roundToWholeNumber
-        value={config.baseSize}
+        value={typography.baseSize}
         multiplier={2}
-        handleOnChange={({ target }) => updateConfig({ ...config, baseSize: target.value })}
+        handleOnChange={({ target }) =>
+          dispatch({
+            type: ACTION_TYPES.UPDATE_TYPOGRAPHY_CONFIG,
+            payload: { baseSize: target.value },
+          })
+        }
       />
     </InputContainer>
   );
@@ -141,10 +149,15 @@ const TypographySection = () => {
       <Counter
         readOnly
         roundToWholeNumber
-        value={config.lowerRatio}
+        value={typography.lowerRatio}
         multiplier={1}
         min={1}
-        handleOnChange={({ target }) => updateConfig({ ...config, lowerRatio: target.value })}
+        handleOnChange={({ target }) =>
+          dispatch({
+            type: ACTION_TYPES.UPDATE_TYPOGRAPHY_CONFIG,
+            payload: { lowerRatio: target.value },
+          })
+        }
       />
     </InputContainer>
   );
@@ -153,16 +166,21 @@ const TypographySection = () => {
       <Counter
         readOnly
         roundToWholeNumber
-        value={config.upperRatio}
+        value={typography.upperRatio}
         multiplier={1}
         min={1}
-        handleOnChange={({ target }) => updateConfig({ ...config, upperRatio: target.value })}
+        handleOnChange={({ target }) =>
+          dispatch({
+            type: ACTION_TYPES.UPDATE_TYPOGRAPHY_CONFIG,
+            payload: { upperRatio: target.value },
+          })
+        }
       />
     </InputContainer>
   );
 
   return (
-    <TypographySectionContainer family={config.family}>
+    <TypographySectionContainer family={typography.family}>
       <Row stretch>
         <Column xsUp={12} lgUp={6}>
           <InputContainer title="Font Family">
@@ -171,7 +189,7 @@ const TypographySection = () => {
                 readOnly
                 placeholder="Choose Font Family..."
                 list={googleFonts.formattedList}
-                value={config.name}
+                value={typography.name}
                 handleOnChange={handleOnFamilyChange}
               />
             )}
@@ -181,13 +199,13 @@ const TypographySection = () => {
       <Row>
         <Column gutterLeft={0} xsUp={12} lgUp={7}>
           <ContentContainer title="Paragraph" loading={loading}>
-            <p style={{ fontFamily: config.family }}>
+            <p style={{ fontFamily: typography.family }}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
               incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
               exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </p>
             <br />
-            <p style={{ fontFamily: config.family }}>
+            <p style={{ fontFamily: typography.family }}>
               <b>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -199,18 +217,21 @@ const TypographySection = () => {
         <Column shrink xsUp={12} lgUp={5} gutter={0}>
           <ContentContainer title="Font Weights" loading={loading}>
             <Row stretch>
-              {config.variants
+              {typography.variants
+                .slice()
                 .sort((a, b) => b - a)
                 .map(weight => (
                   <Column shrink gutterRight={0}>
-                    <h3 style={{ fontWeight: weight, lineHeight: 1, fontFamily: config.family }}>
+                    <h3
+                      style={{ fontWeight: weight, lineHeight: 1, fontFamily: typography.family }}
+                    >
                       Aa
                     </h3>
                     <p
                       style={{
                         fontWeight: weight,
                         lineHeight: 1,
-                        fontFamily: config.family,
+                        fontFamily: typography.family,
                         marginBottom: '8px',
                       }}
                     >
@@ -247,9 +268,9 @@ const TypographySection = () => {
           <ContentContainer title="Font Sizing Legend" loading={loading}>
             <FontLegend
               fontSizingArray={Object.entries(
-                getSizingVariations(config.baseSize, {
-                  upper: config.upperRatio,
-                  lower: config.lowerRatio,
+                getSizingVariations(typography.baseSize, {
+                  upper: typography.upperRatio,
+                  lower: typography.lowerRatio,
                 }),
               )}
             />
@@ -258,9 +279,9 @@ const TypographySection = () => {
         <Column>
           <ContentContainer title="Font Sizing Scale" loading={loading}>
             {Object.entries(
-              getSizingVariations(config.baseSize, {
-                upper: config.upperRatio,
-                lower: config.lowerRatio,
+              getSizingVariations(typography.baseSize, {
+                upper: typography.upperRatio,
+                lower: typography.lowerRatio,
               }),
             )
               .sort((a, b) => b[0] - a[0])
@@ -270,7 +291,7 @@ const TypographySection = () => {
                     fontSize: value,
                     lineHeight: 'normal',
                     marginBottom: '8px',
-                    fontFamily: config.family,
+                    fontFamily: typography.family,
                   }}
                 >
                   Font Size {key}
