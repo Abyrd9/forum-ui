@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const MarkdownRendererStyled = styled.div`
+export const OutputCodeSectionStyled = styled.div`
   ${({ theme = {} }) => {
     return css``;
   }}

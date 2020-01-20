@@ -14,7 +14,6 @@ const initialState = {
   colors: { ...INITIAL_COLORS },
   typography: { ...INITIAL_TYPOGRAPHY_CONFIG },
   spacing: { ...INITIAL_SPACING_CONFIG },
-  build: {},
 };
 
 export const StoreContext = React.createContext({});

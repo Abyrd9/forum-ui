@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
-import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript';
-import style from 'react-syntax-highlighter/dist/esm/styles/hljs/atom-one-dark-reasonable';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import lang from 'react-syntax-highlighter/dist/esm/languages/prism/json';
+import style from 'react-syntax-highlighter/dist/esm/styles/prism/prism';
 
-SyntaxHighlighter.registerLanguage('javascript', js);
+SyntaxHighlighter.registerLanguage('json', lang);
 
 const CodeBlock = ({ code }) => {
   return (
-    <SyntaxHighlighter language="javascript" style={style}>
+    <SyntaxHighlighter language="json" style={style}>
       {code}
     </SyntaxHighlighter>
   );

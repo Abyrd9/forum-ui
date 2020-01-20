@@ -12,7 +12,7 @@ import Footer from './components/Shared/Footer';
 import ColorsSection from './components/Pages/ConfigureThemePage/Colors/ColorsSection';
 import TypographySection from './components/Pages/ConfigureThemePage/Typography/TypographySection';
 import SpacingSection from './components/Pages/ConfigureThemePage/Spacing/SpacingSection/SpacingSection';
-import CodeBlock from './components/Pages/OutputCodePage/CodeBlock/CodeBlock';
+import OutputCodeSection from './components/Pages/OutputCodePage/OutputCodeSection/OutputCodeSection';
 
 function App() {
   return (
@@ -28,8 +28,7 @@ function App() {
           />
           <Switch>
             <Route path="/theme-code">
-              HELLO CODE
-              <CodeBlock />
+              <OutputCodeSection />
             </Route>
             <Route path="/">
               <SectionTitle
