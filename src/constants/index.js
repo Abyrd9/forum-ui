@@ -1,18 +1,5 @@
-import {
-  faHomeLg,
-  faGripHorizontal,
-  faPencilPaintbrush,
-  faUserCircle,
-} from '@fortawesome/pro-duotone-svg-icons';
 import generateUniqueKey from '../helpers/generateUniqueKey';
 import buildColorPalette from '../helpers/buildColorPalette';
-
-export const NAV_LIST = [
-  { icon: faHomeLg, class: 'home' },
-  { icon: faGripHorizontal, class: 'grid' },
-  { icon: faPencilPaintbrush, class: 'theme' },
-  { icon: faUserCircle, class: 'user' },
-];
 
 export const GOOGLE_FONTS_API_KEY = 'AIzaSyAP4JRmnXRwmd21aGgTmcfwjNv246Y5Cu8';
 

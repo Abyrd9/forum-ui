@@ -1,62 +1,68 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+
 import Grid from './library/ForumGrid/Grid';
 import Row from './library/ForumGrid/Row';
-import Navigation from './components/Navigation';
-import PageTitle from './components/PageTitle';
-import SectionTitle from './components/SectionTitle';
-import ColorsSection from './components/ConfigureThemePage/Colors/ColorsSection';
-import TypographySection from './components/ConfigureThemePage/Typography/TypographySection';
-import SpacingSection from './components/ConfigureThemePage/Spacing/SpacingSection/SpacingSection';
-import Footer from './components/Footer';
-import { AuthenticationContext } from './firebase/AuthenticationProvider';
+
+import Navigation from './components/Shared/Navigation';
+import PageTitle from './components/Shared/PageTitle';
+import SectionTitle from './components/Shared/SectionTitle';
+import Footer from './components/Shared/Footer';
+
+import ColorsSection from './components/Pages/ConfigureThemePage/Colors/ColorsSection';
+import TypographySection from './components/Pages/ConfigureThemePage/Typography/TypographySection';
+import SpacingSection from './components/Pages/ConfigureThemePage/Spacing/SpacingSection/SpacingSection';
+import CodeBlock from './components/Pages/OutputCodePage/CodeBlock/CodeBlock';
 
 function App() {
-  const { auth, user } = useContext(AuthenticationContext);
-
-  useEffect(() => {
-    auth.signInAnonymously().catch(error => {
-      console.error(error.code, error.message);
-    });
-  }, [])
-
   return (
     <>
       <Grid>
-        <Row mdDownFill>
-          <Navigation />
-        </Row>
-        <PageTitle
-          title="ForumUi"
-          subtitle="A simplified design system generator for React Developers."
-        />
-        <SectionTitle
-          title="Colors"
-          description={
-            <span>
-              A ForumUi color palette is loosely based on the guidelines given from{' '}
-              <a
-                href="https://refactoringui.com/previews/building-your-color-palette/"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                RefactoringUi
-                  </a>
-              . The initial colors have a primary, secondary, and neutral color palette as well
-              as three accent colors for warning, error, or success notifications.
-                </span>
-          }
-        />
-        <ColorsSection />
-        <SectionTitle
-          title="Typography"
-          description="A ForumUi Typography system has eight levels of font sizing. Currently we only support the use of the top 100 most popular google fonts."
-        />
-        <TypographySection />
-        <SectionTitle
-          title="Spacing"
-          description="A ForumUi spacing system has eight levels to space out elements on the page."
-        />
-        <SpacingSection />
+        <Router>
+          <Row mdDownFill>
+            <Navigation />
+          </Row>
+          <PageTitle
+            title="ForumUi"
+            subtitle="A simplified design system generator for React Developers."
+          />
+          <Switch>
+            <Route path="/theme-code">
+              HELLO CODE
+              <CodeBlock />
+            </Route>
+            <Route path="/">
+              <SectionTitle
+                title="Colors"
+                description={
+                  <span>
+                    A ForumUi color palette is loosely based on the guidelines given from{' '}
+                    <a
+                      href="https://refactoringui.com/previews/building-your-color-palette/"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      RefactoringUi
+                    </a>
+                    . The initial colors have a primary, secondary, and neutral color palette as
+                    well as three accent colors for warning, error, or success notifications.
+                  </span>
+                }
+              />
+              <ColorsSection />
+              <SectionTitle
+                title="Typography"
+                description="A ForumUi Typography system has eight levels of font sizing. Currently we only support the use of the top 100 most popular google fonts."
+              />
+              <TypographySection />
+              <SectionTitle
+                title="Spacing"
+                description="A ForumUi spacing system has eight levels to space out elements on the page."
+              />
+              <SpacingSection />
+            </Route>
+          </Switch>
+        </Router>
       </Grid>
       <Footer />
     </>
