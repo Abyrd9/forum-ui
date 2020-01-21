@@ -30,7 +30,7 @@ export const NavigationContainer = styled.div`
               width: 24px;
               height: auto;
             }
-            color: ${colors.black};
+            color: ${colors.neutral[800]};
           }
         }
         &__list-toggle-container {
