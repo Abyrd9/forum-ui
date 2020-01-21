@@ -33,12 +33,12 @@ export const INITIAL_COLORS = colors.reduce(
 );
 
 export const INITIAL_TYPOGRAPHY_CONFIG = {
-  name: '',
+  name: 'Josefin Sans',
   baseSize: 16,
   upperRatio: 1,
   lowerRatio: 1,
-  family: '',
-  variants: [],
+  family: 'Josefin Sans, sans-serif',
+  variants: ['100', '300', '400', '600', '700'],
 };
 
 export const INITIAL_SPACING_CONFIG = {

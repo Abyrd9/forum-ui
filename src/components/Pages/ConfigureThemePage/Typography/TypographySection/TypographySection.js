@@ -15,6 +15,7 @@ import ContentContainer from '../../../../Shared/ContentContainer';
 import { getSizingVariations } from '../../../../../helpers/buildTheme';
 import FontLegend from '../FontLegend';
 import loadWebFont from '../../../../../helpers/loadWebFont';
+import buildGoogleFontsUrl from '../../../../../helpers/buildGoogleFontsUrl';
 import useMediaQuery from '../../../../../hooks/useMediaQuery';
 import Tabs from '../../../../../library/Tabs';
 import { StoreContext } from '../../../../../state';
@@ -100,16 +101,7 @@ const TypographySection = () => {
       .map(weight => (weight === 'regular' ? '400' : weight));
     let url = [];
     if (font) {
-      url.push(font.family.replace(/ /g, '+'));
-      if (font.variants.length > 0) {
-        variants.forEach((weight, index) => {
-          let string = '';
-          string += index === 0 ? ':' : ',';
-          string += weight === 'regular' ? '400' : weight;
-          url.push(string);
-        });
-      }
-      url = url.join('');
+      url = buildGoogleFontsUrl(font.family, font.variants);
     }
 
     const config = {
@@ -120,7 +112,6 @@ const TypographySection = () => {
       if (status === 'resolved') setLoading(false);
     });
     const payload = {
-      ...config,
       name: value,
       family: `${font.family}, ${font.category}`,
       variants,
