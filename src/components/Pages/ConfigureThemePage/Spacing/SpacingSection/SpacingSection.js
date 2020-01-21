@@ -65,6 +65,7 @@ const SpacingSection = () => {
     <InputContainer title="Spacing Size Ratio (100 - 300)">
       <Counter
         readOnly
+        roundToWholeNumber
         value={spacing.lowerRatio}
         multiplier={1}
         min={1}
@@ -83,6 +84,7 @@ const SpacingSection = () => {
     <InputContainer title="Spacing Size Ratio (500 - 800)">
       <Counter
         readOnly
+        roundToWholeNumber
         value={spacing.upperRatio}
         multiplier={1}
         min={1}
