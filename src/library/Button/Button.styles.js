@@ -2,14 +2,14 @@ import styled, { css } from 'styled-components';
 import chroma from 'chroma-js';
 import buildStyleMap from '../../helpers/buildStyleMap';
 import buildColorStyleMap from '../../helpers/buildColorStyleMap';
+import checkColorBrightness from '../../helpers/checkColorBrightness';
 
-const isDark = color => chroma.valid(color) && chroma(color).luminance() < 0.4;
+const { isReadableDark } = checkColorBrightness;
 
 export const ButtonContainer = styled.button`
   ${props => {
     const { theme = {}, outline = false } = props;
     const { font = {}, colors = {} } = theme;
-
     const color = buildColorStyleMap()(props);
     return css`
       transition: box-shadow 100ms ease, background-color 50ms ease;
@@ -17,11 +17,15 @@ export const ButtonContainer = styled.button`
       position: relative;
       border: ${outline ? `2px solid ${color}` : 'none'};
       outline: none;
-      border-radius: 4px;
+      border-radius: ${buildStyleMap({
+        small: '2px',
+        large: '6px',
+        default: '4px',
+      })};
       padding: ${buildStyleMap({
-        small: outline ? '6px 12px' : '8px 14px',
-        large: outline ? '14px 26px' : '16px 28px',
-        default: outline ? '10px 22px' : '12px 24px',
+        small: outline ? '2px 6px' : '4px 8px',
+        large: outline ? '8px 16px' : '10px 18px',
+        default: outline ? '6px 12px' : '8px 14px',
       })};
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0), 0 3px 6px rgba(0, 0, 0, 0);
       font-size: ${buildStyleMap({
@@ -29,14 +33,9 @@ export const ButtonContainer = styled.button`
         large: font[500],
         default: font[400],
       })};
-      font-weight: ${buildStyleMap({
-        small: '400',
-        large: '400',
-        default: '500',
-      })};
       ${outline && 'font-weight: bold'};
       ${outline && `color: ${color}`};
-      ${!outline && `color: ${isDark(color) ? colors.white : colors.black}`};
+      ${!outline && `color: ${isReadableDark(color) ? colors.white : colors.black}`};
       background-color: ${outline ? 'transparent' : color};
       &:before {
         transition: all 100ms ease-in-out;

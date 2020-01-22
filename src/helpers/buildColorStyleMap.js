@@ -25,7 +25,7 @@ const buildColorStyleMap = type => props => {
         return value;
       }
     }
-    return '#C3C3C3';
+    return '#959595';
   }
   return null;
 };
