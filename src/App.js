@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Grid from './library/ForumGrid/Grid';
 import Row from './library/ForumGrid/Row';
@@ -9,10 +9,10 @@ import PageTitle from './components/Shared/PageTitle';
 import SectionTitle from './components/Shared/SectionTitle';
 import Footer from './components/Shared/Footer';
 
-import ColorsSection from './components/Pages/ConfigureThemePage/Colors/ColorsSection';
-import TypographySection from './components/Pages/ConfigureThemePage/Typography/TypographySection';
-import SpacingSection from './components/Pages/ConfigureThemePage/Spacing/SpacingSection/SpacingSection';
-import OutputCodeSection from './components/Pages/OutputCodePage/OutputCodeSection/OutputCodeSection';
+import ColorsSection from './components/Pages/ConfigurePage/Colors/ColorsSection';
+import TypographySection from './components/Pages/ConfigurePage/Typography/TypographySection';
+import SpacingSection from './components/Pages/ConfigurePage/Spacing/SpacingSection/SpacingSection';
+import OutputCodeSection from './components/Pages/ThemePage/OutputCodeSection/OutputCodeSection';
 
 function App() {
   return (

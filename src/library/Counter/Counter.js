@@ -16,7 +16,7 @@ const Counter = ({
   max,
   min,
   multiplier,
-  roundToWholeNumber,
+  toFixed,
   className,
   handleOnChange,
   handleOnFocus,
@@ -26,10 +26,12 @@ const Counter = ({
   const [count, updateCount] = useState(value);
 
   const handleOnInputChange = e => {
-    const val = e.target.value;
+    let val = e.target.value;
     if (/^[0-9]+$/g.test(val)) {
       handleOnChange(e);
-      updateCount(parseFloat(parseFloat(val).toFixed(2)));
+      val = parseFloat(parseFloat(val));
+      if (toFixed) val = val.toFixed(2);
+      updateCount(val);
     }
   };
 
@@ -38,19 +40,19 @@ const Counter = ({
   }, [count]);
 
   const handleOnMinusClick = () => {
-    let val = parseFloat(parseFloat(count).toFixed(2));
+    let val = parseFloat(parseFloat(count))
     if (typeof min !== 'number' || val > min) {
-      val = parseFloat(val - multiplier).toFixed(2);
-      if (roundToWholeNumber) val = Math.round(val);
+      val = parseFloat(val - multiplier);
+      if (toFixed) val = val.toFixed(2);
       updateCount(val);
     }
   };
 
   const handleOnPlusClick = () => {
-    let val = parseFloat(parseFloat(count).toFixed(2));
+    let val = parseFloat(parseFloat(count));
     if (typeof max !== 'number' || val < max) {
-      val = parseFloat(val + multiplier).toFixed(2);
-      if (roundToWholeNumber) val = Math.round(val);
+      val = parseFloat(val + multiplier);
+      if (toFixed) val = val.toFixed(2)
       updateCount(val);
     }
   };
@@ -116,7 +118,7 @@ Counter.defaultProps = {
   max: 99,
   min: 0,
   multiplier: 1,
-  roundToWholeNumber: false,
+  toFixed: false,
   className: '',
   handleOnChange: () => {},
   handleOnFocus: () => {},
@@ -134,7 +136,7 @@ Counter.propTypes = {
   max: PropTypes.number,
   min: PropTypes.number,
   multiplier: PropTypes.number,
-  roundToWholeNumber: PropTypes.bool,
+  toFixed: PropTypes.bool,
   className: PropTypes.string,
   handleOnChange: PropTypes.func,
   handleOnFocus: PropTypes.func,
