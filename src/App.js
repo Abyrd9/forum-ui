@@ -63,6 +63,7 @@ function App() {
           </Switch>
         </Router>
       </Grid>
+      <div id="modal-root" />
       <Footer />
     </>
   );

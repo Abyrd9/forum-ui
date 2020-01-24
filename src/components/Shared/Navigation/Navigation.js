@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import {
   faHomeLg,
@@ -12,6 +12,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavigationContainer } from './Navigation.styles';
 import ForumIcon from '../../Utilities/Icons/ForumIcon';
+import { AuthenticationContext } from '../../../firebase/AuthenticationProvider';
+import Modal from '../Modal/Modal';
 
 export const NAV_LIST = [
   { icon: faHomeLg, class: 'home', url: '/' },
@@ -21,6 +23,9 @@ export const NAV_LIST = [
 ];
 
 const Navigation = () => {
+  const { user } = useContext(AuthenticationContext);
+  const notAuthenticated = !user || user.isAnonymous;
+
   const [active, toggleActive] = useState(false);
   return (
     <NavigationContainer active={active}>
@@ -41,6 +46,7 @@ const Navigation = () => {
       <span className="nav-bar__list-toggle-container" onClick={() => toggleActive(!active)}>
         <div className="nav-bar__list-toggle" />
       </span>
+      {notAuthenticated && <Modal />}
     </NavigationContainer>
   );
 };
