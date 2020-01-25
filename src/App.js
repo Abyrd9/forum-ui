@@ -13,6 +13,7 @@ import ColorsSection from './components/Pages/ConfigurePage/Colors/ColorsSection
 import TypographySection from './components/Pages/ConfigurePage/Typography/TypographySection';
 import SpacingSection from './components/Pages/ConfigurePage/Spacing/SpacingSection/SpacingSection';
 import OutputCodeSection from './components/Pages/ThemePage/OutputCodeSection/OutputCodeSection';
+import AuthSection from './components/Pages/AuthPage/AuthSection/AuthSection';
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
             <Route path="/theme-code">
               <OutputCodeSection />
             </Route>
-            <Route path="/">
+            <Route path="/theme-configuration">
               <SectionTitle
                 title="Colors"
                 description={
@@ -59,6 +60,9 @@ function App() {
                 description="A ForumUi spacing system has eight levels to space out elements on the page."
               />
               <SpacingSection />
+            </Route>
+            <Route path="/">
+              <AuthSection />
             </Route>
           </Switch>
         </Router>

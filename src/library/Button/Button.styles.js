@@ -23,10 +23,12 @@ export const ButtonContainer = styled.button`
       /* Base Styles */
       transition: all 200ms cubic-bezier(0, 0, 0.2, 1);
       cursor: ${loading ? 'not-allowed' : 'pointer'};
+      width: ${props.grow ? '100%' : 'auto'};
       outline: none;
       border: none;
       display: flex;
       align-items: center;
+      justify-content: center;
       position: relative;
       color: ${textColor};
       background-color: ${color};
@@ -51,7 +53,7 @@ export const ButtonContainer = styled.button`
           padding: 4px 8px;
         `,
         large: css`
-          font-size: ${outline ? font[400] : font[500]};
+          font-size: ${outline ? font[300] : font[400]};
           border-radius: 6px;
           padding: 10px 18px;
         `,

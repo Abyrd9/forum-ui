@@ -6,7 +6,10 @@ const buildColorStyleMap = type => props => {
     const colorKeys = Object.keys(theme.colors);
     const colorProp = Object.entries(props).find(([key]) => colorKeys.includes(key));
     if (colorProp && typeof colorProp[1] === 'boolean') {
-      const value = theme.colors[colorProp[0]][400];
+      const value =
+        typeof theme.colors[colorProp[0]] === 'string'
+          ? theme.colors[colorProp[0]]
+          : theme.colors[colorProp[0]][400];
       if (type === 'lighten') {
         chroma(value).brighten(1);
       } else if (type === 'darken') {

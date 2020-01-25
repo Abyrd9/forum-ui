@@ -12,8 +12,6 @@ firebase.initializeApp({
   measurementId: 'G-KHP7DMFNNK',
 });
 
-const auth = firebase.auth();
-
 export const AuthenticationContext = React.createContext({});
 const AuthenticationProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -30,9 +28,7 @@ const AuthenticationProvider = ({ children }) => {
     };
   }, []);
   return (
-    <AuthenticationContext.Provider value={{ auth, user }}>
-      {children}
-    </AuthenticationContext.Provider>
+    <AuthenticationContext.Provider value={{ user }}>{children}</AuthenticationContext.Provider>
   );
 };
 

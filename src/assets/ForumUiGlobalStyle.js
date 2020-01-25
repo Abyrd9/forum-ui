@@ -9,7 +9,7 @@ const ForumUiGlobalStyle = createGlobalStyle`
         v2.0 | 20110126
         License: none (public domain)
       */
-      @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i&display=swap');
+      @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700|Roboto:400,500,700&display=swap');
       html,
       body,
       div,

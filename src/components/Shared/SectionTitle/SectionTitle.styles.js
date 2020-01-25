@@ -2,12 +2,13 @@ import styled, { css } from 'styled-components';
 
 export const SectionTitleContainer = styled.div`
   ${props => {
-    const { theme = {} } = props;
+    const { theme = {}, hideDivider = false } = props;
     const { colors = {}, spacing = {} } = theme;
     return css`
-      margin-bottom: ${spacing[500]};
+      margin-bottom: ${hideDivider ? 0 : spacing[500]};
       .block-title {
         &__title {
+          ${hideDivider && `margin-bottom: ${spacing[100]}`};
         }
         &__divider {
           display: block;

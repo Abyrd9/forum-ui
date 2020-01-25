@@ -14,6 +14,8 @@ const forumUiTheme = {
     black: '#0C0C0C',
     white: '#FFFFFF',
     default: '#0C0C0C',
+    github: '#444444',
+    google: '#4285F4',
   },
   get font() {
     const base = parseInt(getBrowserFontSize(), 10);

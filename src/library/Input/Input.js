@@ -16,6 +16,7 @@ const Input = ({
   placeholder,
   pattern,
   value,
+  type,
   className,
   infoShow,
   infoMssg,
@@ -68,7 +69,7 @@ const Input = ({
             required={required}
             pattern={pattern}
             value={value}
-            type="text"
+            type={type}
             className={classNames.input}
             onChange={handleOnChange}
             onFocus={handleOnFocus}
@@ -93,6 +94,7 @@ Input.defaultProps = {
   placeholder: '',
   pattern: '',
   value: '',
+  type: 'text',
   className: '',
   infoShow: false,
   infoMssg: {
@@ -115,6 +117,7 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   pattern: PropTypes.string,
   value: PropTypes.string,
+  type: PropTypes.string,
   className: PropTypes.string,
   infoShow: PropTypes.bool,
   infoMssg: PropTypes.shape({
