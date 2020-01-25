@@ -3,7 +3,7 @@
 const buildStyleMap = obj => props => {
   const propsArr = Object.entries(props);
   const objArr = Object.entries(obj);
-  let value = '';  
+  let value = '';
 
   const valRegex = /^[^]+$/;
   const isBool = val => typeof val === 'boolean';
@@ -17,7 +17,11 @@ const buildStyleMap = obj => props => {
   }, []);
 
   const buildStyleMapArr = objArr.reduce((acc, [key, val]) => {
-    if (isNum(val) || isVal(val) || isObj(val)) acc.push([key, val]);
+    let mapValue = val;
+    if (Array.isArray(mapValue) && mapValue.every(item => typeof item === 'string')) {
+      mapValue = mapValue.join('');
+    }
+    if (isNum(mapValue) || isVal(mapValue) || isObj(mapValue)) acc.push([key, mapValue]);
     return acc;
   }, []);
 

@@ -8,12 +8,12 @@ const isLight = (color, threshold = 0.4) => {
   return chroma.valid(color) && chroma(color).luminance() > threshold;
 };
 
-const isReadableLight = color => {
-  return chroma.valid(color) && chroma.contrast('#FFFFFF', color) > 4.5;
+const isReadableLight = (color, threshold = 4.5) => {
+  return chroma.valid(color) && chroma.contrast('#FFFFFF', color) > threshold;
 };
 
-const isReadableDark = color => {
-  return chroma.valid(color) && chroma.contrast('#0C0C0C', color) > 4.5;
+const isReadableDark = (color, threshold = 4.5) => {
+  return chroma.valid(color) && chroma.contrast('#0C0C0C', color) > threshold;
 };
 
 const checkColorBrightness = {};

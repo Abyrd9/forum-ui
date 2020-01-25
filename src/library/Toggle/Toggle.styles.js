@@ -1,10 +1,15 @@
 import styled, { css } from 'styled-components';
 import buildStyleMap from '../../helpers/buildStyleMap';
+import buildColorStyleMap from '../../helpers/buildColorStyleMap';
+import buildColorPalette from '../../helpers/buildColorPalette';
 
 export const ToggleContainer = styled.span`
   ${props => {
     const { theme = {}, small, large } = props;
     const { colors = {} } = theme;
+
+    const color = buildColorStyleMap()(props);
+    const palette = buildColorPalette(color);
 
     let width = 42;
     let height = 16;
@@ -32,9 +37,9 @@ export const ToggleContainer = styled.span`
           opacity: 1;
         }
         &:checked + .forum-ui-toggle-label {
-          background-color: ${colors.primary[200]};
+          background-color: ${palette[200]};
           .forum-ui-toggle-span {
-            background-color: ${colors.primary[400]};
+            background-color: ${palette[400]};
             transform: translateX(${checkedPos}px);
           }
           .forum-ui-toggle-icon.times-icon {
@@ -46,6 +51,7 @@ export const ToggleContainer = styled.span`
         }
 
         &:disabled + .forum-ui-toggle-label {
+          cursor: not-allowed;
           background-color: ${colors.neutral[100]};
           .forum-ui-toggle-span {
             background-color: ${colors.neutral[200]};
@@ -77,9 +83,9 @@ export const ToggleContainer = styled.span`
         border-radius: 20px;
         position: relative;
         &:hover {
-          background-color: ${colors.primary[100]};
+          background-color: ${palette[100]};
           .forum-ui-toggle-span {
-            background-color: ${colors.primary[200]};
+            background-color: ${palette[200]};
             transform: translateX(5px);
           }
         }
@@ -103,7 +109,7 @@ export const ToggleContainer = styled.span`
           })};
           border-radius: 20px;
           background-color: transparent;
-          box-shadow: 0 0 3px ${colors.primary[400]};
+          box-shadow: 0 0 3px ${palette[400]};
         }
       }
 

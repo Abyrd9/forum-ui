@@ -2,7 +2,7 @@
 import React, { useRef, useEffect } from 'react';
 import { storiesOf } from '@storybook/react';
 import Toggle from './Toggle';
-import { StoryBlock } from '../../../.storybook/config';
+import { StoryBlock, StoryContainer } from '../../../.storybook/config';
 
 const FocusedToggle = () => {
   const ToggleRef = useRef();
@@ -15,30 +15,30 @@ const FocusedToggle = () => {
 };
 
 storiesOf('Toggle', module).add('Stories', () => (
-  <>
+  <StoryContainer>
     <StoryBlock>
-      <p>Large</p>
+      <p className="label">Large</p>
       <Toggle large />
     </StoryBlock>
     <StoryBlock>
-      <p>Default</p>
+      <p className="label">Default</p>
       <Toggle />
     </StoryBlock>
     <StoryBlock>
-      <p>Focused</p>
+      <p className="label">Focused</p>
       <FocusedToggle />
     </StoryBlock>
     <StoryBlock>
-      <p>Active</p>
+      <p className="label">Active</p>
       <Toggle checked />
     </StoryBlock>
     <StoryBlock>
-      <p>Disabled</p>
+      <p className="label">Disabled</p>
       <Toggle disabled />
     </StoryBlock>
     <StoryBlock>
-      <p>Small</p>
+      <p className="label">Small</p>
       <Toggle small />
     </StoryBlock>
-  </>
+  </StoryContainer>
 ));

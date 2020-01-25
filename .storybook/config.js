@@ -8,34 +8,39 @@ export const StoryBlock = styled.div`
     const { theme } = props;
     return css`
       margin: 15px;
-      p {
+      .label {
         margin-bottom: 8px;
       }
     `;
   }}
 `;
 
-const StoryContainer = styled.div`
+export const StoryContainer = styled.div`
   ${props => {
-    const { theme } = props;
+    const { theme = {} } = props;
+    const { colors = {} } = theme;
     return css`
-      margin: 100px;
+      position: relative;
+      margin: 65px 100px 25px 100px;
       padding: 25px;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       flex-wrap: wrap;
       background-color: #fafbfd;
       border: 1px solid ${theme.colors.neutral[200]};
       border-radius: 15px;
+      .title {
+        color: ${colors.neutral[800]};
+        position: absolute;
+        font-size: 20px;
+        top: -25px;
+        left: 25px;
+      }
     `;
   }}
 `;
 
-addDecorator(storyFn => (
-  <ForumUiProvider>
-    <StoryContainer>{storyFn()}</StoryContainer>
-  </ForumUiProvider>
-));
+addDecorator(storyFn => <ForumUiProvider>{storyFn()}</ForumUiProvider>);
 
 configure(require.context('../src', true, /\.stories\.js$/), module);
