@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Grid from './library/ForumGrid/Grid';
@@ -14,8 +14,20 @@ import TypographySection from './components/Pages/ConfigurePage/Typography/Typog
 import SpacingSection from './components/Pages/ConfigurePage/Spacing/SpacingSection/SpacingSection';
 import OutputCodeSection from './components/Pages/ThemePage/OutputCodeSection/OutputCodeSection';
 import AuthSection from './components/Pages/AuthPage/AuthSection/AuthSection';
+import { StoreContext } from './state';
+import useDeepCompareEffect from './hooks/useDeepCompareEffect';
+import debounce from './helpers/debounce';
+import useDebounce from './hooks/useDebounce';
+import { AuthenticationContext } from './firebase/AuthenticationProvider';
 
 function App() {
+  const { store } = useContext(StoreContext);
+  const { user } = useContext(AuthenticationContext);
+
+  useDebounce(() => {
+    // If the user is signed in, push the store up to their themes
+  }, 1000);
+
   return (
     <>
       <Grid>

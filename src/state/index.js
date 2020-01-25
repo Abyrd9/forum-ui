@@ -45,6 +45,7 @@ const reducer = (draft, action) => {
 
 const StoreProvider = ({ children }) => {
   const [state, dispatch] = useImmerReducer(reducer, initialState);
+
   return (
     <StoreContext.Provider value={{ store: state, dispatch }}>{children}</StoreContext.Provider>
   );
