@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavigationContainer } from './Navigation.styles';
 import ForumIcon from '../../Utilities/Icons/ForumIcon';
 import { AuthenticationContext } from '../../../firebase/AuthenticationProvider';
-import Modal from '../Modal/Modal';
+// import Modal from '../Modal/Modal';
 
 export const NAV_LIST = [
   { icon: faHomeLg, class: 'home', url: '/' },
@@ -46,7 +46,7 @@ const Navigation = () => {
       <span className="nav-bar__list-toggle-container" onClick={() => toggleActive(!active)}>
         <div className="nav-bar__list-toggle" />
       </span>
-      {notAuthenticated && <Modal />}
+      {/* {notAuthenticated && <Modal />} */}
     </NavigationContainer>
   );
 };

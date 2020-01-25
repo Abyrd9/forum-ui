@@ -6,17 +6,67 @@ import checkColorBrightness from '../../helpers/checkColorBrightness';
 
 const { isReadableDark } = checkColorBrightness;
 
+const baseStyles = (color, textColor) => css`
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  position: relative;
+  color: ${textColor};
+  background-color: ${color};
+  transition: all 150ms ease-in-out;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  &:focus {
+
+  }
+  &:hover {
+
+  }
+  &:active {
+    background-color: ${chroma(color).darken(0.5)};
+  }
+  &:disabled {
+    cursor: not-allowed;
+    box-shadow: none;
+    background-color: ${chroma(color).brighten(1)};
+  }
+`;
+
+const outlineStyles = color => css`
+  background-color: transparent;
+  border: 2px solid ${color};
+  font-weight: bold;
+  color: ${color};
+  &:active, &:disabled {
+    background-color: transparent;
+  }
+  &:active {
+    color: ${chroma(color).darken(0.5)};
+    border: 2px solid ${chroma(color).darken(0.5)};
+  }
+`;
+
+const loadingStyles = () => css`
+  cursor: not-allowed;
+`;
+
+
+// focused, hovered, active, disabled, loading
 export const ButtonContainer = styled.button`
   ${props => {
-    const { theme = {}, outline = false } = props;
+    const { theme = {}, outline = false, loading = false } = props;
     const { font = {}, colors = {} } = theme;
     const color = buildColorStyleMap()(props);
+    const textColor = isReadableDark(color) ? colors.white : colors.black;
     return css`
-      transition: box-shadow 100ms ease, background-color 50ms ease;
-      cursor: pointer;
-      position: relative;
-      border: ${outline ? `2px solid ${color}` : 'none'};
-      outline: none;
+      ${baseStyles(color, textColor)}
+      ${outline && outlineStyles(color)}
+      ${loading && loadingStyles()}
+      font-size: ${buildStyleMap({
+        small: font[300],
+        large: font[500],
+        default: font[400],
+      })};
       border-radius: ${buildStyleMap({
         small: '2px',
         large: '6px',
@@ -27,16 +77,12 @@ export const ButtonContainer = styled.button`
         large: outline ? '8px 16px' : '10px 18px',
         default: outline ? '6px 12px' : '8px 14px',
       })};
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0), 0 3px 6px rgba(0, 0, 0, 0);
-      font-size: ${buildStyleMap({
-        small: font[300],
-        large: font[500],
-        default: font[400],
-      })};
-      ${outline && 'font-weight: bold'};
-      ${outline && `color: ${color}`};
-      ${!outline && `color: ${isReadableDark(color) ? colors.white : colors.black}`};
-      background-color: ${outline ? 'transparent' : color};
+      &:hover {
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      }
+      &:active {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0), 0 3px 6px rgba(0, 0, 0, 0);
+      }
       &:before {
         transition: all 100ms ease-in-out;
         opacity: 0;
@@ -51,28 +97,26 @@ export const ButtonContainer = styled.button`
         background-color: transparent;
         box-shadow: 0 0 3px ${color}, 0 0 5px ${color};
       }
-      &:focus {
-        &:before {
-          opacity: 1;
-        }
+      &:focus:before {
+        opacity: 1;
       }
-      &:hover {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-        &:before {
-          opacity: 0;
-        }
+      &:hover:before, &:active:before {
+        opacity: 0;
       }
-      &:active {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0), 0 3px 6px rgba(0, 0, 0, 0);
-        ${outline && `color: ${chroma.valid(color) && chroma(color).darken(0.5)}`};
-        border: ${outline
-          ? `2px solid ${chroma.valid(color) && chroma(color).darken(0.5)}`
-          : 'none'};
-        background-color: ${outline
-          ? 'transparent'
-          : chroma.valid(color) && chroma(color).darken(0.5)};
-        &:before {
-          opacity: 0;
+      .loader {
+        margin-left: 6px;
+        height: ${buildStyleMap({
+          small: font[300],
+          large: font[500],
+          default: font[400],
+        })};
+        width: ${buildStyleMap({
+          small: font[300],
+          large: font[500],
+          default: font[400],
+        })};
+        path {
+          fill: ${outline ? color : textColor};
         }
       }
     `;

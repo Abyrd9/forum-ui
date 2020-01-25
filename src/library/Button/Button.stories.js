@@ -9,19 +9,19 @@ storiesOf('Button', module)
     const Divider = <span style={{ marginRight: '24px' }} />
     return (
       <>
-        <Button>Base Button</Button>
+        <Button primary>Base Button</Button>
         {Divider}
-        <Button>Focused</Button>
+        <Button primary>Focused</Button>
         {Divider}
-        <Button>Hovered</Button>
+        <Button primary>Hovered</Button>
         {Divider}
-        <Button>Pressed</Button>
+        <Button primary>Pressed</Button>
         {Divider}
-        <Button disabled>Disabled</Button>
+        <Button primary disabled>Disabled</Button>
         {Divider}
-        <Button>Loading</Button>
+        <Button primary loading>Loading</Button>
         {Divider}
-        <Button small>Small</Button>
+        <Button primary small>Small</Button>
       </>
     )
   });

@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 import { ModalStyled } from './Modal.styles';
 import usePortal from '../../../hooks/usePortal';
 
-const Modal = ({ children }) => {
-  const target = usePortal('modal-root');
-  console.log(target);
+const Modal = ({ children, id }) => {
+  const target = usePortal(id);
   const modal = (
     <ModalStyled>
       <div className="modal-content">{children}</div>
@@ -18,6 +17,7 @@ const Modal = ({ children }) => {
 
 Modal.defaultProps = {
   children: 'Modal',
+  id: 'modal'
 };
 
 Modal.propTypes = {
@@ -26,6 +26,7 @@ Modal.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]),
+  id: PropTypes.string,
 };
 
 export default Modal;
