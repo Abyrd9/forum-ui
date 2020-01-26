@@ -22,7 +22,7 @@ const fallback = element => {
 };
 
 const copyToClipboard = element => {
-  let message = ''
+  let message = '';
   try {
     if (navigator.clipboard) {
       navigator.clipboard.writeText(element.value);
@@ -31,9 +31,9 @@ const copyToClipboard = element => {
     } else {
       fallback(element);
     }
-    message = 'Theme copied!'
+    message = 'Copied to clipboard!';
   } catch (e) {
-    message = 'Error: Please copy manually.'
+    message = 'Error: Please copy manually.';
     throw new Error('Please copy manually.');
   } finally {
     // eslint-disable-next-line no-unsafe-finally

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import firebase from 'firebase';
+import useDeepCompareEffect from '../hooks/useDeepCompareEffect';
 
 firebase.initializeApp({
   apiKey: 'AIzaSyCiPHD2ZQMVDpTl3QEe2YoF7TU4pmE0FaQ',
@@ -12,9 +13,12 @@ firebase.initializeApp({
   measurementId: 'G-KHP7DMFNNK',
 });
 
-export const AuthenticationContext = React.createContext({});
-const AuthenticationProvider = ({ children }) => {
+const db = firebase.firestore();
+export const FirebaseContext = React.createContext({});
+
+const FirebaseProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+
   useEffect(() => {
     const unlisten = firebase.auth().onAuthStateChanged(authUser => {
       if (authUser) {
@@ -27,9 +31,24 @@ const AuthenticationProvider = ({ children }) => {
       unlisten();
     };
   }, []);
+
+  useDeepCompareEffect(() => {
+    if (user) {
+      const ref = db.collection('users').doc(user.uid);
+      ref.get().then(doc => {
+        if (!doc.exists) {
+          ref.set({
+            email: user.email,
+            uid: user.uid,
+          });
+        }
+      });
+    }
+  }, [user]);
+
   return (
-    <AuthenticationContext.Provider value={{ user }}>{children}</AuthenticationContext.Provider>
+    <FirebaseContext.Provider value={{ user, database: db }}>{children}</FirebaseContext.Provider>
   );
 };
 
-export default AuthenticationProvider;
+export default FirebaseProvider;

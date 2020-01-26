@@ -7,28 +7,43 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import copyToClipboard from '../../../../helpers/copyToClipboard';
 import { CodeBlockStyled } from './CodeBlock.styles';
 import Notification from '../Notification';
+import Transition from '../../../Utilities/Transition';
+import Loading from '../../../Utilities/Loading';
 
 const CodeBlock = ({ code }) => {
+  const [loading, setLoading] = useState(true);
+
   const [message, setMessage] = useState('');
+  const [show, toggleShow] = useState(false);
   const TextareaRef = useRef();
   const handleCopyToClipboard = () => {
     let res;
-    if (TextareaRef.current) res = copyToClipboard(TextareaRef.current)
-    if (res) setMessage(res);
+    if (TextareaRef.current) res = copyToClipboard(TextareaRef.current);
+    if (res) {
+      setMessage(res);
+      toggleShow(true);
+    }
   };
 
   useEffect(() => {
-    if (message) {
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    if (show) {
       setTimeout(() => {
-        setMessage('');
+        toggleShow(false);
       }, 1000);
     }
-  }, [message]);
+  }, [show]);
 
   return (
     <CodeBlockStyled>
+      {loading && <Loading />}
       <div className="icon-container">
-        <Notification message={message} />
+        <Transition show={show}>
+          <Notification message={message} />
+        </Transition>
         <FontAwesomeIcon icon={faCopy} className="icon" onClick={() => handleCopyToClipboard()} />
       </div>
       <SyntaxHighlighter language="json" style={style}>

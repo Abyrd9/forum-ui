@@ -10,10 +10,10 @@ import Column from '../../../../library/ForumGrid/Column';
 import Button from '../../../../library/Button';
 import SocialSignInButton from '../SocialSignInButton';
 import SectionTitle from '../../../Shared/SectionTitle';
-import { AuthenticationContext } from '../../../../firebase/AuthenticationProvider';
+import { FirebaseContext } from '../../../../firebase/FirebaseProvider';
 
 const AuthSection = () => {
-  const { user = {} } = useContext(AuthenticationContext);
+  const { user = {} } = useContext(FirebaseContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassowrd] = useState('');
@@ -71,8 +71,8 @@ const AuthSection = () => {
         </Column>
       </Row>
       <Row stretch>
-        <Column col={2}>
-          <Button primary large grow onClick={handleEmailSignIn}>
+        <Column>
+          <Button primary large onClick={handleEmailSignIn}>
             Sign in
             <FontAwesomeIcon style={{ marginLeft: '14px' }} icon={faArrowCircleRight} />
           </Button>

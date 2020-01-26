@@ -3,7 +3,7 @@ import chroma from 'chroma-js';
 
 export const ContentContainerContainer = styled.div`
   ${props => {
-    const { theme = {} } = props;
+    const { theme = {}, inline = false } = props;
     const { colors = {}, spacing = {} } = theme;
     return css`
       margin-bottom: ${spacing[600]};
@@ -14,6 +14,7 @@ export const ContentContainerContainer = styled.div`
       .typography-block-content {
         width: 100%;
         position: relative;
+        ${inline && 'display: flex; flex-wrap: wrap;'};
       }
     `;
   }}

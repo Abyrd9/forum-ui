@@ -98,6 +98,9 @@ const ForumUiGlobalStyle = createGlobalStyle`
         font-family: 'Josefin Sans', sans-serif;
         vertical-align: baseline;
       }
+      div {
+        box-sizing: border-box;
+      }
       h1 {
         font-size: ${theme.font[800]};
       }

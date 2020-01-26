@@ -20,7 +20,7 @@ const ColorsSection = () => {
   const handleCreateColorObj = colorObj => {
     const colorsArr = Object.keys(colors).reduce((acc, key) => [...acc, { key }], []);
     const key = generateUniqueKey(colorsArr);
-    if (colorObj) dispatch({ type: ACTION_TYPES.REMOVE_COLOR, key, colorObj });
+    if (colorObj) dispatch({ type: ACTION_TYPES.ADD_COLOR, key, colorObj });
   };
 
   return (

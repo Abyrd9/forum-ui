@@ -21,7 +21,7 @@ export const ButtonContainer = styled.button`
     const textColor = isReadableLight(color, 2.5) ? colors.white : colors.black;
     return css`
       /* Base Styles */
-      transition: all 200ms cubic-bezier(0, 0, 0.2, 1);
+      transition: all 100ms cubic-bezier(0, 0, 0.2, 1);
       cursor: ${loading ? 'not-allowed' : 'pointer'};
       width: ${props.grow ? '100%' : 'auto'};
       outline: none;

@@ -10,6 +10,7 @@ const ExampleCardHeader = ({ title, toggleLabel, toggleValue, handleToggleChange
       <div className="toggle-container">
         <p className="toggle-container__label">{toggleLabel}</p>
         <Toggle
+          primary
           className="toggle-container__toggle"
           checked={toggleValue}
           handleOnChange={() => handleToggleChange(!toggleValue)}

@@ -12,7 +12,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavigationContainer } from './Navigation.styles';
 import ForumIcon from '../../Utilities/Icons/ForumIcon';
-import { AuthenticationContext } from '../../../firebase/AuthenticationProvider';
+import { FirebaseContext } from '../../../firebase/FirebaseProvider';
 // import Modal from '../Modal/Modal';
 
 export const NAV_LIST = [
@@ -23,7 +23,7 @@ export const NAV_LIST = [
 ];
 
 const Navigation = () => {
-  const { user } = useContext(AuthenticationContext);
+  const { user } = useContext(FirebaseContext);
   const notAuthenticated = !user || user.isAnonymous;
 
   const [active, toggleActive] = useState(false);

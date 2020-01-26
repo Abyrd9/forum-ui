@@ -4,7 +4,9 @@ export const FooterStyled = styled.div`
   ${({ theme = {} }) => {
     const { colors = {}, spacing = {}, font = {}, media = {} } = theme;
     return css`
-      margin-top: calc(${spacing[800]} * 2);
+      position: absolute;
+      top: calc(100% - 100px);
+      width: 100%;
       height: 100px;
       background-color: ${colors.neutral[800]};
       display: flex;

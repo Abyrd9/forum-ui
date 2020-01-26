@@ -206,31 +206,27 @@ const TypographySection = () => {
           </ContentContainer>
         </Column>
         <Column shrink xsUp={12} lgUp={5} gutter={0}>
-          <ContentContainer title="Font Weights" loading={loading}>
-            <Row stretch>
-              {typography.variants
-                .slice()
-                .sort((a, b) => b - a)
-                .map(weight => (
-                  <Column shrink gutterRight={0}>
-                    <h3
-                      style={{ fontWeight: weight, lineHeight: 1, fontFamily: typography.family }}
-                    >
-                      Aa
-                    </h3>
-                    <p
-                      style={{
-                        fontWeight: weight,
-                        lineHeight: 1,
-                        fontFamily: typography.family,
-                        marginBottom: '8px',
-                      }}
-                    >
-                      {weight}
-                    </p>
-                  </Column>
-                ))}
-            </Row>
+          <ContentContainer title="Font Weights" loading={loading} inline>
+            {typography.variants
+              .slice()
+              .sort((a, b) => b - a)
+              .map(weight => (
+                <span style={{ margin: '0px 24px 14px 0px' }}>
+                  <h3 style={{ fontWeight: weight, lineHeight: 1, fontFamily: typography.family }}>
+                    Aa
+                  </h3>
+                  <p
+                    style={{
+                      fontWeight: weight,
+                      lineHeight: 1,
+                      fontFamily: typography.family,
+                      marginBottom: '8px',
+                    }}
+                  >
+                    {weight}
+                  </p>
+                </span>
+              ))}
           </ContentContainer>
         </Column>
       </Row>
