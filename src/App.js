@@ -77,7 +77,6 @@ function App() {
         .set(payload)
         .then(() => {
           console.log('Data succesfully saved.');
-          console.log(store.colors);
         });
     }
   }, 1000);

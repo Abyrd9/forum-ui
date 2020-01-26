@@ -14,6 +14,7 @@ import AddButton from '../AddButton';
 import DeleteButton from '../DeleteButton';
 
 const isPossibleHex = /^$|^#([A-Fa-f0-9]{0,6})$/i;
+const isHex = /^#([A-Fa-f0-9]{6})/i;
 
 const ColorBlock = ({
   colorId,
@@ -31,11 +32,6 @@ const ColorBlock = ({
     const newPalette = isFlat ? { 400: color } : buildColorPalette(color);
     handleUpdateColorObj(colorId, { ...colorObj, palette: newPalette });
   }, [isFlat]);
-
-  const [inProgress, updateInProgress] = useState(palette.inProgress);
-  useEffect(() => {
-    updateInProgress(palette.inProgress);
-  }, [palette.inProgress]);
 
   const handleUpdateTitle = event => {
     const { value = '' } = event.target;
@@ -68,10 +64,11 @@ const ColorBlock = ({
     handleUpdateColorObj(colorId, {
       ...colorObj,
       color: colorDraft,
-      palette: isFlat ? { 400: color } : buildColorPalette(color),
+      palette: isFlat ? { 400: colorDraft } : buildColorPalette(colorDraft),
     });
   }, [colorDraft]);
 
+  const inProgress = !isHex.test(color) || !chroma.valid(color);
   return (
     <ColorBlockContainer color={color} inProgress={inProgress}>
       <Transition show={deleteOverlayVisible}>
@@ -112,7 +109,7 @@ const ColorBlock = ({
       </label>
       <div className="color-block__palette-block">
         {inProgress ? (
-          <PaletteBlock inProgress={inProgress} />
+          <PaletteBlock inProgress />
         ) : (
           <>
             {palette &&
