@@ -5,8 +5,7 @@ import ColorBlock from '../ColorBlock';
 import Row from '../../../../../library/ForumGrid/Row';
 import Column from '../../../../../library/ForumGrid/Column';
 import generateUniqueKey from '../../../../../helpers/generateUniqueKey';
-import { StoreContext } from '../../../../../state';
-import ACTION_TYPES from '../../../../../state/actionTypes';
+import { StoreContext, ACTION_TYPES } from '../../../../../assets/StoreProvider';
 
 const ColorsSection = () => {
   const { store, dispatch } = useContext(StoreContext);

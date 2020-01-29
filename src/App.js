@@ -10,17 +10,15 @@ import PageTitle from './components/Shared/PageTitle';
 import SectionTitle from './components/Shared/SectionTitle';
 import Footer from './components/Shared/Footer';
 
-import ColorsSection from './components/Pages/ConfigurePage/Colors/ColorsSection';
-import TypographySection from './components/Pages/ConfigurePage/Typography/TypographySection';
-import SpacingSection from './components/Pages/ConfigurePage/Spacing/SpacingSection/SpacingSection';
 import OutputCodeSection from './components/Pages/ThemePage/OutputCodeSection/OutputCodeSection';
 import AuthSection from './components/Pages/AuthPage/AuthSection/AuthSection';
-import { StoreContext } from './state';
+import { StoreContext } from './assets/StoreProvider';
 import useDebounce from './hooks/useDebounce';
-import { FirebaseContext } from './firebase/FirebaseProvider';
+import { FirebaseContext } from './assets/FirebaseProvider';
 import ACTION_TYPES from './state/actionTypes';
 import Loading from './components/Utilities/Loading';
 import useDeepCompareEffect from './hooks/useDeepCompareEffect';
+import ConfigurationPage from './components/Pages/ConfigurePage';
 
 const AppContainer = styled.div`
   position: relative;
@@ -38,7 +36,7 @@ function App() {
         .collection('users')
         .doc(user.uid)
         .collection('themes');
-      ref.get().then(snapshot => {
+      ref.get().then((snapshot) => {
         if (snapshot.docs.length > 0) {
           dispatch({
             type: ACTION_TYPES.SET_INITIAL_THEME,
@@ -93,44 +91,31 @@ function App() {
             subtitle="A simplified design system generator for React Developers."
           />
           <Switch>
+            <Route path="/">
+              <SectionTitle
+                title="Colors"
+                description={(
+                  <span>
+                    A ForumUi color palette is loosely based on the guidelines given from
+                    {' '}
+                    <a
+                      href="https://refactoringui.com/previews/building-your-color-palette/"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      RefactoringUi
+                    </a>
+                    . The initial colors have a primary, secondary, and neutral color palette as
+                    well as three accent colors for warning, error, or success notifications.
+                  </span>
+                )}
+              />
+            </Route>
             <Route path="/theme-code">
-              <OutputCodeSection />
+              {store.themeId ? <OutputCodeSection /> : <Loading />}
             </Route>
             <Route path="/theme-configuration">
-              {store.themeId ? (
-                <>
-                  <SectionTitle
-                    title="Colors"
-                    description={
-                      <span>
-                        A ForumUi color palette is loosely based on the guidelines given from{' '}
-                        <a
-                          href="https://refactoringui.com/previews/building-your-color-palette/"
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        >
-                          RefactoringUi
-                        </a>
-                        . The initial colors have a primary, secondary, and neutral color palette as
-                        well as three accent colors for warning, error, or success notifications.
-                      </span>
-                    }
-                  />
-                  <ColorsSection />
-                  <SectionTitle
-                    title="Typography"
-                    description="A ForumUi Typography system has eight levels of font sizing. Currently we only support the use of the top 100 most popular google fonts."
-                  />
-                  <TypographySection />
-                  <SectionTitle
-                    title="Spacing"
-                    description="A ForumUi spacing system has eight levels to space out elements on the page."
-                  />
-                  <SpacingSection />
-                </>
-              ) : (
-                <Loading />
-              )}
+              {store.themeId ? <ConfigurationPage /> : <Loading />}
             </Route>
             <Route path="/">
               <AuthSection />

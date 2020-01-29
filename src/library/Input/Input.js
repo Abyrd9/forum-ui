@@ -43,6 +43,7 @@ const Input = ({
   }
 
   if (!disabled && value.length > 0) {
+    classNames.label += ` ${classNames.label}--is-active`;
     classNames.placeholder += ` ${classNames.placeholder}--is-active`;
   }
 

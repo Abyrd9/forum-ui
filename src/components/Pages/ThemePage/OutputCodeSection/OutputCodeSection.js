@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { OutputCodeSectionStyled } from './OutputCodeSection.styles';
-import { StoreContext } from '../../../../state';
+import { StoreContext } from '../../../../assets/StoreProvider';
 import CodeBlock from '../CodeBlock';
 import SectionTitle from '../../../Shared/SectionTitle';
 import buildGoogleFontsUrl from '../../../../helpers/buildGoogleFontsUrl';
@@ -53,9 +52,5 @@ const OutputCodeSection = () => {
     </OutputCodeSectionStyled>
   );
 };
-
-OutputCodeSection.defaultProps = {};
-
-OutputCodeSection.propTypes = {};
 
 export default OutputCodeSection;

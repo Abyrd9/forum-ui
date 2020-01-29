@@ -11,8 +11,7 @@ import { getSizingVariations } from '../../../../../helpers/buildTheme';
 import ContentContainer from '../../../../Shared/ContentContainer';
 import useMediaQuery from '../../../../../hooks/useMediaQuery';
 import Tabs from '../../../../../library/Tabs';
-import { StoreContext } from '../../../../../state';
-import ACTION_TYPES from '../../../../../state/actionTypes';
+import { StoreContext, ACTION_TYPES } from '../../../../../assets/StoreProvider';
 
 const tabs = [
   {

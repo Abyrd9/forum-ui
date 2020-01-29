@@ -10,7 +10,7 @@ import Column from '../../../../library/ForumGrid/Column';
 import Button from '../../../../library/Button';
 import SocialSignInButton from '../SocialSignInButton';
 import SectionTitle from '../../../Shared/SectionTitle';
-import { FirebaseContext } from '../../../../firebase/FirebaseProvider';
+import { FirebaseContext } from '../../../../assets/FirebaseProvider';
 
 const AuthSection = () => {
   const { user = {} } = useContext(FirebaseContext);

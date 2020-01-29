@@ -18,13 +18,14 @@ export const InputStyled = styled.div`
         text-align: right;
       }
       .forum-ui-input-label {
+        border: 1px solid ${show ? color : colors.neutral[200]};
+        transition: transform 100ms cubic-bezier(0, 0, 0.2, 1);
         box-sizing: border-box;
         position: relative;
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
-        border: 1px solid ${show ? color : colors.neutral[200]};
         border-radius: 4px;
         background-color: #ffffff;
         height: 55px;
@@ -39,13 +40,10 @@ export const InputStyled = styled.div`
           border: 1px solid ${colors.neutral[300]};
         }
         &--is-active {
-          border: 1px solid rgba(0, 0, 0, 0);
-          border-bottom-right-radius: 0px;
-          border-bottom-left-radius: 0px;
-          border-bottom: 1px solid ${colors.neutral[200]};
-          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+          border: 1px solid ${show ? color : colors.neutral[400]};
         }
         &:focus-within {
+          border: 1px solid ${show ? color : colors.neutral[400]};
           .forum-ui-input-placeholder {
             transform: translateY(-0.6em) scale(0.6);
           }

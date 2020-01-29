@@ -15,23 +15,23 @@ const InputStory = props => {
 
 storiesOf('Input', module).add('Stories', () => (
   <StoryContainer>
-    <StoryBlock>
+    <StoryBlock style={{ width: '300px' }}>
       <p>Base</p>
       <InputStory placeholder="Placeholder" />
     </StoryBlock>
-    <StoryBlock>
+    <StoryBlock style={{ width: '300px' }}>
       <p>Focused</p>
       <InputStory placeholder="Base" value="Text Value" />
     </StoryBlock>
-    <StoryBlock>
+    <StoryBlock style={{ width: '300px' }}>
       <p>Disabled</p>
       <InputStory disabled placeholder="Placeholder" />
     </StoryBlock>
-    <StoryBlock>
+    <StoryBlock style={{ width: '300px' }}>
       <p>Icon</p>
       <InputStory placeholder="Username" Icon={<FontAwesomeIcon icon={faUserCircle} />} />
     </StoryBlock>
-    <StoryBlock>
+    <StoryBlock style={{ width: '300px' }}>
       <p>Errored</p>
       <InputStory
         placeholder="Placeholder"
@@ -40,7 +40,7 @@ storiesOf('Input', module).add('Stories', () => (
         infoMssg={{ message: 'Something went wrong!', color: '#FF1053' }}
       />
     </StoryBlock>
-    <StoryBlock>
+    <StoryBlock style={{ width: '300px' }}>
       <p>Success</p>
       <InputStory
         placeholder="Placeholder"
