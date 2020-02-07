@@ -1,5 +1,6 @@
 import React from 'react';
-import { render } from '@testing-library/react'; // eslint-disable-line
+import '@testing-library/jest-dom';
+import { render } from '@testing-library/react';
 import ForumUiProvider from './assets/ForumUiProvider';
 
 const AllTheProviders = ({ children }) => {

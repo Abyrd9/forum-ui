@@ -1,8 +1,8 @@
 import React, { useRef, useState, useLayoutEffect } from 'react';
+import PropTypes from 'prop-types';
 import { AutoResizeInputContainer } from './AutoResizeInput.styles';
 
-const AutoResizeInput = props => {
-  const { value = '', handleOnChange = () => {}, pattern = /(.*?)/g } = props;
+const AutoResizeInput = ({ value, handleOnChange, pattern, ...props }) => {
   const hiddenRef = useRef({});
   const [width, setWidth] = useState();
 
@@ -19,15 +19,27 @@ const AutoResizeInput = props => {
       <input
         data-testid="resize-input"
         className="title-input__input"
-        {...props}
         value={value}
         onChange={onChange}
+        {...props}
       />
       <div data-testid="resize-container" className="title-input__hidden" ref={hiddenRef}>
         {value}
       </div>
     </AutoResizeInputContainer>
   );
+};
+
+AutoResizeInput.defaultProps = {
+  value: '',
+  handleOnChange: () => {},
+  pattern: /(.*?)/g,
+};
+
+AutoResizeInput.propTypes = {
+  value: PropTypes.string,
+  handleOnChange: PropTypes.func,
+  pattern: PropTypes.instanceOf(RegExp),
 };
 
 export default AutoResizeInput;

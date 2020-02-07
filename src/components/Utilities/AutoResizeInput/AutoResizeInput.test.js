@@ -1,10 +1,11 @@
 import React from 'react';
-import AutoResizeInput from './AutoResizeInput';
 import { render } from '../../../test-utils';
+import AutoResizeInput from './AutoResizeInput';
 
-it('expects container width to match input width', () => {
-  const { getByTestId } = render(<AutoResizeInput value="something" />);
-  const input = getByTestId('resize-input');
-  const container = getByTestId('resize-container');
-  expect(container.clientWidth).toEqual(input.clientWidth);
+describe('AutoResizeInput', () => {
+  it('Should exist in the DOM', () => {
+    const { getByTestId } = render(<AutoResizeInput value="something" />);
+    expect(getByTestId('resize-input')).toBeInTheDocument();
+    expect(getByTestId('resize-container')).toBeInTheDocument();
+  });
 });

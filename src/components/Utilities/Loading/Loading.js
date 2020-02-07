@@ -4,7 +4,7 @@ import { LoadingStyled } from './Loading.styles';
 
 const Loading = ({ minHeight, ...props }) => {
   return (
-    <LoadingStyled minHeight={minHeight}>
+    <LoadingStyled minHeight={minHeight} data-testid="loading-icon">
       <svg width={38} height={38} viewBox="0 0 38 38" {...props}>
         <defs>
           <linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="prefix__a">
@@ -45,7 +45,7 @@ Loading.defaultProps = {
 };
 
 Loading.propTypes = {
-  minHeight: PropTypes.string,
+  minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default Loading;
