@@ -76,7 +76,7 @@ export const getSizingVariations = (baseSize, ratio = { upper: 1, lower: 1 }) =>
       acc[key] = `${value}px`;
       return acc;
     },
-    {},
+    {}
   );
   return sizing;
 };

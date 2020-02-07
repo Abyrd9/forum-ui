@@ -17,7 +17,7 @@ const Modal = ({ children, id }) => {
 
 Modal.defaultProps = {
   children: 'Modal',
-  id: 'modal'
+  id: 'modal',
 };
 
 Modal.propTypes = {

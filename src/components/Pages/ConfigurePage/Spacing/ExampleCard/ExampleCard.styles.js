@@ -22,8 +22,8 @@ export const ExampleCardStyled = styled.div`
         width: 80%;
       }
       ${media.xs.down} {
-          width: 100%;
-        }
+        width: 100%;
+      }
       .image-container {
         display: block;
         position: relative;

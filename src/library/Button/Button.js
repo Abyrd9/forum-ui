@@ -4,9 +4,9 @@ import { ButtonContainer } from './Button.styles';
 import Loading from './Loading';
 
 const Button = ({ children, ...props }) => {
-  const { loading } = props;
+  const { loading, disabled } = props;
   return (
-    <ButtonContainer disabled={props.disabled || loading} loading={loading} {...props}>
+    <ButtonContainer disabled={disabled || loading} loading={loading} {...props}>
       {children}
       {loading && <Loading />}
     </ButtonContainer>
@@ -16,6 +16,7 @@ const Button = ({ children, ...props }) => {
 Button.defaultProps = {
   children: 'Button',
   loading: false,
+  disabled: false,
 };
 
 Button.propTypes = {
@@ -25,6 +26,7 @@ Button.propTypes = {
     PropTypes.string,
   ]),
   loading: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default Button;

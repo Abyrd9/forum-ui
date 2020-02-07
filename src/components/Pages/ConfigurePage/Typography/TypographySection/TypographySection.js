@@ -69,7 +69,7 @@ const TypographySection = () => {
     const getGoogleFonts = async () => {
       try {
         const response = await fetch(
-          `https://www.googleapis.com/webfonts/v1/webfonts?key=${GOOGLE_FONTS_API_KEY}&sort=popularity`,
+          `https://www.googleapis.com/webfonts/v1/webfonts?key=${GOOGLE_FONTS_API_KEY}&sort=popularity`
         );
         const data = await response.json();
         if (data && data.items.length > 0) {
@@ -257,7 +257,7 @@ const TypographySection = () => {
                 getSizingVariations(typography.baseSize, {
                   upper: typography.upperRatio,
                   lower: typography.lowerRatio,
-                }),
+                })
               )}
             />
           </ContentContainer>
@@ -268,7 +268,7 @@ const TypographySection = () => {
               getSizingVariations(typography.baseSize, {
                 upper: typography.upperRatio,
                 lower: typography.lowerRatio,
-              }),
+              })
             )
               .sort((a, b) => b[0] - a[0])
               .map(([key, value]) => (

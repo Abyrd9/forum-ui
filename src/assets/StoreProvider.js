@@ -1,6 +1,5 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable consistent-return */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useImmerReducer } from 'use-immer';
 import {
   INITIAL_COLORS,
@@ -82,6 +81,10 @@ const StoreProvider = ({ children }) => {
   return (
     <StoreContext.Provider value={{ store: state, dispatch }}>{children}</StoreContext.Provider>
   );
+};
+
+StoreProvider.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
 export default StoreProvider;

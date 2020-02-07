@@ -1,7 +1,3 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-export const SpacingSectionStyled = styled.div`
-  ${({ theme = {} }) => {
-    return css``;
-  }}
-`;
+export const SpacingSectionStyled = styled.div``;

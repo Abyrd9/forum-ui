@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
-
 import Grid from './library/ForumGrid/Grid';
 import Row from './library/ForumGrid/Row';
 
@@ -12,10 +11,9 @@ import Footer from './components/Shared/Footer';
 
 import OutputCodeSection from './components/Pages/ThemePage/OutputCodeSection/OutputCodeSection';
 import AuthSection from './components/Pages/AuthPage/AuthSection/AuthSection';
-import { StoreContext } from './assets/StoreProvider';
+import { StoreContext, ACTION_TYPES } from './assets/StoreProvider';
 import useDebounce from './hooks/useDebounce';
 import { FirebaseContext } from './assets/FirebaseProvider';
-import ACTION_TYPES from './state/actionTypes';
 import Loading from './components/Utilities/Loading';
 import useDeepCompareEffect from './hooks/useDeepCompareEffect';
 import ConfigurationPage from './components/Pages/ConfigurePage';
@@ -36,7 +34,7 @@ function App() {
         .collection('users')
         .doc(user.uid)
         .collection('themes');
-      ref.get().then((snapshot) => {
+      ref.get().then(snapshot => {
         if (snapshot.docs.length > 0) {
           dispatch({
             type: ACTION_TYPES.SET_INITIAL_THEME,
@@ -78,7 +76,6 @@ function App() {
         });
     }
   }, 1000);
-
   return (
     <AppContainer>
       <Grid>
@@ -94,10 +91,9 @@ function App() {
             <Route path="/">
               <SectionTitle
                 title="Colors"
-                description={(
+                description={
                   <span>
-                    A ForumUi color palette is loosely based on the guidelines given from
-                    {' '}
+                    A ForumUi color palette is loosely based on the guidelines given from{' '}
                     <a
                       href="https://refactoringui.com/previews/building-your-color-palette/"
                       rel="noopener noreferrer"
@@ -108,12 +104,10 @@ function App() {
                     . The initial colors have a primary, secondary, and neutral color palette as
                     well as three accent colors for warning, error, or success notifications.
                   </span>
-                )}
+                }
               />
             </Route>
-            <Route path="/theme-code">
-              {store.themeId ? <OutputCodeSection /> : <Loading />}
-            </Route>
+            <Route path="/theme-code">{store.themeId ? <OutputCodeSection /> : <Loading />}</Route>
             <Route path="/theme-configuration">
               {store.themeId ? <ConfigurationPage /> : <Loading />}
             </Route>

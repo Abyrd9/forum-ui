@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FooterStyled } from './Footer.styles';
 
 const Footer = () => {
@@ -11,9 +10,5 @@ const Footer = () => {
     </FooterStyled>
   );
 };
-
-Footer.defaultProps = {};
-
-Footer.propTypes = {};
 
 export default Footer;

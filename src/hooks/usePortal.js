@@ -4,14 +4,11 @@ const createRootElement = id => {
   const rootContainer = document.createElement('div');
   rootContainer.setAttribute('id', id);
   return rootContainer;
-}
+};
 
 const addRootElement = rootElement => {
-  document.body.insertBefore(
-    rootElement,
-    document.body.lastElementChild.nextElementSibling,
-  );
-}
+  document.body.insertBefore(rootElement, document.body.lastElementChild.nextElementSibling);
+};
 
 const usePortal = id => {
   const rootElementRef = useRef(null);
@@ -39,9 +36,9 @@ const usePortal = id => {
       rootElementRef.current = document.createElement('div');
     }
     return rootElementRef.current;
-  }
+  };
 
   return getRootElem();
-}
+};
 
 export default usePortal;

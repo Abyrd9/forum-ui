@@ -9,21 +9,20 @@ const ConfigurationPage = () => {
     <>
       <SectionTitle
         title="Colors"
-        description={(
+        description={
           <span>
-            A ForumUi color palette is loosely based on the guidelines given from
-                        {' '}
+            A ForumUi color palette is loosely based on the guidelines given from{' '}
             <a
               href="https://refactoringui.com/previews/building-your-color-palette/"
               rel="noopener noreferrer"
               target="_blank"
             >
               RefactoringUi
-                        </a>
-            . The initial colors have a primary, secondary, and neutral color palette as
-            well as three accent colors for warning, error, or success notifications.
-                      </span>
-        )}
+            </a>
+            . The initial colors have a primary, secondary, and neutral color palette as well as
+            three accent colors for warning, error, or success notifications.
+          </span>
+        }
       />
       <ColorsSection />
       <SectionTitle

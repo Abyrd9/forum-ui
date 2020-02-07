@@ -1,7 +1,6 @@
 import chroma from 'chroma-js';
 
 const buildColorPalette = hex => {
-  // const shades = {};
   if (!chroma.valid(hex)) return { inProgress: true };
 
   const dark = chroma

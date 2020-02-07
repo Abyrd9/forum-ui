@@ -40,7 +40,7 @@ const Counter = ({
   }, [count]);
 
   const handleOnMinusClick = () => {
-    let val = parseFloat(parseFloat(count))
+    let val = parseFloat(parseFloat(count));
     if (typeof min !== 'number' || val > min) {
       val = parseFloat(val - multiplier);
       if (toFixed) val = val.toFixed(2);
@@ -52,7 +52,7 @@ const Counter = ({
     let val = parseFloat(parseFloat(count));
     if (typeof max !== 'number' || val < max) {
       val = parseFloat(val + multiplier);
-      if (toFixed) val = val.toFixed(2)
+      if (toFixed) val = val.toFixed(2);
       updateCount(val);
     }
   };

@@ -9,7 +9,11 @@ it('renders InputContainer with a title', () => {
 });
 
 it('renders InputContainer with children', () => {
-  const { getByTestId } = render(<InputContainer><div data-testid="block-content">Block Content</div></InputContainer>);
+  const { getByTestId } = render(
+    <InputContainer>
+      <div data-testid="block-content">Block Content</div>
+    </InputContainer>
+  );
   const content = getByTestId('block-content');
   expect(content.innerHTML).toEqual('Block Content');
 });

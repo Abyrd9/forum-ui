@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import firebase from 'firebase';
 import useDeepCompareEffect from '../hooks/useDeepCompareEffect';
 
@@ -49,6 +50,10 @@ const FirebaseProvider = ({ children }) => {
   return (
     <FirebaseContext.Provider value={{ user, database: db }}>{children}</FirebaseContext.Provider>
   );
+};
+
+FirebaseProvider.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
 export default FirebaseProvider;

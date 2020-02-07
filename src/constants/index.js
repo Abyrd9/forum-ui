@@ -30,7 +30,7 @@ export const INITIAL_COLORS = colors.reduce(
     };
     return acc;
   },
-  { creator: INITIAL_CREATOR },
+  { creator: INITIAL_CREATOR }
 );
 
 export const INITIAL_TYPOGRAPHY_CONFIG = {

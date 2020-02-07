@@ -266,7 +266,7 @@ Select.propTypes = {
     PropTypes.shape({
       value: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-    }),
+    })
   ),
   handleOnChange: PropTypes.func,
   handleOnFocus: PropTypes.func,

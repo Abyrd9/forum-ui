@@ -127,7 +127,7 @@ const SpacingSection = () => {
                 getSizingVariations(spacing.baseSize, {
                   upper: spacing.upperRatio,
                   lower: spacing.lowerRatio,
-                }),
+                })
               )}
             />
           </ContentContainer>

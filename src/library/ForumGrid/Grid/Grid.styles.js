@@ -4,7 +4,7 @@ export const GridContainer = styled.div`
   ${props => {
     const { theme = {} } = props;
     const { media = {} } = theme;
-    
+
     let breakpoints = '';
     Object.values(media).forEach(query => {
       breakpoints += `${query.only} {

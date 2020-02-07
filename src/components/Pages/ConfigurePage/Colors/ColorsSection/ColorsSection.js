@@ -38,14 +38,14 @@ const ColorsSection = () => {
             </Column>
           ))}
         <Column xsUp={12} mdUp={6} lgUp={4}>
-          {/* <ColorBlock
+          <ColorBlock
             key="creator"
             colorId="creator"
             colorObj={colors.creator}
             handleUpdateColorObj={handleUpdateColorObj}
             handleCreateColorObj={handleCreateColorObj}
             isCreator
-          /> */}
+          />
         </Column>
       </Row>
     </ColorsSectionContainer>

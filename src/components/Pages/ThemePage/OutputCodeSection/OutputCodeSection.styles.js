@@ -1,7 +1,3 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-export const OutputCodeSectionStyled = styled.div`
-  ${({ theme = {} }) => {
-    return css``;
-  }}
-`;
+export const OutputCodeSectionStyled = styled.div``;

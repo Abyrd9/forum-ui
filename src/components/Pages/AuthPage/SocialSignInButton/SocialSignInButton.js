@@ -19,6 +19,8 @@ const SocialSignInButton = ({ children, ...props }) => {
 
 SocialSignInButton.defaultProps = {
   children: 'SocialSignInButton',
+  google: false,
+  github: false,
 };
 
 SocialSignInButton.propTypes = {
@@ -27,6 +29,8 @@ SocialSignInButton.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]),
+  google: PropTypes.bool,
+  github: PropTypes.bool,
 };
 
 export default SocialSignInButton;

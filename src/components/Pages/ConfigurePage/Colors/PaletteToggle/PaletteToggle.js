@@ -22,12 +22,14 @@ PaletteToggle.defaultProps = {
   color: '',
   isFlat: false,
   toggleIsFlat: () => {},
+  disabled: false,
 };
 
 PaletteToggle.propTypes = {
   color: PropTypes.string,
   isFlat: PropTypes.bool,
   toggleIsFlat: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default PaletteToggle;

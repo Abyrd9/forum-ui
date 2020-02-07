@@ -7,7 +7,7 @@ const Tabs = ({ tabsList, tabActiveIndex, handleTabClick, className, children })
 
   const onTabClick = (event, tabItem, index) => {
     updateActiveTab({ ...tabItem, index });
-    handleTabClick(event, {...tabItem, index});
+    handleTabClick(event, { ...tabItem, index });
   };
 
   /* class variables */
