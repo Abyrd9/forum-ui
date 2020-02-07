@@ -49,6 +49,7 @@ const Tabs = ({ tabsList, tabActiveIndex, handleTabClick, className, children })
 Tabs.defaultProps = {
   tabActiveIndex: 0,
   handleTabClick: () => null,
+  className: '',
 };
 
 Tabs.propTypes = {
@@ -61,6 +62,8 @@ Tabs.propTypes = {
   ]).isRequired,
   tabActiveIndex: PropTypes.number,
   handleTabClick: PropTypes.func,
+  className: PropTypes.string,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
 export default Tabs;
