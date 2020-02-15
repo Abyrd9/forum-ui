@@ -19,7 +19,7 @@ export const InputStyled = styled.div`
       }
       .forum-ui-input-label {
         border: 1px solid ${show ? color : colors.neutral[200]};
-        transition: transform 100ms cubic-bezier(0, 0, 0.2, 1);
+        transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
         box-sizing: border-box;
         position: relative;
         display: flex;
@@ -62,7 +62,7 @@ export const InputStyled = styled.div`
         }
       }
       .forum-ui-input-placeholder {
-        transition: transform 100ms cubic-bezier(0, 0, 0.2, 1);
+        transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
         transform-origin: left;
         color: ${colors.neutral[800]};
         position: absolute;

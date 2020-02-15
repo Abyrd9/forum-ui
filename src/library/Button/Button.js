@@ -4,11 +4,11 @@ import { ButtonContainer } from './Button.styles';
 import Loading from './Loading';
 
 const Button = ({ children, ...props }) => {
-  const { loading, disabled } = props;
+  const disabled = props.disabled || props.loading;
   return (
-    <ButtonContainer disabled={disabled || loading} loading={loading} {...props}>
+    <ButtonContainer disabled={disabled} {...props}>
       {children}
-      {loading && <Loading />}
+      {props.loading && <Loading />}
     </ButtonContainer>
   );
 };

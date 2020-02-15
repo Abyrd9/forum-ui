@@ -46,7 +46,7 @@
     ]
   },
   "devDependencies": {
-    "@abyrd9/abyrd-dev-tools": "^1.0.2",
+    "@abyrd9/abyrd-dev-tools": "^1.0.4",
     "@storybook/react": "^5.2.1",
     "@testing-library/dom": "^6.12.2",
     "@testing-library/jest-dom": "^5.1.1",

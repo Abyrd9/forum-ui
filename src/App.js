@@ -6,7 +6,6 @@ import Row from './library/ForumGrid/Row';
 
 import Navigation from './components/Shared/Navigation';
 import PageTitle from './components/Shared/PageTitle';
-import SectionTitle from './components/Shared/SectionTitle';
 import Footer from './components/Shared/Footer';
 
 import OutputCodeSection from './components/Pages/ThemePage/OutputCodeSection/OutputCodeSection';
@@ -88,7 +87,7 @@ function App() {
             subtitle="A simplified design system generator for React Developers."
           />
           <Switch>
-            <Route path="/">
+            {/* <Route path="/">
               <SectionTitle
                 title="Colors"
                 description={
@@ -106,7 +105,7 @@ function App() {
                   </span>
                 }
               />
-            </Route>
+            </Route> */}
             <Route path="/theme-code">{store.themeId ? <OutputCodeSection /> : <Loading />}</Route>
             <Route path="/theme-configuration">
               {store.themeId ? <ConfigurationPage /> : <Loading />}
