@@ -18,7 +18,10 @@ export const ButtonContainer = styled.button`
     } = props;
     const { font = {}, colors = {} } = theme;
     const color = buildColorStyleMap()(props);
-    const textColor = isReadableLight(color, 2.5) ? colors.white : colors.black;
+
+    const black = colors.black && chroma.valid(colors.black) ? colors.black : '#000000';
+    const white = colors.white && chroma.valid(colors.white) ? colors.white : '#FFFFFF';
+    const textColor = isReadableLight(color, 2.5) ? white : black;
     return css`
       /* Base Styles */
       transition: all 100ms cubic-bezier(0, 0, 0.2, 1);
@@ -63,26 +66,6 @@ export const ButtonContainer = styled.button`
           padding: 8px 14px;
         `,
       })};
-
-      /* Storybook Example Styles */
-      ${focused &&
-        css`
-          &:before {
-            opacity: 1 !important;
-          }
-        `};
-      ${hovered &&
-        css`
-          &:not(:disabled) {
-            ${hovered &&
-              'box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); !important'};
-          }
-        `};
-      ${pressed &&
-        css`
-          background-color: ${chroma(color).darken(0.5)} !important;
-          box-shadow: 0 3px 6px rgba(0, 0, 0, 0), 0 3px 6px rgba(0, 0, 0, 0) !important;
-        `};
 
       /* Outline Styles */
       ${outline &&
@@ -133,6 +116,16 @@ export const ButtonContainer = styled.button`
       &:active:before {
         opacity: 0;
       }
+
+      /* Storybook Example Styles */
+      &:before {
+        ${focused && 'opacity: 1;'}
+      }
+      &:not(:disabled) {
+        ${hovered && 'box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);'}
+      }
+      ${pressed && `background-color: ${chroma(color).darken(0.5)};`};
+      ${pressed && `box-shadow: 0 3px 6px rgba(0, 0, 0, 0), 0 3px 6px rgba(0, 0, 0, 0);`};
 
       /* Loader Styles */
       .loader {

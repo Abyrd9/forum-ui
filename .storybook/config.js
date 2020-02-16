@@ -5,12 +5,19 @@ import styled, { css } from 'styled-components';
 
 export const StoryBlock = styled.div`
   ${props => {
-    const { theme } = props;
+    const { theme, inline } = props;
     return css`
       margin: 15px;
       .label {
         margin-bottom: 8px;
       }
+      ${inline && css`
+        display: flex;
+        align-items: center;
+        p {
+          margin-left: 8px;
+        }
+      `}
     `;
   }}
 `;
