@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import chroma from 'chroma-js';
-import buildStyleMap from '../../helpers/buildStyleMap';
+import styleMap from '../../helpers/styleMap';
 import buildColorStyleMap from '../../helpers/buildColorStyleMap';
 import checkColorBrightness from '../../helpers/checkColorBrightness';
 
@@ -49,7 +49,7 @@ export const ButtonContainer = styled.button`
         color: ${loading ? textColor : chroma(color).luminance(0.25)};
         background-color: ${loading ? color : chroma(color).brighten(1)};
       }
-      ${buildStyleMap({
+      ${styleMap({
         small: css`
           font-size: ${outline ? font[200] : font[300]};
           border-radius: 3px;
@@ -130,7 +130,7 @@ export const ButtonContainer = styled.button`
       /* Loader Styles */
       .loader {
         margin-left: 6px;
-        ${buildStyleMap({
+        ${styleMap({
           small: css`
             height: ${outline ? font[200] : font[300]};
             width: ${outline ? font[200] : font[300]};

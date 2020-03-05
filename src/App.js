@@ -10,11 +10,11 @@ import Footer from './components/Shared/Footer';
 
 import OutputCodeSection from './components/Pages/ThemePage/OutputCodeSection/OutputCodeSection';
 import AuthSection from './components/Pages/AuthPage/AuthSection/AuthSection';
-import { StoreContext, ACTION_TYPES } from './assets/StoreProvider';
-import useDebounce from './hooks/useDebounce';
-import { FirebaseContext } from './assets/FirebaseProvider';
+import { StoreContext } from './assets/StoreProvider';
+// import useDebounce from './hooks/useDebounce';
+// import { FirebaseContext } from './assets/FirebaseProvider';
 import Loading from './components/Utilities/Loading';
-import useDeepCompareEffect from './hooks/useDeepCompareEffect';
+// import useDeepCompareEffect from './hooks/useDeepCompareEffect';
 import ConfigurationPage from './components/Pages/ConfigurePage';
 
 const AppContainer = styled.div`
@@ -24,57 +24,39 @@ const AppContainer = styled.div`
 `;
 
 function App() {
-  const { store, dispatch } = useContext(StoreContext);
-  const { user, database } = useContext(FirebaseContext);
+  const { store } = useContext(StoreContext);
+  // const { user, database } = useContext(FirebaseContext);
 
-  useDeepCompareEffect(() => {
-    if (user && database) {
-      const ref = database
-        .collection('users')
-        .doc(user.uid)
-        .collection('themes');
-      ref.get().then(snapshot => {
-        if (snapshot.docs.length > 0) {
-          dispatch({
-            type: ACTION_TYPES.SET_INITIAL_THEME,
-            themeId: snapshot.docs[0].id,
-            theme: snapshot.docs[0].data(),
-          });
-        } else {
-          dispatch({ type: ACTION_TYPES.SET_INITIAL_THEME, themeId: user.uid });
-        }
-      });
-    }
-  }, [user]);
+  // useDebounce(() => {
+  //   if (user && database && store && store.themeId) {
+  //     const ref = database
+  //       .collection('users')
+  //       .doc(user.uid)
+  //       .collection('themes');
+  //     const colors = Object.entries(store.colors).reduce((acc, [key, value]) => {
+  //       if (key !== 'creator') {
+  //         acc[key] = value;
+  //       }
+  //       return acc;
+  //     }, {});
+  //     const payload = Object.entries(store).reduce((acc, [key, value]) => {
+  //       if (key === 'colors') {
+  //         acc[key] = colors;
+  //       } else {
+  //         acc[key] = value;
+  //       }
+  //       return acc;
+  //     }, {});
+  //     ref
+  //       .doc(store.themeId)
+  //       .set(payload)
+  //       .then(() => {
+  //         console.log('Data succesfully saved.');
+  //       });
+  //   }
+  // }, 1000);
 
-  useDebounce(() => {
-    if (user && database && store && store.themeId) {
-      const ref = database
-        .collection('users')
-        .doc(user.uid)
-        .collection('themes');
-      const colors = Object.entries(store.colors).reduce((acc, [key, value]) => {
-        if (key !== 'creator') {
-          acc[key] = value;
-        }
-        return acc;
-      }, {});
-      const payload = Object.entries(store).reduce((acc, [key, value]) => {
-        if (key === 'colors') {
-          acc[key] = colors;
-        } else {
-          acc[key] = value;
-        }
-        return acc;
-      }, {});
-      ref
-        .doc(store.themeId)
-        .set(payload)
-        .then(() => {
-          console.log('Data succesfully saved.');
-        });
-    }
-  }, 1000);
+
   return (
     <AppContainer>
       <Grid>

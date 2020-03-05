@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-prototype-builtins */
-const buildStyleMap = obj => props => {
+const styleMap = obj => props => {
   const propsArr = Object.entries(props);
   const objArr = Object.entries(obj);
   let value = '';
@@ -43,4 +43,4 @@ const buildStyleMap = obj => props => {
   return value;
 };
 
-export default buildStyleMap;
+export default styleMap;

@@ -1,18 +1,18 @@
 import styled, { css } from 'styled-components';
 import rowStyles from './constants';
-
-import buildStyleMap from '../../../helpers/buildStyleMap';
+import fallback from '../constants';
+import styleMap from '../../../helpers/styleMap';
 
 const buildStyles = (prefix = '', device = {}, props) => {
   let styles = '';
   const hasProp = name => props[`${prefix}${name}`];
-  if (hasProp('Stretch')) {
+  if (hasProp('FillGrid')) {
     styles += `
       width: calc(100% + ${(device.gutter || 0) * 2}px);
-      margin-left: -${device.gutter || 0}px
+      margin-left: -${device.gutter || 0}px;
       padding: 0px;`;
   }
-  if (hasProp('Fill')) {
+  if (hasProp('FillScreen')) {
     styles += `
       width: 100vw;
       position: relative;
@@ -33,31 +33,31 @@ const buildStyles = (prefix = '', device = {}, props) => {
   if (hasProp('WrapReverse')) {
     styles += 'flex-wrap: wrap-reverse;';
   }
-  if (hasProp('Start')) {
+  if (hasProp('AlignLeft')) {
     styles += 'justify-content: flex-start;';
   }
-  if (hasProp('End')) {
+  if (hasProp('AlignRight')) {
     styles += 'justify-content: flex-end;';
   }
-  if (hasProp('Center')) {
+  if (hasProp('AlignCenter')) {
     styles += 'justify-content: center;';
   }
-  if (hasProp('Between')) {
+  if (hasProp('SpaceBetween')) {
     styles += 'justify-content: space-between;';
   }
-  if (hasProp('Around')) {
+  if (hasProp('SpaceAround')) {
     styles += 'justify-content: space-around;';
   }
-  if (hasProp('Even')) {
+  if (hasProp('SpaceEvenly')) {
     styles += 'justify-content: space-evenly;';
   }
-  if (hasProp('Top')) {
+  if (hasProp('AlignTop')) {
     styles += 'align-items: flex-start;';
   }
-  if (hasProp('Bottom')) {
+  if (hasProp('AlignBottom')) {
     styles += 'align-items: flex-end;';
   }
-  if (hasProp('Middle')) {
+  if (hasProp('AlignMiddle')) {
     styles += 'align-items: center;';
   }
   if (hasProp('Stretch')) {
@@ -71,28 +71,27 @@ const buildStyles = (prefix = '', device = {}, props) => {
 
 export const RowContainer = styled.div`
   ${props => {
-    const { theme, stretch, fill } = props;
+    const { theme = {}, fillGrid = false, fillScreen = false } = props;
     // theme variables
-    const { media = {} } = theme;
+    const media = theme.media || fallback.media;
     let breakpoints = '';
     const downQueries = Object.keys(props).some(key => key.includes('Down'));
     const upQueries = Object.keys(props).some(key => key.includes('Up'));
     Object.values(media).forEach(query => {
       breakpoints += `${query.only} {
-        width: 100%;
-        ${stretch &&
+        ${fillGrid &&
+          ` width: calc(100% + ${(query.gutter || 0) * 2}px);
+            margin-left: ${fillGrid ? `-${query.gutter || 0}px` : '0px'};
+          `};
+        ${fillScreen &&
           `
-          width: calc(100% + ${(query.gutter || 0) * 2}px);
-          margin-left: ${stretch ? `-${query.gutter || 0}px` : '0px'}`};
-        ${fill &&
-          `
-          width: 100vw;
-          position: relative;
-          left: 50%;
-          right: 50%;
-          margin-left: -50vw;
-          margin-right: -50vw;
-        `}   
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+          `};
         ${buildStyles(query.prefix, query, props)};
       }`;
       if (downQueries && !!query.down) {
@@ -112,10 +111,10 @@ export const RowContainer = styled.div`
       display: flex;
       flex: 0 1 auto;
       /* prop styles */
-      flex-direction: ${buildStyleMap(rowStyles.flexDirection)};
-      flex-wrap: ${buildStyleMap(rowStyles.flexWrap)};
-      justify-content: ${buildStyleMap(rowStyles.justifyContent)};
-      align-items: ${buildStyleMap(rowStyles.alignItems)};
+      flex-direction: ${styleMap(rowStyles.flexDirection)};
+      flex-wrap: ${styleMap(rowStyles.flexWrap)};
+      justify-content: ${styleMap(rowStyles.justifyContent)};
+      align-items: ${styleMap(rowStyles.alignItems)};
       ${breakpoints};
     `;
   }}

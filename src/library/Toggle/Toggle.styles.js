@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import buildStyleMap from '../../helpers/buildStyleMap';
+import styleMap from '../../helpers/styleMap';
 import buildColorStyleMap from '../../helpers/buildColorStyleMap';
 import buildColorPalette from '../../helpers/buildColorPalette';
 
@@ -70,12 +70,12 @@ export const ToggleContainer = styled.span`
         background-color: ${colors.neutral[200]};
         display: inline-block;
         cursor: pointer;
-        width: ${buildStyleMap({
+        width: ${styleMap({
           small: `${width}px`,
           large: `${width}px`,
           default: `${width}px`,
         })};
-        height: ${buildStyleMap({
+        height: ${styleMap({
           small: `${height}px`,
           large: `${height}px`,
           default: `${height}px`,
@@ -97,12 +97,12 @@ export const ToggleContainer = styled.span`
           position: absolute;
           top: -1px;
           left: -1px;
-          width: ${buildStyleMap({
+          width: ${styleMap({
             small: `${width + 2}px`,
             large: `${width + 2}px`,
             default: `${width + 2}px`,
           })};
-          height: ${buildStyleMap({
+          height: ${styleMap({
             small: `${height + 2}px`,
             large: `${height + 2}px`,
             default: `${height + 2}px`,
@@ -121,17 +121,17 @@ export const ToggleContainer = styled.span`
         justify-content: center;
         align-items: center;
         left: 0;
-        top: ${buildStyleMap({
+        top: ${styleMap({
           small: `-${(dotSize - height) / 2}px`,
           large: `-${(dotSize - height) / 2}px`,
           default: `-${(dotSize - height) / 2}px`,
         })};
-        height: ${buildStyleMap({
+        height: ${styleMap({
           small: `${dotSize}px`,
           large: `${dotSize}px`,
           default: `${dotSize}px`,
         })};
-        width: ${buildStyleMap({
+        width: ${styleMap({
           small: `${dotSize}px`,
           large: `${dotSize}px`,
           default: `${dotSize}px`,
@@ -148,7 +148,7 @@ export const ToggleContainer = styled.span`
       }
       .forum-ui-toggle-icon.times-icon {
         opacity: 1;
-        height: ${buildStyleMap({
+        height: ${styleMap({
           small: `${18 * 0.75}px`,
           large: `${18 * 1.15}px`,
           default: `${18}px`,
@@ -156,7 +156,7 @@ export const ToggleContainer = styled.span`
       }
       .forum-ui-toggle-icon.check-icon {
         opacity: 0;
-        height: ${buildStyleMap({
+        height: ${styleMap({
           small: `${16 * 0.75}px`,
           large: `${16 * 1.15}px`,
           default: `${16}px`,

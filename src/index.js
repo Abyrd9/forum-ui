@@ -2,18 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import FirebaseProvider from './assets/FirebaseProvider';
+// import FirebaseProvider from './assets/FirebaseProvider';
 import ForumUiProvider from './assets/ForumUiProvider';
 import StoreProvider from './assets/StoreProvider';
 
 ReactDOM.render(
-  <FirebaseProvider>
     <ForumUiProvider>
       <StoreProvider>
         <App />
       </StoreProvider>
-    </ForumUiProvider>
-  </FirebaseProvider>,
+    </ForumUiProvider>,
   document.getElementById('root')
 );
 

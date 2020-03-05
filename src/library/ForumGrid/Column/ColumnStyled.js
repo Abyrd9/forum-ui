@@ -1,17 +1,19 @@
 import styled, { css } from 'styled-components';
-import calculateColumnWidth from '../../../helpers/calculateColumnWidth';
+
+const getColumnWidth = (dividend, divisor = 12) => {
+  const decimal = dividend / divisor;
+  const percent = decimal.toFixed(5) * 100;
+  return `${percent}%`;
+};
 
 const buildStyles = (prefix = '', device = {}, props) => {
   let styles = '';
   styles += `padding: 0 ${device.gutter || 0}px;`;
   if (props[prefix]) {
-    styles += `flex-basis: ${calculateColumnWidth(props[prefix], device.columns)};
-    max-width: ${calculateColumnWidth(props[prefix], device.columns)};`;
+    styles += `flex-basis: ${getColumnWidth(props[prefix], device.columns)};
+    max-width: ${getColumnWidth(props[prefix], device.columns)};`;
   }
   const isNum = value => typeof value === 'number';
-  if (isNum(props[`${prefix}Offset`])) {
-    styles += `margin-left: ${calculateColumnWidth(props[`${prefix}Offset`], device.columns)};`;
-  }
   if (isNum(props[`${prefix}Order`])) {
     styles += `order: ${props[`${prefix}Order`]};`;
   }
@@ -22,13 +24,16 @@ const buildStyles = (prefix = '', device = {}, props) => {
     styles += 'flex: 1 1 auto;';
   }
   if (isNum(props[`${prefix}Gutter`])) {
-    styles += `padding: 0 ${props[`${prefix}Gutter`]}px !important;`;
+    styles += `margin: 0 ${props[`${prefix}Gutter`]}px !important;`;
   }
   if (isNum(props[`${prefix}GutterLeft`])) {
-    styles += `padding-left: ${props[`${prefix}GutterLeft`]}px !important;`;
+    styles += `margin-left: ${props[`${prefix}GutterLeft`]}px !important;`;
   }
   if (isNum(props[`${prefix}GutterRight`])) {
-    styles += `padding-right: ${props[`${prefix}GutterRight`]}px !important;`;
+    styles += `margin-right: ${props[`${prefix}GutterRight`]}px !important;`;
+  }
+  if (isNum(props[`${prefix}Offset`])) {
+    styles += `margin-left: ${getColumnWidth(props[`${prefix}Offset`], device.columns)};`;
   }
   return styles;
 };
@@ -55,16 +60,16 @@ export const ColumnContainer = styled.div`
       box-sizing: border-box;
       flex: 1 0 0;
       max-width: 100%;
-      ${offset && `margin-left: ${calculateColumnWidth(offset, desktop.columns)} !important;`};
       ${order && `order: ${order}`};
       ${shrink && 'flex: 0 1 auto;'};
       ${fill && 'flex: 1 1 auto'};
       ${col &&
-        `flex-basis: ${calculateColumnWidth(col, desktop.columns)};
-         max-width: ${calculateColumnWidth(col, desktop.columns)};`};
-      ${typeof gutter === 'number' && `padding: 0 ${gutter}px !important;`};
-      ${typeof gutterLeft === 'number' && `padding-left: ${gutterLeft}px !important;`};
-      ${typeof gutterRight === 'number' && `padding-right: ${gutterRight}px !important;`};
+        `flex-basis: ${getColumnWidth(col, desktop.columns)};
+         max-width: ${getColumnWidth(col, desktop.columns)};`};
+      ${typeof gutter === 'number' && `margin: 0 ${gutter}px !important;`};
+      ${typeof gutterLeft === 'number' && `margin-left: ${gutterLeft}px !important;`};
+      ${typeof gutterRight === 'number' && `margin-right: ${gutterRight}px !important;`};
+      ${offset && `margin-left: ${getColumnWidth(offset, desktop.columns)} !important;`};
       ${breakpoints};
     `;
   }}
