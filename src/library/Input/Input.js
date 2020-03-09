@@ -53,7 +53,7 @@ const Input = ({
     <>
       <InputStyled
         className={className}
-        info={disabled ? {} : { show: infoShow, color: infoMssg.color }}
+        info={{ hasMssg: infoMssg, show: infoShow && !disabled, color: infoMssg.color }}
         {...props}
       >
         <label className={classNames.label}>
@@ -76,7 +76,7 @@ const Input = ({
           {placeholder && <span className={classNames.placeholder}>{placeholder}</span>}
         </label>
       </InputStyled>
-      {!disabled && infoShow && <p className={classNames.info}>{infoMssg.message}</p>}
+      {infoMssg && <p className={classNames.info}>{infoMssg.message}</p>}
     </>
   );
 };

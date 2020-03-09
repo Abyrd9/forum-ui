@@ -8,7 +8,6 @@ const getColumnWidth = (dividend, divisor = 12) => {
 
 const buildStyles = (prefix = '', device = {}, props) => {
   let styles = '';
-  styles += `padding: 0 ${device.gutter || 0}px;`;
   if (props[prefix]) {
     styles += `flex-basis: ${getColumnWidth(props[prefix], device.columns)};
     max-width: ${getColumnWidth(props[prefix], device.columns)};`;

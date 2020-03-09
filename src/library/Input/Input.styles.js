@@ -3,23 +3,25 @@ import styled, { css } from 'styled-components';
 export const InputStyled = styled.div`
   ${({ theme = {}, info = {} }) => {
     const { colors = {}, spacing = {}, font = {} } = theme;
-    const { show = false, color = '' } = info;
+    const { hasMssg = false, show = false, color = '' } = info;
     return css`
       position: relative;
       width: 100%;
-      margin-bottom: ${show ? 0 : spacing[400]};
+      margin-bottom: ${hasMssg ? 0 : spacing[400]};
       & + .forum-ui-input-info {
+        transition: opacity 150ms cubic-bezier(0, 0, 0.2, 1);
         margin-top: 4px;
-        margin-bottom: ${spacing[400]};
-        font-size: ${font[200]};
+        margin-bottom: ${spacing[300]};
+        font-size: ${font[300]};
         color: ${color};
         max-width: 75%;
         margin-left: auto;
         text-align: right;
+        opacity: ${show ? 1 : 0};
       }
       .forum-ui-input-label {
+        transition: transform 200ms cubic-bezier(0, 0, 0.2, 1), border 150ms cubic-bezier(0, 0, 0.2, 1);
         border: 1px solid ${show ? color : colors.neutral[200]};
-        transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
         box-sizing: border-box;
         position: relative;
         display: flex;

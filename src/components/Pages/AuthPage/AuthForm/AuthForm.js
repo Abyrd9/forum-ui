@@ -2,24 +2,22 @@ import React, { useState, useContext } from 'react';
 import firebase from 'firebase';
 import { faArrowCircleRight, faAt, faLockAlt } from '@fortawesome/pro-duotone-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { AuthSectionStyled } from './AuthSection.styles';
+import { AuthFormStyled } from './AuthForm.styles';
 import Input from '../../../../library/Input/Input';
 import Row from '../../../../library/ForumGrid/Row';
 import Column from '../../../../library/ForumGrid/Column';
 import Button from '../../../../library/Button';
-import SocialSignInButton from '../SocialSignInButton';
-import SectionTitle from '../../../Shared/SectionTitle';
 import { FirebaseContext } from '../../../../assets/FirebaseProvider';
 
-const AuthSection = () => {
-  const { user = {} } = useContext(FirebaseContext);
+const AuthForm = () => {
+  const { user = {}, authentication = {} } = useContext(FirebaseContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassowrd] = useState('');
 
   const handleEmailSignIn = () => {
     if (user && user.isAnonymous) {
-      const credential = firebase.auth.EmailAuthProvider.credential(email, password);
+      const credential = authentication.EmailAuthProvider.credential(email, password);
       firebase
         .auth()
         .currentUser.linkWithCredential(credential)
@@ -33,19 +31,10 @@ const AuthSection = () => {
       console.log('This user is already signed in.');
     }
   };
+
   return (
-    <AuthSectionStyled>
-      <SectionTitle
-        title={user && user.isAnonymous ? 'Sign Up' : 'Sign In'}
-        description={
-          user && user.isAnonymous
-            ? 'Welcome to ForumUi.\nSign up in order to save your work.'
-            : 'Welcome back to ForumUi'
-        }
-        hideDivider
-      />
-      <div className="divider" />
-      <Row stretch>
+    <AuthFormStyled>
+      <Row>
         <Column col={6}>
           <Input
             placeholder="Email"
@@ -57,7 +46,7 @@ const AuthSection = () => {
           />
         </Column>
       </Row>
-      <Row stretch>
+      <Row>
         <Column col={6}>
           <Input
             placeholder="Password"
@@ -69,7 +58,7 @@ const AuthSection = () => {
           />
         </Column>
       </Row>
-      <Row stretch>
+      <Row>
         <Column>
           <Button primary large onClick={handleEmailSignIn}>
             Sign in
@@ -77,25 +66,12 @@ const AuthSection = () => {
           </Button>
         </Column>
       </Row>
-      <div className="divider" />
-      <Row stretch>
-        <Column col={3} gutterRight={6}>
-          <SocialSignInButton large grow google>
-            Sign in with Google
-          </SocialSignInButton>
-        </Column>
-        <Column col={3} gutterLeft={6}>
-          <SocialSignInButton large grow github>
-            Sign in with Github
-          </SocialSignInButton>
-        </Column>
-      </Row>
-    </AuthSectionStyled>
+    </AuthFormStyled>
   );
 };
 
-AuthSection.defaultProps = {};
+AuthForm.defaultProps = {};
 
-AuthSection.propTypes = {};
+AuthForm.propTypes = {};
 
-export default AuthSection;
+export default AuthForm;

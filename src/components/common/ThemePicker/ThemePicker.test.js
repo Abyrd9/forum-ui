@@ -1,4 +1,5 @@
 import React from 'react';
-import AuthSection from './AuthSection';
+import ThemePicker from './ThemePicker';
 
 it('', () => {});
+    

@@ -4,18 +4,12 @@ import styled from 'styled-components';
 import Grid from './library/ForumGrid/Grid';
 import Row from './library/ForumGrid/Row';
 
-import Navigation from './components/Shared/Navigation';
-import PageTitle from './components/Shared/PageTitle';
-import Footer from './components/Shared/Footer';
+import Navigation from './components/common/Navigation';
+import PageTitle from './components/common/PageTitle';
+import Footer from './components/common/Footer';
 
-import OutputCodeSection from './components/Pages/ThemePage/OutputCodeSection/OutputCodeSection';
-import AuthSection from './components/Pages/AuthPage/AuthSection/AuthSection';
-import { StoreContext } from './assets/StoreProvider';
-// import useDebounce from './hooks/useDebounce';
-// import { FirebaseContext } from './assets/FirebaseProvider';
-import Loading from './components/Utilities/Loading';
-// import useDeepCompareEffect from './hooks/useDeepCompareEffect';
-import ConfigurationPage from './components/Pages/ConfigurePage';
+import AuthPage from './components/pages/AuthPage';
+import ThemePicker from './components/common/ThemePicker';
 
 const AppContainer = styled.div`
   position: relative;
@@ -24,39 +18,6 @@ const AppContainer = styled.div`
 `;
 
 function App() {
-  const { store } = useContext(StoreContext);
-  // const { user, database } = useContext(FirebaseContext);
-
-  // useDebounce(() => {
-  //   if (user && database && store && store.themeId) {
-  //     const ref = database
-  //       .collection('users')
-  //       .doc(user.uid)
-  //       .collection('themes');
-  //     const colors = Object.entries(store.colors).reduce((acc, [key, value]) => {
-  //       if (key !== 'creator') {
-  //         acc[key] = value;
-  //       }
-  //       return acc;
-  //     }, {});
-  //     const payload = Object.entries(store).reduce((acc, [key, value]) => {
-  //       if (key === 'colors') {
-  //         acc[key] = colors;
-  //       } else {
-  //         acc[key] = value;
-  //       }
-  //       return acc;
-  //     }, {});
-  //     ref
-  //       .doc(store.themeId)
-  //       .set(payload)
-  //       .then(() => {
-  //         console.log('Data succesfully saved.');
-  //       });
-  //   }
-  // }, 1000);
-
-
   return (
     <AppContainer>
       <Grid>
@@ -68,6 +29,7 @@ function App() {
             title="ForumUi"
             subtitle="A simplified design system generator for React Developers."
           />
+          <ThemePicker />
           <Switch>
             {/* <Route path="/">
               <SectionTitle
@@ -88,12 +50,12 @@ function App() {
                 }
               />
             </Route> */}
-            <Route path="/theme-code">{store.themeId ? <OutputCodeSection /> : <Loading />}</Route>
+            {/* <Route path="/theme-code">{store.themeId ? <OutputCodeSection /> : <Loading />}</Route>
             <Route path="/theme-configuration">
               {store.themeId ? <ConfigurationPage /> : <Loading />}
-            </Route>
+            </Route> */}
             <Route path="/">
-              <AuthSection />
+              <AuthPage />
             </Route>
           </Switch>
         </Router>

@@ -1,7 +1,7 @@
 {
   "javascript.updateImportsOnFileMove.enabled": "always",
   "eslint.alwaysShowStatus": true,
-  "window.zoomLevel": 2,
+  "window.zoomLevel": 1,
   "editor.snippetSuggestions": "top",
   "editor.tabSize": 2,
   "editor.wordWrapColumn": 100,

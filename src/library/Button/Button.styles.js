@@ -37,11 +37,11 @@ export const ButtonContainer = styled.button`
       background-color: ${color};
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
       &:hover:not(:disabled) {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.23);
       }
       &:active {
         background-color: ${chroma(color).darken(0.5)};
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0), 0 3px 6px rgba(0, 0, 0, 0) !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0), 0 2px 3px rgba(0, 0, 0, 0) !important;
       }
       &:disabled {
         cursor: not-allowed;
@@ -122,10 +122,10 @@ export const ButtonContainer = styled.button`
         ${focused && 'opacity: 1;'}
       }
       &:not(:disabled) {
-        ${hovered && 'box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);'}
+        ${hovered && 'box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.23);'}
       }
       ${pressed && `background-color: ${chroma(color).darken(0.5)};`};
-      ${pressed && `box-shadow: 0 3px 6px rgba(0, 0, 0, 0), 0 3px 6px rgba(0, 0, 0, 0);`};
+      ${pressed && `box-shadow: 0 2px 4px rgba(0, 0, 0, 0), 0 2px 3px rgba(0, 0, 0, 0);`};
 
       /* Loader Styles */
       .loader {

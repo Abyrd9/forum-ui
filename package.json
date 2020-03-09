@@ -20,6 +20,7 @@
     "react-syntax-highlighter": "^12.2.1",
     "styled-components": "^4.3.2",
     "use-immer": "^0.3.5",
+    "uuidv4": "^6.0.6",
     "webfontloader": "^1.6.28"
   },
   "scripts": {

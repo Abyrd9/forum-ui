@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const AuthSectionStyled = styled.div`
+export const AuthFormStyled = styled.div`
   ${({ theme = {} }) => {
     const { spacing = {}, colors = {} } = theme;
     return css`
