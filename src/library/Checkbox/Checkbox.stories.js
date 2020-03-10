@@ -5,8 +5,8 @@ import Checkbox from './Checkbox';
 
 const DefaultCheckbox = props => {
   const [checked, toggleChecked] = useState(false);
-  return <Checkbox checked={checked} handleOnChange={() => toggleChecked(!checked)} {...props}/>
-}
+  return <Checkbox checked={checked} handleOnChange={() => toggleChecked(!checked)} {...props}/>;
+};
 
 storiesOf('Checkbox', module)
   .addDecorator(storyFn => <div>{storyFn()}</div>)

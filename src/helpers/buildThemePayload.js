@@ -14,6 +14,6 @@ const buildThemePayload = store => {
     return acc;
   }, {});
   return payload;
-}
+};
 
 export default buildThemePayload;

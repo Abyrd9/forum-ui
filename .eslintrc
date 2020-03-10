@@ -1,3 +1,3 @@
 {
-  "extends": "./node_modules/@abyrd9/abyrd-dev-tools/eslint.js"
+  "extends": "@abyrd9/eslint-config-abyrd"
 }

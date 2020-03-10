@@ -1,8 +1,8 @@
-import styled, { css } from 'styled-components';
-import chroma from 'chroma-js';
-import styleMap from '../../helpers/styleMap';
-import buildColorStyleMap from '../../helpers/buildColorStyleMap';
-import checkColorBrightness from '../../helpers/checkColorBrightness';
+import styled, { css } from "styled-components";
+import chroma from "chroma-js";
+import styleMap from "../../helpers/styleMap";
+import buildColorStyleMap from "../../helpers/buildColorStyleMap";
+import checkColorBrightness from "../../helpers/checkColorBrightness";
 
 const { isReadableLight } = checkColorBrightness;
 
@@ -14,19 +14,21 @@ export const ButtonContainer = styled.button`
       loading = false,
       focused = false,
       hovered = false,
-      pressed = false,
+      pressed = false
     } = props;
     const { font = {}, colors = {} } = theme;
     const color = buildColorStyleMap()(props);
 
-    const black = colors.black && chroma.valid(colors.black) ? colors.black : '#000000';
-    const white = colors.white && chroma.valid(colors.white) ? colors.white : '#FFFFFF';
+    const black =
+      colors.black && chroma.valid(colors.black) ? colors.black : "#000000";
+    const white =
+      colors.white && chroma.valid(colors.white) ? colors.white : "#FFFFFF";
     const textColor = isReadableLight(color, 2.5) ? white : black;
     return css`
       /* Base Styles */
       transition: all 100ms cubic-bezier(0, 0, 0.2, 1);
-      cursor: ${loading ? 'not-allowed' : 'pointer'};
-      width: ${props.grow ? '100%' : 'auto'};
+      cursor: ${loading ? "not-allowed" : "pointer"};
+      width: ${props.grow ? "100%" : "auto"};
       outline: none;
       border: none;
       display: flex;
@@ -64,7 +66,7 @@ export const ButtonContainer = styled.button`
           font-size: ${outline ? font[300] : font[400]};
           border-radius: 4px;
           padding: 8px 14px;
-        `,
+        `
       })};
 
       /* Outline Styles */
@@ -99,7 +101,7 @@ export const ButtonContainer = styled.button`
         transition: all 100ms ease-in-out;
         opacity: 0;
         display: inline-block;
-        content: '';
+        content: "";
         position: absolute;
         top: -2px;
         left: -2px;
@@ -119,13 +121,15 @@ export const ButtonContainer = styled.button`
 
       /* Storybook Example Styles */
       &:before {
-        ${focused && 'opacity: 1;'}
+        ${focused && "opacity: 1;"}
       }
       &:not(:disabled) {
-        ${hovered && 'box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.23);'}
+        ${hovered &&
+          "box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.23);"}
       }
       ${pressed && `background-color: ${chroma(color).darken(0.5)};`};
-      ${pressed && `box-shadow: 0 2px 4px rgba(0, 0, 0, 0), 0 2px 3px rgba(0, 0, 0, 0);`};
+      ${pressed &&
+        `box-shadow: 0 2px 4px rgba(0, 0, 0, 0), 0 2px 3px rgba(0, 0, 0, 0);`};
 
       /* Loader Styles */
       .loader {
@@ -142,7 +146,7 @@ export const ButtonContainer = styled.button`
           default: css`
             height: ${outline ? font[300] : font[400]};
             width: ${outline ? font[300] : font[400]};
-          `,
+          `
         })}
         path {
           fill: ${outline ? color : textColor};

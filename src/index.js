@@ -1,10 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import * as serviceWorker from "./serviceWorker";
-import StoreProvider from "./assets/StoreProvider";
-import FirebaseProvider from "./assets/FirebaseProvider";
-import ForumUiProvider from "./assets/ForumUiProvider";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+import StoreProvider from './assets/StoreProvider';
+import FirebaseProvider from './assets/FirebaseProvider';
+import ForumUiProvider from './assets/ForumUiProvider';
 
 ReactDOM.render(
   <StoreProvider>
@@ -14,7 +14,7 @@ ReactDOM.render(
       </ForumUiProvider>
     </FirebaseProvider>
   </StoreProvider>,
-  document.getElementById("root")
+  document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change

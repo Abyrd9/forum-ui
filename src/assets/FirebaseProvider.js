@@ -29,6 +29,7 @@ const FirebaseProvider = ({ children }) => {
   const { store, dispatch } = useContext(StoreContext);
   const [user, setUser] = useState(null);
 
+  // Authentication state change listener
   useEffect(() => {
     const unlisten = auth.onAuthStateChanged(authUser => {
       const userPayload = authUser || null;
@@ -44,7 +45,7 @@ const FirebaseProvider = ({ children }) => {
     if (!user) {
       auth.signInAnonymously().catch(err => {
         console.error(err.code, err.message);
-      })
+      });
     } else {
       const userRef = db.collection("users").doc(user.uid);
       userRef.get().then(doc => {
@@ -79,7 +80,7 @@ const FirebaseProvider = ({ children }) => {
     }
   }, [user]);
 
-  useDebounce(() => {}, store, 1000);
+  useDebounce(() => { }, store, 1000);
 
   return (
     <FirebaseContext.Provider value={{ user, database: db, authentication: auth }}>
