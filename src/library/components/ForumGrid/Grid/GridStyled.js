@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import fallback from '../constants';
+import fallback from '../../constants';
 
 export const GridContainer = styled.div`
   ${({ theme = {} }) => {

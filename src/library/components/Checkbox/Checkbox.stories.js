@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { storiesOf } from '@storybook/react';
-import { StoryContainer, StoryBlock } from '../../../.storybook/config';
+import { StoryContainer, StoryBlock } from '../../../../.storybook/config';
 import Checkbox from './Checkbox';
 
 const DefaultCheckbox = props => {

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import Select from './Select';
-import { StoryBlock } from '../../../.storybook/config';
+import { StoryBlock } from '../../../../.storybook/config';
 
 const Story = () => {
   const [value, updateValue] = useState('');

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import buildColorStyleMap from '../../helpers/buildColorStyleMap';
-import { NEUTRAL_COLORS } from '../constants';
+import buildColorStyleMap from '../../../helpers/buildColorStyleMap';
+import { NEUTRAL_COLORS } from '../../constants';
 
 export const CheckboxStyled = styled.label`
   ${props => {

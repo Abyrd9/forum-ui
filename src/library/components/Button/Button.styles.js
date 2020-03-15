@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import chroma from "chroma-js";
 import styleMap from "../../../helpers/styleMap";
-import buildColorStyleMap from "../../../helpers/buildColorStyleMap";
+import buildColorStyleMap from "../../helpers/buildColorValuesObj";
 import checkColorBrightness from "../../../helpers/checkColorBrightness";
 
 const { isReadableLight } = checkColorBrightness;

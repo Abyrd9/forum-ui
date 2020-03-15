@@ -1,6 +1,6 @@
 import chroma from 'chroma-js';
 
-const buildColorStyleMap = type => props => {
+const buildColorValuesObj = props => {
   const { theme = {} } = props;
   if (theme.colors) {
     const colorKeys = Object.keys(theme.colors);
@@ -33,4 +33,4 @@ const buildColorStyleMap = type => props => {
   return null;
 };
 
-export default buildColorStyleMap;
+export default buildColorValuesObj;

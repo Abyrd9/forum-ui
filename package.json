@@ -44,7 +44,7 @@
     ]
   },
   "devDependencies": {
-    "@abyrd9/eslint-config-abyrd": "^1.0.5",
+    "@abyrd9/eslint-config-abyrd": "^1.0.6",
     "@storybook/react": "^5.2.1",
     "@testing-library/dom": "^6.12.2",
     "@testing-library/jest-dom": "^5.1.1",

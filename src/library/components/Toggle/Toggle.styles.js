@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import styleMap from '../../../helpers/styleMap';
-import buildColorStyleMap from '../../../helpers/buildColorStyleMap';
+import buildColorStyleMap from '../../helpers/buildColorValuesObj';
 import buildColorPalette from '../../../helpers/buildColorPalette';
 
 export const ToggleContainer = styled.span`

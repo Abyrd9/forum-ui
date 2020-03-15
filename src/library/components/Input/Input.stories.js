@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { faUserCircle } from '@fortawesome/pro-duotone-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Input from './Input';
-import { StoryBlock, StoryContainer } from '../../../.storybook/config';
+import { StoryBlock, StoryContainer } from '../../../../.storybook/config';
 
 const InputStory = props => {
   const [value, updateValue] = useState(props.value || '');

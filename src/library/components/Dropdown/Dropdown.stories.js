@@ -1,6 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { StoryBlock, StoryContainer } from '../../../.storybook/config';
+import { StoryBlock, StoryContainer } from '../../../../.storybook/config';
 import Dropdown from "./Dropdown";
 
 

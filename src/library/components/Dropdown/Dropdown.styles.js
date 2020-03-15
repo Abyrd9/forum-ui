@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import styleMap from "../../helpers/styleMap";
+import styleMap from "../../../helpers/styleMap";
 
 export const DropdownStyled = styled.div`
   ${props => {

@@ -2,7 +2,7 @@
 import React, { useRef, useEffect } from 'react';
 import { storiesOf } from '@storybook/react';
 import Toggle from './Toggle';
-import { StoryBlock, StoryContainer } from '../../../.storybook/config';
+import { StoryBlock, StoryContainer } from '../../../../.storybook/config';
 
 const FocusedToggle = () => {
   const ToggleRef = useRef();

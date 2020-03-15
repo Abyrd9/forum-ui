@@ -1,7 +1,7 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { storiesOf } from '@storybook/react';
-import { StoryBlock, StoryContainer } from '../../../.storybook/config';
+import { StoryBlock, StoryContainer } from '../../../../.storybook/config';
 import Button from './Button';
 
 storiesOf('Button', module)
