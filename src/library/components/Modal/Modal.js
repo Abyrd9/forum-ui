@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { ModalStyled } from './Modal.styles';
-import usePortal from '../../hooks/usePortal';
+import usePortal from '../../../hooks/usePortal';
 
 const Modal = ({ children }) => {
   const target = usePortal('modal-root');

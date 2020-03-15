@@ -1,4 +1,4 @@
-import matchParentNode from '../../helpers/matchParentNode';
+import matchParentNode from '../../../helpers/matchParentNode';
 
 export const onKeyDownEvent = (list, inputNode, callback) => event => {
   // Before we check whether the select is active or not,

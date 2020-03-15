@@ -1,7 +1,6 @@
 {
   "javascript.updateImportsOnFileMove.enabled": "always",
   "eslint.alwaysShowStatus": true,
-  "prettier.eslintIntegration": true,
   "window.zoomLevel": 1,
   "editor.snippetSuggestions": "top",
   "editor.tabSize": 2,

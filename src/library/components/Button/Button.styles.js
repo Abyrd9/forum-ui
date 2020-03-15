@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
 import chroma from "chroma-js";
-import styleMap from "../../helpers/styleMap";
-import buildColorStyleMap from "../../helpers/buildColorStyleMap";
-import checkColorBrightness from "../../helpers/checkColorBrightness";
+import styleMap from "../../../helpers/styleMap";
+import buildColorStyleMap from "../../../helpers/buildColorStyleMap";
+import checkColorBrightness from "../../../helpers/checkColorBrightness";
 
 const { isReadableLight } = checkColorBrightness;
 
@@ -43,7 +43,6 @@ export const ButtonContainer = styled.button`
       }
       &:active {
         background-color: ${chroma(color).darken(0.5)};
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0), 0 2px 3px rgba(0, 0, 0, 0) !important;
       }
       &:disabled {
         cursor: not-allowed;
@@ -128,8 +127,6 @@ export const ButtonContainer = styled.button`
           "box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.23);"}
       }
       ${pressed && `background-color: ${chroma(color).darken(0.5)};`};
-      ${pressed &&
-        `box-shadow: 0 2px 4px rgba(0, 0, 0, 0), 0 2px 3px rgba(0, 0, 0, 0);`};
 
       /* Loader Styles */
       .loader {

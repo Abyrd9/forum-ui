@@ -1,8 +1,8 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { storiesOf } from '@storybook/react';
-import Button from './Button';
 import { StoryBlock, StoryContainer } from '../../../.storybook/config';
+import Button from './Button';
 
 storiesOf('Button', module)
   .addDecorator(storyFn => <div>{storyFn()}</div>)

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { DropdownStyled } from "./Dropdown.styles";
 import Chevron from "./Chevron";
 
-const Dropdown = ({ list, children, ...props }) => {
+const Dropdown = ({ handleOnClick, ...props }) => {
   const [active, setActive] = useState(false);
   return (
     <DropdownStyled
@@ -11,14 +11,19 @@ const Dropdown = ({ list, children, ...props }) => {
       onClick={() => setActive(!active)}
       {...props}
     >
-      {children}
-      <Chevron />
+      <button className="dropdown-button">
+        Click Me
+        <Chevron />
+      </button>
+      <ul className="">
+        Hello
+      </ul>
     </DropdownStyled>
   );
 };
 
 Dropdown.defaultProps = {
-  children: "",
+  value: "",
   list: [
     { name: "Option 1", value: "Option 1" },
     { name: "Option 2", value: "Option 2" }
@@ -26,11 +31,10 @@ Dropdown.defaultProps = {
 };
 
 Dropdown.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-    PropTypes.string
-  ]),
+  value: PropTypes.shape({
+    name: PropTypes.string,
+    value: PropTypes.string
+  }),
   list: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
