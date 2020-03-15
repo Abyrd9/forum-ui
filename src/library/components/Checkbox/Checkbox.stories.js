@@ -1,21 +1,27 @@
-import React, { Fragment, useState } from 'react';
-import { storiesOf } from '@storybook/react';
-import { StoryContainer, StoryBlock } from '../../../../.storybook/config';
-import Checkbox from './Checkbox';
+import React, { Fragment, useState } from "react";
+import { storiesOf } from "@storybook/react";
+import { StoryContainer, StoryBlock } from "../../../../.storybook/config";
+import Checkbox from "./Checkbox";
 
 const DefaultCheckbox = props => {
   const [checked, toggleChecked] = useState(false);
-  return <Checkbox checked={checked} handleOnChange={() => toggleChecked(!checked)} {...props}/>;
+  return (
+    <Checkbox
+      checked={checked}
+      handleOnChange={() => toggleChecked(!checked)}
+      {...props}
+    />
+  );
 };
 
-storiesOf('Checkbox', module)
+storiesOf("Checkbox", module)
   .addDecorator(storyFn => <div>{storyFn()}</div>)
-  .add('Stories', () => 
+  .add("Stories", () => (
     <>
       <StoryContainer>
         <h1 className="title">Default Checkbox</h1>
         <StoryBlock inline>
-          <DefaultCheckbox  />
+          <DefaultCheckbox />
           <p>Default</p>
         </StoryBlock>
         <StoryBlock inline>
@@ -59,4 +65,4 @@ storiesOf('Checkbox', module)
         </StoryBlock>
       </StoryContainer>
     </>
-  );
+  ));

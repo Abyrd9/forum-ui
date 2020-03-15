@@ -1,32 +1,35 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { ButtonContainer } from './Button.styles';
-import Loading from './Loading';
+import React from "react";
+import PropTypes from "prop-types";
+import { ButtonContainer } from "./Button.styles";
+import Loading from "./Loading";
 
-const Button = ({ children, ...props }) => {
-  const disabled = props.disabled || props.loading;
+const Button = ({ children, disabled, loading, ...props }) => {
   return (
-    <ButtonContainer disabled={disabled} {...props}>
+    <ButtonContainer
+      disabled={disabled || loading}
+      loading={loading}
+      {...props}
+    >
       {children}
-      {props.loading && <Loading />}
+      {loading && <Loading />}
     </ButtonContainer>
   );
 };
 
 Button.defaultProps = {
-  children: 'Button',
-  loading: false,
+  children: "Button",
   disabled: false,
+  loading: false
 };
 
 Button.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
-    PropTypes.string,
+    PropTypes.string
   ]),
-  loading: PropTypes.bool,
   disabled: PropTypes.bool,
+  loading: PropTypes.bool
 };
 
 export default Button;

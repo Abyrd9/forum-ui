@@ -1,46 +1,96 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import { DropdownStyled } from "./Dropdown.styles";
 import Chevron from "./Chevron";
 
-const Dropdown = ({ handleOnClick, ...props }) => {
+import matchParentNode from "../../../helpers/matchParentNode";
+
+const Dropdown = ({
+  optionValue,
+  optionList,
+  handleOnClick,
+  handleOnChange,
+  placeholder,
+  ...props
+}) => {
   const [active, setActive] = useState(false);
+  const { name = "", value = "" } = optionValue;
+
+  const ContainerRef = useRef(null);
+  useEffect(() => {
+    document.addEventListener("click", ({ target }) => {
+      const isWithinContainer = matchParentNode(ContainerRef.current, target);
+      if (!isWithinContainer) setActive(false);
+    });
+  }, []);
+
+  const handleOnDropdownClick = e => {
+    setActive(!active);
+    handleOnClick(e);
+  };
+
+  const handleOnOptionClick = e => {
+    handleOnChange(e);
+  };
+
   return (
-    <DropdownStyled
-      active={active}
-      onClick={() => setActive(!active)}
-      {...props}
-    >
-      <button className="dropdown-button">
-        Click Me
+    <DropdownStyled ref={ContainerRef} {...props}>
+      <button
+        type="button"
+        className="dropdown-button"
+        onClick={handleOnDropdownClick}
+      >
+        {name || placeholder}
         <Chevron />
       </button>
-      <ul className="">
-        Hello
-      </ul>
+      {active && (
+        <ul>
+          {optionList.map(item => {
+            let listItemClass = "dropdown-list-item";
+            if (item.value === optionValue.value) {
+              listItemClass += " dropdown-list-item--is-selected";
+            }
+            return (
+              <li className={listItemClass}>
+                <button
+                  type="button"
+                  value={item}
+                  onClick={handleOnOptionClick}
+                >
+                  {item.name}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </DropdownStyled>
   );
 };
 
 Dropdown.defaultProps = {
-  value: "",
-  list: [
+  optionValue: { name: "Option 1", value: "Option 1" },
+  optionList: [
     { name: "Option 1", value: "Option 1" },
     { name: "Option 2", value: "Option 2" }
-  ]
+  ],
+  handleOnClick: () => null,
+  placeholder: "Click me"
 };
 
 Dropdown.propTypes = {
-  value: PropTypes.shape({
+  optionValue: PropTypes.shape({
     name: PropTypes.string,
     value: PropTypes.string
   }),
-  list: PropTypes.arrayOf(
+  optionList: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
       value: PropTypes.string
     })
-  )
+  ),
+  handleOnClick: PropTypes.func,
+  placeholder: PropTypes.string
 };
 
 export default Dropdown;

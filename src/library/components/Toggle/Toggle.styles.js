@@ -1,15 +1,13 @@
-import styled, { css } from 'styled-components';
-import styleMap from '../../../helpers/styleMap';
-import buildColorStyleMap from '../../helpers/buildColorValuesObj';
-import buildColorPalette from '../../../helpers/buildColorPalette';
+import styled, { css } from "styled-components";
+import styleMap from "../../../helpers/styleMap";
+import buildColorValuesObj from "../../helpers/buildColorValuesObj";
+import { NEUTRAL_COLORS } from "../../constants";
 
 export const ToggleContainer = styled.span`
   ${props => {
-    const { theme = {}, small, large } = props;
-    const { colors = {} } = theme;
+    const { small, large } = props;
 
-    const color = buildColorStyleMap()(props);
-    const palette = buildColorPalette(color);
+    const colorObj = buildColorValuesObj(props);
 
     let width = 42;
     let height = 16;
@@ -37,9 +35,9 @@ export const ToggleContainer = styled.span`
           opacity: 1;
         }
         &:checked + .forum-ui-toggle-label {
-          background-color: ${palette[200]};
+          background-color: ${colorObj.disabled};
           .forum-ui-toggle-span {
-            background-color: ${palette[400]};
+            background-color: ${colorObj.base};
             transform: translateX(${checkedPos}px);
           }
           .forum-ui-toggle-icon.times-icon {
@@ -52,9 +50,9 @@ export const ToggleContainer = styled.span`
 
         &:disabled + .forum-ui-toggle-label {
           cursor: not-allowed;
-          background-color: ${colors.neutral[100]};
+          background-color: ${NEUTRAL_COLORS[100]};
           .forum-ui-toggle-span {
-            background-color: ${colors.neutral[200]};
+            background-color: ${NEUTRAL_COLORS[200]};
           }
           /* Keep dot from transitioning on disabled hover */
           &:hover {
@@ -67,25 +65,25 @@ export const ToggleContainer = styled.span`
 
       .forum-ui-toggle-label {
         transition: all 200ms ease-in-out;
-        background-color: ${colors.neutral[200]};
+        background-color: ${NEUTRAL_COLORS[200]};
         display: inline-block;
         cursor: pointer;
         width: ${styleMap({
           small: `${width}px`,
           large: `${width}px`,
-          default: `${width}px`,
+          default: `${width}px`
         })};
         height: ${styleMap({
           small: `${height}px`,
           large: `${height}px`,
-          default: `${height}px`,
+          default: `${height}px`
         })};
         border-radius: 20px;
         position: relative;
         &:hover {
-          background-color: ${palette[100]};
+          background-color: ${colorObj.disabled};
           .forum-ui-toggle-span {
-            background-color: ${palette[200]};
+            background-color: ${colorObj.base};
             transform: translateX(5px);
           }
         }
@@ -93,29 +91,29 @@ export const ToggleContainer = styled.span`
           transition: all 200ms ease-in-out;
           opacity: 0;
           display: inline-block;
-          content: '';
+          content: "";
           position: absolute;
           top: -1px;
           left: -1px;
           width: ${styleMap({
             small: `${width + 2}px`,
             large: `${width + 2}px`,
-            default: `${width + 2}px`,
+            default: `${width + 2}px`
           })};
           height: ${styleMap({
             small: `${height + 2}px`,
             large: `${height + 2}px`,
-            default: `${height + 2}px`,
+            default: `${height + 2}px`
           })};
           border-radius: 20px;
           background-color: transparent;
-          box-shadow: 0 0 3px ${palette[400]};
+          box-shadow: 0 0 3px ${colorObj.base};
         }
       }
 
       .forum-ui-toggle-span {
         transition: all 200ms ease-in-out;
-        background-color: ${colors.neutral[400]};
+        background-color: ${NEUTRAL_COLORS[400]};
         position: absolute;
         display: flex;
         justify-content: center;
@@ -124,17 +122,17 @@ export const ToggleContainer = styled.span`
         top: ${styleMap({
           small: `-${(dotSize - height) / 2}px`,
           large: `-${(dotSize - height) / 2}px`,
-          default: `-${(dotSize - height) / 2}px`,
+          default: `-${(dotSize - height) / 2}px`
         })};
         height: ${styleMap({
           small: `${dotSize}px`,
           large: `${dotSize}px`,
-          default: `${dotSize}px`,
+          default: `${dotSize}px`
         })};
         width: ${styleMap({
           small: `${dotSize}px`,
           large: `${dotSize}px`,
-          default: `${dotSize}px`,
+          default: `${dotSize}px`
         })};
         border-radius: 100%;
       }
@@ -143,7 +141,7 @@ export const ToggleContainer = styled.span`
         transition: all 200ms ease-in-out;
         position: absolute;
         path {
-          fill: ${colors.neutral[100]};
+          fill: ${NEUTRAL_COLORS[100]};
         }
       }
       .forum-ui-toggle-icon.times-icon {
@@ -151,7 +149,7 @@ export const ToggleContainer = styled.span`
         height: ${styleMap({
           small: `${18 * 0.75}px`,
           large: `${18 * 1.15}px`,
-          default: `${18}px`,
+          default: `${18}px`
         })};
       }
       .forum-ui-toggle-icon.check-icon {
@@ -159,7 +157,7 @@ export const ToggleContainer = styled.span`
         height: ${styleMap({
           small: `${16 * 0.75}px`,
           large: `${16 * 1.15}px`,
-          default: `${16}px`,
+          default: `${16}px`
         })};
       }
     `;

@@ -17,39 +17,41 @@ const Checkbox = ({
   handleOnBlur,
   ...props
 }) => {
-  return <CheckboxStyled className={className} {...props}>
-    <input
-      type="checkbox"
-      disabled={disabled}
-      form={form}
-      name={name}
-      readOnly={readOnly}
-      required={required}
-      checked={checked}
-      value={value}
-      className="forum-ui-checkbox-input"
-      onChange={handleOnChange}
-      onFocus={handleOnFocus}
-      onBlur={handleOnBlur}
-    />
-    <span className="forum-ui-checkbox-checkbox">
-      <Check />
-    </span>
-  </CheckboxStyled>;
+  return (
+    <CheckboxStyled className={className} {...props}>
+      <input
+        type="checkbox"
+        disabled={disabled}
+        form={form}
+        name={name}
+        readOnly={readOnly}
+        required={required}
+        checked={checked}
+        value={value}
+        className="forum-ui-checkbox-input"
+        onChange={handleOnChange}
+        onFocus={handleOnFocus}
+        onBlur={handleOnBlur}
+      />
+      <span className="forum-ui-checkbox-checkbox">
+        <Check />
+      </span>
+    </CheckboxStyled>
+  );
 };
 
 Checkbox.defaultProps = {
   disabled: false,
   form: null,
-  name: 'checkbox',
+  name: "checkbox",
   readOnly: false,
   required: false,
   checked: false,
-  value: '',
-  className: '',
+  value: "",
+  className: "",
   handleOnChange: () => {},
   handleOnFocus: () => {},
-  handleOnBlur: () => {},
+  handleOnBlur: () => {}
 };
 
 Checkbox.propTypes = {
@@ -59,12 +61,15 @@ Checkbox.propTypes = {
   readOnly: PropTypes.bool,
   required: PropTypes.bool,
   checked: PropTypes.bool,
-  value: PropTypes.arrayOf([PropTypes.string, PropTypes.bool, PropTypes.object]),
+  value: PropTypes.arrayOf([
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.object
+  ]),
   className: PropTypes.string,
   handleOnChange: PropTypes.func,
   handleOnFocus: PropTypes.func,
-  handleOnBlur: PropTypes.func,
+  handleOnBlur: PropTypes.func
 };
 
 export default Checkbox;
-    

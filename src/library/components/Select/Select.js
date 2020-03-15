@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { SelectContainer } from './Select.styles';
-import { selectClickEvent, onKeyDownEvent } from './helpers';
-import ChevronDown from '../../../components/Utilities/Icons/ChevronDown';
+import React, { useState, useRef, useEffect } from "react";
+import PropTypes from "prop-types";
+import { SelectContainer } from "./Select.styles";
+import { selectClickEvent, onKeyDownEvent } from "./helpers";
+import ChevronDown from "../../../components/Utilities/Icons/ChevronDown";
 
 const Select = ({
   autoComplete,
@@ -54,7 +54,7 @@ const Select = ({
     // get the filtered item, IF the input value matches
     // an item in the list array.
     const filteredItem = listRefCollection.find(item => {
-      const { innerText = '' } = item;
+      const { innerText = "" } = item;
       return innerText.toLowerCase().includes(target.value.toLowerCase());
     });
 
@@ -78,13 +78,15 @@ const Select = ({
   // When traversing up and down the list with arrow keys, we want to
   // make sure the scroll position in the container is at the right spot.
   const handleScroll = (item, flow) => {
-    const listItemElement = listRefCollection.find(listItem => listItem.innerText === item);
+    const listItemElement = listRefCollection.find(
+      listItem => listItem.innerText === item
+    );
     const { current } = ListRef;
 
     const listItemTop = listItemElement.offsetTop;
     const listItemBottom = listItemTop + listItemElement.clientHeight;
     const listBottom = current.scrollTop + current.clientHeight;
-    if (flow === 'down') {
+    if (flow === "down") {
       if (listItemBottom > listBottom) {
         current.scrollTop = listItemBottom - current.clientHeight;
       }
@@ -92,7 +94,7 @@ const Select = ({
         current.scrollTop = listItemTop;
       }
     }
-    if (flow === 'up') {
+    if (flow === "up") {
       if (listItemTop < current.scrollTop) {
         current.scrollTop = listItemTop;
       }
@@ -104,20 +106,20 @@ const Select = ({
 
   const keyDownCallback = payload => {
     switch (payload.type) {
-      case 'ArrowDown':
+      case "ArrowDown":
         handleOnChange(payload.value);
-        handleScroll(payload.value, 'down');
+        handleScroll(payload.value, "down");
         break;
-      case 'ArrowUp':
+      case "ArrowUp":
         handleOnChange(payload.value);
-        handleScroll(payload.value, 'up');
+        handleScroll(payload.value, "up");
         break;
-      case 'Enter':
+      case "Enter":
         toggleActive(false);
         handleOnChange(payload.value);
         InputRef.current.blur();
         break;
-      case 'Tab':
+      case "Tab":
         toggleActive(false);
         InputRef.current.blur();
         break;
@@ -128,22 +130,28 @@ const Select = ({
 
   // On mount and unmount, add and remove event listeners
   useEffect(() => {
-    document.addEventListener('keydown', onKeyDownEvent(list, InputRef.current, keyDownCallback));
-    document.addEventListener('click', selectClickEvent(ContainerRef.current, toggleActive));
+    document.addEventListener(
+      "keydown",
+      onKeyDownEvent(list, InputRef.current, keyDownCallback)
+    );
+    document.addEventListener(
+      "click",
+      selectClickEvent(ContainerRef.current, toggleActive)
+    );
     return () => {
-      document.removeEventListener('keydown', onKeyDownEvent);
-      document.removeEventListener('click', selectClickEvent);
+      document.removeEventListener("keydown", onKeyDownEvent);
+      document.removeEventListener("click", selectClickEvent);
     };
   }, []);
 
   /* class variables */
   const classNames = {
-    label: 'forum-ui-select-label',
-    input: 'forum-ui-select-input',
-    arrow: 'forum-ui-select-arrow',
-    placeholder: 'forum-ui-select-placeholder',
-    info: 'forum-ui-select-info',
-    list: 'forum-ui-select-list',
+    label: "forum-ui-select-label",
+    input: "forum-ui-select-input",
+    arrow: "forum-ui-select-arrow",
+    placeholder: "forum-ui-select-placeholder",
+    info: "forum-ui-select-info",
+    list: "forum-ui-select-list"
   };
 
   // building class names based on props
@@ -199,9 +207,9 @@ const Select = ({
         </label>
         <ul className={classNames.list} ref={ListRef}>
           {list.map(item => {
-            let listItemClassName = 'forum-ui-select-list-item';
+            let listItemClassName = "forum-ui-select-list-item";
             if (value.toLowerCase() === item.value.toLowerCase())
-              listItemClassName += ' forum-ui-select-list-item--is-selected';
+              listItemClassName += " forum-ui-select-list-item--is-selected";
             return (
               <li
                 className={listItemClassName}
@@ -215,7 +223,9 @@ const Select = ({
           })}
         </ul>
       </SelectContainer>
-      {!disabled && infoShow && <p className={classNames.info}>{infoMssg.message}</p>}
+      {!disabled && infoShow && (
+        <p className={classNames.info}>{infoMssg.message}</p>
+      )}
     </>
   );
 };
@@ -224,22 +234,22 @@ Select.defaultProps = {
   autoComplete: true,
   disabled: false,
   form: null,
-  name: 'select',
+  name: "select",
   readOnly: false,
   required: false,
-  placeholder: '',
-  pattern: '',
-  value: '',
-  className: '',
+  placeholder: "",
+  pattern: "",
+  value: "",
+  className: "",
   infoShow: false,
   infoMssg: {
-    message: '',
-    color: '',
+    message: "",
+    color: ""
   },
-  list: [{ value: '', name: '' }],
+  list: [{ value: "", name: "" }],
   handleOnChange: () => {},
   handleOnFocus: () => {},
-  handleOnBlur: () => {},
+  handleOnBlur: () => {}
 };
 
 Select.propTypes = {
@@ -256,17 +266,17 @@ Select.propTypes = {
   infoShow: PropTypes.bool,
   infoMssg: PropTypes.shape({
     message: PropTypes.string,
-    color: PropTypes.string,
+    color: PropTypes.string
   }),
   list: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired
     })
   ),
   handleOnChange: PropTypes.func,
   handleOnFocus: PropTypes.func,
-  handleOnBlur: PropTypes.func,
+  handleOnBlur: PropTypes.func
 };
 
 export default Select;

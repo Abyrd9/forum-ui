@@ -1,4 +1,4 @@
-import React from 'react';
-import Toggle from './Toggle';
+import React from "react";
+import Toggle from "./Toggle";
 
-it('', () => {});
+it("", () => {});

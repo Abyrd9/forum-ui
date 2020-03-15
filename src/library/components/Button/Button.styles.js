@@ -1,29 +1,12 @@
 import styled, { css } from "styled-components";
-import chroma from "chroma-js";
 import styleMap from "../../../helpers/styleMap";
-import buildColorStyleMap from "../../helpers/buildColorValuesObj";
-import checkColorBrightness from "../../../helpers/checkColorBrightness";
-
-const { isReadableLight } = checkColorBrightness;
+import buildColorValuesObj from "../../helpers/buildColorValuesObj";
 
 export const ButtonContainer = styled.button`
   ${props => {
-    const {
-      theme = {},
-      outline = false,
-      loading = false,
-      focused = false,
-      hovered = false,
-      pressed = false
-    } = props;
-    const { font = {}, colors = {} } = theme;
-    const color = buildColorStyleMap()(props);
-
-    const black =
-      colors.black && chroma.valid(colors.black) ? colors.black : "#000000";
-    const white =
-      colors.white && chroma.valid(colors.white) ? colors.white : "#FFFFFF";
-    const textColor = isReadableLight(color, 2.5) ? white : black;
+    const { theme = {}, outline = false, loading = false } = props;
+    const { font = {} } = theme;
+    const colorObj = buildColorValuesObj(props);
     return css`
       /* Base Styles */
       transition: all 100ms cubic-bezier(0, 0, 0.2, 1);
@@ -35,20 +18,20 @@ export const ButtonContainer = styled.button`
       align-items: center;
       justify-content: center;
       position: relative;
-      color: ${textColor};
-      background-color: ${color};
+      color: ${colorObj.text};
+      background-color: ${colorObj.base};
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
       &:hover:not(:disabled) {
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.23);
       }
-      &:active {
-        background-color: ${chroma(color).darken(0.5)};
+      &:active:not(:disabled) {
+        background-color: ${colorObj.active};
       }
       &:disabled {
         cursor: not-allowed;
         box-shadow: none;
-        color: ${loading ? textColor : chroma(color).luminance(0.25)};
-        background-color: ${loading ? color : chroma(color).brighten(1)};
+        color: ${loading ? colorObj.text : colorObj.base};
+        background-color: ${loading ? colorObj.base : colorObj.disabled};
       }
       ${styleMap({
         small: css`
@@ -59,7 +42,7 @@ export const ButtonContainer = styled.button`
         large: css`
           font-size: ${outline ? font[300] : font[400]};
           border-radius: 6px;
-          padding: 10px 18px;
+          padding: 12px 24px;
         `,
         default: css`
           font-size: ${outline ? font[300] : font[400]};
@@ -72,27 +55,19 @@ export const ButtonContainer = styled.button`
       ${outline &&
         css`
           background-color: transparent;
-          border: 2px solid ${color};
+          border: 2px solid ${colorObj.base};
           font-weight: 600;
-          color: ${color};
+          color: ${colorObj.base};
           &:active {
             background-color: transparent;
-            color: ${chroma(color).darken(0.5)};
-            border: 2px solid ${chroma(color).darken(0.5)};
+            color: ${colorObj.active};
+            border: 2px solid ${colorObj.active};
           }
           &:disabled {
             background-color: transparent;
-            color: ${loading ? color : chroma(color).luminance(0.65)};
-            border: 2px solid ${loading ? color : chroma(color).luminance(0.65)};
+            color: ${loading ? colorObj.base : colorObj.disabled};
+            border: 2px solid ${loading ? colorObj.base : colorObj.disabled};
           }
-
-          /* Storybook Example Styles */
-          ${pressed &&
-            css`
-              background-color: transparent !important;
-              color: ${chroma(color).darken(0.5)} !important;
-              border: 2px solid ${chroma(color).darken(0.5)} !important;
-            `};
         `};
 
       /* Focus Styles */
@@ -108,7 +83,7 @@ export const ButtonContainer = styled.button`
         height: calc(100% + 4px);
         border-radius: 4px;
         background-color: transparent;
-        box-shadow: 0 0 3px ${color}, 0 0 5px ${color};
+        box-shadow: 0 0 3px ${colorObj.base}, 0 0 5px ${colorObj.base};
       }
       &:focus:before {
         opacity: 1;
@@ -117,16 +92,6 @@ export const ButtonContainer = styled.button`
       &:active:before {
         opacity: 0;
       }
-
-      /* Storybook Example Styles */
-      &:before {
-        ${focused && "opacity: 1;"}
-      }
-      &:not(:disabled) {
-        ${hovered &&
-          "box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.23);"}
-      }
-      ${pressed && `background-color: ${chroma(color).darken(0.5)};`};
 
       /* Loader Styles */
       .loader {
@@ -146,7 +111,7 @@ export const ButtonContainer = styled.button`
           `
         })}
         path {
-          fill: ${outline ? color : textColor};
+          fill: ${outline ? colorObj.base : colorObj.text};
         }
       }
     `;

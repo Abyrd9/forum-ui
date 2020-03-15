@@ -1,11 +1,11 @@
-import styled, { css } from 'styled-components';
-import buildColorStyleMap from '../../../helpers/buildColorStyleMap';
-import { NEUTRAL_COLORS } from '../../constants';
+import styled, { css } from "styled-components";
+import buildColorValuesObj from "../../helpers/buildColorValuesObj";
+import { NEUTRAL_COLORS } from "../../constants";
 
 export const CheckboxStyled = styled.label`
   ${props => {
     const { focused, hovered } = props;
-    const color = buildColorStyleMap()(props);
+    const colorObj = buildColorValuesObj(props);
     return css`
       position: relative;
       cursor: pointer;
@@ -19,7 +19,7 @@ export const CheckboxStyled = styled.label`
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #FFFFFF;
+        background-color: #ffffff;
         border: 2px solid ${NEUTRAL_COLORS[400]};
         border-radius: 6px;
         width: 25px;
@@ -28,7 +28,7 @@ export const CheckboxStyled = styled.label`
           transition: all 100ms ease-in-out;
           opacity: 0;
           path {
-            fill: ${color};
+            fill: ${colorObj.base};
           }
         }
 
@@ -37,7 +37,7 @@ export const CheckboxStyled = styled.label`
           transition: all 100ms ease-in-out;
           opacity: 0;
           display: inline-block;
-          content: '';
+          content: "";
           position: absolute;
           top: -1px;
           left: -1px;
@@ -45,14 +45,14 @@ export const CheckboxStyled = styled.label`
           height: calc(100% + 2px);
           border-radius: 6px;
           background-color: transparent;
-          box-shadow: 0 0 3px ${color}, 0 0 5px ${color};
+          box-shadow: 0 0 3px ${colorObj.base}, 0 0 5px ${colorObj.base};
         }
       }
 
       /* Hover Styles */
       span svg {
-        ${hovered && 'transition: all 150ms ease-in-out;'};
-        ${hovered && 'opacity: 0.25;'};
+        ${hovered && "transition: all 150ms ease-in-out;"};
+        ${hovered && "opacity: 0.25;"};
       }
       &:hover svg {
         transition: all 150ms ease-in-out;
@@ -61,15 +61,15 @@ export const CheckboxStyled = styled.label`
 
       /* Focus Styles */
       span:before {
-        ${focused && 'opacity: 1;'};
+        ${focused && "opacity: 1;"};
       }
       input:focus + span:before {
-          opacity: 1;
+        opacity: 1;
       }
 
       /* Checked Styles */
       input:checked + span {
-        border-color: ${color};
+        border-color: ${colorObj.base};
         svg {
           opacity: 1;
         }

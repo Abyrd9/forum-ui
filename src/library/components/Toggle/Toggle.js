@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { ToggleContainer } from './Toggle.styles';
-import TimesIcon from '../../../components/Utilities/Icons/TimesIcon';
-import CheckIcon from '../../../components/Utilities/Icons/CheckIcon';
-import generateUniqueKey from '../../../helpers/generateUniqueKey';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { ToggleContainer } from "./Toggle.styles";
+import TimesIcon from "../../../components/Utilities/Icons/TimesIcon";
+import CheckIcon from "../../../components/Utilities/Icons/CheckIcon";
+import generateUniqueKey from "../../../helpers/generateUniqueKey";
 
 const Toggle = React.forwardRef((props, ref) => {
   const {
@@ -19,7 +19,7 @@ const Toggle = React.forwardRef((props, ref) => {
     handleOnChange,
     handleOnBlur,
     handleOnFocus,
-    className,
+    className
   } = props;
   const [toggle, updateToggle] = useState(checked);
 
@@ -28,7 +28,7 @@ const Toggle = React.forwardRef((props, ref) => {
     if (handleOnChange) handleOnChange(e);
   };
 
-  let containerClass = 'forum-ui-toggle';
+  let containerClass = "forum-ui-toggle";
   if (className) containerClass += ` ${className}`;
   const customId = `forum-ui-toggle-${generateUniqueKey()}`;
   return (
@@ -62,17 +62,17 @@ const Toggle = React.forwardRef((props, ref) => {
 
 Toggle.defaultProps = {
   disabled: false,
-  form: '',
-  list: '',
-  name: '',
+  form: "",
+  list: "",
+  name: "",
   readonly: false,
   required: false,
-  value: '',
+  value: "",
   checked: false,
   handleOnChange: () => {},
   handleOnBlur: () => {},
   handleOnFocus: () => {},
-  className: '',
+  className: ""
 };
 
 Toggle.propTypes = {
@@ -87,7 +87,7 @@ Toggle.propTypes = {
   handleOnChange: PropTypes.func,
   handleOnBlur: PropTypes.func,
   handleOnFocus: PropTypes.func,
-  className: PropTypes.string,
+  className: PropTypes.string
 };
 
 export default Toggle;
