@@ -1,9 +1,9 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const InputStyled = styled.div`
   ${({ theme = {}, info = {} }) => {
     const { colors = {}, spacing = {}, font = {} } = theme;
-    const { hasMssg = false, show = false, color = '' } = info;
+    const { hasMssg = false, show = false, color = "" } = info;
     return css`
       position: relative;
       width: 100%;
@@ -20,7 +20,8 @@ export const InputStyled = styled.div`
         opacity: ${show ? 1 : 0};
       }
       .forum-ui-input-label {
-        transition: transform 200ms cubic-bezier(0, 0, 0.2, 1), border 150ms cubic-bezier(0, 0, 0.2, 1);
+        transition: transform 200ms cubic-bezier(0, 0, 0.2, 1),
+          border 150ms cubic-bezier(0, 0, 0.2, 1);
         border: 1px solid ${show ? color : colors.neutral[200]};
         box-sizing: border-box;
         position: relative;
@@ -47,7 +48,8 @@ export const InputStyled = styled.div`
         &:focus-within {
           border: 1px solid ${show ? color : colors.neutral[400]};
           .forum-ui-input-placeholder {
-            transform: translateY(-0.6em) scale(0.6);
+            color: ${colors.neutral[600]};
+            transform: translateY(-0.7em) scale(0.6);
           }
         }
       }
@@ -64,9 +66,9 @@ export const InputStyled = styled.div`
         }
       }
       .forum-ui-input-placeholder {
-        transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+        transition: all 200ms cubic-bezier(0, 0, 0.2, 1);
         transform-origin: left;
-        color: ${colors.neutral[800]};
+        color: ${colors.neutral[400]};
         position: absolute;
         left: calc(1em + 0.5px);
         user-input: none;
@@ -74,7 +76,8 @@ export const InputStyled = styled.div`
           color: ${colors.neutral[300]};
         }
         &--is-active {
-          transform: translateY(-0.6em) scale(0.6);
+          color: ${colors.neutral[600]};
+          transform: translateY(-0.7em) scale(0.6);
         }
       }
       .forum-ui-input-icon {

@@ -2,8 +2,8 @@
 import React, { useContext } from 'react';
 import { ColorsSectionContainer } from './ColorsSection.styles';
 import ColorBlock from '../ColorBlock';
-import Row from '../../../../../library/ForumGrid/Row';
-import Column from '../../../../../library/ForumGrid/Column';
+import Row from '../../../../../library/components/ForumGrid/Row';
+import Column from '../../../../../library/components/ForumGrid/Column';
 import generateUniqueKey from '../../../../../helpers/generateUniqueKey';
 import { StoreContext, ACTION_TYPES } from '../../../../../assets/StoreProvider';
 

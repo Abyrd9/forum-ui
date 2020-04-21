@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { ButtonContainer } from "./Button.styles";
 import Loading from "./Loading";
 
-const Button = ({ children, disabled, loading, ...props }) => {
+const Button = ({ children, disabled, loading, icon, ...props }) => {
   return (
     <ButtonContainer
       disabled={disabled || loading}
@@ -12,6 +12,7 @@ const Button = ({ children, disabled, loading, ...props }) => {
     >
       {children}
       {loading && <Loading />}
+      {!loading && icon &&  <span className="button-icon">{icon}</span>}
     </ButtonContainer>
   );
 };
@@ -29,7 +30,8 @@ Button.propTypes = {
     PropTypes.string
   ]),
   disabled: PropTypes.bool,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  icon: PropTypes.node,
 };
 
 export default Button;

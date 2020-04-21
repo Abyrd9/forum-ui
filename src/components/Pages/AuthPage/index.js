@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SectionTitle from '../../common/SectionTitle';
-import Row from '../../../library/ForumGrid/Row';
-import Column from '../../../library/ForumGrid/Column';
+import Row from '../../../library/components/ForumGrid/Row';
+import Column from '../../../library/components/ForumGrid/Column';
 import SocialSignInButton from './SocialSignInButton';
 import AuthForm from './AuthForm/AuthForm';
 

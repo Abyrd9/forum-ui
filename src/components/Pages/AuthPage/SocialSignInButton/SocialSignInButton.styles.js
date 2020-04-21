@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Button from '../../../../library/Button';
+import Button from '../../../../library/components/Button';
 
 export const SocialSignInButtonStyled = styled(Button)`
   font-weight: 400;

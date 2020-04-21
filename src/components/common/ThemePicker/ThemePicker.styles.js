@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import Button from "../../../library/Button";
+import Button from "../../../library/components/Button";
 
 export const ThemePickerStyled = styled.div`
   ${({ theme = {} }) => {

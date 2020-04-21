@@ -94,7 +94,7 @@ export const ButtonContainer = styled.button`
       }
 
       /* Loader Styles */
-      .loader {
+      .loader, .button-icon {
         margin-left: 6px;
         ${styleMap({
           small: css`

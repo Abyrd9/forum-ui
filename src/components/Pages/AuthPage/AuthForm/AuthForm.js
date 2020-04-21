@@ -3,10 +3,10 @@ import firebase from 'firebase';
 import { faArrowCircleRight, faAt, faLockAlt } from '@fortawesome/pro-duotone-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AuthFormStyled } from './AuthForm.styles';
-import Input from '../../../../library/Input/Input';
-import Row from '../../../../library/ForumGrid/Row';
-import Column from '../../../../library/ForumGrid/Column';
-import Button from '../../../../library/Button';
+import Input from '../../../../library/components/Input/Input';
+import Row from '../../../../library/components/ForumGrid/Row';
+import Column from '../../../../library/components/ForumGrid/Column';
+import Button from '../../../../library/components/Button';
 import { FirebaseContext } from '../../../../assets/FirebaseProvider';
 
 const AuthForm = () => {

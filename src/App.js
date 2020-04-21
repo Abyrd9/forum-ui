@@ -1,15 +1,15 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import styled from 'styled-components';
-import Grid from './library/ForumGrid/Grid';
-import Row from './library/ForumGrid/Row';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import styled from "styled-components";
+import Grid from "./library/components/ForumGrid/Grid";
+import Row from "./library/components/ForumGrid/Row";
 
-import Navigation from './components/common/Navigation';
-import PageTitle from './components/common/PageTitle';
-import Footer from './components/common/Footer';
+import Navigation from "./components/common/Navigation";
+import PageTitle from "./components/common/PageTitle";
+import Footer from "./components/common/Footer";
 
-import AuthPage from './components/pages/AuthPage';
-import ThemePicker from './components/common/ThemePicker';
+import AuthPage from "./pages/AuthPage";
+import ThemePicker from "./components/common/ThemePicker";
 
 const AppContainer = styled.div`
   position: relative;

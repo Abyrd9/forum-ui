@@ -54,14 +54,13 @@ export const INITIAL_COLORS = {
     isFlat: true,
     order: 6
   },
-  creator: COLOR_CREATOR
 };
 
 export const INITIAL_TYPOGRAPHY = {
-  name: "Josefin Sans",
   baseSize: 16,
   upperRatio: 1,
   lowerRatio: 1,
+  name: "Josefin Sans",
   family: "Josefin Sans, sans-serif",
   variants: ["100", "300", "400", "600", "700"]
 };

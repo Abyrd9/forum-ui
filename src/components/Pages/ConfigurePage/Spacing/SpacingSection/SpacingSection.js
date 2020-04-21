@@ -1,16 +1,16 @@
 /* eslint-disable import/no-named-as-default */
 import React, { useState, useContext } from 'react';
 import { SpacingSectionStyled } from './SpacingSection.styles';
-import Row from '../../../../../library/ForumGrid/Row';
-import Column from '../../../../../library/ForumGrid/Column';
+import Row from '../../../../../library/components/ForumGrid/Row';
+import Column from '../../../../../library/components/ForumGrid/Column';
 import InputContainer from '../../../../Shared/InputContainer';
-import Counter from '../../../../../library/Counter';
+import Counter from '../../../../../library/components/Counter';
 import ExampleCard from '../ExampleCard';
 import SpacingLegend from '../SpacingLegend';
 import { getSizingVariations } from '../../../../../helpers/buildTheme';
 import ContentContainer from '../../../../Shared/ContentContainer';
 import useMediaQuery from '../../../../../hooks/useMediaQuery';
-import Tabs from '../../../../../library/Tabs';
+import Tabs from '../../../../../library/components/Tabs';
 import { StoreContext, ACTION_TYPES } from '../../../../../assets/StoreProvider';
 
 const tabs = [

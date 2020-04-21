@@ -9,7 +9,7 @@ const ForumUiGlobalStyle = createGlobalStyle`
         v2.0 | 20110126
         License: none (public domain)
       */
-      @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700|Roboto:400,500,700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
       html,
       body,
       div,
@@ -95,7 +95,7 @@ const ForumUiGlobalStyle = createGlobalStyle`
         border: 0;
         color: ${colors.black};
         font-size: ${theme.font[400]};
-        font-family: 'Josefin Sans', sans-serif;
+        font-family: 'Manrope', sans-serif;
         vertical-align: baseline;
       }
       div {

@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { useImmerReducer } from "use-immer";
 import { COLOR_CREATOR } from "../constants";
+import { FirebaseContext } from "./FirebaseProvider";
+import useDeepCompareEffect from "../hooks/useDeepCompareEffect";
 
 export const ACTION_TYPES = {
+  SET_USER_THEMES: "SET_USER_THEMES",
+
   SET_INITIAL_THEME: "SET_INITIAL_THEME",
   ADD_COLOR: "ADD_COLOR",
   UPDATE_COLOR: "UPDATE_COLOR",
@@ -16,9 +20,17 @@ export const StoreContext = React.createContext({});
 
 const reducer = (draft, action) => {
   switch (action.type) {
-    case ACTION_TYPES.SET_INITIAL_THEME:
-      draft = action.theme;
+    case ACTION_TYPES.SET_USER_THEMES:
+      // Themes are already sorted when called from firebase
+      // The first one should be the active one, TODO: Track Last-Active Theme
+      const { userThemes = {} } = action;
+      const firstItem = Object.values(userThemes)[0] || {};
+      draft = {
+        activeThemeId: firstItem.themeId || "",
+        themes: action.userThemes
+      };
       return draft;
+
     case ACTION_TYPES.ADD_COLOR:
       draft.colors[action.key] = {
         ...action.colorObj,
@@ -50,7 +62,15 @@ const reducer = (draft, action) => {
 };
 
 const StoreProvider = ({ children }) => {
-  const [state, dispatch] = useImmerReducer(reducer, {});
+  const { userThemes } = useContext(FirebaseContext);
+  const [state, dispatch] = useImmerReducer(reducer, userThemes);
+
+  // Once userThemes is updated, add it as the initial theme
+  useDeepCompareEffect(() => {
+    if (userThemes) {
+      dispatch({ type: ACTION_TYPES.SET_USER_THEMES, userThemes });
+    }
+  }, [userThemes]);
 
   return (
     <StoreContext.Provider value={{ store: state, dispatch }}>

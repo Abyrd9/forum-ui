@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ExampleCardHeaderStyled } from './ExampleCardHeader.styles';
-import Toggle from '../../../../../library/Toggle';
+import Toggle from '../../../../../library/components/Toggle';
 
 const ExampleCardHeader = ({ title, toggleLabel, toggleValue, handleToggleChange }) => {
   return (

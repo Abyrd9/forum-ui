@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import rowStyles from './constants';
-import fallback from '../../constants';
+import fallback from '../constants';
 import styleMap from '../../../helpers/styleMap';
 
 const buildStyles = (prefix = '', device = {}, props) => {

@@ -6,10 +6,10 @@ import React, { useState, useEffect, useContext } from 'react';
 // import PropTypes from 'prop-types';
 import { TypographySectionContainer } from './TypographySection.styles';
 import { GOOGLE_FONTS_API_KEY } from '../../../../../constants';
-import Select from '../../../../../library/Select';
-import Counter from '../../../../../library/Counter';
-import Row from '../../../../../library/ForumGrid/Row';
-import Column from '../../../../../library/ForumGrid/Column';
+import Select from '../../../../../library/components/Select';
+import Counter from '../../../../../library/components/Counter';
+import Row from '../../../../../library/components/ForumGrid/Row';
+import Column from '../../../../../library/components/ForumGrid/Column';
 import InputContainer from '../../../../Shared/InputContainer';
 import ContentContainer from '../../../../Shared/ContentContainer';
 import { getSizingVariations } from '../../../../../helpers/buildTheme';
@@ -17,7 +17,7 @@ import FontLegend from '../FontLegend';
 import loadWebFont from '../../../../../helpers/loadWebFont';
 import buildGoogleFontsUrl from '../../../../../helpers/buildGoogleFontsUrl';
 import useMediaQuery from '../../../../../hooks/useMediaQuery';
-import Tabs from '../../../../../library/Tabs';
+import Tabs from '../../../../../library/components/Tabs';
 import { StoreContext, ACTION_TYPES } from '../../../../../assets/StoreProvider';
 
 const tabs = [

@@ -65,13 +65,13 @@ import ForumUiProvider from './assets/ForumUiProvider';
 
 
 ReactDOM.render(
-  <StoreProvider>
     <FirebaseProvider>
-      <ForumUiProvider>
-        <App />
-      </ForumUiProvider>
-    </FirebaseProvider>
-  </StoreProvider>,
+      <StoreProvider>
+        <ForumUiProvider>
+          <App />
+        </ForumUiProvider>
+      </StoreProvider>
+    </FirebaseProvider>,
   document.getElementById('root'),
 );
 
