@@ -9,6 +9,8 @@ import PageTitle from "./components/common/PageTitle";
 import Footer from "./components/common/Footer";
 
 import AuthPage from "./pages/AuthPage";
+import HomePage from "./pages/HomePage";
+
 import ThemePicker from "./components/common/ThemePicker";
 
 const AppContainer = styled.div`
@@ -29,7 +31,6 @@ function App() {
             title="ForumUi"
             subtitle="A simplified design system generator for React Developers."
           />
-          <ThemePicker />
           <Switch>
             {/* <Route path="/">
               <SectionTitle
@@ -54,6 +55,9 @@ function App() {
             <Route path="/theme-configuration">
               {store.themeId ? <ConfigurationPage /> : <Loading />}
             </Route> */}
+            <Route path="/home">
+              <HomePage />
+            </Route>
             <Route path="/">
               <AuthPage />
             </Route>

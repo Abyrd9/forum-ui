@@ -1,12 +1,12 @@
-import styled, { css } from 'styled-components';
-import chroma from 'chroma-js';
+import styled, { css } from "styled-components";
+import chroma from "chroma-js";
 
 export const ExampleCardStyled = styled.div`
   ${({ theme = {} }) => {
     const { media = {}, zIndex = {} } = theme;
     const colors = {
-      primary: '#FDFDFD',
-      black: '#0A090C',
+      primary: "#FDFDFD",
+      black: "#0A090C"
     };
     return css`
       width: 90%;
@@ -15,13 +15,13 @@ export const ExampleCardStyled = styled.div`
       justify-content: space-between;
       margin-right: 25px;
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-      ${media.md.down} {
+      ${media.tablet.down} {
         width: 85%;
       }
-      ${media.sm.down} {
+      ${media.mobile.down} {
         width: 80%;
       }
-      ${media.xs.down} {
+      ${media.xsMobile.down} {
         width: 100%;
       }
       .image-container {
@@ -31,7 +31,7 @@ export const ExampleCardStyled = styled.div`
         overflow: hidden;
         margin-right: -100%;
         max-width: 1340px;
-        ${media.md.down} {
+        ${media.tablet.down} {
           display: none;
         }
         .image {
@@ -46,7 +46,7 @@ export const ExampleCardStyled = styled.div`
         margin-right: -24px;
         display: flex;
         justify-content: flex-end;
-        ${media.sm.down} {
+        ${media.mobile.down} {
           margin-right: 0;
         }
         span {
@@ -81,14 +81,14 @@ export const ExampleCardStyled = styled.div`
         margin-right: 54px;
         z-index: ${zIndex[200]};
         padding: 0 15px;
-        ${media.md.down} {
+        ${media.tablet.down} {
           margin: 0 auto;
         }
         &__title {
           font-size: 62px;
           font-weight: 800;
           color: ${colors.black};
-          ${media.sm.down} {
+          ${media.mobile.down} {
             font-size: 36px;
           }
         }
@@ -97,7 +97,7 @@ export const ExampleCardStyled = styled.div`
             height: 13px;
             margin-top: 2px;
             margin-right: 12px;
-            ${media.sm.down} {
+            ${media.mobile.down} {
               margin-right: 8px;
               height: 8px;
             }
@@ -109,7 +109,7 @@ export const ExampleCardStyled = styled.div`
             font-size: 14px;
             margin-right: 24px;
             color: ${chroma(colors.black).alpha(0.5)};
-            ${media.sm.down} {
+            ${media.mobile.down} {
               margin-right: 18px;
               font-size: 10px;
             }
@@ -136,14 +136,14 @@ export const ExampleCardStyled = styled.div`
             padding: 14px 18px;
             max-width: 160px;
             border-radius: 25px;
-            ${media.sm.down} {
+            ${media.mobile.down} {
               margin-right: 14px;
               padding: 8px 12px;
             }
             svg {
               height: 12px;
               margin-right: 10px;
-              ${media.sm.down} {
+              ${media.mobile.down} {
                 height: 10px;
               }
               path {
@@ -153,14 +153,14 @@ export const ExampleCardStyled = styled.div`
             div {
               height: 16px;
               width: 1px;
-              background-color: ${chroma('#E1E0E0').alpha(0.5)};
+              background-color: ${chroma("#E1E0E0").alpha(0.5)};
               margin-right: 10px;
             }
             p {
               text-transform: uppercase;
               color: #e1e0e0;
               font-size: 14px;
-              ${media.sm.down} {
+              ${media.mobile.down} {
                 margin-bottom: -4px;
                 font-size: 10px;
               }
@@ -168,13 +168,13 @@ export const ExampleCardStyled = styled.div`
           }
           .secondary-cta {
             margin-top: 2px;
-            ${media.sm.down} {
+            ${media.mobile.down} {
               max-width: 160px;
             }
             svg {
               height: 12px;
               margin-right: 6px;
-              ${media.sm.down} {
+              ${media.mobile.down} {
                 height: 10px;
               }
               path {
@@ -185,7 +185,7 @@ export const ExampleCardStyled = styled.div`
               &:nth-child(1) {
                 font-weight: bold;
                 color: ${colors.black};
-                ${media.sm.down} {
+                ${media.mobile.down} {
                   font-size: 12px;
                 }
               }
@@ -193,7 +193,7 @@ export const ExampleCardStyled = styled.div`
                 font-size: 14px;
                 font-weight: bold;
                 color: ${chroma(colors.black).alpha(0.5)};
-                ${media.sm.down} {
+                ${media.mobile.down} {
                   font-size: 10px;
                 }
               }

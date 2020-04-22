@@ -1,21 +1,19 @@
-import buildColorPalette from '../helpers/buildColorPalette';
-import { getBrowserFontSize, getSizingVariations } from '../helpers/buildTheme';
-
-const columnAmount = 12;
+import buildColorPalette from "../helpers/buildColorPalette";
+import { getBrowserFontSize, getSizingVariations } from "../helpers/buildTheme";
 
 const forumUiTheme = {
   colors: {
-    primary: buildColorPalette('#FE5F55'),
-    secondary: buildColorPalette('#84DCC6'),
-    neutral: buildColorPalette('#BEBEBE'),
-    warning: buildColorPalette('#FDE74C'),
-    success: buildColorPalette('#A5D836'),
-    error: buildColorPalette('#E50F00'),
-    black: '#0C0C0C',
-    white: '#FFFFFF',
-    default: '#0C0C0C',
-    github: '#444444',
-    google: '#4285F4',
+    primary: buildColorPalette("#FE5F55"),
+    secondary: buildColorPalette("#84DCC6"),
+    neutral: buildColorPalette("#BEBEBE"),
+    warning: buildColorPalette("#FDE74C"),
+    success: buildColorPalette("#A5D836"),
+    error: buildColorPalette("#E50F00"),
+    black: "#0C0C0C",
+    white: "#FFFFFF",
+    default: "#0C0C0C",
+    github: "#444444",
+    google: "#4285F4"
   },
   get font() {
     const base = parseInt(getBrowserFontSize(), 10);
@@ -33,56 +31,42 @@ const forumUiTheme = {
     return zIndex;
   },
   grid: {
-    xs: {
+    xsMobile: {
       min: 0,
-      max: 480,
+      max: 460,
       fluid: true,
-      content: 320,
-      columns: columnAmount,
-      divider: 24,
-      gutter: 24,
-      prefix: 'xs',
+      content: 312,
+      columns: 12,
+      gutter: 12,
+      prefix: "xs"
     },
-    sm: {
-      min: 480,
+    mobile: {
+      min: 460,
       max: 768,
       fluid: false,
-      content: 480,
-      columns: columnAmount,
-      divider: 24,
-      gutter: 24,
-      prefix: 'sm',
+      content: 448,
+      columns: 12,
+      gutter: 12,
+      prefix: "sm"
     },
-    md: {
+    tablet: {
       min: 768,
-      max: 990,
+      max: 1280,
       fluid: false,
-      content: 768,
-      columns: columnAmount,
-      divider: 32,
-      gutter: 32,
-      prefix: 'md',
+      content: 760,
+      columns: 12,
+      gutter: 24,
+      prefix: "md"
     },
-    lg: {
-      min: 990,
-      max: 1200,
-      fluid: false,
-      content: 990,
-      columns: columnAmount,
-      divider: 40,
-      gutter: 40,
-      prefix: 'lg',
-    },
-    xl: {
-      min: 1200,
+    desktop: {
+      min: 1280,
       max: Infinity,
       fluid: false,
       content: 1200,
-      columns: columnAmount,
-      divider: 40,
-      gutter: 40,
-      prefix: 'xl',
-    },
+      columns: 12,
+      gutter: 32,
+      prefix: "lg"
+    }
   },
   get media() {
     const media = {};
@@ -94,18 +78,24 @@ const forumUiTheme = {
         .sort((a, b) => a.min - b.min);
       breakpoints.forEach(value => {
         const { min, max } = value;
-        const query = `@media only screen and (min-width: ${min}px) and (max-width: ${max - 1}px)`;
+        const query = `@media only screen and (min-width: ${min}px) and (max-width: ${max -
+          1}px)`;
         const queryUp = `@media only screen and (min-width: ${min}px)`;
         const queryDown = `@media only screen and (max-width: ${max}px)`;
         if (max === Infinity) {
           media[value.key] = { only: queryUp, ...value };
         } else {
-          media[value.key] = { only: query, up: queryUp, down: queryDown, ...value };
+          media[value.key] = {
+            only: query,
+            up: queryUp,
+            down: queryDown,
+            ...value
+          };
         }
       });
     }
     return media;
-  },
+  }
 };
 
 export default forumUiTheme;

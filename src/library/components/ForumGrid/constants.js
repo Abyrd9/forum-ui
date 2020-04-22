@@ -1,50 +1,45 @@
 export default {
   grid: {
-    xs: {
+    xsMobile: {
       min: 0,
-      max: 480,
+      max: 460,
       fluid: true,
-      content: 320,
+      content: 312,
       columns: 12,
+      divider: 24,
       gutter: 24,
-      prefix: 'xs',
+      prefix: "xs"
     },
-    sm: {
-      min: 480,
+    mobile: {
+      min: 460,
       max: 768,
       fluid: false,
-      content: 480,
+      content: 412,
       columns: 12,
+      divider: 24,
       gutter: 24,
-      prefix: 'sm',
+      prefix: "sm"
     },
-    md: {
+    tablet: {
       min: 768,
-      max: 990,
+      max: 1280,
       fluid: false,
-      content: 768,
+      content: 704,
       columns: 12,
+      divider: 32,
       gutter: 32,
-      prefix: 'md',
+      prefix: "md"
     },
-    lg: {
-      min: 990,
-      max: 1200,
-      fluid: false,
-      content: 990,
-      columns: 12,
-      gutter: 40,
-      prefix: 'lg',
-    },
-    xl: {
-      min: 1200,
+    desktop: {
+      min: 1280,
       max: Infinity,
       fluid: false,
       content: 1200,
       columns: 12,
+      divider: 40,
       gutter: 40,
-      prefix: 'xl',
-    },
+      prefix: "lg"
+    }
   },
   get media() {
     const media = {};
@@ -56,16 +51,22 @@ export default {
         .sort((a, b) => a.min - b.min);
       breakpoints.forEach(value => {
         const { min, max } = value;
-        const query = `@media only screen and (min-width: ${min}px) and (max-width: ${max - 1}px)`;
+        const query = `@media only screen and (min-width: ${min}px) and (max-width: ${max -
+          1}px)`;
         const queryUp = `@media only screen and (min-width: ${min}px)`;
-        const queryDown = `@media only screen and (max-width: ${max}px)`;
+        const queryDown = `@media only screen and (max-width: ${max - 1}px)`;
         if (max === Infinity) {
           media[value.key] = { only: queryUp, ...value };
         } else {
-          media[value.key] = { only: query, up: queryUp, down: queryDown, ...value };
+          media[value.key] = {
+            only: query,
+            up: queryUp,
+            down: queryDown,
+            ...value
+          };
         }
       });
     }
     return media;
-  },
+  }
 };

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const SectionTitleContainer = styled.div`
   ${props => {
@@ -7,7 +7,7 @@ export const SectionTitleContainer = styled.div`
     return css`
       .block-title {
         &__title {
-          margin-bottom: ${spacing[100]}
+          margin-bottom: ${spacing[100]};
         }
         &__divider {
           display: block;
@@ -19,6 +19,7 @@ export const SectionTitleContainer = styled.div`
         &__description {
           max-width: 640px;
           white-space: pre-wrap;
+          margin-bottom: ${spacing[500]};
         }
       }
     `;

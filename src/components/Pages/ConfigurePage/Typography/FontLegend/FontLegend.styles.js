@@ -4,7 +4,7 @@ export const FontLegendStyled = styled.div`
   ${({ theme = {} }) => {
     const { colors = {}, font = {}, spacing = {}, media = {} } = theme;
     return css`
-      ${media.sm.down} {
+      ${media.mobile.down} {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
@@ -13,7 +13,7 @@ export const FontLegendStyled = styled.div`
       .font-legend-title {
         font-size: ${font[500]};
         font-weight: 800;
-        ${media.sm.down} {
+        ${media.mobile.down} {
           display: none;
         }
         span {
@@ -26,7 +26,7 @@ export const FontLegendStyled = styled.div`
         font-size: ${font[500]};
         font-weight: 800;
         border-bottom: 1px solid ${colors.neutral[300]};
-        ${media.sm.down} {
+        ${media.mobile.down} {
           padding-right: ${spacing[100]};
           margin-right: ${spacing[100]};
           margin-bottom: ${spacing[300]};
@@ -37,7 +37,7 @@ export const FontLegendStyled = styled.div`
         }
         &__key,
         &__value {
-          ${media.sm.down} {
+          ${media.mobile.down} {
             font-size: ${font[300]};
           }
         }
@@ -47,7 +47,7 @@ export const FontLegendStyled = styled.div`
           width: 1px;
           background-color: ${colors.neutral[300]};
           margin: ${spacing[200]} ${spacing[300]};
-          ${media.sm.down} {
+          ${media.mobile.down} {
             height: 1px;
             width: 22px;
             margin: ${spacing[200]} auto;

@@ -20,14 +20,14 @@ export const FooterStyled = styled.div`
         height: 16px;
         background-color: ${colors.white};
         margin: ${spacing[500]};
-        ${media.md.down} {
+        ${media.tablet.down} {
           margin: ${spacing[300]};
         }
       }
       p {
         color: ${colors.white};
         font-size: ${font[300]};
-        ${media.md.down} {
+        ${media.tablet.down} {
           font-size: ${font[200]};
         }
       }

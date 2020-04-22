@@ -1,15 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { ColumnContainer } from './ColumnStyled';
+import React from "react";
+import PropTypes from "prop-types";
+import { ColumnContainer } from "./ColumnStyled";
 
 const Column = ({ children, ...props }) => {
-  return <ColumnContainer {...props}>{children}</ColumnContainer>;
+  return (
+    <ColumnContainer {...props} className="column">
+      {children}
+    </ColumnContainer>
+  );
 };
 
-Column.displayName = 'Column';
+Column.displayName = "Column";
 
 Column.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired
 };
 
 export default Column;

@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
+import fallback from "../constants";
 
 const getColumnWidth = (dividend, divisor = 12) => {
   const decimal = dividend / divisor;
@@ -6,53 +7,77 @@ const getColumnWidth = (dividend, divisor = 12) => {
   return `${percent}%`;
 };
 
-const buildStyles = (prefix = '', device = {}, props) => {
-  let styles = '';
+const buildStyles = (prefix = "", device = {}, props) => {
+  let styles = "";
   if (props[prefix]) {
     styles += `flex-basis: ${getColumnWidth(props[prefix], device.columns)};
     max-width: ${getColumnWidth(props[prefix], device.columns)};`;
   }
-  const isNum = value => typeof value === 'number';
+  const isNum = value => typeof value === "number";
   if (isNum(props[`${prefix}Order`])) {
     styles += `order: ${props[`${prefix}Order`]};`;
   }
   if (isNum(props[`${prefix}Shrink`])) {
-    styles += 'flex: 0 1 auto;';
+    styles += "flex: 0 1 auto;";
   }
   if (isNum(props[`${prefix}Fill`])) {
-    styles += 'flex: 1 1 auto;';
+    styles += "flex: 1 1 auto;";
   }
   if (isNum(props[`${prefix}Gutter`])) {
-    styles += `margin: 0 ${props[`${prefix}Gutter`]}px !important;`;
+    styles += `padding: 0 ${props[`${prefix}Gutter`]}px;`;
   }
   if (isNum(props[`${prefix}GutterLeft`])) {
-    styles += `margin-left: ${props[`${prefix}GutterLeft`]}px !important;`;
+    styles += `padding-left: ${props[`${prefix}GutterLeft`]}px;`;
   }
   if (isNum(props[`${prefix}GutterRight`])) {
-    styles += `margin-right: ${props[`${prefix}GutterRight`]}px !important;`;
+    styles += `padding-right: ${props[`${prefix}GutterRight`]}px;`;
   }
   if (isNum(props[`${prefix}Offset`])) {
-    styles += `margin-left: ${getColumnWidth(props[`${prefix}Offset`], device.columns)};`;
+    styles += `padding-left: ${getColumnWidth(
+      props[`${prefix}Offset`],
+      device.columns
+    )};`;
   }
   return styles;
 };
 
 export const ColumnContainer = styled.div`
   ${props => {
-    const { theme, offset, order, shrink, fill, col, gutter, gutterLeft, gutterRight } = props;
+    const {
+      theme = {},
+      offset,
+      order,
+      shrink,
+      fill,
+      col,
+      gutter,
+      gutterLeft,
+      gutterRight,
+      autoGutter
+    } = props;
     // theme variables
-    const { grid = {}, media = {} } = theme;
-    const { desktop = {} } = grid;
-    let breakpoints = '';
-    const downQueries = Object.keys(props).some(key => key.includes('Down'));
-    const upQueries = Object.keys(props).some(key => key.includes('Up'));
+    const media = theme.media || fallback.media;
+    const desktop = (theme.grid && theme.grid.desktop) || fallback.grid.desktop;
+    let breakpoints = "";
+    const downQueries = Object.keys(props).some(key => key.includes("Down"));
+    const upQueries = Object.keys(props).some(key => key.includes("Up"));
     Object.values(media).forEach(query => {
-      breakpoints += `${query.only} {${buildStyles(query.prefix, query, props)};}`;
+      breakpoints += `${query.only} {
+        ${autoGutter && `padding: 0px ${(query.gutter || 0) / 2}px`};
+        ${buildStyles(query.prefix, query, props)};}`;
       if (downQueries && !!query.down) {
-        breakpoints += `${query.down} {${buildStyles(`${query.prefix}Down`, query, props)};}`;
+        breakpoints += `${query.down} {${buildStyles(
+          `${query.prefix}Down`,
+          query,
+          props
+        )};}`;
       }
       if (upQueries && !!query.up) {
-        breakpoints += `${query.up} {${buildStyles(`${query.prefix}Up`, query, props)};}`;
+        breakpoints += `${query.up} {${buildStyles(
+          `${query.prefix}Up`,
+          query,
+          props
+        )};}`;
       }
     });
     return css`
@@ -60,15 +85,15 @@ export const ColumnContainer = styled.div`
       flex: 1 0 0;
       max-width: 100%;
       ${order && `order: ${order}`};
-      ${shrink && 'flex: 0 1 auto;'};
-      ${fill && 'flex: 1 1 auto'};
+      ${shrink && "flex: 0 1 auto;"};
+      ${fill && "flex: 1 1 auto"};
       ${col &&
         `flex-basis: ${getColumnWidth(col, desktop.columns)};
          max-width: ${getColumnWidth(col, desktop.columns)};`};
-      ${typeof gutter === 'number' && `margin: 0 ${gutter}px !important;`};
-      ${typeof gutterLeft === 'number' && `margin-left: ${gutterLeft}px !important;`};
-      ${typeof gutterRight === 'number' && `margin-right: ${gutterRight}px !important;`};
-      ${offset && `margin-left: ${getColumnWidth(offset, desktop.columns)} !important;`};
+      ${typeof gutter === "number" && `padding: 0 ${gutter}px;`};
+      ${typeof gutterLeft === "number" && `padding-left: ${gutterLeft}px;`};
+      ${typeof gutterRight === "number" && `padding-right: ${gutterRight}px;`};
+      ${offset && `margin-left: ${getColumnWidth(offset, desktop.columns)};`};
       ${breakpoints};
     `;
   }}

@@ -72,8 +72,13 @@ const StoreProvider = ({ children }) => {
     }
   }, [userThemes]);
 
+  let theme = {};
+  if (state && state.activeThemeId && state.themes) {
+    const { activeThemeId, themes } = state;
+    theme = themes[activeThemeId];
+  }
   return (
-    <StoreContext.Provider value={{ store: state, dispatch }}>
+    <StoreContext.Provider value={{ store: state || {}, dispatch, theme }}>
       {children}
     </StoreContext.Provider>
   );

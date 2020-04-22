@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const NavigationContainer = styled.div`
   ${props => {
@@ -37,7 +37,7 @@ export const NavigationContainer = styled.div`
           display: none;
         }
       }
-      ${media.md.down} {
+      ${media.tablet.down} {
         padding: ${spacing[400]};
         .nav-bar {
           &__icon {
@@ -52,8 +52,8 @@ export const NavigationContainer = styled.div`
             border-bottom-left-radius: 50px;
             border-top-left-radius: 50px;
             transition: transform 150ms ease-in, opacity 150ms ease-in 50ms;
-            transform: ${active ? 'translateX(0)' : 'translateX(15px)'};
-            opacity: ${active ? '1' : '0'};
+            transform: ${active ? "translateX(0)" : "translateX(15px)"};
+            opacity: ${active ? "1" : "0"};
           }
           &__list-item {
             margin-left: 0;
@@ -90,19 +90,19 @@ export const NavigationContainer = styled.div`
               height: 3px;
             }
             &:before {
-              transform: ${active ? 'translateX(0px)' : 'translateX(20px)'};
+              transform: ${active ? "translateX(0px)" : "translateX(20px)"};
               width: 15px;
               top: -16px;
             }
             &:after {
-              transform: ${active ? 'translateX(0px)' : 'translateX(10px)'};
+              transform: ${active ? "translateX(0px)" : "translateX(10px)"};
               width: 25px;
               top: -8px
             }
           }
         }
       }
-      ${media.xs.down} {
+      ${media.xsMobile.down} {
         padding: ${spacing[400]};
         .nav-bar {
           &__icon {
@@ -123,12 +123,12 @@ export const NavigationContainer = styled.div`
               height: 2px;
             }
             &:before {
-              transform: ${active ? 'translateX(0px)' : 'translateX(12px)'};
+              transform: ${active ? "translateX(0px)" : "translateX(12px)"};
               width: 14px;
               top: -12px;
             }
             &:after {
-              transform: ${active ? 'translateX(0px)' : 'translateX(6px)'};
+              transform: ${active ? "translateX(0px)" : "translateX(6px)"};
               width: 20px;
               top: -6px
             }

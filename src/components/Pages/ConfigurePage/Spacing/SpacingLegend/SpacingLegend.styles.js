@@ -8,7 +8,7 @@ export const SpacingLegendStyled = styled.div`
       align-items: center;
       justify-content: space-between;
       max-width: 800px;
-      ${media.sm.down} {
+      ${media.mobile.down} {
         flex-wrap: wrap;
         justify-content: flex-start;
       }
@@ -18,7 +18,7 @@ export const SpacingLegendStyled = styled.div`
         align-items: center;
         font-size: ${font[500]};
         font-weight: 800;
-        ${media.sm.down} {
+        ${media.mobile.down} {
           padding-right: ${spacing[100]};
           margin-right: ${spacing[100]};
           margin-bottom: ${spacing[300]};
@@ -27,7 +27,7 @@ export const SpacingLegendStyled = styled.div`
         }
         &__key,
         &__value {
-          ${media.sm.down} {
+          ${media.mobile.down} {
             font-size: ${font[300]};
           }
         }
@@ -37,7 +37,7 @@ export const SpacingLegendStyled = styled.div`
           width: 22px;
           background-color: ${colors.neutral[300]};
           margin: ${spacing[200]} ${spacing[300]};
-          ${media.sm.down} {
+          ${media.mobile.down} {
             margin: ${spacing[200]} auto;
           }
         }
@@ -53,7 +53,7 @@ export const SpacingLegendStyled = styled.div`
         width: 1px;
         height: 100px;
         background-color: ${colors.neutral[300]};
-        ${media.sm.down} {
+        ${media.mobile.down} {
           display: none;
         }
       }

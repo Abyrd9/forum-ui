@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import chroma from 'chroma-js';
+import styled, { css } from "styled-components";
+import chroma from "chroma-js";
 
 export const ExampleCardHeaderStyled = styled.div`
   ${({ theme = {} }) => {
@@ -11,7 +11,7 @@ export const ExampleCardHeaderStyled = styled.div`
       margin-bottom: ${spacing[400]};
       .header-title {
         color: ${chroma(colors.black).brighten(2)};
-        ${media.sm.down} {
+        ${media.mobile.down} {
           font-size: 24px;
         }
       }
@@ -19,20 +19,20 @@ export const ExampleCardHeaderStyled = styled.div`
         display: flex;
         align-items: flex-end;
         margin-right: 10%;
-        ${media.md.down} {
+        ${media.tablet.down} {
           margin-right: 15%;
         }
-        ${media.sm.down} {
+        ${media.mobile.down} {
           margin-right: 20%;
         }
-        ${media.xs.down} {
+        ${media.xsMobile.down} {
           margin-right: 0;
         }
         &__label {
           font-weight: bold;
           color: ${chroma(colors.black).brighten(2)};
           margin-right: ${spacing[100]};
-          ${media.sm.down} {
+          ${media.mobile.down} {
             display: none;
           }
         }

@@ -1,11 +1,11 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const PageTitleContainer = styled.div`
   ${props => {
     const { theme = {} } = props;
     const { colors = {}, spacing = {} } = theme;
     return css`
-      margin-bottom: ${spacing[700]};
+      margin-bottom: ${spacing[800]};
       .page-title {
         &__title {
           color: ${colors.primary[400]};

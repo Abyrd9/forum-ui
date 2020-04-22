@@ -19,14 +19,14 @@ export const ExampleCardSpacingStyled = styled.div`
         width: ${width};
         position: absolute;
         left: 50%;
-        ${media.xs.down} {
+        ${media.xsMobile.down} {
           display: none;
         }
       }
       .spacing {
         position: absolute;
         right: -${position};
-        ${media.xs.down} {
+        ${media.xsMobile.down} {
           display: none;
         }
         span {
