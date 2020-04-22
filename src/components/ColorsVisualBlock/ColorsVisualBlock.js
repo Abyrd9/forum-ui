@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ColorBlockStyled, ColorItem } from "./ColorBlock.styles";
+import { ColorsVisualBlockStyled, ColorItem } from "./ColorsVisualBlock.styles";
 
-const ColorBlock = ({ title, palette }) => {
+const ColorsVisualBlock = ({ title, palette }) => {
   const paletteArr = Object.entries(palette);
   return (
-    <ColorBlockStyled>
+    <ColorsVisualBlockStyled>
       <h3 className="color-block-title">{title}</h3>
       <ul className="color-block-list">
         {paletteArr.map(([key, value]) => (
@@ -14,18 +14,18 @@ const ColorBlock = ({ title, palette }) => {
           </ColorItem>
         ))}
       </ul>
-    </ColorBlockStyled>
+    </ColorsVisualBlockStyled>
   );
 };
 
-ColorBlock.defaultProps = {
+ColorsVisualBlock.defaultProps = {
   title: "",
   palette: []
 };
 
-ColorBlock.propTypes = {
+ColorsVisualBlock.propTypes = {
   title: PropTypes.string,
   palette: PropTypes.arrayOf([PropTypes.string])
 };
 
-export default ColorBlock;
+export default ColorsVisualBlock;

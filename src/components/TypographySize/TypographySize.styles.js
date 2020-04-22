@@ -1,15 +1,10 @@
 import styled, { css } from "styled-components";
-import chroma from "chroma-js";
 
 export const TypographySizeStyled = styled.div`
   ${({ theme = {} }) => {
-    const { colors = {}, spacing = {} } = theme;
+    const { spacing = {} } = theme;
     return css`
-      margin-bottom: ${spacing[400]};
-      .typography-title {
-        margin-bottom: ${spacing[300]};
-        color: ${chroma(colors.black).brighten(2)};
-      }
+      margin-bottom: ${spacing[500]};
     `;
   }}
 `;

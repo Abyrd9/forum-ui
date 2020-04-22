@@ -1,14 +1,14 @@
-import { useLayoutEffect } from 'react';
-import debounce from '../helpers/debounce';
+import { useLayoutEffect } from "react";
+import debounce from "../helpers/debounce";
 
-export const useWindowResize = (callback, time = 200) => {
+const useWindowResize = (callback, time = 50) => {
   const updateWindowSize = debounce(() => {
     callback();
   }, time);
 
   useLayoutEffect(() => {
-    window.addEventListener('resize', updateWindowSize);
-    return () => window.removeEventListener('resize', updateWindowSize);
+    window.addEventListener("resize", updateWindowSize);
+    return () => window.removeEventListener("resize", updateWindowSize);
   }, []);
 };
 

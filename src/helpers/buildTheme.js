@@ -1,7 +1,9 @@
 export const getBrowserFontSize = () => {
-  let base = '16px';
+  let base = "16px";
   if (window && document.body) {
-    const browserFontSize = window.getComputedStyle(document.body).getPropertyValue('font-size');
+    const browserFontSize = window
+      .getComputedStyle(document.body)
+      .getPropertyValue("font-size");
     if (browserFontSize) base = browserFontSize;
   }
   return base;
@@ -66,17 +68,21 @@ export const getLowerValues = (base, step = 1) => {
   return values;
 };
 
-export const getSizingVariations = (baseSize, ratio = { upper: 1, lower: 1 }) => {
+export const getSizingVariations = (
+  baseSize,
+  ratio = { upper: 1, lower: 1 }
+) => {
   const size = parseInt(baseSize, 10);
   const upper = parseInt(ratio.upper, 10);
   const lower = parseInt(ratio.lower, 10);
-  const sizing = [...getLowerValues(size, lower), baseSize, ...getUpperValues(size, upper)].reduce(
-    (acc, value, index) => {
-      const key = (index + 1) * 100;
-      acc[key] = `${value}px`;
-      return acc;
-    },
-    {}
-  );
+  const sizing = [
+    ...getLowerValues(size, lower),
+    baseSize,
+    ...getUpperValues(size, upper)
+  ].reduce((acc, value, index) => {
+    const key = (index + 1) * 100;
+    acc[key] = `${value}px`;
+    return acc;
+  }, {});
   return sizing;
 };

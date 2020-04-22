@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import chroma from "chroma-js";
 
-export const ExampleCardStyled = styled.div`
+export const SpacingExampleCardStyled = styled.div`
   ${({ theme = {} }) => {
     const { media = {}, zIndex = {} } = theme;
     const colors = {
@@ -43,7 +43,6 @@ export const ExampleCardStyled = styled.div`
         }
       }
       .social-content-block {
-        margin-right: -24px;
         display: flex;
         justify-content: flex-end;
         ${media.mobile.down} {

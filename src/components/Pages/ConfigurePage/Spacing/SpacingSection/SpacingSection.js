@@ -1,34 +1,37 @@
 /* eslint-disable import/no-named-as-default */
-import React, { useState, useContext } from 'react';
-import { SpacingSectionStyled } from './SpacingSection.styles';
-import Row from '../../../../../library/components/ForumGrid/Row';
-import Column from '../../../../../library/components/ForumGrid/Column';
-import InputContainer from '../../../../Shared/InputContainer';
-import Counter from '../../../../../library/components/Counter';
-import ExampleCard from '../ExampleCard';
-import SpacingLegend from '../SpacingLegend';
-import { getSizingVariations } from '../../../../../helpers/buildTheme';
-import ContentContainer from '../../../../Shared/ContentContainer';
-import useMediaQuery from '../../../../../hooks/useMediaQuery';
-import Tabs from '../../../../../library/components/Tabs';
-import { StoreContext, ACTION_TYPES } from '../../../../../assets/StoreProvider';
+import React, { useState, useContext } from "react";
+import { SpacingSectionStyled } from "./SpacingSection.styles";
+import Row from "../../../../../library/components/ForumGrid/Row";
+import Column from "../../../../../library/components/ForumGrid/Column";
+import InputContainer from "../../../../Shared/InputContainer";
+import Counter from "../../../../../library/components/Counter";
+import ExampleCard from "../ExampleCard";
+import SpacingLegend from "../SpacingLegend";
+import { getSizingVariations } from "../../../../../helpers/buildTheme";
+import ContentContainer from "../../../../Shared/ContentContainer";
+import useMediaQuery from "../../../../../hooks/useMediaQuery";
+import Tabs from "../../../../../library/components/Tabs";
+import {
+  StoreContext,
+  ACTION_TYPES
+} from "../../../../../assets/StoreProvider";
 
 const tabs = [
   {
-    name: 'base-spacing',
-    value: 'Base Font',
-    content: null,
+    name: "base-spacing",
+    value: "Base Font",
+    content: null
   },
   {
-    name: 'spacing-ratio-lower',
-    value: 'Lower Ratio',
-    content: null,
+    name: "spacing-ratio-lower",
+    value: "Lower Ratio",
+    content: null
   },
   {
-    name: 'spacing-ratio-upper',
-    value: 'Upper Ratio',
-    content: null,
-  },
+    name: "spacing-ratio-upper",
+    value: "Upper Ratio",
+    content: null
+  }
 ];
 
 const SpacingSection = () => {
@@ -37,7 +40,7 @@ const SpacingSection = () => {
 
   const [tabIndex, setTabIndex] = useState(0);
   const handleSetTabIndex = (_, { index }) => setTabIndex(index);
-  const mobile = window.matchMedia('(max-width: 768px)');
+  const mobile = window.matchMedia("(max-width: 768px)");
   const isMobile = useMediaQuery(mobile);
 
   const BaseSize = (
@@ -52,8 +55,8 @@ const SpacingSection = () => {
         handleOnChange={({ target }) =>
           dispatch({
             type: ACTION_TYPES.UPDATE_SPACING_CONFIG,
-            key: 'baseSize',
-            payload: target.value,
+            key: "baseSize",
+            payload: target.value
           })
         }
       />
@@ -71,8 +74,8 @@ const SpacingSection = () => {
         handleOnChange={({ target }) =>
           dispatch({
             type: ACTION_TYPES.UPDATE_SPACING_CONFIG,
-            key: 'lowerRatio',
-            payload: target.value,
+            key: "lowerRatio",
+            payload: target.value
           })
         }
       />
@@ -90,8 +93,8 @@ const SpacingSection = () => {
         handleOnChange={({ target }) =>
           dispatch({
             type: ACTION_TYPES.UPDATE_SPACING_CONFIG,
-            key: 'upperRatio',
-            payload: target.value,
+            key: "upperRatio",
+            payload: target.value
           })
         }
       />
@@ -103,7 +106,11 @@ const SpacingSection = () => {
       {isMobile ? (
         <Row stretch>
           <Column col={12}>
-            <Tabs tabsList={tabs} tabActiveIndex={tabIndex} handleTabClick={handleSetTabIndex} />
+            <Tabs
+              tabsList={tabs}
+              tabActiveIndex={tabIndex}
+              handleTabClick={handleSetTabIndex}
+            />
           </Column>
           <Column>
             {tabIndex === 0 && BaseSize}
@@ -126,7 +133,7 @@ const SpacingSection = () => {
               spacingSizingArray={Object.entries(
                 getSizingVariations(spacing.baseSize, {
                   upper: spacing.upperRatio,
-                  lower: spacing.lowerRatio,
+                  lower: spacing.lowerRatio
                 })
               )}
             />
@@ -138,7 +145,7 @@ const SpacingSection = () => {
           <ExampleCard
             spacing={getSizingVariations(spacing.baseSize, {
               upper: spacing.upperRatio,
-              lower: spacing.lowerRatio,
+              lower: spacing.lowerRatio
             })}
           />
         </Column>

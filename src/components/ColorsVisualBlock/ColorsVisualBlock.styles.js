@@ -1,16 +1,16 @@
 import styled, { css } from "styled-components";
-import checkColorBrightness from "../../../helpers/checkColorBrightness";
+import chroma from "chroma-js";
+import checkColorBrightness from "../../helpers/checkColorBrightness";
 
 const { isReadableLight } = checkColorBrightness;
-export const ColorBlockStyled = styled.div`
+export const ColorsVisualBlockStyled = styled.div`
   ${({ theme = {} }) => {
-    const { spacing = {} } = theme;
-    console.log(spacing);
-
+    const { spacing = {}, colors = {} } = theme;
     return css`
       .color-block-title {
         text-transform: capitalize;
         margin-bottom: ${spacing[100]};
+        color: ${chroma(colors.black).brighten(2)};
       }
       .color-block-list {
         margin-bottom: ${spacing[400]};

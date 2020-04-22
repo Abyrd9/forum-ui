@@ -2,10 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { TypographyParagraphStyled } from "./TypographyParagraph.styles";
 
-const TypographyParagraph = ({ title, fontFamily }) => {
+const TypographyParagraph = ({ fontFamily }) => {
   return (
     <TypographyParagraphStyled fontFamily={fontFamily}>
-      <h3 className="typography-title">{title}</h3>
       <p className="typography-paragraph-text">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -33,12 +32,10 @@ const TypographyParagraph = ({ title, fontFamily }) => {
 };
 
 TypographyParagraph.defaultProps = {
-  title: "",
   fontFamily: ""
 };
 
 TypographyParagraph.propTypes = {
-  title: PropTypes.string,
   fontFamily: PropTypes.string
 };
 

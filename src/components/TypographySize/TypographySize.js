@@ -3,16 +3,9 @@ import PropTypes from "prop-types";
 import { TypographySizeStyled, SizeBlock } from "./TypographySize.styles";
 import { getSizingVariations } from "../../helpers/buildTheme";
 
-const TypographySize = ({
-  title,
-  fontFamily,
-  baseSize,
-  upperRatio,
-  lowerRatio
-}) => {
+const TypographySize = ({ fontFamily, baseSize, upperRatio, lowerRatio }) => {
   return (
     <TypographySizeStyled>
-      <h3 className="typography-title">{title}</h3>
       {Object.entries(
         getSizingVariations(baseSize, {
           upper: upperRatio,
@@ -30,7 +23,6 @@ const TypographySize = ({
 };
 
 TypographySize.defaultProps = {
-  title: "",
   fontFamily: "",
   baseSize: 16,
   upperRatio: 1,
@@ -38,7 +30,6 @@ TypographySize.defaultProps = {
 };
 
 TypographySize.propTypes = {
-  title: PropTypes.string,
   fontFamily: PropTypes.string,
   baseSize: PropTypes.number,
   upperRatio: PropTypes.number,

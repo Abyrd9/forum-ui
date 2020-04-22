@@ -17,10 +17,10 @@ const buildStyles = (prefix = "", device = {}, props) => {
   if (isNum(props[`${prefix}Order`])) {
     styles += `order: ${props[`${prefix}Order`]};`;
   }
-  if (isNum(props[`${prefix}Shrink`])) {
+  if (props[`${prefix}Shrink`]) {
     styles += "flex: 0 1 auto;";
   }
-  if (isNum(props[`${prefix}Fill`])) {
+  if (props[`${prefix}Fill`]) {
     styles += "flex: 1 1 auto;";
   }
   if (isNum(props[`${prefix}Gutter`])) {

@@ -5,10 +5,9 @@ import {
   WeightBlock
 } from "./TypographyWeights.styles";
 
-const TypographyWeights = ({ title, fontFamily, fontVariants }) => {
+const TypographyWeights = ({ fontFamily, fontVariants }) => {
   return (
     <TypographyWeightsStyled>
-      <h3 className="typography-title">{title}</h3>
       <ul className="font-variant-list">
         {fontVariants
           .slice()
@@ -42,13 +41,11 @@ const TypographyWeights = ({ title, fontFamily, fontVariants }) => {
 };
 
 TypographyWeights.defaultProps = {
-  title: "",
   fontFamily: "",
   fontVariants: []
 };
 
 TypographyWeights.propTypes = {
-  title: PropTypes.string,
   fontFamily: PropTypes.string,
   fontVariants: PropTypes.arrayOf([PropTypes.string])
 };

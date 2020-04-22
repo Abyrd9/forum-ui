@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import chroma from "chroma-js";
 
-export const ExampleCardHeaderStyled = styled.div`
+export const SpacingExampleCardHeaderStyled = styled.div`
   ${({ theme = {} }) => {
     const { spacing = {}, colors = {}, media = {} } = theme;
     return css`

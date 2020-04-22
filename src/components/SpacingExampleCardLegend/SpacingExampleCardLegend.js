@@ -1,13 +1,19 @@
-import React, { useRef, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { ExampleCardSpacingStyled } from './ExampleCardSpacing.styles';
-import useWindowResize from '../../../../../hooks/useWindowResize';
+import React, { useRef, useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { SpacingExampleCardLegendStyled } from "./SpacingExampleCardLegend.styles";
+import useWindowResize from "../../hooks/useWindowResize";
 
-const ExampleCardSpacing = ({ spacingKey, spacingValue, showSpacing, ContainerRef, ...props }) => {
+const SpacingExampleCardLegend = ({
+  spacingKey,
+  spacingValue,
+  showSpacing,
+  ContainerRef,
+  ...props
+}) => {
   const CardSpacingRef = useRef(null);
 
-  const [position, setPosition] = useState('');
-  const [width, setWidth] = useState('');
+  const [position, setPosition] = useState("");
+  const [width, setWidth] = useState("");
 
   const getDimensions = () => {
     if (ContainerRef.current && CardSpacingRef.current) {
@@ -32,7 +38,7 @@ const ExampleCardSpacing = ({ spacingKey, spacingValue, showSpacing, ContainerRe
   }, 100);
 
   return (
-    <ExampleCardSpacingStyled
+    <SpacingExampleCardLegendStyled
       ref={CardSpacingRef}
       spacingValue={spacingValue}
       showSpacing={showSpacing}
@@ -44,22 +50,22 @@ const ExampleCardSpacing = ({ spacingKey, spacingValue, showSpacing, ContainerRe
       <p className="spacing">
         {spacingValue} <span>({spacingKey})</span>
       </p>
-    </ExampleCardSpacingStyled>
+    </SpacingExampleCardLegendStyled>
   );
 };
 
-ExampleCardSpacing.defaultProps = {
-  spacingKey: '',
-  spacingValue: '',
+SpacingExampleCardLegend.defaultProps = {
+  spacingKey: "",
+  spacingValue: "",
   showSpacing: true,
-  ContainerRef: { current: null },
+  ContainerRef: { current: null }
 };
 
-ExampleCardSpacing.propTypes = {
+SpacingExampleCardLegend.propTypes = {
   spacingKey: PropTypes.string,
   spacingValue: PropTypes.string,
   showSpacing: PropTypes.bool,
-  ContainerRef: PropTypes.node,
+  ContainerRef: PropTypes.node
 };
 
-export default ExampleCardSpacing;
+export default SpacingExampleCardLegend;
