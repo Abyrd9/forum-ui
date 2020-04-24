@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import chroma from "chroma-js";
 
 export const SpacingColumnStyled = styled.ul`
   ${({ theme = {} }) => {
@@ -10,7 +9,7 @@ export const SpacingColumnStyled = styled.ul`
       .spacing-title {
         display: none;
         margin-bottom: ${spacing[300]};
-        color: ${chroma(colors.black).brighten(2)};
+        color: ${colors.neutral[400]};
       }
       ${media.mobile.down} {
         width: 100%;

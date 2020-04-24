@@ -12,7 +12,7 @@ export const SectionTitleContainer = styled.div`
         &__divider {
           display: block;
           height: 1px;
-          width: 145px;
+          width: 245px;
           background-color: ${colors.neutral[200]};
           margin: ${spacing[100]} 0;
         }

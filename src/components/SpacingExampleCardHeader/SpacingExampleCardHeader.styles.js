@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import chroma from "chroma-js";
 
 export const SpacingExampleCardHeaderStyled = styled.div`
   ${({ theme = {} }) => {
@@ -10,7 +9,7 @@ export const SpacingExampleCardHeaderStyled = styled.div`
       align-items: flex-end;
       margin-bottom: ${spacing[400]};
       .header-title {
-        color: ${chroma(colors.black).brighten(2)};
+        color: ${colors.neutral[400]};
         ${media.mobile.down} {
           font-size: 24px;
         }
@@ -30,7 +29,7 @@ export const SpacingExampleCardHeaderStyled = styled.div`
         }
         &__label {
           font-weight: bold;
-          color: ${chroma(colors.black).brighten(2)};
+          color: ${colors.neutral[600]};
           margin-right: ${spacing[100]};
           ${media.mobile.down} {
             display: none;

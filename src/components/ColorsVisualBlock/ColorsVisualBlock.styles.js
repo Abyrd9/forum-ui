@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import chroma from "chroma-js";
 import checkColorBrightness from "../../helpers/checkColorBrightness";
 
 const { isReadableLight } = checkColorBrightness;
@@ -10,7 +9,7 @@ export const ColorsVisualBlockStyled = styled.div`
       .color-block-title {
         text-transform: capitalize;
         margin-bottom: ${spacing[100]};
-        color: ${chroma(colors.black).brighten(2)};
+        color: ${colors.neutral[400]};
       }
       .color-block-list {
         margin-bottom: ${spacing[400]};
