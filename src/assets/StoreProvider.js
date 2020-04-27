@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { useImmerReducer } from "use-immer";
@@ -7,20 +8,18 @@ import useDeepCompareEffect from "../hooks/useDeepCompareEffect";
 
 export const ACTION_TYPES = {
   SET_USER_THEMES: "SET_USER_THEMES",
-
-  SET_INITIAL_THEME: "SET_INITIAL_THEME",
-  ADD_COLOR: "ADD_COLOR",
-  UPDATE_COLOR: "UPDATE_COLOR",
-  REMOVE_COLOR: "REMOVE_COLOR",
-  UPDATE_TYPOGRAPHY_CONFIG: "UPDATE_TYPOGRAPHY_CONFIG",
-  UPDATE_SPACING_CONFIG: "UPDATE_SPACING_CONFIG"
+  UPDATE_COLOR_TITLE: "UPDATE_COLOR_TITLE",
+  UPDATE_COLOR_VALUE: "UPDATE_COLOR_VALUE",
+  TOGGLE_COLOR_IS_FLAT: "TOGGLE_COLOR_IS_FLAT",
+  ADD_COLOR_ITEM: "ADD_COLOR_ITEM",
+  REMOVE_COLOR_ITEM: "REMOVE_COLOR_ITEM"
 };
 
 export const StoreContext = React.createContext({});
 
 const reducer = (draft, action) => {
   switch (action.type) {
-    case ACTION_TYPES.SET_USER_THEMES:
+    case ACTION_TYPES.SET_USER_THEMES: {
       // Themes are already sorted when called from firebase
       // The first one should be the active one, TODO: Track Last-Active Theme
       const { userThemes = {} } = action;
@@ -30,32 +29,39 @@ const reducer = (draft, action) => {
         themes: action.userThemes
       };
       return draft;
-
-    case ACTION_TYPES.ADD_COLOR:
-      draft.colors[action.key] = {
-        ...action.colorObj,
-        order: Object.keys(draft.colors).length + 1
-      };
-      draft.colors.creator = COLOR_CREATOR;
-      return draft;
-    case ACTION_TYPES.UPDATE_COLOR:
-      draft.colors[action.colorId] = action.colorObj;
-      return draft;
-    case ACTION_TYPES.REMOVE_COLOR: {
-      delete draft.colors[action.colorId];
-      Object.values(draft.colors).forEach((color, index) => {
-        color.order = index;
-      });
+    }
+    case ACTION_TYPES.UPDATE_COLOR_TITLE: {
+      const { colorId = "", title = "" } = action;
+      const { activeThemeId = "" } = draft;
+      draft.themes[activeThemeId].colors[colorId].title = title;
       return draft;
     }
-    case ACTION_TYPES.UPDATE_TYPOGRAPHY_CONFIG:
-      Object.entries(action.payload).forEach(([key, value]) => {
-        draft.typography[key] = value;
-      });
+    case ACTION_TYPES.UPDATE_COLOR_VALUE: {
+      const { colorId = "", color = "", palette = {} } = action;
+      const { activeThemeId = "" } = draft;
+      draft.themes[activeThemeId].colors[colorId].color = color;
+      draft.themes[activeThemeId].colors[colorId].palette = palette;
       return draft;
-    case ACTION_TYPES.UPDATE_SPACING_CONFIG:
-      draft.spacing[action.key] = action.payload;
+    }
+    case ACTION_TYPES.TOGGLE_COLOR_IS_FLAT: {
+      const { colorId = "", toggle = false, palette = {} } = action;
+      const { activeThemeId = "" } = draft;
+      draft.themes[activeThemeId].colors[colorId].isFlat = toggle;
+      draft.themes[activeThemeId].colors[colorId].palette = palette;
       return draft;
+    }
+    case ACTION_TYPES.ADD_COLOR_ITEM: {
+      const { colorId = "", colorObj = {} } = action;
+      const { activeThemeId = "" } = draft;
+      draft.themes[activeThemeId].colors[colorId] = colorObj;
+      return draft;
+    }
+    case ACTION_TYPES.REMOVE_COLOR_ITEM: {
+      const { colorId = "" } = action;
+      const { activeThemeId = "" } = draft;
+      delete draft.themes[activeThemeId].colors[colorId];
+      return draft;
+    }
     default:
       return draft;
   }

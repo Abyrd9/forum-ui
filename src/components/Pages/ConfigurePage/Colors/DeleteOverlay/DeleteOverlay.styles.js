@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const DeleteOverlayContainer = styled.div`
   ${({ theme = {} }) => {
@@ -19,8 +19,12 @@ export const DeleteOverlayContainer = styled.div`
         margin-bottom: ${spacing[300]};
       }
       .button-container {
+        display: flex;
         button:first-child {
           margin-right: ${spacing[200]};
+        }
+        &__delete {
+          color: #ffffff;
         }
       }
     `;

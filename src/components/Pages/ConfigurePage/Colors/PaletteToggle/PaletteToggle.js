@@ -1,17 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { PaletteToggleContainer } from './PaletteToggle.styles';
-import PaletteIcon from '../../../../Utilities/Icons/PaletteIcon';
+import React from "react";
+import PropTypes from "prop-types";
+import { PaletteToggleContainer } from "./PaletteToggle.styles";
+import PaletteIcon from "../../../../Utilities/Icons/PaletteIcon";
 
-const PaletteToggle = ({ color, isFlat, toggleIsFlat, disabled }) => {
+const PaletteToggle = ({ color, isFlat, toggleIsFlat, badColorValue }) => {
   return (
-    <PaletteToggleContainer isFlat={isFlat} color={color} disabled={disabled}>
+    <PaletteToggleContainer
+      isFlat={isFlat}
+      color={color}
+      badColorValue={badColorValue}
+    >
       <input
         className="palette-toggle-input"
         type="checkbox"
         checked={isFlat}
         onChange={() => toggleIsFlat(!isFlat)}
-        disabled={disabled}
+        disabled={badColorValue}
       />
       <PaletteIcon className="palette-toggle-icon" />
     </PaletteToggleContainer>
@@ -19,17 +23,17 @@ const PaletteToggle = ({ color, isFlat, toggleIsFlat, disabled }) => {
 };
 
 PaletteToggle.defaultProps = {
-  color: '',
+  color: "",
   isFlat: false,
   toggleIsFlat: () => {},
-  disabled: false,
+  badColorValue: false
 };
 
 PaletteToggle.propTypes = {
   color: PropTypes.string,
   isFlat: PropTypes.bool,
   toggleIsFlat: PropTypes.func,
-  disabled: PropTypes.bool,
+  badColorValue: PropTypes.bool
 };
 
 export default PaletteToggle;

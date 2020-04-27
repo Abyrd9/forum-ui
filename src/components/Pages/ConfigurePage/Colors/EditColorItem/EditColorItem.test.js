@@ -1,4 +1,4 @@
 import React from 'react';
-import ColorBlock from './ColorBlock';
+import EditColorItem from './EditColorItem';
 
 it('', () => {});

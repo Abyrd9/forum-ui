@@ -35,17 +35,17 @@ export const ButtonContainer = styled.button`
       }
       ${styleMap({
         small: css`
-          font-size: ${outline ? font[200] : font[300]};
+          font-size: ${font[300]};
           border-radius: 3px;
           padding: 4px 8px;
         `,
         large: css`
-          font-size: ${outline ? font[300] : font[400]};
+          font-size: ${font[400]};
           border-radius: 6px;
           padding: 12px 24px;
         `,
         default: css`
-          font-size: ${outline ? font[300] : font[400]};
+          font-size: ${font[400]};
           border-radius: 4px;
           padding: 8px 14px;
         `
@@ -94,7 +94,8 @@ export const ButtonContainer = styled.button`
       }
 
       /* Loader Styles */
-      .loader, .button-icon {
+      .loader,
+      .button-icon {
         margin-left: 6px;
         ${styleMap({
           small: css`

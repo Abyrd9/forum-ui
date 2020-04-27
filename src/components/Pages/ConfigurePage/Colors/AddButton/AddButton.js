@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { AddButtonContainer } from './AddButton.styles';
-import PlusIcon from '../../../../Utilities/Icons/PlusIcon';
+import React from "react";
+import PropTypes from "prop-types";
+import { AddButtonContainer } from "./AddButton.styles";
+import PlusIcon from "../../../../Utilities/Icons/PlusIcon";
 
 const AddButton = ({ handleOnClick, disabled }) => {
   return (
@@ -13,12 +13,12 @@ const AddButton = ({ handleOnClick, disabled }) => {
 
 AddButton.defaultProps = {
   handleOnClick: () => {},
-  disabled: false,
+  disabled: false
 };
 
 AddButton.propTypes = {
   handleOnClick: PropTypes.func,
-  disabled: PropTypes.bool,
+  disabled: PropTypes.bool
 };
 
 export default AddButton;

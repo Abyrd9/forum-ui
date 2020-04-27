@@ -1,15 +1,15 @@
-import styled, { css } from 'styled-components';
-import chroma from 'chroma-js';
+import styled, { css } from "styled-components";
+import chroma from "chroma-js";
 
 export const PaletteToggleContainer = styled.label`
-  ${({ theme = {}, isFlat = false, color = '', disabled = false }) => {
+  ${({ theme = {}, isFlat = false, color = "", badColorValue = false }) => {
     const { colors = {}, spacing = {} } = theme;
     const colorVal =
-      chroma.valid(color) && chroma.contrast(color, '#FFFFFF') < 1.2
+      chroma.valid(color) && chroma.contrast(color, "#FFFFFF") < 1.2
         ? chroma(color).darken(0.5)
         : color;
     return css`
-      ${disabled && 'visibility: hidden;'};
+      visibility: ${badColorValue ? "hidden" : "visible"};
       cursor: pointer;
       transition: background-color 150ms ease;
       position: relative;
@@ -31,7 +31,7 @@ export const PaletteToggleContainer = styled.label`
         transition: all 100ms ease-in-out;
         opacity: 0;
         display: inline-block;
-        content: '';
+        content: "";
         position: absolute;
         left: -3px;
         top: -3px;
@@ -49,7 +49,7 @@ export const PaletteToggleContainer = styled.label`
       }
       .palette-toggle-icon {
         transition: all 150ms ease;
-        transform: ${isFlat ? 'translateX(0px)' : 'translateX(16px)'};
+        transform: ${isFlat ? "translateX(0px)" : "translateX(16px)"};
         height: 14px;
         width: 14px;
         path {

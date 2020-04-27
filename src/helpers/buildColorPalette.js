@@ -1,15 +1,15 @@
-import chroma from 'chroma-js';
+import chroma from "chroma-js";
 
 const buildColorPalette = hex => {
-  if (!chroma.valid(hex)) return { inProgress: true };
+  if (!chroma.valid(hex)) return {};
 
   const dark = chroma
-    .bezier([hex, '#000000'])
+    .bezier([hex, "#000000"])
     .scale()
     .colors(6)
     .slice(1, 5);
   const light = chroma
-    .bezier([hex, '#FFFFFF'])
+    .bezier([hex, "#FFFFFF"])
     .scale()
     .colors(5)
     .slice(1, 4)

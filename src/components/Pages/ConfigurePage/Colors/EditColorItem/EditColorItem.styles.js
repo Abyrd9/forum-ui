@@ -1,15 +1,16 @@
-import styled, { css } from 'styled-components';
-import chroma from 'chroma-js';
-import checkColorBrightness from '../../../../../helpers/checkColorBrightness';
+import styled, { css } from "styled-components";
+import chroma from "chroma-js";
+import checkColorBrightness from "../../../../../helpers/checkColorBrightness";
 
 const { isLight, isReadableLight } = checkColorBrightness;
 
-export const ColorBlockContainer = styled.div`
+export const EditColorItemContainer = styled.div`
   ${props => {
-    const { theme = {}, color = '', inProgress = false } = props;
+    const { theme = {}, color = "", badColorValue = false } = props;
 
     const { colors = {}, font = {}, spacing = {} } = theme;
-    const hex = inProgress || !chroma.valid(color) ? colors.neutral[300] : color;
+    const hex =
+      badColorValue || !chroma.valid(color) ? colors.neutral[300] : color;
     return css`
       position: relative;
       margin-bottom: ${spacing[400]};
@@ -50,7 +51,7 @@ export const ColorBlockContainer = styled.div`
           display: flex;
           justify-content: center;
           align-items: center;
-          background-color: ${inProgress ? 'transparent' : hex};
+          background-color: ${badColorValue ? "transparent" : hex};
           position: absolute;
           top: 14px;
           left: 14px;
@@ -59,9 +60,11 @@ export const ColorBlockContainer = styled.div`
           height: 14px;
           width: 14px;
           path {
-            ${inProgress && `fill: ${colors.neutral[400]}`};
-            ${!inProgress &&
-              `fill: ${isLight(hex) ? chroma(hex).darken(3) : chroma(hex).brighten(3)}`}
+            ${badColorValue && `fill: ${colors.neutral[400]}`};
+            ${!badColorValue &&
+              `fill: ${
+                isLight(hex) ? chroma(hex).darken(3) : chroma(hex).brighten(3)
+              }`}
           }
         }
         &__color-input {
@@ -92,7 +95,12 @@ export const TitleBlock = styled.div`
 
 export const PaletteBlock = styled.div`
   ${props => {
-    const { theme = {}, color = '', inProgress = false, isSingleColor = false } = props;
+    const {
+      theme = {},
+      color = "",
+      badColorValue = false,
+      isSingleColor = false
+    } = props;
     const { font = {}, colors = {} } = theme;
     return css`
       max-height: 40px;
@@ -103,7 +111,7 @@ export const PaletteBlock = styled.div`
       font-weight: 600;
       height: 100%;
       flex: 1;
-      background-color: ${inProgress ? colors.neutral[300] : color};
+      background-color: ${badColorValue ? colors.neutral[300] : color};
       color: ${isReadableLight(color) ? colors.white : colors.black};
     `;
   }}

@@ -12,6 +12,7 @@ import AuthPage from "./pages/AuthPage";
 import HomePage from "./pages/HomePage";
 
 import ThemePicker from "./components/common/ThemePicker";
+import EditPage from "./pages/EditPage";
 
 const AppContainer = styled.div`
   position: relative;
@@ -55,6 +56,9 @@ function App() {
             <Route path="/theme-configuration">
               {store.themeId ? <ConfigurationPage /> : <Loading />}
             </Route> */}
+            <Route path="/configure-theme">
+              <EditPage />
+            </Route>
             <Route path="/home">
               <HomePage />
             </Route>
