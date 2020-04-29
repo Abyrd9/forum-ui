@@ -1,10 +1,10 @@
 import styled, { css } from "styled-components";
 import chroma from "chroma-js";
-import checkColorBrightness from "../../../../../helpers/checkColorBrightness";
+import checkColorBrightness from "../../helpers/checkColorBrightness";
 
 const { isLight, isReadableLight } = checkColorBrightness;
 
-export const EditColorItemContainer = styled.div`
+export const ColorsConfigureItemContainer = styled.div`
   ${props => {
     const { theme = {}, color = "", badColorValue = false } = props;
 

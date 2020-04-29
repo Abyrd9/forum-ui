@@ -3,18 +3,21 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import chroma from "chroma-js";
-import { EditColorItemContainer, PaletteBlock } from "./EditColorItem.styles";
-import PencilIcon from "../../../../Utilities/Icons/PencilIcon";
-import Transition from "../../../../Utilities/Transition";
-import TitleInput from "../TitleInput";
-import PaletteToggle from "../PaletteToggle";
-import DeleteOverlay from "../DeleteOverlay";
-import DeleteButton from "../DeleteButton";
-import AddButton from "../AddButton";
+import {
+  ColorsConfigureItemContainer,
+  PaletteBlock
+} from "./ColorsConfigureItem.styles";
+import PencilIcon from "../Utilities/Icons/PencilIcon";
+import Transition from "../Utilities/Transition";
+import TitleInput from "./components/TitleInput";
+import PaletteToggle from "./components/PaletteToggle";
+import DeleteOverlay from "./components/DeleteOverlay";
+import DeleteButton from "./components/DeleteButton";
+import AddButton from "./components/AddButton";
 
 const isHex = /^#([A-Fa-f0-9]{6})$/i;
 
-const EditColorItem = ({
+const ColorsConfigureItem = ({
   colorId,
   color,
   isFlat,
@@ -37,7 +40,7 @@ const EditColorItem = ({
   }, [color]);
 
   return (
-    <EditColorItemContainer color={color} badColorValue={badColorValue}>
+    <ColorsConfigureItemContainer color={color} badColorValue={badColorValue}>
       <Transition show={overlayVisible}>
         <DeleteOverlay
           handleOnClose={() => toggleOverlayVisible(false)}
@@ -102,11 +105,11 @@ const EditColorItem = ({
           </>
         )}
       </div>
-    </EditColorItemContainer>
+    </ColorsConfigureItemContainer>
   );
 };
 
-EditColorItem.defaultProps = {
+ColorsConfigureItem.defaultProps = {
   colorId: "",
   color: "",
   isFlat: false,
@@ -119,7 +122,7 @@ EditColorItem.defaultProps = {
   handleAddColor: () => {}
 };
 
-EditColorItem.propTypes = {
+ColorsConfigureItem.propTypes = {
   colorId: PropTypes.string,
   color: PropTypes.string,
   isFlat: PropTypes.bool,
@@ -132,4 +135,4 @@ EditColorItem.propTypes = {
   handleAddColor: PropTypes.func
 };
 
-export default EditColorItem;
+export default ColorsConfigureItem;

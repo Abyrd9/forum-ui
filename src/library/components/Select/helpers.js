@@ -1,10 +1,10 @@
-import matchParentNode from '../../../helpers/matchParentNode';
+import matchParentNode from "../../../helpers/matchParentNode";
 
 export const onKeyDownEvent = (list, inputNode, callback) => event => {
   // Before we check whether the select is active or not,
   // capture and run the tab event
-  if (event.code === 'Tab') {
-    callback({ type: 'Tab' });
+  if (event.code === "Tab") {
+    callback({ type: "Tab" });
   }
 
   // if the select is not the active element, break out of function
@@ -12,24 +12,24 @@ export const onKeyDownEvent = (list, inputNode, callback) => event => {
   if (!isActive) return;
 
   // check if the select input has a value from the list
-  const value = inputNode.value || '';
+  const value = inputNode.value || "";
   const listHasValue = list.some(item => item.value === value);
 
   // On ArrowDown if the input value is an item in the list, then select the next
   // item in the list and handle the scroll. if it's the last index, do nothing.
   // If the value is not in the list, then select the first item from the list.
-  if (event.code === 'ArrowDown') {
+  if (event.code === "ArrowDown") {
     event.preventDefault();
     if (listHasValue) {
       const listIndex = list.findIndex(item => item.value === value);
       const isNotLastIndex = listIndex !== list.length - 1;
       if (isNotLastIndex) {
         const nextItem = list[listIndex + 1].value;
-        callback({ type: 'ArrowDown', value: nextItem });
+        callback({ type: "ArrowDown", value: nextItem });
       }
     } else {
       const nextItem = list[0].value;
-      callback({ type: 'ArrowDown', value: nextItem });
+      callback({ type: "ArrowDown", value: nextItem });
     }
   }
 
@@ -38,24 +38,26 @@ export const onKeyDownEvent = (list, inputNode, callback) => event => {
   // On ArrowUp if the input value is an item in the list, then select the previous
   // item in the list and handle the scroll. If it's the first index, do nothing.
   // If the value is not in the list, do nothing.
-  if (event.code === 'ArrowUp') {
+  if (event.code === "ArrowUp") {
     event.preventDefault();
     const listIndex = list.findIndex(item => item.value === value);
     const isNotFirstIndex = listIndex !== 0;
     if (isNotFirstIndex) {
       const nextItem = list[listIndex - 1].value;
-      callback({ type: 'ArrowUp', value: nextItem });
+      callback({ type: "ArrowUp", value: nextItem });
     }
   }
 
   // On Enter set the input value
-  if (event.code === 'Enter') {
-    callback({ type: 'Enter', value });
+  if (event.code === "Enter") {
+    callback({ type: "Enter", value });
   }
 };
 
 // Close the dropdown if you click outside of the SelectContainer container
-export const selectClickEvent = (containerNode, toggleActive) => ({ target }) => {
+export const selectClickEvent = (containerNode, toggleActive) => ({
+  target
+}) => {
   const isWithinContainer = matchParentNode(containerNode, target);
   if (!isWithinContainer) {
     toggleActive(false);

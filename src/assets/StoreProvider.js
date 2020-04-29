@@ -12,7 +12,8 @@ export const ACTION_TYPES = {
   UPDATE_COLOR_VALUE: "UPDATE_COLOR_VALUE",
   TOGGLE_COLOR_IS_FLAT: "TOGGLE_COLOR_IS_FLAT",
   ADD_COLOR_ITEM: "ADD_COLOR_ITEM",
-  REMOVE_COLOR_ITEM: "REMOVE_COLOR_ITEM"
+  REMOVE_COLOR_ITEM: "REMOVE_COLOR_ITEM",
+  UPDATE_TYPOGRAPHY: "UPDATE_TYPOGRAPHY"
 };
 
 export const StoreContext = React.createContext({});
@@ -60,6 +61,15 @@ const reducer = (draft, action) => {
       const { colorId = "" } = action;
       const { activeThemeId = "" } = draft;
       delete draft.themes[activeThemeId].colors[colorId];
+      return draft;
+    }
+    case ACTION_TYPES.UPDATE_TYPOGRAPHY: {
+      const { activeThemeId = "" } = draft;
+      const current = draft.themes[activeThemeId].typography;
+      draft.themes[activeThemeId].typography = {
+        ...current,
+        ...action.payload
+      };
       return draft;
     }
     default:

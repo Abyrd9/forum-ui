@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const DeleteButtonContainer = styled.button`
   ${props => {
@@ -14,7 +14,8 @@ export const DeleteButtonContainer = styled.button`
       display: inline-flex;
       padding: 0;
       &:focus .delete-icon {
-        box-shadow: 0 0 2px ${colors.neutral[800]}, 0 0 4px ${colors.neutral[800]};
+        box-shadow: 0 0 2px ${colors.neutral[800]},
+          0 0 4px ${colors.neutral[800]};
         border-radius: 2px;
       }
       &:active .delete-icon {

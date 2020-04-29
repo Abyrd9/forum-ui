@@ -4,7 +4,7 @@ import chroma from "chroma-js";
 import { uuid } from "uuidv4";
 import { ConfigureColorsStyled } from "./ConfigureColors.styles";
 import { StoreContext, ACTION_TYPES } from "../../assets/StoreProvider";
-import EditColorItem from "../pages/ConfigurePage/Colors/EditColorItem/EditColorItem";
+import ColorsConfigureItem from "../ColorsConfigureItem";
 import buildColorPalette from "../../helpers/buildColorPalette";
 import Row from "../../library/components/ForumGrid/Row";
 import Column from "../../library/components/ForumGrid/Column";
@@ -100,7 +100,7 @@ const ConfigureColors = ({ colors }) => {
       <Row fillGrid>
         {Object.entries(colors).map(([key, colorObj]) => (
           <Column xsUp={12} mdUp={6} lg={4} autoGutter>
-            <EditColorItem
+            <ColorsConfigureItem
               colorId={key}
               {...colorObj}
               handleUpdateTitle={handleUpdateTitle}
@@ -111,7 +111,7 @@ const ConfigureColors = ({ colors }) => {
           </Column>
         ))}
         <Column xsUp={12} mdUp={6} lg={4} autoGutter>
-          <EditColorItem
+          <ColorsConfigureItem
             colorId="creator"
             {...colorObjDraft}
             handleUpdateTitle={handleUpdateTitle}

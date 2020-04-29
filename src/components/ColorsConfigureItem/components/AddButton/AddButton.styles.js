@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const AddButtonContainer = styled.button`
   ${props => {
@@ -20,7 +20,7 @@ export const AddButtonContainer = styled.button`
         transition: all 100ms ease-in-out;
         opacity: 0;
         display: inline-block;
-        content: '';
+        content: "";
         position: absolute;
         top: -2px;
         left: -2px;
@@ -28,7 +28,8 @@ export const AddButtonContainer = styled.button`
         height: calc(100% + 4px);
         border-radius: 4px;
         background-color: transparent;
-        box-shadow: 0 0 3px ${colors.success[600]}, 0 0 5px ${colors.success[600]};
+        box-shadow: 0 0 3px ${colors.success[600]},
+          0 0 5px ${colors.success[600]};
       }
       &:not(:disabled):focus {
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.23);

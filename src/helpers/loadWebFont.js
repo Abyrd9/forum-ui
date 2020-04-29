@@ -1,4 +1,4 @@
-import WebFont from 'webfontloader';
+import WebFont from "webfontloader";
 
 const wait = () =>
   new Promise(resolve => {
@@ -16,16 +16,16 @@ const webFont = config =>
       },
       inactive: () => {
         reject();
-      },
+      }
     });
   });
 
 const loadWebFont = (config, callback) => {
   Promise.all([wait(), webFont(config)])
-    .then(() => callback('resolved'))
+    .then(() => callback("resolved"))
     .catch(() => {
-      console.error('Error Loading web Font');
-      callback('errored');
+      console.error("Error Loading web Font");
+      callback("errored");
     });
 };
 

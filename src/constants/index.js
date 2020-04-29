@@ -2,6 +2,7 @@ import { uuid } from "uuidv4";
 import buildColorPalette from "../helpers/buildColorPalette";
 
 export const GOOGLE_FONTS_API_KEY = "AIzaSyAP4JRmnXRwmd21aGgTmcfwjNv246Y5Cu8";
+export const GOOGLE_FONTS_URL = `https://www.googleapis.com/webfonts/v1/webfonts?key=${GOOGLE_FONTS_API_KEY}&sort=popularity`;
 
 export const COLOR_CREATOR = {
   title: "NewColor",
@@ -53,7 +54,7 @@ export const INITIAL_COLORS = {
     palette: { 400: "#E50F00" },
     isFlat: true,
     order: 6
-  },
+  }
 };
 
 export const INITIAL_TYPOGRAPHY = {

@@ -1,15 +1,15 @@
 const buildGoogleFontsUrl = (family, variants, fullUrl = false) => {
   let url = [];
-  url.push(family.replace(/ /g, '+'));
+  url.push(family.replace(/ /g, "+"));
   if (variants.length > 0) {
     variants.forEach((weight, index) => {
-      let string = '';
-      string += index === 0 ? ':' : ',';
-      string += weight === 'regular' ? '400' : weight;
+      let string = "";
+      string += index === 0 ? ":" : ",";
+      string += weight === "regular" ? "400" : weight;
       url.push(string);
     });
   }
-  url = url.join('');
+  url = url.join("");
   if (fullUrl) {
     url = `https://fonts.googleapis.com/css?family=${url}&display=swap`;
   }
