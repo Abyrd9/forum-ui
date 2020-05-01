@@ -1,23 +1,23 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const TabsContainer = styled.div`
   ${props => {
     const { theme = {} } = props;
-    const { colors = {}, spacing = {} } = theme;
+    const { colors = {} } = theme;
     return css`
-      margin-bottom: ${spacing[300]};
       .forum-ui-tabs-list {
+        width: fit-content;
         display: flex;
         align-items: center;
         box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
         border-radius: 4px;
+        background: #f1f1f0;
       }
       .forum-ui-tabs-list-item {
-        flex: 1;
         &-button {
           width: 100%;
           min-height: 62px;
-          padding: 18px 0px;
+          padding: 16px 32px;
           background: transparent;
           position: relative;
           border: none;
@@ -29,7 +29,7 @@ export const TabsContainer = styled.div`
             transition: all 200ms ease-in-out;
             opacity: 0;
             display: inline-block;
-            content: '';
+            content: "";
             position: absolute;
             bottom: 0;
             left: 0;
@@ -41,7 +41,7 @@ export const TabsContainer = styled.div`
             transition: all 200ms ease-in-out;
             opacity: 0;
             display: inline-block;
-            content: '';
+            content: "";
             position: absolute;
             top: 0;
             left: 0;

@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 export const getBrowserFontSize = () => {
   let base = "16px";
   if (window && document.body) {

@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-export const TypographyTitleWrapperStyled = styled.div`
+export const GenericTitleWrapperStyled = styled.div`
   ${({ theme = {} }) => {
     const { spacing = {}, colors = {} } = theme;
     return css`

@@ -8,7 +8,7 @@ export const CurrentThemeStyled = styled.div`
         text-transform: capitalize;
         font-size: ${font[300]};
         color: ${colors.neutral[400]};
-        margin-bottom: 4px;
+        margin-bottom: ${spacing[100]};
       }
       .theme-name {
         font-weight: 400;

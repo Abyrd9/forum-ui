@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { CounterContainer } from './Counter.styles';
-import Minus from './Icons/MinusIcon';
-import Plus from './Icons/PlusIcon';
+import React, { useState, useRef, useEffect } from "react";
+import PropTypes from "prop-types";
+import { CounterContainer } from "./Counter.styles";
+import Minus from "./Icons/MinusIcon";
+import Plus from "./Icons/PlusIcon";
+import useDeepCompareEffect from "../../../hooks/useDeepCompareEffect";
 
 const Counter = ({
   disabled,
@@ -20,7 +21,7 @@ const Counter = ({
   className,
   handleOnChange,
   handleOnFocus,
-  handleOnBlur,
+  handleOnBlur
 }) => {
   const CounterInputRef = useRef(null);
   const [count, updateCount] = useState(value);
@@ -39,9 +40,13 @@ const Counter = ({
     handleOnChange({ target: CounterInputRef.current });
   }, [count]);
 
+  useDeepCompareEffect(() => {
+    updateCount(value);
+  }, [value]);
+
   const handleOnMinusClick = () => {
     let val = parseFloat(parseFloat(count));
-    if (typeof min !== 'number' || val > min) {
+    if (typeof min !== "number" || val > min) {
       val = parseFloat(val - multiplier);
       if (toFixed) val = val.toFixed(2);
       updateCount(val);
@@ -50,7 +55,7 @@ const Counter = ({
 
   const handleOnPlusClick = () => {
     let val = parseFloat(parseFloat(count));
-    if (typeof max !== 'number' || val < max) {
+    if (typeof max !== "number" || val < max) {
       val = parseFloat(val + multiplier);
       if (toFixed) val = val.toFixed(2);
       updateCount(val);
@@ -59,9 +64,9 @@ const Counter = ({
 
   /* class variables */
   const classNames = {
-    button: 'forum-ui-counter-button',
-    label: 'forum-ui-counter-input-label',
-    input: 'forum-ui-counter-input',
+    button: "forum-ui-counter-button",
+    label: "forum-ui-counter-input-label",
+    input: "forum-ui-counter-input"
   };
 
   if (disabled) classNames.label += ` ${classNames.label}--is-disabled`;
@@ -110,19 +115,19 @@ const Counter = ({
 Counter.defaultProps = {
   disabled: false,
   form: null,
-  name: 'select',
+  name: "select",
   readOnly: false,
   required: false,
-  pattern: '',
+  pattern: "",
   value: 0,
   max: 99,
   min: 0,
   multiplier: 1,
   toFixed: false,
-  className: '',
+  className: "",
   handleOnChange: () => {},
   handleOnFocus: () => {},
-  handleOnBlur: () => {},
+  handleOnBlur: () => {}
 };
 
 Counter.propTypes = {
@@ -140,7 +145,7 @@ Counter.propTypes = {
   className: PropTypes.string,
   handleOnChange: PropTypes.func,
   handleOnFocus: PropTypes.func,
-  handleOnBlur: PropTypes.func,
+  handleOnBlur: PropTypes.func
 };
 
 export default Counter;

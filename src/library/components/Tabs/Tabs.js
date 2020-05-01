@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { TabsContainer } from './Tabs.styles';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { TabsContainer } from "./Tabs.styles";
 
-const Tabs = ({ tabsList, tabActiveIndex, handleTabClick, className, children }) => {
+const Tabs = ({
+  tabsList,
+  tabActiveIndex,
+  handleTabClick,
+  className,
+  children
+}) => {
   const [activeTab, updateActiveTab] = useState({ index: tabActiveIndex });
 
   const onTabClick = (event, tabItem, index) => {
@@ -12,10 +18,10 @@ const Tabs = ({ tabsList, tabActiveIndex, handleTabClick, className, children })
 
   /* class variables */
   const classNames = {
-    list: 'forum-ui-tabs-list',
-    listItem: 'forum-ui-tabs-list-item',
-    button: 'forum-ui-tabs-list-item-button',
-    content: 'forum-ui-tabs-content',
+    list: "forum-ui-tabs-list",
+    listItem: "forum-ui-tabs-list-item",
+    button: "forum-ui-tabs-list-item-button",
+    content: "forum-ui-tabs-content"
   };
 
   return (
@@ -26,9 +32,10 @@ const Tabs = ({ tabsList, tabActiveIndex, handleTabClick, className, children })
           tabsList.map((tab, index) => {
             const key = `${index}-${tab.name}`;
             let buttonClass = classNames.button;
-            if (index === activeTab.index) buttonClass += ` ${classNames.button}--is-active`;
+            if (index === activeTab.index)
+              buttonClass += ` ${classNames.button}--is-active`;
             return (
-              <li className={classNames.listItem} key={key} id={tab.name || ''}>
+              <li className={classNames.listItem} key={key} id={tab.name || ""}>
                 <button
                   type="button"
                   className={buttonClass}
@@ -41,7 +48,12 @@ const Tabs = ({ tabsList, tabActiveIndex, handleTabClick, className, children })
             );
           })}
       </ul>
-      <div className={classNames.content}>{children}</div>
+      <div className={classNames.content}>
+        {children({
+          activeTab,
+          updateActiveTab
+        })}
+      </div>
     </TabsContainer>
   );
 };
@@ -49,7 +61,8 @@ const Tabs = ({ tabsList, tabActiveIndex, handleTabClick, className, children })
 Tabs.defaultProps = {
   tabActiveIndex: 0,
   handleTabClick: () => null,
-  className: '',
+  className: "",
+  children: () => {}
 };
 
 Tabs.propTypes = {
@@ -57,13 +70,17 @@ Tabs.propTypes = {
     PropTypes.shape({
       name: PropTypes.string,
       value: PropTypes.string,
-      content: PropTypes.node,
-    }),
+      content: PropTypes.node
+    })
   ]).isRequired,
   tabActiveIndex: PropTypes.number,
   handleTabClick: PropTypes.func,
   className: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.func
+  ])
 };
 
 export default Tabs;

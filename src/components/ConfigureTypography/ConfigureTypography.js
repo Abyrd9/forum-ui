@@ -8,6 +8,15 @@ import buildGoogleFontsUrl from "../../helpers/buildGoogleFontsUrl";
 import loadWebFont from "../../helpers/loadWebFont";
 import useDeepCompareEffect from "../../hooks/useDeepCompareEffect";
 import { ACTION_TYPES, StoreContext } from "../../assets/StoreProvider";
+import Row from "../../library/components/ForumGrid/Row";
+import Column from "../../library/components/ForumGrid/Column";
+import Divider from "../Divider";
+import GenericTitleWrapper from "../GenericTitleWrapper";
+import TypographyParagraph from "../TypographyParagraph";
+import TypographyWeights from "../TypographyWeights";
+import ConfigValueConfigureBlock from "../ConfigValueConfigureBlock";
+import TypographySize from "../TypographySize/TypographySize";
+import TypographyFamily from "../TypographyFamily/TypographyFamily";
 
 const ConfigureTypography = ({ typography }) => {
   const { dispatch } = useContext(StoreContext);
@@ -19,6 +28,7 @@ const ConfigureTypography = ({ typography }) => {
   // This could be run in the handleOnFamilyChange but we don't want the
   // api call to slow down the Select component search
   useDeepCompareEffect(() => {
+    console.log(loading);
     if (!isEmpty(typography)) {
       setLoading(true);
       // load the new webfont on the page
@@ -54,12 +64,59 @@ const ConfigureTypography = ({ typography }) => {
 
   return (
     <ConfigureTypographyStyled>
-      <Select
-        placeholder="Choose font family..."
-        list={formatted}
-        value={fontSearchValue}
-        handleOnChange={handleOnFamilyChange}
-      />
+      <Row>
+        <Column xsUp={12} mdUp={8} lg={5}>
+          <Select
+            placeholder="Choose font family..."
+            list={formatted}
+            value={fontSearchValue}
+            handleOnChange={handleOnFamilyChange}
+          />
+        </Column>
+      </Row>
+
+      <Row fillGrid>
+        <Column autoGutter xsUp={12} mdUp={7}>
+          <GenericTitleWrapper title="Paragraph">
+            <TypographyParagraph fontFamily={typography.family || ""} />
+          </GenericTitleWrapper>
+        </Column>
+        <Column autoGutter xsUp={12} mdUp={5}>
+          <TypographyFamily
+            title="Current Font Family:"
+            fontFamily={typography.family || ""}
+          />
+          <GenericTitleWrapper title="Font Weights">
+            <TypographyWeights
+              fontFamily={typography.family || ""}
+              fontVariants={typography.variants || []}
+            />
+          </GenericTitleWrapper>
+        </Column>
+      </Row>
+      <Divider spacing={300} />
+      <Row fillGrid>
+        <Column autoGutter xsUp={12} lg={7}>
+          <GenericTitleWrapper title="Variable Font Sizing">
+            <ConfigValueConfigureBlock
+              actionType={ACTION_TYPES.UPDATE_TYPOGRAPHY}
+              baseSize={typography.baseSize || 16}
+              upperRatio={typography.upperRatio || 1}
+              lowerRatio={typography.lowerRatio || 1}
+            />
+          </GenericTitleWrapper>
+        </Column>
+        <Column autoGutter xsUp={12} lg={5}>
+          <GenericTitleWrapper title="Font Sizing">
+            <TypographySize
+              fontFamily={typography.family || ""}
+              baseSize={typography.baseSize || 16}
+              upperRatio={typography.upperRatio || 1}
+              lowerRatio={typography.lowerRatio || 1}
+            />
+          </GenericTitleWrapper>
+        </Column>
+      </Row>
     </ConfigureTypographyStyled>
   );
 };

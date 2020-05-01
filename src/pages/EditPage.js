@@ -4,8 +4,9 @@ import { StoreContext } from "../assets/StoreProvider";
 import Divider from "../components/Divider";
 import CurrentTheme from "../components/CurrentTheme";
 import SectionTitle from "../components/common/SectionTitle";
-import ConfigureColors from "../components/ConfigureColors/ConfigureColors";
-import ConfigureTypography from "../components/ConfigureTypography/ConfigureTypography";
+import ConfigureColors from "../components/ConfigureColors";
+import ConfigureTypography from "../components/ConfigureTypography";
+import ConfigureSpacing from "../components/ConfigureSpacing";
 
 const EditPage = () => {
   const { theme } = useContext(StoreContext);
@@ -41,6 +42,12 @@ const EditPage = () => {
         description="A ForumUi Typography system has eight levels of font sizing. Currently we only support the use of the top 100 most popular google fonts."
       />
       <ConfigureTypography typography={typography} />
+      <Divider spacing={600} />
+      <SectionTitle
+        title="Spacing"
+        description="A ForumUi spacing system has eight levels to space out elements on the page."
+      />
+      <ConfigureSpacing spacing={spacing} />
     </>
   );
 };
