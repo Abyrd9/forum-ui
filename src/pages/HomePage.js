@@ -1,5 +1,4 @@
 import React, { useContext, useMemo } from "react";
-
 import SectionTitle from "../components/common/SectionTitle";
 import { StoreContext } from "../assets/StoreProvider";
 import Row from "../library/components/ForumGrid/Row";
@@ -17,13 +16,20 @@ import { getSizingVariations } from "../helpers/buildTheme";
 import SpacingExampleCard from "../components/SpacingExampleCard";
 
 const HomePage = () => {
-  const { theme } = useContext(StoreContext);
-  const { themeName = "", colors = {}, typography = {}, spacing = {} } = theme;
+  const { store = {} } = useContext(StoreContext);
+  const { activeThemeId = "", themes = {} } = store;
+  const currentTheme = themes[activeThemeId] || {};
+  const {
+    themeName = "",
+    colors = {},
+    typography = {},
+    spacing = {}
+  } = currentTheme;
 
   const getFilteredColors = boolValue => {
     return Object.values(colors)
       .filter(color => color.isFlat === boolValue)
-      .sort((a, b) => a.order - b.order);
+      .sort((a, b) => a.sortOrder - b.sortOrder);
   };
   const variantColors = useMemo(() => getFilteredColors(false), [colors]);
   const flatColors = useMemo(() => getFilteredColors(true), [colors]);

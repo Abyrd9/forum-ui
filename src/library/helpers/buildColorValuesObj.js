@@ -8,6 +8,7 @@ const buildColorValuesObj = props => {
     active: "#a2a2a2",
     hovered: "#f1f1f0",
     disabled: "#e2e2e2",
+    textDisabled: "#b0b0b0",
     text: "#000000"
   };
 
@@ -41,7 +42,8 @@ const buildColorValuesObj = props => {
       base,
       active: chroma(base).darken(0.5),
       hovered: chroma(base).alpha(0.35),
-      disabled: chroma(base).brighten(1.5),
+      disabled: "#e2e2e2",
+      textDisabled: "#b0b0b0",
       text: chroma.contrast(base, "#ffffff") > 4.5 ? "#000000" : "#ffffff"
     };
   }

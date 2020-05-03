@@ -38,7 +38,7 @@ export const ButtonContainer = styled.button`
       &:disabled {
         cursor: not-allowed;
         box-shadow: none;
-        color: ${loading ? colorObj.text : colorObj.base};
+        color: ${loading ? colorObj.text : colorObj.textDisabled};
         background-color: ${loading ? colorObj.base : colorObj.disabled};
       }
       ${styleMap({

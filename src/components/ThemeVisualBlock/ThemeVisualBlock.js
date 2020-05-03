@@ -20,7 +20,8 @@ const ThemeVisualBlock = ({ theme, selected }) => {
     const colorsArr = Object.values(colors);
     const newColorsArr = [];
     for (let i = 0; i <= 2; i++) {
-      newColorsArr.push(Object.values(colorsArr[i].palette));
+      const palette = colorsArr[i] ? colorsArr[i].palette : [];
+      newColorsArr.push(Object.values(palette));
     }
     return newColorsArr;
   }, [colors]);
@@ -32,8 +33,12 @@ const ThemeVisualBlock = ({ theme, selected }) => {
     });
   };
 
-  const handleDeleteClick = event => {
-    console.log("hello");
+  const handleDeleteClick = () => {
+    dispatch({
+      type: ACTION_TYPES.DELETE_THEME,
+      themeId
+    });
+    toggleOverlayVisible(false);
   };
 
   return (

@@ -17,7 +17,7 @@ const ConfigureColors = ({ colors }) => {
   const [colorObjDraft, setColorObjDraft] = useState({
     color: "",
     isFlat: false,
-    order: Object.keys(colors).length + 1,
+    sortOrder: Object.keys(colors).length + 1,
     palette: {},
     title: "New Color"
   });
@@ -95,7 +95,7 @@ const ConfigureColors = ({ colors }) => {
       setColorObjDraft({
         color: "",
         isFlat: false,
-        order: order + 1,
+        sortOrder: order + 1,
         palette: {},
         title: "New Color"
       });

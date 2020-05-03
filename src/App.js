@@ -4,14 +4,15 @@ import styled from "styled-components";
 import Grid from "./library/components/ForumGrid/Grid";
 import Row from "./library/components/ForumGrid/Row";
 
-import Navigation from "./components/common/Navigation";
-import PageTitle from "./components/common/PageTitle";
-import Footer from "./components/common/Footer";
+import Navigation from "./components/Navigation";
+import PageTitle from "./components/PageTitle";
+import Footer from "./components/Footer";
 
 import AuthPage from "./pages/AuthPage";
 import HomePage from "./pages/HomePage";
-import EditPage from "./pages/EditPage";
-import ThemesPage from "./pages/ThemesPage";
+import EditThemePage from "./pages/EditThemePage";
+import ChooseThemePage from "./pages/ChooseThemePage";
+import CopyThemePage from "./pages/CopyThemePage";
 
 const AppContainer = styled.div`
   position: relative;
@@ -32,11 +33,14 @@ function App() {
             subtitle="A simplified design system generator for React Developers."
           />
           <Switch>
-            <Route path="/choose-theme">
-              <ThemesPage />
+            <Route path="/copy-theme">
+              <CopyThemePage />
             </Route>
             <Route path="/edit-theme">
-              <EditPage />
+              <EditThemePage />
+            </Route>
+            <Route path="/choose-theme">
+              <ChooseThemePage />
             </Route>
             <Route path="/authentication">
               <AuthPage />

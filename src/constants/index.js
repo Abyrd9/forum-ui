@@ -9,7 +9,7 @@ export const COLOR_CREATOR = {
   color: "",
   palette: { inProgress: true },
   isFlat: false,
-  order: Infinity
+  sortOrder: Infinity
 };
 
 export const INITIAL_COLORS = {
@@ -18,42 +18,42 @@ export const INITIAL_COLORS = {
     color: "#FE5F55",
     palette: buildColorPalette("#FE5F55"),
     isFlat: false,
-    order: 1
+    sortOrder: 1
   },
   [uuid()]: {
     title: "secondary",
     color: "#006989",
     palette: buildColorPalette("#006989"),
     isFlat: false,
-    order: 2
+    sortOrder: 2
   },
   [uuid()]: {
     title: "neutral",
     color: "#BEBEBE",
     palette: buildColorPalette("#BEBEBE"),
     isFlat: false,
-    order: 3
+    sortOrder: 3
   },
   [uuid()]: {
     title: "warning",
     color: "#FDE74C",
     palette: { 400: "#FDE74C" },
     isFlat: true,
-    order: 4
+    sortOrder: 4
   },
   [uuid()]: {
     title: "success",
     color: "#A5D836",
     palette: { 400: "#A5D836" },
     isFlat: true,
-    order: 5
+    sortOrder: 5
   },
   [uuid()]: {
     title: "error",
     color: "#E50F00",
     palette: { 400: "#E50F00" },
     isFlat: true,
-    order: 6
+    sortOrder: 6
   }
 };
 

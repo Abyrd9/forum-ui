@@ -8,6 +8,7 @@ import { FirebaseContext } from "./FirebaseProvider";
 import useDeepCompareEffect from "../hooks/useDeepCompareEffect";
 import { INITIAL_TYPOGRAPHY, INITIAL_SPACING } from "../constants";
 import buildColorPalette from "../helpers/buildColorPalette";
+import updateSortOrder from "../helpers/updateSortOrder";
 
 export const ACTION_TYPES = {
   SET_USER_THEMES: "SET_USER_THEMES",
@@ -60,7 +61,7 @@ const reducer = (draft, action) => {
             color: "#BEBEBE",
             palette: buildColorPalette("#BEBEBE"),
             isFlat: false,
-            order: 1
+            sortOrder: 1
           }
         },
         spacing: INITIAL_SPACING,
@@ -86,8 +87,9 @@ const reducer = (draft, action) => {
           // is the first one on the list
           const getNextSortOrder = order => (order > 1 ? order - 1 : order + 1);
           currentSortOrder = getNextSortOrder(currentSortOrder);
+
           const fallbackTheme = Object.values(draft.themes).find(theme => {
-            return theme.sortOrder === currentSortOrder - 1;
+            return theme.sortOrder === currentSortOrder;
           });
 
           // If there is a fallback theme, make it the current theme
@@ -96,7 +98,8 @@ const reducer = (draft, action) => {
           }
         }
         delete draft.themes[action.themeId];
-        // TODO: Run through all themes and reassign their sort order
+        // Re-order the sort number of the themes
+        draft.themes = updateSortOrder(draft.themes);
       }
       return draft;
     }
@@ -143,7 +146,10 @@ const reducer = (draft, action) => {
       const { activeThemeId = "" } = draft || {};
       if (!isEmpty(draft)) {
         delete draft.themes[activeThemeId].colors[colorId];
-        // TODO: Run through all colors and reassign their sort order
+
+        // Re-order the sort number of the colors
+        const { colors } = draft.themes[activeThemeId];
+        draft.themes[activeThemeId].colors = updateSortOrder(colors);
         return draft;
       }
       break;
@@ -188,13 +194,8 @@ const StoreProvider = ({ children }) => {
     }
   }, [userThemes]);
 
-  let theme = {};
-  if (state && state.activeThemeId && state.themes) {
-    const { activeThemeId, themes } = state;
-    theme = themes[activeThemeId];
-  }
   return (
-    <StoreContext.Provider value={{ store: state || {}, dispatch, theme }}>
+    <StoreContext.Provider value={{ store: state || {}, dispatch }}>
       {children}
     </StoreContext.Provider>
   );

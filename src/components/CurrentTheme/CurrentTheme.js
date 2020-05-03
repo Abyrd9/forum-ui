@@ -7,13 +7,15 @@ import Divider from "../Divider";
 import ThemeToolbox from "../ThemeToolbox/ThemeToolbox";
 
 const CurrentTheme = ({ themeName }) => {
-  const { dispatch, theme } = useContext(StoreContext);
   const { pathname = "" } = useLocation();
+  const { store = {}, dispatch } = useContext(StoreContext);
+  const { activeThemeId = "", themes = {} } = store;
+  const currentTheme = themes[activeThemeId] || {};
 
   return (
     <CurrentThemeStyled>
       <h5 className="title">Current Theme:</h5>
-      {pathname.includes("configure-theme") ? (
+      {pathname.includes("edit-theme") ? (
         <input
           className="theme-input-name"
           value={themeName}
@@ -28,8 +30,8 @@ const CurrentTheme = ({ themeName }) => {
         <h3 className="theme-name">{themeName}</h3>
       )}
       <ThemeToolbox
-        activeThemeId={theme.themeId}
-        activeThemeName={theme.themeName}
+        activeThemeId={currentTheme.themeId || ""}
+        activeThemeName={currentTheme.themeName || ""}
       />
       <Divider spacing={600} />
       <span className="divider-line" />

@@ -9,15 +9,18 @@ import {
   faPlusCircle
 } from "@fortawesome/pro-duotone-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import isEmpty from "lodash.isempty";
 import { ThemeToolboxStyled, ModalContent } from "./ThemeToolbox.styles";
 import Button from "../../library/components/Button";
 import { StoreContext, ACTION_TYPES } from "../../assets/StoreProvider";
 import Modal from "../../library/components/Modal";
+import { FirebaseContext } from "../../assets/FirebaseProvider";
 
 const ThemeToolbox = ({ activeThemeId, activeThemeName }) => {
   const [modalVisible, toggleModalVisible] = useState(false);
   const [modalContentType, setModalContentType] = useState("");
-  const { dispatch } = useContext(StoreContext);
+  const { store = {}, dispatch } = useContext(StoreContext);
+  const { userData = {} } = useContext(FirebaseContext);
   const { pathname = "" } = useLocation();
   const { push = () => {} } = useHistory();
 
@@ -42,43 +45,42 @@ const ThemeToolbox = ({ activeThemeId, activeThemeName }) => {
         <FontAwesomeIcon icon={faTools} className="toolbox__tool-icon" />
         <span className="toolbox__divider" />
         <ul className="toolbox-list">
-          {!pathname.includes("choose-theme") && (
-            <li className="toolbox-list__item">
-              <Button
-                primary
-                large
-                colorWhite
-                className="toolbox-list__button"
-                onClick={handleClickChooseTheme}
-              >
-                <FontAwesomeIcon
-                  icon={faList}
-                  className="toolbox-list__icon toolbox-list__icon--list"
-                />
-              </Button>
-            </li>
-          )}
-          {!pathname.includes("edit-theme") && (
-            <li className="toolbox-list__item">
-              <Button
-                secondary
-                large
-                colorWhite
-                className="toolbox-list__button"
-                onClick={handleClickEditTheme}
-              >
-                <FontAwesomeIcon
-                  icon={faEdit}
-                  className="toolbox-list__icon toolbox-list__icon--edit"
-                />
-              </Button>
-            </li>
-          )}
+          <li className="toolbox-list__item">
+            <Button
+              primary
+              large
+              colorWhite
+              disabled={pathname.includes("choose-theme")}
+              className="toolbox-list__button"
+              onClick={handleClickChooseTheme}
+            >
+              <FontAwesomeIcon
+                icon={faList}
+                className="toolbox-list__icon toolbox-list__icon--list"
+              />
+            </Button>
+          </li>
+          <li className="toolbox-list__item">
+            <Button
+              secondary
+              large
+              colorWhite
+              disabled={pathname.includes("edit-theme")}
+              className="toolbox-list__button"
+              onClick={handleClickEditTheme}
+            >
+              <FontAwesomeIcon
+                icon={faEdit}
+                className="toolbox-list__icon toolbox-list__icon--edit"
+              />
+            </Button>
+          </li>
           <li className="toolbox-list__item">
             <Button
               error
               large
               colorWhite
+              disabled={Object.values(store.themes || {}).length <= 1}
               className="toolbox-list__button"
               onClick={handleClickDeleteTheme}
             >
@@ -93,6 +95,7 @@ const ThemeToolbox = ({ activeThemeId, activeThemeName }) => {
               success
               large
               colorWhite
+              disabled={isEmpty(userData)}
               className="toolbox-list__button"
               onClick={handleClickCreateTheme}
             >
@@ -124,6 +127,7 @@ const ThemeToolbox = ({ activeThemeId, activeThemeName }) => {
                       type: ACTION_TYPES.DELETE_THEME,
                       themeId: activeThemeId
                     });
+                    push("/choose-theme");
                     toggleModalVisible(false);
                   }}
                 >
