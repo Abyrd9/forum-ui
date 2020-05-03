@@ -92,6 +92,13 @@ const ConfigureColors = ({ colors }) => {
         colorId,
         colorObj: { ...colorObjDraft, title: colorTitle, order }
       });
+      setColorObjDraft({
+        color: "",
+        isFlat: false,
+        order: order + 1,
+        palette: {},
+        title: "New Color"
+      });
     }
   };
 

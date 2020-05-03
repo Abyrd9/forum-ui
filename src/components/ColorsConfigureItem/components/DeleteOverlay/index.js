@@ -4,7 +4,7 @@ import { DeleteOverlayContainer } from "./DeleteOverlay.styles";
 import Button from "../../../../library/components/Button";
 import matchParentNode from "../../../../helpers/matchParentNode";
 
-const DeleteOverlay = ({ handleOnClose, handleOnDelete }) => {
+const DeleteOverlay = ({ text, handleOnClose, handleOnDelete }) => {
   const DeleteOverlayRef = useRef(null);
 
   const handleClick = remove => {
@@ -27,7 +27,7 @@ const DeleteOverlay = ({ handleOnClose, handleOnDelete }) => {
 
   return (
     <DeleteOverlayContainer ref={DeleteOverlayRef}>
-      <p className="delete-text">Are you sure you want to delete this color?</p>
+      <p className="delete-text">{text}</p>
       <div className="button-container">
         <Button
           small
@@ -52,11 +52,13 @@ const DeleteOverlay = ({ handleOnClose, handleOnDelete }) => {
 };
 
 DeleteOverlay.defaultProps = {
+  text: "",
   handleOnClose: () => {},
   handleOnDelete: () => {}
 };
 
 DeleteOverlay.propTypes = {
+  text: PropTypes.string,
   handleOnClose: PropTypes.func,
   handleOnDelete: PropTypes.func
 };

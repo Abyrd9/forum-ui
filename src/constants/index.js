@@ -22,8 +22,8 @@ export const INITIAL_COLORS = {
   },
   [uuid()]: {
     title: "secondary",
-    color: "#84DCC6",
-    palette: buildColorPalette("#84DCC6"),
+    color: "#006989",
+    palette: buildColorPalette("#006989"),
     isFlat: false,
     order: 2
   },

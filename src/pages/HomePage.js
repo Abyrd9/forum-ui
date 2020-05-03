@@ -59,12 +59,16 @@ const HomePage = () => {
         description="A ForumUi Typography system has eight levels of font sizing."
       />
       <Row>
+        <Column>
+          <TypographyFamily
+            title="Current Font Family:"
+            fontFamily={typography.family || ""}
+          />
+        </Column>
+      </Row>
+      <Row>
         <Column shrink gutterRight={32}>
           <GenericTitleWrapper title="Font Weights">
-            <TypographyFamily
-              title="Current Font Family:"
-              fontFamily={typography.family || ""}
-            />
             <TypographyWeights
               fontFamily={typography.family || ""}
               fontVariants={typography.variants || []}

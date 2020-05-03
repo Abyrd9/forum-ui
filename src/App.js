@@ -10,9 +10,8 @@ import Footer from "./components/common/Footer";
 
 import AuthPage from "./pages/AuthPage";
 import HomePage from "./pages/HomePage";
-
-import ThemePicker from "./components/common/ThemePicker";
 import EditPage from "./pages/EditPage";
+import ThemesPage from "./pages/ThemesPage";
 
 const AppContainer = styled.div`
   position: relative;
@@ -33,37 +32,17 @@ function App() {
             subtitle="A simplified design system generator for React Developers."
           />
           <Switch>
-            {/* <Route path="/">
-              <SectionTitle
-                title="Colors"
-                description={
-                  <span>
-                    A ForumUi color palette is loosely based on the guidelines given from{' '}
-                    <a
-                      href="https://refactoringui.com/previews/building-your-color-palette/"
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      RefactoringUi
-                    </a>
-                    . The initial colors have a primary, secondary, and neutral color palette as
-                    well as three accent colors for warning, error, or success notifications.
-                  </span>
-                }
-              />
-            </Route> */}
-            {/* <Route path="/theme-code">{store.themeId ? <OutputCodeSection /> : <Loading />}</Route>
-            <Route path="/theme-configuration">
-              {store.themeId ? <ConfigurationPage /> : <Loading />}
-            </Route> */}
-            <Route path="/configure-theme">
+            <Route path="/choose-theme">
+              <ThemesPage />
+            </Route>
+            <Route path="/edit-theme">
               <EditPage />
             </Route>
-            <Route path="/home">
-              <HomePage />
+            <Route path="/authentication">
+              <AuthPage />
             </Route>
             <Route path="/">
-              <AuthPage />
+              <HomePage />
             </Route>
           </Switch>
         </Router>

@@ -4,7 +4,13 @@ import buildColorValuesObj from "../../helpers/buildColorValuesObj";
 
 export const ButtonContainer = styled.button`
   ${props => {
-    const { theme = {}, outline = false, loading = false } = props;
+    const {
+      theme = {},
+      outline = false,
+      loading = false,
+      colorWhite = false,
+      colorBlack = false
+    } = props;
     const { font = {} } = theme;
     const colorObj = buildColorValuesObj(props);
     return css`
@@ -19,6 +25,8 @@ export const ButtonContainer = styled.button`
       justify-content: center;
       position: relative;
       color: ${colorObj.text};
+      ${colorWhite && "color: #ffffff;"};
+      ${colorBlack && "color: #000000;"};
       background-color: ${colorObj.base};
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
       &:hover:not(:disabled) {
@@ -113,6 +121,8 @@ export const ButtonContainer = styled.button`
         })}
         path {
           fill: ${outline ? colorObj.base : colorObj.text};
+          ${colorWhite && `fill: ${outline ? colorObj.base : "#ffffff"};`};
+          ${colorBlack && `fill: ${outline ? colorObj.base : "#000000"};`};
         }
       }
     `;

@@ -3,12 +3,18 @@ import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { useImmerReducer } from "use-immer";
 import isEmpty from "lodash.isempty";
-import { COLOR_CREATOR } from "../constants";
+import { uuid } from "uuidv4";
 import { FirebaseContext } from "./FirebaseProvider";
 import useDeepCompareEffect from "../hooks/useDeepCompareEffect";
+import { INITIAL_TYPOGRAPHY, INITIAL_SPACING } from "../constants";
+import buildColorPalette from "../helpers/buildColorPalette";
 
 export const ACTION_TYPES = {
   SET_USER_THEMES: "SET_USER_THEMES",
+  SET_ACTIVE_THEME: "SET_ACTIVE_THEME",
+  SET_THEME_TITLE: "SET_THEME_TITLE",
+  CREATE_THEME: "CREATE_THEME",
+  DELETE_THEME: "DELETE_THEME",
   UPDATE_COLOR_TITLE: "UPDATE_COLOR_TITLE",
   UPDATE_COLOR_VALUE: "UPDATE_COLOR_VALUE",
   TOGGLE_COLOR_IS_FLAT: "TOGGLE_COLOR_IS_FLAT",
@@ -31,6 +37,67 @@ const reducer = (draft, action) => {
         activeThemeId: firstItem.themeId || "",
         themes: action.userThemes
       };
+      return draft;
+    }
+    case ACTION_TYPES.SET_ACTIVE_THEME: {
+      draft.activeThemeId = action.themeId;
+      return draft;
+    }
+    case ACTION_TYPES.SET_THEME_TITLE: {
+      const { activeThemeId = "" } = draft || {};
+      if (!isEmpty(draft)) {
+        draft.themes[activeThemeId].themeName = action.value;
+        return draft;
+      }
+      break;
+    }
+    case ACTION_TYPES.CREATE_THEME: {
+      const NEW_KEY = uuid();
+      const NEW_THEME = {
+        colors: {
+          [uuid()]: {
+            title: "neutral",
+            color: "#BEBEBE",
+            palette: buildColorPalette("#BEBEBE"),
+            isFlat: false,
+            order: 1
+          }
+        },
+        spacing: INITIAL_SPACING,
+        typography: INITIAL_TYPOGRAPHY,
+        sortOrder: Object.values(draft.themes).length + 1,
+        themeName: "New Theme",
+        themeId: NEW_KEY
+      };
+      draft.themes[NEW_KEY] = NEW_THEME;
+      draft.activeThemeId = NEW_KEY;
+      break;
+    }
+    case ACTION_TYPES.DELETE_THEME: {
+      const themesList = Object.values(draft.themes);
+      // If there's only one theme, we won't delete it
+      if (themesList.length > 1) {
+        // if the deleted theme is also the active theme,
+        // we need to select a new active theme
+        if (draft.activeThemeId === action.themeId) {
+          let currentSortOrder = draft.themes[action.themeId].sortOrder;
+
+          // Always fallback to the previous theme, unless the theme being deleted
+          // is the first one on the list
+          const getNextSortOrder = order => (order > 1 ? order - 1 : order + 1);
+          currentSortOrder = getNextSortOrder(currentSortOrder);
+          const fallbackTheme = Object.values(draft.themes).find(theme => {
+            return theme.sortOrder === currentSortOrder - 1;
+          });
+
+          // If there is a fallback theme, make it the current theme
+          if (!isEmpty(fallbackTheme)) {
+            draft.activeThemeId = fallbackTheme.themeId;
+          }
+        }
+        delete draft.themes[action.themeId];
+        // TODO: Run through all themes and reassign their sort order
+      }
       return draft;
     }
     case ACTION_TYPES.UPDATE_COLOR_TITLE: {
@@ -76,6 +143,7 @@ const reducer = (draft, action) => {
       const { activeThemeId = "" } = draft || {};
       if (!isEmpty(draft)) {
         delete draft.themes[activeThemeId].colors[colorId];
+        // TODO: Run through all colors and reassign their sort order
         return draft;
       }
       break;

@@ -73,7 +73,6 @@ export const ColorsConfigureItemContainer = styled.div`
           width: 100%;
           height: 28px;
           text-align: center;
-          margin-bottom: -5px;
           &::placeholder {
             color: ${colors.neutral[300]};
           }

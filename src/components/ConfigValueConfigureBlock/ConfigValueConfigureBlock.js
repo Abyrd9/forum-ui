@@ -60,6 +60,7 @@ const ConfigValueConfigureBlock = ({
           roundToWholeNumber
           value={baseSize}
           multiplier={2}
+          min={14}
           handleOnChange={({ target }) =>
             handleChange(target.value, "baseSize")
           }

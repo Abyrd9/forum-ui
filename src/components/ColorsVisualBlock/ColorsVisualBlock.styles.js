@@ -26,7 +26,7 @@ export const ColorItem = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 600;
+      font-weight: bold;
       font-size: 14px;
       height: 70px;
       width: 60px;

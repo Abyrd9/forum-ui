@@ -4,7 +4,7 @@ import { getBrowserFontSize, getSizingVariations } from "../helpers/buildTheme";
 const forumUiTheme = {
   colors: {
     primary: buildColorPalette("#FE5F55"),
-    secondary: buildColorPalette("#84DCC6"),
+    secondary: buildColorPalette("#006989"),
     neutral: buildColorPalette("#BEBEBE"),
     warning: buildColorPalette("#FDE74C"),
     success: buildColorPalette("#A5D836"),

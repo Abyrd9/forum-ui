@@ -43,6 +43,7 @@ const ColorsConfigureItem = ({
     <ColorsConfigureItemContainer color={color} badColorValue={badColorValue}>
       <Transition show={overlayVisible}>
         <DeleteOverlay
+          text="Are you sure you want to delete this color?"
           handleOnClose={() => toggleOverlayVisible(false)}
           handleOnDelete={() => handleDeleteColor(colorId)}
         />

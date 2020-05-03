@@ -10,6 +10,18 @@ export const CurrentThemeStyled = styled.div`
         color: ${colors.neutral[400]};
         margin-bottom: ${spacing[100]};
       }
+      .theme-input-name {
+        font-weight: 400;
+        font-size: ${font[700]};
+        margin-bottom: ${spacing[200]};
+        border-bottom: 1px solid rgba(0, 0, 0, 0);
+        font-family: "Josefin Sans", sans-serif;
+        outline: none;
+        &:focus,
+        &:active {
+          border-bottom: 1px solid ${colors.neutral[400]};
+        }
+      }
       .theme-name {
         font-weight: 400;
         font-size: ${font[700]};
@@ -21,13 +33,6 @@ export const CurrentThemeStyled = styled.div`
         width: 100%;
         background-color: ${colors.neutral[200]};
         margin-bottom: ${spacing[300]};
-      }
-      .button-container {
-        display: flex;
-        align-items: center;
-        button:nth-child(1) {
-          margin-right: 16px;
-        }
       }
     `;
   }}
