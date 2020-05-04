@@ -16,7 +16,7 @@ const styleMap = obj => props => {
     return acc;
   }, []);
 
-  const buildStyleMapArr = objArr.reduce((acc, [key, val]) => {
+  const styleMapArray = objArr.reduce((acc, [key, val]) => {
     let mapValue = val;
     if (Array.isArray(mapValue) && mapValue.every(item => typeof item === 'string')) {
       mapValue = mapValue.join('');
@@ -25,17 +25,20 @@ const styleMap = obj => props => {
     return acc;
   }, []);
 
-  value = buildStyleMapArr.find(([key]) => key === 'default');
+  value = styleMapArray.find(([key]) => key === 'default');
 
+  // Loop through the filtered props. If the style map object has the same
+  // key as one of the props and a prop value exists, then check style map value.
+  // If the style map value is an object, and that object has a key that is the same
+  // value as the prop value, then use that style maps key/value.
   value = filteredProps.reduce((acc, [key, val]) => {
-    const map = Object.fromEntries(buildStyleMapArr);
+    const map = Object.fromEntries(styleMapArray);
     if (map.hasOwnProperty(key) && val) {
       if (isObj(map[key]) && map[key].hasOwnProperty(val)) {
         acc = map[key][val];
       } else {
         acc = map[key];
       }
-      return acc;
     }
     return acc;
   }, value[1]);
