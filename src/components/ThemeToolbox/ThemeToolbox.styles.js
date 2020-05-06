@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const ThemeToolboxStyled = styled.div`
   ${({ theme = {} }) => {
-    const { colors = {} } = theme;
+    const { media = {}, colors = {}, spacing = {}, font = {} } = theme;
     return css`
       display: flex;
       align-items: center;
@@ -26,13 +26,28 @@ export const ThemeToolboxStyled = styled.div`
       .toolbox-list {
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
+        .tooltip-content {
+          background-color: ${colors.neutral[800]};
+          border-radius: 5px;
+        }
         &__item {
           margin-right: 14px;
           &:last-child {
             margin-right: 0;
           }
+          ${media.mobile.down} {
+            margin-top: 4px;
+            margin-bottom: 4px;
+          }
+        }
+        &__tooltip-content {
+          font-size: ${font[300]};
+          width: max-content;
+          color: #ffffff;
         }
         &__button {
+          padding: 0px;
           width: 60px;
           height: 60px;
         }

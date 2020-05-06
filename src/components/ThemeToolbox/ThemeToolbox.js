@@ -18,6 +18,7 @@ import Button from "../../library/components/Button";
 import { StoreContext, ACTION_TYPES } from "../../assets/StoreProvider";
 import Modal from "../../library/components/Modal";
 import { FirebaseContext } from "../../assets/FirebaseProvider";
+import Tooltip from "../../library/components/Tooltip/Tooltip";
 
 const ThemeToolbox = ({ activeThemeId, activeThemeName }) => {
   const [modalVisible, toggleModalVisible] = useState(false);
@@ -34,10 +35,11 @@ const ThemeToolbox = ({ activeThemeId, activeThemeName }) => {
         disabled: pathname.includes("choose-theme"),
         onClick: () => {
           push("/choose-theme");
-        }
+        },
       },
       icon: faList,
-      classAppendix: "--list"
+      classAppendix: "--list",
+      tooltip: "Choose a new theme",
     },
     {
       toolProps: {
@@ -45,10 +47,11 @@ const ThemeToolbox = ({ activeThemeId, activeThemeName }) => {
         disabled: pathname.includes("edit-theme"),
         onClick: () => {
           push("/edit-theme");
-        }
+        },
       },
       icon: faEdit,
-      classAppendix: "--edit"
+      classAppendix: "--edit",
+      tooltip: "Edit this theme",
     },
     {
       toolProps: {
@@ -59,7 +62,8 @@ const ThemeToolbox = ({ activeThemeId, activeThemeName }) => {
         }
       },
       icon: faCode,
-      classAppendix: "--code"
+      classAppendix: "--code",
+      tooltip: "Copy this theme",
     },
     {
       toolProps: {
@@ -71,7 +75,8 @@ const ThemeToolbox = ({ activeThemeId, activeThemeName }) => {
         }
       },
       icon: faTrashAlt,
-      classAppendix: "--trash"
+      classAppendix: "--trash",
+      tooltip: "Delete the current theme",
     },
     {
       toolProps: {
@@ -83,7 +88,8 @@ const ThemeToolbox = ({ activeThemeId, activeThemeName }) => {
         }
       },
       icon: faPlusCircle,
-      classAppendix: "--plus"
+      classAppendix: "--plus",
+      tooltip: "Create a new theme",
     },
   ]
 
@@ -93,20 +99,24 @@ const ThemeToolbox = ({ activeThemeId, activeThemeName }) => {
         <FontAwesomeIcon icon={faTools} className="toolbox__tool-icon" />
         <span className="toolbox__divider" />
         <ul className="toolbox-list">
-          {tools.map(({ toolProps, icon, classAppendix }) => (
-            <li className="toolbox-list__item">
-              <Button
-                large
-                colorWhite
-                {...toolProps}
-                className="toolbox-list__button"
-              >
-                <FontAwesomeIcon
-                  icon={icon}
-                  className={`toolbox-list__icon toolbox-list__icon${classAppendix}`}
-                />
-              </Button>
-            </li>
+          {tools.map(({ toolProps, icon, classAppendix, tooltip }) => (
+              <li className="toolbox-list__item">
+                <Tooltip
+                  content={<p className="toolbox-list__tooltip-content">{tooltip}</p>} position="bottom"
+                >
+                  <Button
+                    large
+                    colorWhite
+                    {...toolProps}
+                    className="toolbox-list__button"
+                  >
+                    <FontAwesomeIcon
+                      icon={icon}
+                      className={`toolbox-list__icon toolbox-list__icon${classAppendix}`}
+                    />
+                  </Button>
+                </Tooltip>
+              </li>
           ))}
         </ul>
       </ThemeToolboxStyled>

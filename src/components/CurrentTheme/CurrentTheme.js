@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
 import { CurrentThemeStyled } from "./CurrentTheme.styles";
 import { StoreContext, ACTION_TYPES } from "../../assets/StoreProvider";
+import Row from '../../library/components/ForumGrid/Row';
 import Divider from "../Divider";
 import ThemeToolbox from "../ThemeToolbox/ThemeToolbox";
 
@@ -29,10 +30,12 @@ const CurrentTheme = ({ themeName }) => {
       ) : (
         <h3 className="theme-name">{themeName}</h3>
       )}
-      <ThemeToolbox
-        activeThemeId={currentTheme.themeId || ""}
-        activeThemeName={currentTheme.themeName || ""}
-      />
+      <Row>
+        <ThemeToolbox
+          activeThemeId={currentTheme.themeId || ""}
+          activeThemeName={currentTheme.themeName || ""}
+        />
+      </Row>
       <Divider spacing={600} />
       <span className="divider-line" />
     </CurrentThemeStyled>
