@@ -3,7 +3,7 @@ import { StoreContext } from "../assets/StoreProvider";
 import Row from "../library/components/ForumGrid/Row";
 import Divider from "../components/Divider";
 import CurrentTheme from "../components/CurrentTheme";
-import SectionTitle from "../components/common/SectionTitle";
+import SectionTitle from "../components/SectionTitle";
 import ThemeVisualBlock from "../components/ThemeVisualBlock";
 
 const ChooseThemePage = () => {

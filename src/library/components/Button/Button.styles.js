@@ -66,7 +66,7 @@ export const ButtonContainer = styled.button`
           border: 2px solid ${colorObj.base};
           font-weight: 600;
           color: ${colorObj.base};
-          &:active {
+          &:active:not(:disabled) {
             background-color: transparent;
             color: ${colorObj.active};
             border: 2px solid ${colorObj.active};

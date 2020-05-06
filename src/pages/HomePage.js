@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from "react";
-import SectionTitle from "../components/common/SectionTitle";
+import SectionTitle from "../components/SectionTitle";
 import { StoreContext } from "../assets/StoreProvider";
 import Row from "../library/components/ForumGrid/Row";
 import Column from "../library/components/ForumGrid/Column";

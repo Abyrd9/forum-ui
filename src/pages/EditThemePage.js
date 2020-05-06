@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { StoreContext } from "../assets/StoreProvider";
 import Divider from "../components/Divider";
 import CurrentTheme from "../components/CurrentTheme";
-import SectionTitle from "../components/common/SectionTitle";
+import SectionTitle from "../components/SectionTitle";
 import ConfigureColors from "../components/ConfigureColors";
 import ConfigureTypography from "../components/ConfigureTypography";
 import ConfigureSpacing from "../components/ConfigureSpacing";
