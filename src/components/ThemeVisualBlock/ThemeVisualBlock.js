@@ -9,7 +9,7 @@ import { ThemeVisualBlockStyled, ColorItem } from "./ThemeVisualBlock.styles";
 import Transition from "../Utilities/Transition";
 import DeleteOverlay from "../ColorsConfigureItem/components/DeleteOverlay";
 
-const ThemeVisualBlock = ({ theme, selected }) => {
+const ThemeVisualBlock = ({ themesLength, theme, selected }) => {
   // Delete Color Item Overlay
   const [overlayVisible, toggleOverlayVisible] = useState(false);
 
@@ -54,8 +54,10 @@ const ThemeVisualBlock = ({ theme, selected }) => {
         <h3 className="theme-block-header__theme-name">{themeName}</h3>
         <FontAwesomeIcon
           icon={faTrashAlt}
-          className="theme-block-header__trash-icon"
-          onClick={() => toggleOverlayVisible(true)}
+          className={`theme-block-header__trash-icon ${themesLength <= 1 ? 'theme-block-header__trash-icon--disabled' : ''}`}
+          onClick={() => {
+            if (themesLength > 1) toggleOverlayVisible(true);
+          }}
         />
       </div>
       <div onClick={handleCardClick}>
@@ -81,6 +83,7 @@ const ThemeVisualBlock = ({ theme, selected }) => {
           </p>
         </div>
         <div className="theme-block-footer">
+          <p className="theme-block-footer__text">selected</p>
           <FontAwesomeIcon
             icon={faCheckCircle}
             className="theme-block-footer__check-icon"
@@ -92,11 +95,13 @@ const ThemeVisualBlock = ({ theme, selected }) => {
 };
 
 ThemeVisualBlock.defaultProps = {
+  themesLength: 1,
   theme: {},
   selected: false
 };
 
 ThemeVisualBlock.propTypes = {
+  themesLength: PropTypes.number,
   theme: PropTypes.shape({
     themeId: PropTypes.string,
     themeName: PropTypes.string,

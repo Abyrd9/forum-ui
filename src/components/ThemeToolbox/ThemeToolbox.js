@@ -5,12 +5,15 @@ import {
   faTools,
   faEdit,
   faList,
+  faCode,
   faTrashAlt,
-  faPlusCircle
+  faPlusCircle,
 } from "@fortawesome/pro-duotone-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import isEmpty from "lodash.isempty";
 import { ThemeToolboxStyled, ModalContent } from "./ThemeToolbox.styles";
+import DeleteThemeContent from './DeleteThemeContent';
+import CreateThemeContent from './CreateThemeContent';
 import Button from "../../library/components/Button";
 import { StoreContext, ACTION_TYPES } from "../../assets/StoreProvider";
 import Modal from "../../library/components/Modal";
@@ -24,20 +27,65 @@ const ThemeToolbox = ({ activeThemeId, activeThemeName }) => {
   const { pathname = "" } = useLocation();
   const { push = () => {} } = useHistory();
 
-  const handleClickChooseTheme = () => {
-    push("/choose-theme");
-  };
-  const handleClickEditTheme = () => {
-    push("/edit-theme");
-  };
-  const handleClickDeleteTheme = () => {
-    setModalContentType("delete");
-    toggleModalVisible(true);
-  };
-  const handleClickCreateTheme = () => {
-    setModalContentType("create");
-    toggleModalVisible(true);
-  };
+  const tools = [
+    {
+      toolProps: {
+        primary: true,
+        disabled: pathname.includes("choose-theme"),
+        onClick: () => {
+          push("/choose-theme");
+        }
+      },
+      icon: faList,
+      classAppendix: "--list"
+    },
+    {
+      toolProps: {
+        secondary: true,
+        disabled: pathname.includes("edit-theme"),
+        onClick: () => {
+          push("/edit-theme");
+        }
+      },
+      icon: faEdit,
+      classAppendix: "--edit"
+    },
+    {
+      toolProps: {
+        secondary: true,
+        disabled: pathname.includes("copy-theme"),
+        onClick: () => {
+          push("/copy-theme");
+        }
+      },
+      icon: faCode,
+      classAppendix: "--code"
+    },
+    {
+      toolProps: {
+        error: true,
+        disabled: Object.values(store.themes || {}).length <= 1,
+        onClick: () => {
+          setModalContentType("delete");
+          toggleModalVisible(true);
+        }
+      },
+      icon: faTrashAlt,
+      classAppendix: "--trash"
+    },
+    {
+      toolProps: {
+        success: true,
+        disabled: isEmpty(userData),
+        onClick: () => {
+          setModalContentType("create");
+          toggleModalVisible(true);
+        }
+      },
+      icon: faPlusCircle,
+      classAppendix: "--plus"
+    },
+  ]
 
   return (
     <>
@@ -45,66 +93,21 @@ const ThemeToolbox = ({ activeThemeId, activeThemeName }) => {
         <FontAwesomeIcon icon={faTools} className="toolbox__tool-icon" />
         <span className="toolbox__divider" />
         <ul className="toolbox-list">
-          <li className="toolbox-list__item">
-            <Button
-              primary
-              large
-              colorWhite
-              disabled={pathname.includes("choose-theme")}
-              className="toolbox-list__button"
-              onClick={handleClickChooseTheme}
-            >
-              <FontAwesomeIcon
-                icon={faList}
-                className="toolbox-list__icon toolbox-list__icon--list"
-              />
-            </Button>
-          </li>
-          <li className="toolbox-list__item">
-            <Button
-              secondary
-              large
-              colorWhite
-              disabled={pathname.includes("edit-theme")}
-              className="toolbox-list__button"
-              onClick={handleClickEditTheme}
-            >
-              <FontAwesomeIcon
-                icon={faEdit}
-                className="toolbox-list__icon toolbox-list__icon--edit"
-              />
-            </Button>
-          </li>
-          <li className="toolbox-list__item">
-            <Button
-              error
-              large
-              colorWhite
-              disabled={Object.values(store.themes || {}).length <= 1}
-              className="toolbox-list__button"
-              onClick={handleClickDeleteTheme}
-            >
-              <FontAwesomeIcon
-                icon={faTrashAlt}
-                className="toolbox-list__icon toolbox-list__icon--trash"
-              />
-            </Button>
-          </li>
-          <li className="toolbox-list__item">
-            <Button
-              success
-              large
-              colorWhite
-              disabled={isEmpty(userData)}
-              className="toolbox-list__button"
-              onClick={handleClickCreateTheme}
-            >
-              <FontAwesomeIcon
-                icon={faPlusCircle}
-                className="toolbox-list__icon toolbox-list__icon--plus"
-              />
-            </Button>
-          </li>
+          {tools.map(({ toolProps, icon, classAppendix }) => (
+            <li className="toolbox-list__item">
+              <Button
+                large
+                colorWhite
+                {...toolProps}
+                className="toolbox-list__button"
+              >
+                <FontAwesomeIcon
+                  icon={icon}
+                  className={`toolbox-list__icon toolbox-list__icon${classAppendix}`}
+                />
+              </Button>
+            </li>
+          ))}
         </ul>
       </ThemeToolboxStyled>
       <Modal
@@ -113,67 +116,28 @@ const ThemeToolbox = ({ activeThemeId, activeThemeName }) => {
       >
         <ModalContent>
           {modalContentType === "delete" && (
-            <>
-              <h4 className="modal-title">
-                Are you sure you want to delete <b>{activeThemeName}</b>?
-              </h4>
-              <div className="button-container">
-                <Button
-                  large
-                  error
-                  colorWhite
-                  onClick={() => {
-                    dispatch({
-                      type: ACTION_TYPES.DELETE_THEME,
-                      themeId: activeThemeId
-                    });
-                    push("/choose-theme");
-                    toggleModalVisible(false);
-                  }}
-                >
-                  Delete
-                </Button>
-                <Button
-                  large
-                  error
-                  outline
-                  onClick={() => toggleModalVisible(false)}
-                >
-                  Cancel
-                </Button>
-              </div>
-            </>
+            <DeleteThemeContent
+              activeThemeName={activeThemeName}
+              toggleModalVisible={toggleModalVisible}
+              handleOnClick={() => {
+                dispatch({
+                  type: ACTION_TYPES.DELETE_THEME,
+                  themeId: activeThemeId
+                });
+                push("/choose-theme");
+              }}
+            />
           )}
           {modalContentType === "create" && (
-            <>
-              <h4 className="modal-title">
-                Do you want to create a new theme?
-              </h4>
-              <div className="button-container">
-                <Button
-                  large
-                  success
-                  colorWhite
-                  onClick={() => {
-                    dispatch({
-                      type: ACTION_TYPES.CREATE_THEME
-                    });
-                    push("/edit-theme");
-                    toggleModalVisible(false);
-                  }}
-                >
-                  Create
-                </Button>
-                <Button
-                  large
-                  success
-                  outline
-                  onClick={() => toggleModalVisible(false)}
-                >
-                  Cancel
-                </Button>
-              </div>
-            </>
+            <CreateThemeContent
+              toggleModalVisible={toggleModalVisible}
+              handleOnClick={() => {
+                dispatch({
+                  type: ACTION_TYPES.CREATE_THEME
+                });
+                push("/edit-theme");
+              }}
+            />
           )}
         </ModalContent>
       </Modal>

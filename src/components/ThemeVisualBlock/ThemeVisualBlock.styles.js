@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const ThemeVisualBlockStyled = styled.div`
   ${({ theme = {}, selected = false }) => {
-    const { colors = {} } = theme;
+    const { colors = {}, font = {} } = theme;
     return css`
       cursor: pointer;
       position: relative;
@@ -10,7 +10,7 @@ export const ThemeVisualBlockStyled = styled.div`
       box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
       background-color: #ffffff;
       border-radius: 5px;
-      width: 300px;
+      width: 100%;
       border: ${selected
         ? `2px solid ${colors.success[400]}`
         : "2px solid rgba(0,0,0,0)"};
@@ -30,6 +30,9 @@ export const ThemeVisualBlockStyled = styled.div`
           cursor: pointer;
           font-size: 16px;
           color: ${colors.error[400]};
+          &--disabled {
+            display: none;
+          }
         }
       }
       .theme-block-content {
@@ -67,6 +70,14 @@ export const ThemeVisualBlockStyled = styled.div`
         display: flex;
         justify-content: flex-end;
         align-items: center;
+        &__text {
+          ${!selected && 'display: none;'};
+          font-size: ${font[200]};
+          font-weight: bold;
+          text-transform: uppercase;
+          margin-right: 6px;
+          color: #ffffff;
+        }
         &__check-icon {
           font-size: 16px;
           color: ${selected ? "#ffffff" : colors.neutral[600]};
@@ -76,11 +87,11 @@ export const ThemeVisualBlockStyled = styled.div`
   }}
 `;
 
-export const ColorItem = styled.div`
+export const ColorItem = styled.li`
   ${({ color = "" }) => {
     return css`
       background-color: ${color};
-      height: 35px;
+      height: 45px;
       flex: 1;
     `;
   }}

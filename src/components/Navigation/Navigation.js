@@ -25,7 +25,9 @@ const Navigation = () => {
   return (
     <NavigationContainer active={active}>
       <FontAwesomeIcon title="user" />
-      <ForumIcon className="nav-bar__icon" />
+      <Link to="/">
+        <ForumIcon className="nav-bar__icon" />
+      </Link>
       <ul className="nav-bar__list">
         {NAV_LIST.map(item => {
           return (

@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { StoreContext } from "../assets/StoreProvider";
 import Row from "../library/components/ForumGrid/Row";
+import Column from "../library/components/ForumGrid/Column";
 import Divider from "../components/Divider";
 import CurrentTheme from "../components/CurrentTheme";
 import SectionTitle from "../components/SectionTitle";
@@ -20,12 +21,16 @@ const ChooseThemePage = () => {
         title="Themes"
         description="Please Select a theme you’d like to work with."
       />
-      <Row>
+      <Row fillGrid>
         {Object.values(themes)
           .sort((a, b) => a.sortOrder - b.sortOrder)
           .map(theme => {
             const selected = theme.themeId === currentTheme.themeId;
-            return <ThemeVisualBlock theme={theme} selected={selected} />;
+            return (
+              <Column xsUp={12} md={6} lg={3.5} autoGutter>
+                <ThemeVisualBlock theme={theme} selected={selected} />
+              </Column>
+            );
           })}
       </Row>
     </>
