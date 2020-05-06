@@ -4,6 +4,7 @@ import { faSignInAlt } from "@fortawesome/pro-duotone-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Row from "../library/components/ForumGrid/Row";
 import Column from "../library/components/ForumGrid/Column";
+import Divider from "../components/Divider";
 import Input from "../library/components/Input";
 import Button from "../library/components/Button";
 import { FirebaseContext } from "../assets/FirebaseProvider";
@@ -27,7 +28,8 @@ const AuthPage = () => {
   };
 
   return (
-    <div>
+    <>
+      <Divider spacing={800} />
       <Row>
         <Column col={5}>
           <Input
@@ -62,7 +64,7 @@ const AuthPage = () => {
           </Button>
         </Column>
       </Row>
-    </div>
+    </>
   );
 };
 

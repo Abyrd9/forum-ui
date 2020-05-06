@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const NavigationContainer = styled.div`
   ${props => {
     const { theme = {}, active } = props;
-    const { spacing = {}, colors = {}, media = {} } = theme;
+    const { spacing = {}, colors = {}, font = {}, media = {} } = theme;
     return css`
       width: 100%;
       padding: ${spacing[400]} 0px;
@@ -31,6 +31,35 @@ export const NavigationContainer = styled.div`
               height: auto;
             }
             color: ${colors.neutral[800]};
+          }
+        }
+        &__divider {
+          display: inline-block;
+          height: 32px;
+          width: 1px;
+          background-color: ${colors.neutral[200]};
+          margin-left: 34px;
+        }
+        &__link-text {
+          color: ${colors.neutral[800]};
+          font-size: ${font[300]};
+          text-transform: uppercase;
+          font-weight: 400;
+          letter-spacing: 1px;
+          &:hover {
+            color: ${colors.primary[400]};
+          }
+          &--sign-up {
+            color: #ffffff;
+            padding: 6px 8px;
+            border-radius: 4px;
+            background-color: ${colors.primary[400]};
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            &:hover {
+              text-decoration: none;
+              color: #ffffff;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.23);
+            }
           }
         }
         &__list-toggle-container {
