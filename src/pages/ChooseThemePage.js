@@ -28,7 +28,11 @@ const ChooseThemePage = () => {
             const selected = theme.themeId === currentTheme.themeId;
             return (
               <Column xsUp={12} md={6} lg={3.5} autoGutter>
-                <ThemeVisualBlock theme={theme} selected={selected} />
+                <ThemeVisualBlock
+                  theme={theme}
+                  selected={selected}
+                  canBeDeleted={Object.values(themes).length > 1}
+                />
               </Column>
             );
           })}

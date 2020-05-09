@@ -1,15 +1,19 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-param-reassign */
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
+import firebase from "firebase";
 import { useImmerReducer } from "use-immer";
 import isEmpty from "lodash.isempty";
 import { uuid } from "uuidv4";
 import { FirebaseContext } from "./FirebaseProvider";
 import useDeepCompareEffect from "../hooks/useDeepCompareEffect";
+import useDebounce from "../hooks/useDebounce";
 import { INITIAL_TYPOGRAPHY, INITIAL_SPACING } from "../constants";
 import buildColorPalette from "../helpers/buildColorPalette";
 import updateSortOrder from "../helpers/updateSortOrder";
 
+const db = firebase.firestore();
 export const ACTION_TYPES = {
   SET_USER_THEMES: "SET_USER_THEMES",
   SET_ACTIVE_THEME: "SET_ACTIVE_THEME",
@@ -35,6 +39,7 @@ const reducer = (draft, action) => {
       const { userThemes = {} } = action;
       const firstItem = Object.values(userThemes)[0] || {};
       draft = {
+        userId: action.userId,
         activeThemeId: firstItem.themeId || "",
         themes: action.userThemes
       };
@@ -53,7 +58,14 @@ const reducer = (draft, action) => {
       break;
     }
     case ACTION_TYPES.CREATE_THEME: {
-      const NEW_KEY = uuid();
+      // A user can only create a theme when authenticated
+      // So get a key from firebase database
+      const ThemeRef = db
+        .collection("users")
+        .doc(draft.userId)
+        .collection("themes")
+        .doc();
+      const NEW_KEY = ThemeRef.id;
       const NEW_THEME = {
         colors: {
           [uuid()]: {
@@ -100,6 +112,26 @@ const reducer = (draft, action) => {
         delete draft.themes[action.themeId];
         // Re-order the sort number of the themes
         draft.themes = updateSortOrder(draft.themes);
+
+        // A user won't be able to create more than one theme if they're not logged in,
+        // And they can only delete themes if there is more than one. Meaning, a user
+        // must be logged in if they are able to delete themes. This also means we need
+        // to delete the theme in the firestore and update all sortOrders of other themes.
+        const ThemesRef = db
+          .collection("users")
+          .doc(draft.userId)
+          .collection("themes");
+
+        // Set up a batch call to delete the theme and update every other theme
+        const batch = db.batch();
+        batch.delete(ThemesRef.doc(action.themeId));
+        Object.values(draft.themes).forEach(theme => {
+          batch.set(ThemesRef.doc(theme.themeId), theme);
+        });
+        batch.commit().catch(error => {
+          console.error(error.code);
+          console.error(error.message);
+        });
       }
       return draft;
     }
@@ -184,15 +216,40 @@ const reducer = (draft, action) => {
 };
 
 const StoreProvider = ({ children }) => {
-  const { userThemes } = useContext(FirebaseContext);
+  const { userData, userThemes } = useContext(FirebaseContext);
   const [state, dispatch] = useImmerReducer(reducer, userThemes);
 
   // Once userThemes is updated, add it as the initial theme
   useDeepCompareEffect(() => {
-    if (userThemes) {
-      dispatch({ type: ACTION_TYPES.SET_USER_THEMES, userThemes });
+    if (!isEmpty(userData) && !isEmpty(userThemes)) {
+      dispatch({
+        type: ACTION_TYPES.SET_USER_THEMES,
+        userThemes,
+        userId: userData.uid
+      });
     }
   }, [userThemes]);
+
+  // This hook watches the current active theme and throttles
+  // value changes accordingly
+  const { userId = "", activeThemeId = "", themes = {} } = state || {};
+  useDebounce(
+    () => {
+      if (userId && !isEmpty(themes[activeThemeId])) {
+        const ThemeRef = db
+          .collection("users")
+          .doc(userId)
+          .collection("themes")
+          .doc(activeThemeId);
+        ThemeRef.set(themes[activeThemeId]).catch(error => {
+          console.error(error.code);
+          console.error(error.message);
+        });
+      }
+    },
+    [themes[activeThemeId]],
+    1000
+  );
 
   return (
     <StoreContext.Provider value={{ store: state || {}, dispatch }}>

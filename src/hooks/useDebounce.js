@@ -1,7 +1,7 @@
-import { useRef } from 'react';
-import useDeepCompareEffect from './useDeepCompareEffect';
+import { useRef } from "react";
+import useDeepCompareEffect from "./useDeepCompareEffect";
 
-const useDebounce = (callback, value, delay) => {
+const useDebounce = (callback = () => {}, dependencies = [], delay = 0) => {
   const CallbackRef = useRef();
 
   useDeepCompareEffect(() => {
@@ -11,7 +11,7 @@ const useDebounce = (callback, value, delay) => {
       CallbackRef.current();
     }, delay);
     return () => clearTimeout(timeout);
-  }, [value]);
+  }, [...dependencies]);
 };
 
 export default useDebounce;

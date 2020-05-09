@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const ThemeToolboxStyled = styled.div`
   ${({ theme = {} }) => {
-    const { media = {}, colors = {}, spacing = {}, font = {} } = theme;
+    const { media = {}, colors = {}, font = {} } = theme;
     return css`
       display: flex;
       align-items: center;
@@ -59,22 +59,54 @@ export const ThemeToolboxStyled = styled.div`
   }}
 `;
 
-export const ModalContent = styled.div`
+export const ToolboxModalContentStyled = styled.div`
   ${({ theme = {} }) => {
-    const { spacing = {} } = theme;
+    const { colors = {}, spacing = {} } = theme;
     return css`
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      .modal-title {
-        margin-bottom: ${spacing[300]};
-      }
-      .button-container {
-        display: flex;
-        button:first-child {
-          margin-right: 10px;
+      max-width: 460px;
+      .toolbox-modal-header {
+        margin-top: -24px;
+        margin-bottom: ${spacing[200]};
+        border-bottom: 1px solid ${colors.neutral[400]};
+        &__title {
+          margin-bottom: ${spacing[200]};
         }
       }
+      .toolbox-modal-content {
+        &__content {
+          color: ${colors.neutral[800]};
+          margin-bottom: ${spacing[400]};
+        }
+        &__button-container {
+          margin: 0px -18px -24px;
+          background-color: ${colors.neutral[100]};
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+          padding: 16px 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        &__button {
+          &:first-child {
+            margin-right: 18px;
+          }
+        }
+      }
+    `;
+  }}
+`;
+
+export const ThemeToolboxInfoMessage = styled.p`
+  ${({ theme = {} }) => {
+    const { colors = {}, spacing = {} } = theme;
+    return css`
+      white-space: pre-wrap;
+      max-width: 400px;
+      color: ${colors.neutral[800]};
+      font-size: 12px;
+      font-weight: bold;
+      margin-top: ${spacing[200]};
     `;
   }}
 `;

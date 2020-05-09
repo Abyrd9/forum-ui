@@ -23,10 +23,12 @@ const ConfigureColors = ({ colors }) => {
   });
 
   const handleUpdateTitle = (colorId, title) => {
-    if (colorId === "creator") {
-      setColorObjDraft({ ...colorObjDraft, title });
-    } else {
-      dispatch({ type: ACTION_TYPES.UPDATE_COLOR_TITLE, colorId, title });
+    if (/^\S*$/.test(title)) {
+      if (colorId === "creator") {
+        setColorObjDraft({ ...colorObjDraft, title });
+      } else {
+        dispatch({ type: ACTION_TYPES.UPDATE_COLOR_TITLE, colorId, title });
+      }
     }
   };
 
@@ -105,19 +107,23 @@ const ConfigureColors = ({ colors }) => {
   return (
     <ConfigureColorsStyled>
       <Row fillGrid>
-        {Object.entries(colors).map(([key, colorObj]) => (
-          <Column xsUp={12} mdUp={6} lg={4} autoGutter>
-            <ColorsConfigureItem
-              colorId={key}
-              {...colorObj}
-              handleUpdateTitle={handleUpdateTitle}
-              handleUpdateColor={handleUpdateColor}
-              handleToggleIsFlat={handleToggleIsFlat}
-              handleDeleteColor={handleDeleteColor}
-            />
-          </Column>
-        ))}
-        <Column xsUp={12} mdUp={6} lg={4} autoGutter>
+        {Object.entries(colors)
+          .sort((colorA, colorB) => {
+            return colorA[1].sortOrder - colorB[1].sortOrder;
+          })
+          .map(([key, colorObj]) => (
+            <Column key={key} xsUp={12} mdUp={6} lg={4} autoGutter>
+              <ColorsConfigureItem
+                colorId={key}
+                {...colorObj}
+                handleUpdateTitle={handleUpdateTitle}
+                handleUpdateColor={handleUpdateColor}
+                handleToggleIsFlat={handleToggleIsFlat}
+                handleDeleteColor={handleDeleteColor}
+              />
+            </Column>
+          ))}
+        <Column key="creator" xsUp={12} mdUp={6} lg={4} autoGutter>
           <ColorsConfigureItem
             colorId="creator"
             {...colorObjDraft}

@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useMemo, useContext } from "react";
@@ -9,7 +10,7 @@ import { ThemeVisualBlockStyled, ColorItem } from "./ThemeVisualBlock.styles";
 import Transition from "../Utilities/Transition";
 import DeleteOverlay from "../ColorsConfigureItem/components/DeleteOverlay";
 
-const ThemeVisualBlock = ({ themesLength, theme, selected }) => {
+const ThemeVisualBlock = ({ theme, selected, canBeDeleted }) => {
   // Delete Color Item Overlay
   const [overlayVisible, toggleOverlayVisible] = useState(false);
 
@@ -17,7 +18,9 @@ const ThemeVisualBlock = ({ themesLength, theme, selected }) => {
   const { themeId = "", themeName = "", colors = {}, typography = {} } = theme;
 
   const palettesArray = useMemo(() => {
-    const colorsArr = Object.values(colors);
+    const colorsArr = Object.values(colors).sort(
+      (colorA, colorB) => colorA.sortOrder - colorB.sortOrder
+    );
     const newColorsArr = [];
     for (let i = 0; i <= 2; i++) {
       const palette = colorsArr[i] ? colorsArr[i].palette : [];
@@ -42,7 +45,7 @@ const ThemeVisualBlock = ({ themesLength, theme, selected }) => {
   };
 
   return (
-    <ThemeVisualBlockStyled selected={selected}>
+    <ThemeVisualBlockStyled selected={selected} canBeDeleted={canBeDeleted}>
       <Transition show={overlayVisible}>
         <DeleteOverlay
           text="Are you sure you want to delete this theme?"
@@ -54,9 +57,9 @@ const ThemeVisualBlock = ({ themesLength, theme, selected }) => {
         <h3 className="theme-block-header__theme-name">{themeName}</h3>
         <FontAwesomeIcon
           icon={faTrashAlt}
-          className={`theme-block-header__trash-icon ${themesLength <= 1 ? 'theme-block-header__trash-icon--disabled' : ''}`}
+          className="theme-block-header__trash-icon"
           onClick={() => {
-            if (themesLength > 1) toggleOverlayVisible(true);
+            if (canBeDeleted) toggleOverlayVisible(true);
           }}
         />
       </div>
@@ -95,13 +98,12 @@ const ThemeVisualBlock = ({ themesLength, theme, selected }) => {
 };
 
 ThemeVisualBlock.defaultProps = {
-  themesLength: 1,
   theme: {},
-  selected: false
+  selected: false,
+  canBeDeleted: false
 };
 
 ThemeVisualBlock.propTypes = {
-  themesLength: PropTypes.number,
   theme: PropTypes.shape({
     themeId: PropTypes.string,
     themeName: PropTypes.string,
@@ -114,7 +116,8 @@ ThemeVisualBlock.propTypes = {
       family: PropTypes.string
     })
   }),
-  selected: PropTypes.bool
+  selected: PropTypes.bool,
+  canBeDeleted: PropTypes.bool
 };
 
 export default ThemeVisualBlock;

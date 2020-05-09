@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const ConfigValueGridStyled = styled.div`
   ${({ theme = {} }) => {
-    const { media = {}, colors = {}, spacing = {} } = theme;
+    const { colors = {}, spacing = {} } = theme;
     return css`
       display: flex;
       flex-wrap: wrap;
@@ -66,23 +66,6 @@ export const ConfigValueGridStyled = styled.div`
           border-top-right-radius: 4px;
           border-bottom-right-radius: 4px;
           border-left: 0;
-        }
-        ${media.mobile.down} {
-          &:not(.grid-item--selected) {
-            &:nth-child(1) {
-              border-left: 2px solid ${colors.neutral[300]};
-            }
-            border-right: 2px solid ${colors.neutral[300]};
-          }
-          &:nth-child(3).grid-item--clear-border {
-            border-right: none;
-          }
-          &:nth-child(4) {
-            margin-right: 100px;
-          }
-          &:nth-child(5):not(.grid-item--selected) {
-            border-left: 2px solid ${colors.neutral[300]};
-          }
         }
       }
     `;

@@ -35,7 +35,7 @@ const forumUiTheme = {
       min: 0,
       max: 460,
       fluid: true,
-      content: 312,
+      content: 345,
       columns: 12,
       gutter: 12,
       prefix: "xs"

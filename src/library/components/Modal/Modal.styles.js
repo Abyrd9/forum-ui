@@ -2,7 +2,8 @@ import styled, { css } from "styled-components";
 
 export const ModalStyled = styled.div`
   ${props => {
-    const { visible } = props;
+    const { theme = {}, visible } = props;
+    const { media = {} } = theme;
     return css`
       position: fixed;
       height: 100vh;
@@ -22,12 +23,22 @@ export const ModalStyled = styled.div`
         background-color: #ffffff;
         padding: 24px 18px;
         padding-top: 48px;
+        ${media.mobile.down} {
+          height: 100vh;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
         .times-icon {
           cursor: pointer;
           height: 24px;
           position: absolute;
           top: 10px;
           right: 10px;
+          ${media.mobile.down} {
+            right: 24px;
+          }
         }
       }
     `;
