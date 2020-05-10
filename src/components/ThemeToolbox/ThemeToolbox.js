@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import { useLocation, useHistory } from "react-router-dom";
 import {
+  faHome,
   faTools,
   faEdit,
   faList,
@@ -34,6 +35,18 @@ const ThemeToolbox = ({ activeThemeId }) => {
     {
       toolProps: {
         primary: true,
+        disabled: pathname.includes("home"),
+        onClick: () => {
+          push("/home");
+        }
+      },
+      icon: faHome,
+      classAppendix: "--home",
+      tooltip: "See theme details"
+    },
+    {
+      toolProps: {
+        secondary: true,
         disabled: pathname.includes("choose-theme"),
         onClick: () => {
           push("/choose-theme");

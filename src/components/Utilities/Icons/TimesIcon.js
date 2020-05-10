@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const TimesIcon = props => (
   <svg aria-hidden="true" viewBox="0 0 352 512" {...props}>

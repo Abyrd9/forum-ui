@@ -1,9 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import { SelectContainer } from "./Select.styles";
 import { selectClickEvent, onKeyDownEvent } from "./helpers";
 import ChevronDown from "../../../components/Utilities/Icons/ChevronDown";
-import useDeepCompareEffect from "../../../hooks/useDeepCompareEffect";
 import useMountedValueEffect from "../../../hooks/useMountedValueEffect";
 
 const Select = ({

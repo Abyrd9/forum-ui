@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import firebase from "firebase";
 import { uuid } from "uuidv4";
+import isEmpty from "lodash.isempty";
 import useDeepCompareEffect from "../hooks/useDeepCompareEffect";
 import {
   INITIAL_COLORS,
@@ -50,7 +51,7 @@ const FirebaseProvider = ({ children }) => {
 
   // If a user does sign in, set their database data to state
   useDeepCompareEffect(() => {
-    if (userData) {
+    if (!isEmpty(userData)) {
       const userRef = db.collection("users").doc(userData.uid);
       userRef.get().then(doc => {
         const isNewUser = !doc.exists;

@@ -16,6 +16,7 @@ import updateSortOrder from "../helpers/updateSortOrder";
 const db = firebase.firestore();
 export const ACTION_TYPES = {
   SET_USER_THEMES: "SET_USER_THEMES",
+  SET_USER_ID: "SET_USER_ID",
   SET_ACTIVE_THEME: "SET_ACTIVE_THEME",
   SET_THEME_TITLE: "SET_THEME_TITLE",
   CREATE_THEME: "CREATE_THEME",
@@ -39,10 +40,14 @@ const reducer = (draft, action) => {
       const { userThemes = {} } = action;
       const firstItem = Object.values(userThemes)[0] || {};
       draft = {
-        userId: action.userId,
         activeThemeId: firstItem.themeId || "",
         themes: action.userThemes
       };
+      return draft;
+    }
+    case ACTION_TYPES.SET_USER_ID: {
+      const { userId = "" } = action;
+      draft.userId = userId;
       return draft;
     }
     case ACTION_TYPES.SET_ACTIVE_THEME: {
@@ -221,10 +226,17 @@ const StoreProvider = ({ children }) => {
 
   // Once userThemes is updated, add it as the initial theme
   useDeepCompareEffect(() => {
-    if (!isEmpty(userData) && !isEmpty(userThemes)) {
+    console.log(userThemes);
+
+    if (!isEmpty(userThemes)) {
       dispatch({
         type: ACTION_TYPES.SET_USER_THEMES,
-        userThemes,
+        userThemes
+      });
+    }
+    if (!isEmpty(userData)) {
+      dispatch({
+        type: ACTION_TYPES.SET_USER_ID,
         userId: userData.uid
       });
     }

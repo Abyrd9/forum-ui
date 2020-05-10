@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 const ForumIcon = ({ className }) => {
   return (
@@ -75,7 +75,10 @@ const ForumIcon = ({ className }) => {
         d="M4.71573 29.0903L3.67182 32.1524H18.0796L17.0357 29.0903H4.71573ZM3.6201 26.0281C2.96491 26.0281 2.38234 26.445 2.17093 27.0652L0.0831088 33.1894C-0.255514 34.1827 0.482852 35.2145 1.53228 35.2145H20.2192C21.2686 35.2145 22.007 34.1827 21.6684 33.1894L19.5805 27.0652C19.3691 26.445 18.7866 26.0281 18.1314 26.0281H3.6201Z"
         fill="#2F2F2F"
       />
-      <path d="M5.51698 6.12427H16.2344V29.0903H5.51698V6.12427Z" fill="white" />
+      <path
+        d="M5.51698 6.12427H16.2344V29.0903H5.51698V6.12427Z"
+        fill="white"
+      />
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -97,11 +100,11 @@ const ForumIcon = ({ className }) => {
 };
 
 ForumIcon.defaultProps = {
-  className: '',
+  className: ""
 };
 
 ForumIcon.propTypes = {
-  className: PropTypes.string,
+  className: PropTypes.string
 };
 
 export default ForumIcon;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const PlusIcon = props => (
   <svg aria-hidden="true" viewBox="0 0 448 512" {...props}>

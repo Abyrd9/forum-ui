@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 const PencilIcon = ({ className }) => {
   return (
@@ -20,11 +20,11 @@ const PencilIcon = ({ className }) => {
 };
 
 PencilIcon.defaultProps = {
-  className: '',
+  className: ""
 };
 
 PencilIcon.propTypes = {
-  className: PropTypes.string,
+  className: PropTypes.string
 };
 
 export default PencilIcon;

@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 const EditIcon = ({ className }) => {
   return (
@@ -20,11 +20,11 @@ const EditIcon = ({ className }) => {
 };
 
 EditIcon.defaultProps = {
-  className: '',
+  className: ""
 };
 
 EditIcon.propTypes = {
-  className: PropTypes.string,
+  className: PropTypes.string
 };
 
 export default EditIcon;

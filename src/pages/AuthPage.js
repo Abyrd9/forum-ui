@@ -32,7 +32,7 @@ const AuthPage = () => {
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then(() => {
-          push("/");
+          push("/home");
         })
         .catch(error => {
           console.error(error.code);
@@ -51,7 +51,7 @@ const AuthPage = () => {
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
-          push("/");
+          push("/home");
         })
         .catch(error => {
           console.error(error.code);

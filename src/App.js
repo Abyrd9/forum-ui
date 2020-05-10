@@ -13,6 +13,7 @@ import HomePage from "./pages/HomePage";
 import EditThemePage from "./pages/EditThemePage";
 import ChooseThemePage from "./pages/ChooseThemePage";
 import CopyThemePage from "./pages/CopyThemePage";
+import ProfilePage from "./pages/ProfilePage";
 
 const AppContainer = styled.div`
   position: relative;
@@ -45,7 +46,10 @@ function App() {
             <Route path="/authentication">
               <AuthPage />
             </Route>
-            <Route path="/">
+            <Route path="/profile">
+              <ProfilePage />
+            </Route>
+            <Route path="/home">
               <HomePage />
             </Route>
           </Switch>
