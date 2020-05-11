@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 import isEmpty from "lodash.isempty";
 import firebase from "firebase";
 import { faSignOut } from "@fortawesome/pro-duotone-svg-icons";
@@ -12,6 +13,7 @@ import Modal from "../library/components/Modal";
 import ToolboxModalContent from "../components/ThemeToolbox/ToolboxModalContent";
 
 const ProfilePage = () => {
+  const { push = () => {} } = useHistory();
   const { userData } = useContext(FirebaseContext);
   const { store = {} } = useContext(StoreContext);
   const { themes = {} } = store;
@@ -49,6 +51,7 @@ const ProfilePage = () => {
           toggleModalVisible={toggleSignOutModalVisible}
           handleOnClick={() => {
             firebase.auth().signOut();
+            push("/authentication?auth_type=sign-in");
           }}
           error
         />

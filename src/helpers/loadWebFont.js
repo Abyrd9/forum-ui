@@ -20,7 +20,7 @@ const webFont = config =>
     });
   });
 
-const loadWebFont = (config, callback) => {
+const loadWebFont = (config, callback = () => {}) => {
   Promise.all([wait(), webFont(config)])
     .then(() => callback("resolved"))
     .catch(() => {

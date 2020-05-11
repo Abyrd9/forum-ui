@@ -3,13 +3,13 @@
 const styleMap = obj => props => {
   const propsArr = Object.entries(props);
   const objArr = Object.entries(obj);
-  let value = '';
+  let value = "";
 
   const valRegex = /^[^]+$/;
-  const isBool = val => typeof val === 'boolean';
-  const isNum = val => typeof val === 'number';
-  const isVal = val => typeof val === 'string' && valRegex.test(val);
-  const isObj = val => val && !Array.isArray(val) && typeof val === 'object';
+  const isBool = val => typeof val === "boolean";
+  const isNum = val => typeof val === "number";
+  const isVal = val => typeof val === "string" && valRegex.test(val);
+  const isObj = val => val && !Array.isArray(val) && typeof val === "object";
 
   const filteredProps = propsArr.reduce((acc, [key, val]) => {
     if (isBool(val) || isNum(val) || isVal(val)) acc.push([key, val]);
@@ -18,14 +18,18 @@ const styleMap = obj => props => {
 
   const styleMapArray = objArr.reduce((acc, [key, val]) => {
     let mapValue = val;
-    if (Array.isArray(mapValue) && mapValue.every(item => typeof item === 'string')) {
-      mapValue = mapValue.join('');
+    if (
+      Array.isArray(mapValue) &&
+      mapValue.every(item => typeof item === "string")
+    ) {
+      mapValue = mapValue.join("");
     }
-    if (isNum(mapValue) || isVal(mapValue) || isObj(mapValue)) acc.push([key, mapValue]);
+    if (isNum(mapValue) || isVal(mapValue) || isObj(mapValue))
+      acc.push([key, mapValue]);
     return acc;
   }, []);
 
-  value = styleMapArray.find(([key]) => key === 'default');
+  value = styleMapArray.find(([key]) => key === "default");
 
   // Loop through the filtered props. If the style map object has the same
   // key as one of the props and a prop value exists, then check style map value.

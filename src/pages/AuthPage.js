@@ -44,8 +44,6 @@ const AuthPage = () => {
   };
 
   const handleEmailSignUp = () => {
-    console.log(userData);
-
     if (isEmpty(userData)) {
       firebase
         .auth()

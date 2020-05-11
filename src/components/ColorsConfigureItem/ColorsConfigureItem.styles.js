@@ -107,7 +107,7 @@ export const PaletteBlock = styled.div`
       justify-content: center;
       align-items: center;
       font-size: ${isSingleColor ? font[300] : font[200]};
-      font-weight: 600;
+      font-weight: bold;
       height: 100%;
       flex: 1;
       background-color: ${badColorValue ? colors.neutral[300] : color};

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import chroma from "chroma-js";
+import generate from "project-name-generator";
 import { uuid } from "uuidv4";
 import { ConfigureColorsStyled } from "./ConfigureColors.styles";
 import { StoreContext, ACTION_TYPES } from "../../assets/StoreProvider";
@@ -85,19 +86,19 @@ const ConfigureColors = ({ colors }) => {
     if (isHex.test(color) && chroma.valid(color)) {
       let colorTitle = title;
       if (colorTitle === "New Color") {
-        colorTitle = "";
+        colorTitle = generate({ words: 2, alliterative: true }).dashed;
       }
       const colorId = uuid();
       const order = Object.keys(colors).length + 1; // Make sure order # is right
       dispatch({
         type: ACTION_TYPES.ADD_COLOR_ITEM,
         colorId,
-        colorObj: { ...colorObjDraft, title: colorTitle, order }
+        colorObj: { ...colorObjDraft, title: colorTitle, sortOrder: order }
       });
       setColorObjDraft({
         color: "",
         isFlat: false,
-        sortOrder: order + 1,
+        sortOrder: order + 1, // order needs to be last so add an extra + 1
         palette: {},
         title: "New Color"
       });

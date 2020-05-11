@@ -11,7 +11,6 @@ import { FirebaseContext } from "../../assets/FirebaseProvider";
 
 const Navigation = () => {
   const { userData } = useContext(FirebaseContext);
-  console.log(userData);
 
   return (
     <NavigationContainer>

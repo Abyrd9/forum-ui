@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { TransitionStyled } from './Transition.styles';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { TransitionStyled } from "./Transition.styles";
 
 const Transition = ({ show, children }) => {
   const [mounted, setMounted] = useState(show);
@@ -15,7 +15,11 @@ const Transition = ({ show, children }) => {
 
   return (
     mounted && (
-      <TransitionStyled show={show} onAnimationEnd={onAnimationEnd} data-testid="transition">
+      <TransitionStyled
+        show={show}
+        onAnimationEnd={onAnimationEnd}
+        data-testid="transition"
+      >
         {children}
       </TransitionStyled>
     )
@@ -24,7 +28,7 @@ const Transition = ({ show, children }) => {
 
 Transition.defaultProps = {
   show: false,
-  children: 'Transition',
+  children: "Transition"
 };
 
 Transition.propTypes = {
@@ -32,8 +36,8 @@ Transition.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
-    PropTypes.string,
-  ]),
+    PropTypes.string
+  ])
 };
 
 export default Transition;

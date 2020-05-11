@@ -20,7 +20,6 @@ import TypographyFamily from "../TypographyFamily/TypographyFamily";
 
 const ConfigureTypography = ({ typography }) => {
   const { dispatch } = useContext(StoreContext);
-  const [loading, setLoading] = useState(false);
   const [fontSearchValue, setFontSearchValue] = useState("");
   const { raw, formatted } = useGoogleFonts();
 
@@ -28,18 +27,14 @@ const ConfigureTypography = ({ typography }) => {
   // This could be run in the handleOnFamilyChange but we don't want the
   // api call to slow down the Select component search
   useDeepCompareEffect(() => {
-    console.log(loading);
     if (!isEmpty(typography)) {
-      setLoading(true);
       // load the new webfont on the page
       const url = buildGoogleFontsUrl(typography.family, typography.variants);
       const config = {
         google: { families: [url] },
         classes: false
       };
-      loadWebFont(config, status => {
-        if (status === "resolved") setLoading(false);
-      });
+      loadWebFont(config);
     }
   }, [typography.family, typography.variants]);
 

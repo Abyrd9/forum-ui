@@ -63,7 +63,7 @@ const ThemeVisualBlock = ({ theme, selected, canBeDeleted }) => {
           }}
         />
       </div>
-      <div onClick={handleCardClick}>
+      <div className="theme-block-content-container" onClick={handleCardClick}>
         <div className="theme-block-content">
           <h3 className="theme-block-content__title">Colors</h3>
           <span className="theme-block-content__divider" />
@@ -85,13 +85,13 @@ const ThemeVisualBlock = ({ theme, selected, canBeDeleted }) => {
             {typography.family || ""}
           </p>
         </div>
-        <div className="theme-block-footer">
-          <p className="theme-block-footer__text">selected</p>
-          <FontAwesomeIcon
-            icon={faCheckCircle}
-            className="theme-block-footer__check-icon"
-          />
-        </div>
+      </div>
+      <div className="theme-block-footer" onClick={handleCardClick}>
+        <p className="theme-block-footer__text">selected</p>
+        <FontAwesomeIcon
+          icon={faCheckCircle}
+          className="theme-block-footer__check-icon"
+        />
       </div>
     </ThemeVisualBlockStyled>
   );

@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const ThemeVisualBlockStyled = styled.div`
   ${({ theme = {}, selected = false, canBeDeleted = false }) => {
-    const { colors = {}, font = {} } = theme;
+    const { colors = {}, font = {}, spacing = {} } = theme;
     return css`
       cursor: pointer;
       position: relative;
@@ -11,9 +11,13 @@ export const ThemeVisualBlockStyled = styled.div`
       background-color: #ffffff;
       border-radius: 5px;
       width: 100%;
+      height: 100%;
+      margin-bottom: ${spacing[600]};
       border: ${selected
         ? `2px solid ${colors.success[400]}`
         : `2px solid ${colors.neutral[100]}`};
+      display: flex;
+      flex-direction: column;
       .theme-block-header {
         cursor: default;
         border-top-right-radius: 5px;
@@ -32,6 +36,9 @@ export const ThemeVisualBlockStyled = styled.div`
           color: ${colors.error[400]};
           ${!canBeDeleted && "display: none;"};
         }
+      }
+      .theme-block-content-container {
+        flex: 1;
       }
       .theme-block-content {
         padding: 16px 12px;

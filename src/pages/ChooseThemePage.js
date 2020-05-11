@@ -21,7 +21,7 @@ const ChooseThemePage = () => {
         title="Themes"
         description="Please Select a theme you’d like to work with."
       />
-      <Row fillGrid>
+      <Row fillGrid stretch>
         {Object.values(themes)
           .sort((a, b) => a.sortOrder - b.sortOrder)
           .map(theme => {

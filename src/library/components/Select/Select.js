@@ -48,7 +48,9 @@ const Select = ({
   const handleOnItemClick = val => {
     handleOnChange(val);
     toggleActive(false);
-    InputRef.current.blur();
+    if (InputRef.current) {
+      InputRef.current.blur();
+    }
   };
 
   const handleOnInputChange = ({ target }) => {
@@ -63,7 +65,9 @@ const Select = ({
     // is scrolled to the top of the list container
     if (filteredItem) {
       const itemOffsetTop = filteredItem.offsetTop;
-      ListRef.current.scrollTop = itemOffsetTop;
+      if (ListRef.current) {
+        ListRef.current.scrollTop = itemOffsetTop;
+      }
     }
     handleOnChange(target.value);
   };
@@ -79,50 +83,81 @@ const Select = ({
   // When traversing up and down the list with arrow keys, we want to
   // make sure the scroll position in the container is at the right spot.
   const handleScroll = (item, flow) => {
+    // If the input has a text value, and the text is close to a match BUT
+    // is not an exact match of any of the values, then use the match
+    // as the element we scroll to
+    const currentInputValue = InputRef.current && InputRef.current.value;
+    let filteredItem = null;
+    if (currentInputValue.length > 0) {
+      const format = val => val.toLowerCase();
+      const noMatch = listRefCollection.every(
+        ({ innerText }) => format(innerText) !== format(currentInputValue)
+      );
+      if (noMatch) {
+        filteredItem = listRefCollection.find(({ innerText }) => {
+          return (
+            format(innerText) !== format(currentInputValue) &&
+            format(innerText).includes(format(currentInputValue))
+          );
+        });
+      }
+    }
+
     const listItemElement = listRefCollection.find(
       listItem => listItem.innerText === item
     );
     const { current } = ListRef;
 
-    const listItemTop = listItemElement.offsetTop;
-    const listItemBottom = listItemTop + listItemElement.clientHeight;
-    const listBottom = current.scrollTop + current.clientHeight;
-    if (flow === "down") {
-      if (listItemBottom > listBottom) {
-        current.scrollTop = listItemBottom - current.clientHeight;
+    if (current) {
+      const element = filteredItem || listItemElement;
+      const listItemTop = element.offsetTop;
+      const listItemBottom = listItemTop + element.clientHeight;
+      const listBottom = current.scrollTop + current.clientHeight;
+      if (flow === "down") {
+        if (listItemBottom > listBottom) {
+          current.scrollTop = listItemBottom - current.clientHeight;
+        }
+        if (listItemTop - current.scrollTop < 0) {
+          current.scrollTop = listItemTop;
+        }
       }
-      if (listItemTop - current.scrollTop < 0) {
-        current.scrollTop = listItemTop;
+      if (flow === "up") {
+        if (listItemTop < current.scrollTop) {
+          current.scrollTop = listItemTop;
+        }
+        if (listItemTop - current.scrollTop > 255) {
+          current.scrollTop = listItemTop;
+        }
       }
+      return element.innerText;
     }
-    if (flow === "up") {
-      if (listItemTop < current.scrollTop) {
-        current.scrollTop = listItemTop;
-      }
-      if (listItemTop - current.scrollTop > 255) {
-        current.scrollTop = listItemTop;
-      }
-    }
+    return "";
   };
 
   const keyDownCallback = payload => {
     switch (payload.type) {
-      case "ArrowDown":
-        handleOnChange(payload.value);
-        handleScroll(payload.value, "down");
+      case "ArrowDown": {
+        const scrollItemValue = handleScroll(payload.value, "down");
+        handleOnChange(scrollItemValue);
         break;
-      case "ArrowUp":
-        handleOnChange(payload.value);
-        handleScroll(payload.value, "up");
+      }
+      case "ArrowUp": {
+        const scrollItemValue = handleScroll(payload.value, "up");
+        handleOnChange(scrollItemValue);
         break;
+      }
       case "Enter":
         toggleActive(false);
         handleOnChange(payload.value);
-        InputRef.current.blur();
+        if (InputRef.current) {
+          InputRef.current.blur();
+        }
         break;
       case "Tab":
         toggleActive(false);
-        InputRef.current.blur();
+        if (InputRef.current) {
+          InputRef.current.blur();
+        }
         break;
       default:
         break;

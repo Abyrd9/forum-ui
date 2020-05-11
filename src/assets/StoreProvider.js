@@ -63,32 +63,37 @@ const reducer = (draft, action) => {
       break;
     }
     case ACTION_TYPES.CREATE_THEME: {
-      // A user can only create a theme when authenticated
-      // So get a key from firebase database
-      const ThemeRef = db
-        .collection("users")
-        .doc(draft.userId)
-        .collection("themes")
-        .doc();
-      const NEW_KEY = ThemeRef.id;
-      const NEW_THEME = {
-        colors: {
-          [uuid()]: {
-            title: "neutral",
-            color: "#BEBEBE",
-            palette: buildColorPalette("#BEBEBE"),
-            isFlat: false,
-            sortOrder: 1
-          }
-        },
-        spacing: INITIAL_SPACING,
-        typography: INITIAL_TYPOGRAPHY,
-        sortOrder: Object.values(draft.themes).length + 1,
-        themeName: "New Theme",
-        themeId: NEW_KEY
-      };
-      draft.themes[NEW_KEY] = NEW_THEME;
-      draft.activeThemeId = NEW_KEY;
+      const themesList = Object.values(draft.themes);
+      // Don't add a new theme if the current number of themes is 6
+      if (themesList.length < 6) {
+        // A user can only create a theme when authenticated
+        // So get a key from firebase database
+        const ThemeRef = db
+          .collection("users")
+          .doc(draft.userId)
+          .collection("themes")
+          .doc();
+        const NEW_KEY = ThemeRef.id;
+        const NEW_THEME = {
+          colors: {
+            [uuid()]: {
+              title: "neutral",
+              color: "#BEBEBE",
+              palette: buildColorPalette("#BEBEBE"),
+              isFlat: false,
+              sortOrder: 1
+            }
+          },
+          spacing: INITIAL_SPACING,
+          typography: INITIAL_TYPOGRAPHY,
+          sortOrder: Object.values(draft.themes).length + 1,
+          themeName: "New Theme",
+          themeId: NEW_KEY
+        };
+        draft.themes[NEW_KEY] = NEW_THEME;
+        draft.activeThemeId = NEW_KEY;
+        return draft;
+      }
       break;
     }
     case ACTION_TYPES.DELETE_THEME: {
@@ -173,7 +178,11 @@ const reducer = (draft, action) => {
       const { colorId = "", colorObj = {} } = action;
       const { activeThemeId = "" } = draft || {};
       if (!isEmpty(draft)) {
-        draft.themes[activeThemeId].colors[colorId] = colorObj;
+        const colorsList = Object.values(draft.themes[activeThemeId].colors);
+        // Don't add a new color if the current number of colors is 12
+        if (colorsList.length < 12) {
+          draft.themes[activeThemeId].colors[colorId] = colorObj;
+        }
         return draft;
       }
       break;
@@ -226,8 +235,6 @@ const StoreProvider = ({ children }) => {
 
   // Once userThemes is updated, add it as the initial theme
   useDeepCompareEffect(() => {
-    console.log(userThemes);
-
     if (!isEmpty(userThemes)) {
       dispatch({
         type: ACTION_TYPES.SET_USER_THEMES,
