@@ -45,17 +45,17 @@ export const ButtonContainer = styled.button`
         small: css`
           font-size: ${font[300]};
           border-radius: 3px;
-          padding: 4px 8px;
+          padding: ${outline ? "4px 8px" : "6px 10px"};
         `,
         large: css`
           font-size: ${font[400]};
           border-radius: 6px;
-          padding: 12px 24px;
+          padding: ${outline ? "12px 24px" : "14px 26px"};
         `,
         default: css`
           font-size: ${font[400]};
           border-radius: 4px;
-          padding: 8px 14px;
+          padding: ${outline ? "8px 14px" : "10px 16px"};
         `
       })};
 
@@ -105,6 +105,9 @@ export const ButtonContainer = styled.button`
       .loader,
       .button-icon {
         margin-left: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         ${styleMap({
           small: css`
             height: ${outline ? font[200] : font[300]};

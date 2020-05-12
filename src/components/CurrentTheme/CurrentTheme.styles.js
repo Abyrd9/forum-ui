@@ -11,7 +11,7 @@ export const CurrentThemeStyled = styled.div`
         margin-bottom: ${spacing[100]};
       }
       .theme-input-name {
-        font-weight: 400;
+        font-weight: bold;
         font-size: ${font[700]};
         margin-bottom: ${spacing[200]};
         border-bottom: 1px solid rgba(0, 0, 0, 0);
@@ -23,7 +23,7 @@ export const CurrentThemeStyled = styled.div`
         }
       }
       .theme-name {
-        font-weight: 400;
+        font-weight: bold;
         font-size: ${font[700]};
         margin-bottom: ${spacing[200]};
       }

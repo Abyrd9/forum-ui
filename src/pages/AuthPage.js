@@ -24,7 +24,7 @@ const AuthPage = () => {
     if (location.search) {
       setAuthType(location.search.split("=")[1]);
     }
-  }, []);
+  }, [location.search]);
 
   const handleEmailSignIn = () => {
     if (isEmpty(userData)) {
@@ -32,7 +32,7 @@ const AuthPage = () => {
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then(() => {
-          push("/home");
+          push("/");
         })
         .catch(error => {
           console.error(error.code);
@@ -49,7 +49,7 @@ const AuthPage = () => {
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
-          push("/home");
+          push("/");
         })
         .catch(error => {
           console.error(error.code);

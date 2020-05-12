@@ -34,22 +34,22 @@ function App() {
             subtitle="A simplified design system generator for React Developers."
           />
           <Switch>
-            <Route path="/copy-theme">
+            <Route exact path="/copy-theme">
               <CopyThemePage />
             </Route>
-            <Route path="/edit-theme">
+            <Route exact path="/edit-theme">
               <EditThemePage />
             </Route>
-            <Route path="/choose-theme">
+            <Route exact path="/choose-theme">
               <ChooseThemePage />
             </Route>
-            <Route path="/authentication">
+            <Route exact path="/authentication">
               <AuthPage />
             </Route>
-            <Route path="/profile">
+            <Route exact path="/profile">
               <ProfilePage />
             </Route>
-            <Route path="/home">
+            <Route path="/">
               <HomePage />
             </Route>
           </Switch>

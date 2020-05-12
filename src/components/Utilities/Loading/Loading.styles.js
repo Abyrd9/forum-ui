@@ -1,17 +1,16 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const LoadingStyled = styled.div`
-  ${({ theme = {}, minHeight }) => {
+  ${({ theme = {} }) => {
     const { colors = {}, zIndex = {} } = theme;
-    const height = typeof minHeight === 'number' ? `${minHeight}px` : minHeight;
     return css`
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: ${height || '100%'};
+      width: 100vw;
+      height: 100vh;
       background-color: ${colors.white};
-      z-index: ${zIndex[500]};
+      z-index: ${zIndex[800]};
       display: flex;
       justify-content: center;
       align-items: center;

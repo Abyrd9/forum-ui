@@ -15,7 +15,7 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <FontAwesomeIcon title="user" />
-      <Link to="/home">
+      <Link to="/">
         <ForumIcon className="nav-bar__icon" />
       </Link>
       <ul className="nav-bar__list">

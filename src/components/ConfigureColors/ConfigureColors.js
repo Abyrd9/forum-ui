@@ -5,7 +5,7 @@ import generate from "project-name-generator";
 import { uuid } from "uuidv4";
 import { ConfigureColorsStyled } from "./ConfigureColors.styles";
 import { StoreContext, ACTION_TYPES } from "../../assets/StoreProvider";
-import ColorsConfigureItem from "../ColorsConfigureItem";
+import ColorsConfigureItem, { ErrorBlock } from "../ColorsConfigureItem";
 import buildColorPalette from "../../helpers/buildColorPalette";
 import Row from "../../library/components/ForumGrid/Row";
 import Column from "../../library/components/ForumGrid/Column";
@@ -124,16 +124,22 @@ const ConfigureColors = ({ colors }) => {
               />
             </Column>
           ))}
-        <Column key="creator" xsUp={12} mdUp={6} lg={4} autoGutter>
-          <ColorsConfigureItem
-            colorId="creator"
-            {...colorObjDraft}
-            handleUpdateTitle={handleUpdateTitle}
-            handleUpdateColor={handleUpdateColor}
-            handleToggleIsFlat={handleToggleIsFlat}
-            handleAddColor={handleAddColor}
-          />
-        </Column>
+        {Object.values(colors).length < 12 ? (
+          <Column key="creator" xsUp={12} mdUp={6} lg={4} autoGutter>
+            <ColorsConfigureItem
+              colorId="creator"
+              {...colorObjDraft}
+              handleUpdateTitle={handleUpdateTitle}
+              handleUpdateColor={handleUpdateColor}
+              handleToggleIsFlat={handleToggleIsFlat}
+              handleAddColor={handleAddColor}
+            />
+          </Column>
+        ) : (
+          <Column key="creator" xsUp={12} mdUp={6} lg={4} autoGutter>
+            <ErrorBlock text="You are only allowed to create up to 12 colors." />
+          </Column>
+        )}
       </Row>
     </ConfigureColorsStyled>
   );

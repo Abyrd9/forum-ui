@@ -35,9 +35,9 @@ const ThemeToolbox = ({ activeThemeId }) => {
     {
       toolProps: {
         primary: true,
-        disabled: pathname.includes("home"),
+        disabled: pathname === "/",
         onClick: () => {
-          push("/home");
+          push("/");
         }
       },
       icon: faHome,

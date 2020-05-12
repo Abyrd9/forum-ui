@@ -9,6 +9,7 @@ import {
   INITIAL_SPACING,
   INITIAL_TYPOGRAPHY
 } from "../constants";
+import Loading from "../components/Utilities/Loading";
 
 firebase.initializeApp({
   apiKey: "AIzaSyCiPHD2ZQMVDpTl3QEe2YoF7TU4pmE0FaQ",
@@ -35,14 +36,17 @@ const DEFAULT_THEME = {
 };
 
 const FirebaseProvider = ({ children }) => {
+  const [appLoading, toggleAppLoading] = useState(false);
   const [userData, setUserData] = useState(null);
   const [userThemes, setUserThemes] = useState(null);
 
   // Authentication state change listener
   useEffect(() => {
+    toggleAppLoading(true);
     const unlisten = auth.onAuthStateChanged(authUser => {
       const userPayload = authUser || null;
       setUserData(userPayload);
+      toggleAppLoading(false);
     });
     return () => {
       unlisten();
@@ -93,7 +97,7 @@ const FirebaseProvider = ({ children }) => {
 
   return (
     <FirebaseContext.Provider value={{ userData, userThemes }}>
-      {children}
+      {appLoading ? <Loading /> : children}
     </FirebaseContext.Provider>
   );
 };

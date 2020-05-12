@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { SelectContainer } from "./Select.styles";
 import { selectClickEvent, onKeyDownEvent } from "./helpers";
 import ChevronDown from "../../../components/Utilities/Icons/ChevronDown";
-import useMountedValueEffect from "../../../hooks/useMountedValueEffect";
+import useMountValueEffect from "../../../hooks/useMountValueEffect";
 
 const Select = ({
   autoComplete,
@@ -165,7 +165,7 @@ const Select = ({
   };
 
   // On mount and unmount, add and remove event listeners
-  useMountedValueEffect(() => {
+  useMountValueEffect(() => {
     document.addEventListener(
       "keydown",
       onKeyDownEvent(list, InputRef.current, keyDownCallback)

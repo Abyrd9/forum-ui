@@ -56,7 +56,7 @@ const reducer = (draft, action) => {
     }
     case ACTION_TYPES.SET_THEME_TITLE: {
       const { activeThemeId = "" } = draft || {};
-      if (!isEmpty(draft)) {
+      if (!isEmpty(draft.themes)) {
         draft.themes[activeThemeId].themeName = action.value;
         return draft;
       }
@@ -148,7 +148,7 @@ const reducer = (draft, action) => {
     case ACTION_TYPES.UPDATE_COLOR_TITLE: {
       const { colorId = "", title = "" } = action;
       const { activeThemeId = "" } = draft || {};
-      if (!isEmpty(draft)) {
+      if (!isEmpty(draft.themes)) {
         draft.themes[activeThemeId].colors[colorId].title = title;
         return draft;
       }
@@ -157,7 +157,7 @@ const reducer = (draft, action) => {
     case ACTION_TYPES.UPDATE_COLOR_VALUE: {
       const { colorId = "", color = "", palette = {} } = action;
       const { activeThemeId = "" } = draft || {};
-      if (!isEmpty(draft)) {
+      if (!isEmpty(draft.themes)) {
         draft.themes[activeThemeId].colors[colorId].color = color;
         draft.themes[activeThemeId].colors[colorId].palette = palette;
         return draft;
@@ -167,7 +167,7 @@ const reducer = (draft, action) => {
     case ACTION_TYPES.TOGGLE_COLOR_IS_FLAT: {
       const { colorId = "", toggle = false, palette = {} } = action;
       const { activeThemeId = "" } = draft || {};
-      if (!isEmpty(draft)) {
+      if (!isEmpty(draft.themes)) {
         draft.themes[activeThemeId].colors[colorId].isFlat = toggle;
         draft.themes[activeThemeId].colors[colorId].palette = palette;
         return draft;
@@ -177,7 +177,7 @@ const reducer = (draft, action) => {
     case ACTION_TYPES.ADD_COLOR_ITEM: {
       const { colorId = "", colorObj = {} } = action;
       const { activeThemeId = "" } = draft || {};
-      if (!isEmpty(draft)) {
+      if (!isEmpty(draft.themes)) {
         const colorsList = Object.values(draft.themes[activeThemeId].colors);
         // Don't add a new color if the current number of colors is 12
         if (colorsList.length < 12) {
@@ -190,7 +190,7 @@ const reducer = (draft, action) => {
     case ACTION_TYPES.REMOVE_COLOR_ITEM: {
       const { colorId = "" } = action;
       const { activeThemeId = "" } = draft || {};
-      if (!isEmpty(draft)) {
+      if (!isEmpty(draft.themes)) {
         delete draft.themes[activeThemeId].colors[colorId];
 
         // Re-order the sort number of the colors
@@ -201,8 +201,8 @@ const reducer = (draft, action) => {
       break;
     }
     case ACTION_TYPES.UPDATE_TYPOGRAPHY: {
-      const { activeThemeId = "" } = draft || {};
-      if (!isEmpty(draft)) {
+      if (!isEmpty(draft.themes)) {
+        const { activeThemeId = "" } = draft || {};
         const current = draft.themes[activeThemeId].typography;
         draft.themes[activeThemeId].typography = {
           ...current,
@@ -213,8 +213,8 @@ const reducer = (draft, action) => {
       break;
     }
     case ACTION_TYPES.UPDATE_SPACING: {
-      const { activeThemeId = "" } = draft || {};
-      if (!isEmpty(draft)) {
+      if (!isEmpty(draft.themes)) {
+        const { activeThemeId = "" } = draft || {};
         const current = draft.themes[activeThemeId].spacing;
         draft.themes[activeThemeId].spacing = {
           ...current,

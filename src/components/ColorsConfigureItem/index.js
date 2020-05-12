@@ -1,1 +1,4 @@
-export { default } from './ColorsConfigureItem';
+import ErrorBlock from "./ErrorBlock";
+
+export { default } from "./ColorsConfigureItem";
+export { ErrorBlock };

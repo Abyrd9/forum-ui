@@ -5,7 +5,7 @@ import Column from "../library/components/ForumGrid/Column";
 import Divider from "../components/Divider";
 import CurrentTheme from "../components/CurrentTheme";
 import SectionTitle from "../components/SectionTitle";
-import ThemeVisualBlock from "../components/ThemeVisualBlock";
+import ThemeVisualBlock, { ErrorBlock } from "../components/ThemeVisualBlock";
 
 const ChooseThemePage = () => {
   const { store = {} } = useContext(StoreContext);
@@ -36,6 +36,11 @@ const ChooseThemePage = () => {
               </Column>
             );
           })}
+        {Object.values(themes).length >= 6 && (
+          <Column xsUp={12} md={6} lg={3.5} autoGutter>
+            <ErrorBlock text="You are only allowed to create up to 6 themes." />
+          </Column>
+        )}
       </Row>
     </>
   );

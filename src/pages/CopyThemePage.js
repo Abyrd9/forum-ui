@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import isEmpty from "lodash.isempty";
 import { StoreContext } from "../assets/StoreProvider";
 import Divider from "../components/Divider";
 import CurrentTheme from "../components/CurrentTheme";
@@ -6,7 +7,7 @@ import SectionTitle from "../components/SectionTitle";
 import buildGoogleFontsUrl from "../helpers/buildGoogleFontsUrl";
 import { getSizingVariations } from "../helpers/buildTheme";
 import CopyCodeBlock from "../components/CopyCodeBlock";
-import useMountedValueEffect from "../hooks/useMountedValueEffect";
+import useMountValueEffect from "../hooks/useMountValueEffect";
 
 const CopyThemePage = () => {
   const { store = {} } = useContext(StoreContext);
@@ -14,7 +15,7 @@ const CopyThemePage = () => {
   const currentTheme = themes[activeThemeId] || {};
 
   const [generatedTheme, setGeneratedTheme] = useState({});
-  useMountedValueEffect(() => {
+  useMountValueEffect(() => {
     const { colors = {}, typography = {}, spacing = {} } = currentTheme;
 
     setGeneratedTheme({
@@ -22,7 +23,9 @@ const CopyThemePage = () => {
       get colors() {
         const obj = {};
         Object.values(colors).forEach(item => {
-          obj[item.title] = item.palette;
+          if (!isEmpty(item.palette)) {
+            obj[item.title] = item.palette;
+          }
         });
         return obj;
       },

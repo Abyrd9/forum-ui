@@ -11,7 +11,7 @@ export const ThemeVisualBlockStyled = styled.div`
       background-color: #ffffff;
       border-radius: 5px;
       width: 100%;
-      height: 100%;
+      height: calc(100% - ${spacing[600]});
       margin-bottom: ${spacing[600]};
       border: ${selected
         ? `2px solid ${colors.success[400]}`

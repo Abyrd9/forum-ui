@@ -4,7 +4,7 @@ import isEmpty from "lodash.isempty";
 // A useEffect may run on first render, but a value it's using is not populated yet
 // we don't want to run every time it changes, only run once a value is populated
 // but not before or after
-const useMountedValueEffect = (callback = () => {}, dependencies = []) => {
+const useMountValueEffect = (callback = () => {}, dependencies = []) => {
   const [depReady, setDepReady] = useState(null);
   useEffect(() => {
     const depsHaveValues = deps =>
@@ -22,4 +22,4 @@ const useMountedValueEffect = (callback = () => {}, dependencies = []) => {
   }, [depReady]);
 };
 
-export default useMountedValueEffect;
+export default useMountValueEffect;
