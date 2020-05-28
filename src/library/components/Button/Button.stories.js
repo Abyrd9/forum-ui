@@ -1,34 +1,44 @@
 import React from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { storiesOf } from "@storybook/react";
+import { ThemeProvider } from "styled-components";
 import { StoryBlock, StoryContainer } from "../../../../.storybook/config";
 import Button from "./Button";
+import DEFAULT_THEME from "../../constants";
 
 storiesOf("Button", module)
-  .addDecorator(storyFn => <div>{storyFn()}</div>)
+  .addDecorator(storyFn => (
+    <ThemeProvider theme={DEFAULT_THEME}>{storyFn()}</ThemeProvider>
+  ))
   .add("Stories", () => {
     return (
       <>
         <StoryContainer>
           <h1 className="title">Large Button</h1>
-          <Button large>Base Button</Button>
+          <Button primary large>
+            Base Button
+          </Button>
           <StoryBlock />
-          <Button large disabled>
+          <Button primary large disabled>
             Disabled
           </Button>
           <StoryBlock />
-          <Button large loading>
+          <Button primary large loading>
             Loading
           </Button>
         </StoryContainer>
 
         <StoryContainer>
           <h1 className="title">Default Button</h1>
-          <Button>Base Button</Button>
+          <Button secondary>Base Button</Button>
           <StoryBlock />
-          <Button disabled>Disabled</Button>
+          <Button secondary disabled>
+            Disabled
+          </Button>
           <StoryBlock />
-          <Button loading>Loading</Button>
+          <Button secondary loading>
+            Loading
+          </Button>
         </StoryContainer>
 
         <StoryContainer>
@@ -46,28 +56,30 @@ storiesOf("Button", module)
 
         <StoryContainer>
           <h1 className="title">Large Outline Button</h1>
-          <Button large outline>
+          <Button primary large outline>
             Base Button
           </Button>
           <StoryBlock />
-          <Button large outline disabled>
+          <Button primary large outline disabled>
             Disabled
           </Button>
           <StoryBlock />
-          <Button large outline loading>
+          <Button primary large outline loading>
             Loading
           </Button>
         </StoryContainer>
 
         <StoryContainer>
           <h1 className="title">Default Outline Button</h1>
-          <Button outline>Base Button</Button>
+          <Button secondary outline>
+            Base Button
+          </Button>
           <StoryBlock />
-          <Button outline disabled>
+          <Button secondary outline disabled>
             Disabled
           </Button>
           <StoryBlock />
-          <Button outline loading>
+          <Button secondary outline loading>
             Loading
           </Button>
         </StoryContainer>

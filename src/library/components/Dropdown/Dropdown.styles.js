@@ -1,12 +1,12 @@
 import styled, { css } from "styled-components";
 import styleMap from "../../../helpers/styleMap";
-import buildColorValuesObj from "../../helpers/buildColorValuesObj";
+// import buildColorValuesObj from "../../helpers/buildColorValuesObj";
 
 export const DropdownStyled = styled.div`
   ${props => {
     const { theme = {} } = props;
     const { font = {} } = theme;
-    const colorObj = buildColorValuesObj(props);
+    // const colorObj = buildColorValuesObj(props);
     return css`
       .dropdown-button {
         /* Base Styles */
@@ -23,23 +23,23 @@ export const DropdownStyled = styled.div`
         font-size: ${font[400]};
         border-radius: 4px;
         padding: 16px 24px;
-        color: ${colorObj.text};
-        background-color: ${colorObj.base};
+        /* color: ${colorObj.text}; */
+        /* background-color: ${colorObj.base}; */
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
         &:hover:not(:disabled) {
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16),
             0 2px 3px rgba(0, 0, 0, 0.23);
         }
         &:active {
-          background-color: ${colorObj.active};
+          /* background-color: ${colorObj.active}; */
         }
         &:disabled {
           cursor: not-allowed;
           box-shadow: none;
-          color: ${colorObj.base};
-          background-color: ${colorObj.disabled};
+          /* color: ${colorObj.base}; */
+          /* background-color: ${colorObj.disabled}; */
           .chevron path {
-            fill: ${colorObj.text};
+            /* fill: ${colorObj.text}; */
           }
         }
 
@@ -56,7 +56,7 @@ export const DropdownStyled = styled.div`
           height: calc(100% + 4px);
           border-radius: 4px;
           background-color: transparent;
-          box-shadow: 0 0 3px ${colorObj.base}, 0 0 5px ${colorObj.base};
+          /* box-shadow: 0 0 3px ${colorObj.base}, 0 0 5px ${colorObj.base}; */
         }
         &:focus:before {
           opacity: 1;
@@ -84,7 +84,7 @@ export const DropdownStyled = styled.div`
             `
           })}
           path {
-            fill: ${colorObj.text};
+            /* fill: ${colorObj.text}; */
           }
         }
       }

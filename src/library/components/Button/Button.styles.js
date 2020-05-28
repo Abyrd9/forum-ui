@@ -1,6 +1,9 @@
 import styled, { css } from "styled-components";
-import styleMap from "../../../helpers/styleMap";
-import buildColorValuesObj from "../../helpers/buildColorValuesObj";
+import chroma from "chroma-js";
+import styleMap from "../../helpers/styleMap";
+import DEFAULT_THEME from "../../constants";
+import { checkColorObj } from "../../helpers/checkThemeObjects";
+import buildColorPalette from "../../helpers/buildColorPalette";
 
 export const ButtonContainer = styled.button`
   ${props => {
@@ -11,8 +14,22 @@ export const ButtonContainer = styled.button`
       colorWhite = false,
       colorBlack = false
     } = props;
-    const { font = {} } = theme;
-    const colorObj = buildColorValuesObj(props);
+    const { colors = {}, font = {} } = theme;
+
+    const { neutral } = DEFAULT_THEME.colors;
+    let color = checkColorObj(colors)
+      ? styleMap({
+          ...colors,
+          default: neutral
+        })(props)[400]
+      : neutral[400];
+    color = buildColorPalette(color);
+
+    const textcolor =
+      chroma.valid(color[400]) && chroma.contrast("#ffffff", color[400]) < 4.5
+        ? "#ffffff"
+        : "#000000";
+
     return css`
       /* Base Styles */
       transition: all 100ms cubic-bezier(0, 0, 0.2, 1);
@@ -24,22 +41,22 @@ export const ButtonContainer = styled.button`
       align-items: center;
       justify-content: center;
       position: relative;
-      color: ${colorObj.text};
+      color: ${textcolor};
       ${colorWhite && "color: #ffffff;"};
       ${colorBlack && "color: #000000;"};
-      background-color: ${colorObj.base};
+      background-color: ${color[400]};
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
       &:hover:not(:disabled) {
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.23);
+        background-color: ${color[500]};
       }
       &:active:not(:disabled) {
-        background-color: ${colorObj.active};
+        background-color: ${color[600]};
       }
       &:disabled {
         cursor: not-allowed;
         box-shadow: none;
-        color: ${loading ? colorObj.text : colorObj.textDisabled};
-        background-color: ${loading ? colorObj.base : colorObj.disabled};
+        color: ${loading ? textcolor : color[300]};
+        background-color: ${loading ? color[400] : color[100]};
       }
       ${styleMap({
         small: css`
@@ -63,18 +80,23 @@ export const ButtonContainer = styled.button`
       ${outline &&
         css`
           background-color: transparent;
-          border: 2px solid ${colorObj.base};
+          border: 2px solid ${color[400]};
           font-weight: 600;
-          color: ${colorObj.base};
+          color: ${color[400]};
+          &:hover:not(:disabled) {
+            background-color: transparent;
+            color: ${color[500]};
+            border: 2px solid ${color[500]};
+          }
           &:active:not(:disabled) {
             background-color: transparent;
-            color: ${colorObj.active};
-            border: 2px solid ${colorObj.active};
+            color: ${color[600]};
+            border: 2px solid ${color[600]};
           }
           &:disabled {
             background-color: transparent;
-            color: ${loading ? colorObj.base : colorObj.disabled};
-            border: 2px solid ${loading ? colorObj.base : colorObj.disabled};
+            color: ${loading ? color[400] : color[200]};
+            border: 2px solid ${loading ? color[400] : color[200]};
           }
         `};
 
@@ -91,7 +113,7 @@ export const ButtonContainer = styled.button`
         height: calc(100% + 4px);
         border-radius: 4px;
         background-color: transparent;
-        box-shadow: 0 0 3px ${colorObj.base}, 0 0 5px ${colorObj.base};
+        box-shadow: 0 0 3px ${color[400]}, 0 0 5px ${color[400]};
       }
       &:focus:before {
         opacity: 1;
@@ -123,9 +145,9 @@ export const ButtonContainer = styled.button`
           `
         })}
         path {
-          fill: ${outline ? colorObj.base : colorObj.text};
-          ${colorWhite && `fill: ${outline ? colorObj.base : "#ffffff"};`};
-          ${colorBlack && `fill: ${outline ? colorObj.base : "#000000"};`};
+          fill: ${outline ? color[400] : textcolor};
+          ${colorWhite && `fill: ${outline ? color[400] : "#ffffff"};`};
+          ${colorBlack && `fill: ${outline ? color[400] : "#000000"};`};
         }
       }
     `;

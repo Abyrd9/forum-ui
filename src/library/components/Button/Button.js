@@ -12,7 +12,7 @@ const Button = ({ children, disabled, loading, icon, ...props }) => {
     >
       {children}
       {loading && <Loading />}
-      {!loading && icon &&  <span className="button-icon">{icon}</span>}
+      {!loading && icon && <span className="button-icon">{icon}</span>}
     </ButtonContainer>
   );
 };
@@ -31,7 +31,7 @@ Button.propTypes = {
   ]),
   disabled: PropTypes.bool,
   loading: PropTypes.bool,
-  icon: PropTypes.node,
+  icon: PropTypes.node
 };
 
 export default Button;

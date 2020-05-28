@@ -1,11 +1,9 @@
 import styled, { css } from "styled-components";
-import buildColorValuesObj from "../../helpers/buildColorValuesObj";
-import { NEUTRAL_COLORS } from "../../constants";
 
 export const CheckboxStyled = styled.label`
   ${props => {
     const { focused, hovered } = props;
-    const colorObj = buildColorValuesObj(props);
+    // const colorObj = buildColorValuesObj(props);
     return css`
       position: relative;
       cursor: pointer;
@@ -20,7 +18,7 @@ export const CheckboxStyled = styled.label`
         align-items: center;
         justify-content: center;
         background-color: #ffffff;
-        border: 2px solid ${NEUTRAL_COLORS[400]};
+        /* border: 2px solid ${NEUTRAL_COLORS[400]}; */
         border-radius: 6px;
         width: 25px;
         height: 25px;
@@ -28,7 +26,7 @@ export const CheckboxStyled = styled.label`
           transition: all 100ms ease-in-out;
           opacity: 0;
           path {
-            fill: ${colorObj.base};
+            /* fill: ${colorObj.base}; */
           }
         }
 
@@ -45,7 +43,7 @@ export const CheckboxStyled = styled.label`
           height: calc(100% + 2px);
           border-radius: 6px;
           background-color: transparent;
-          box-shadow: 0 0 3px ${colorObj.base}, 0 0 5px ${colorObj.base};
+          /* box-shadow: 0 0 3px ${colorObj.base}, 0 0 5px ${colorObj.base}; */
         }
       }
 
@@ -69,7 +67,7 @@ export const CheckboxStyled = styled.label`
 
       /* Checked Styles */
       input:checked + span {
-        border-color: ${colorObj.base};
+        /* border-color: ${colorObj.base}; */
         svg {
           opacity: 1;
         }
@@ -78,8 +76,8 @@ export const CheckboxStyled = styled.label`
       /* Disabled Styles */
       input:disabled + span {
         cursor: not-allowed;
-        border-color: ${NEUTRAL_COLORS[400]};
-        background-color: ${NEUTRAL_COLORS[200]};
+        /* border-color: ${NEUTRAL_COLORS[400]}; */
+        /* background-color: ${NEUTRAL_COLORS[200]}; */
         svg {
           opacity: 0;
         }

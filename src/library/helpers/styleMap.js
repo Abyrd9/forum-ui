@@ -11,6 +11,7 @@ const styleMap = obj => props => {
   const isVal = val => typeof val === "string" && valRegex.test(val);
   const isObj = val => val && !Array.isArray(val) && typeof val === "object";
 
+  // get only prop values that are bools, strings, or numbers
   const filteredProps = propsArr.reduce((acc, [key, val]) => {
     if (isBool(val) || isNum(val) || isVal(val)) acc.push([key, val]);
     return acc;
@@ -28,7 +29,7 @@ const styleMap = obj => props => {
       acc.push([key, mapValue]);
     return acc;
   }, []);
-
+  // Set the value as whatever default is, this will be the default acc value
   value = styleMapArray.find(([key]) => key === "default");
 
   // Loop through the filtered props. If the style map object has the same

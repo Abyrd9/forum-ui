@@ -18,7 +18,7 @@ const AuthPage = () => {
   const { userData = {} } = useContext(FirebaseContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [authType, setAuthType] = useState("");
+  const [authType, setAuthType] = useState("sign-in");
 
   useEffect(() => {
     if (location.search) {
