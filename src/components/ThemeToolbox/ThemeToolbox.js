@@ -1,67 +1,43 @@
 import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
-import { useLocation, useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import {
-  faHome,
   faTools,
   faEdit,
-  faList,
-  faCode,
   faTrashAlt,
   faPlusCircle
 } from "@fortawesome/pro-duotone-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import isEmpty from "lodash.isempty";
-import {
-  ThemeToolboxStyled,
-  ThemeToolboxInfoMessage
-} from "./ThemeToolbox.styles";
+import { ThemeToolboxStyled } from "./ThemeToolbox.styles";
 import ToolboxModalContent from "./ToolboxModalContent";
 import Button from "../../library/components/Button";
 import { StoreContext, ACTION_TYPES } from "../../assets/StoreProvider";
 import Modal from "../../library/components/Modal";
-import { FirebaseContext } from "../../assets/FirebaseProvider";
 import Tooltip from "../../library/components/Tooltip/Tooltip";
+import { FirebaseContext } from "../../assets/FirebaseProvider";
 
 const ThemeToolbox = ({ activeThemeId }) => {
   const [modalVisible, toggleModalVisible] = useState(false);
   const [modalContentType, setModalContentType] = useState("");
-  const { store = {}, dispatch } = useContext(StoreContext);
-  const { userData = {} } = useContext(FirebaseContext);
-  const { pathname = "" } = useLocation();
+  const { store, dispatch } = useContext(StoreContext);
+  const { userData } = useContext(FirebaseContext);
   const { push = () => {} } = useHistory();
+  const { pathname = "" } = useLocation();
 
   const tools = [
     {
       toolProps: {
-        primary: true,
-        disabled: pathname === "/",
-        onClick: () => {
-          push("/");
-        }
-      },
-      icon: faHome,
-      classAppendix: "--home",
-      tooltip: "See theme details"
-    },
-    {
-      toolProps: {
         secondary: true,
-        disabled: pathname.includes("choose-theme"),
         onClick: () => {
-          push("/choose-theme");
-        }
-      },
-      icon: faList,
-      classAppendix: "--list",
-      tooltip: "Choose a new theme"
-    },
-    {
-      toolProps: {
-        secondary: true,
-        disabled: pathname.includes("edit-theme"),
-        onClick: () => {
-          push("/edit-theme");
+          if (pathname.includes("edit-theme")) {
+            dispatch({
+              type: ACTION_TYPES.ADD_NOTIFICATION,
+              payload: "You are currently editing this theme."
+            });
+          } else {
+            push("/edit-theme");
+          }
         }
       },
       icon: faEdit,
@@ -70,23 +46,18 @@ const ThemeToolbox = ({ activeThemeId }) => {
     },
     {
       toolProps: {
-        secondary: true,
-        disabled: pathname.includes("copy-theme"),
-        onClick: () => {
-          push("/copy-theme");
-        }
-      },
-      icon: faCode,
-      classAppendix: "--code",
-      tooltip: "Copy this theme"
-    },
-    {
-      toolProps: {
         error: true,
-        disabled: Object.values(store.themes || {}).length <= 1,
         onClick: () => {
-          setModalContentType("delete");
-          toggleModalVisible(true);
+          if (Object.values(store.themes || {}).length <= 1) {
+            dispatch({
+              type: ACTION_TYPES.ADD_NOTIFICATION,
+              payload:
+                "You are reguired to have at least one theme at all times."
+            });
+          } else {
+            setModalContentType("delete");
+            toggleModalVisible(true);
+          }
         }
       },
       icon: faTrashAlt,
@@ -96,10 +67,17 @@ const ThemeToolbox = ({ activeThemeId }) => {
     {
       toolProps: {
         success: true,
-        disabled: isEmpty(userData),
         onClick: () => {
-          setModalContentType("create");
-          toggleModalVisible(true);
+          if (isEmpty(userData)) {
+            dispatch({
+              type: ACTION_TYPES.ADD_NOTIFICATION,
+              payload:
+                'You can only create new themes if you are registered. Click the "Register" button in the top right corner.'
+            });
+          } else {
+            setModalContentType("create");
+            toggleModalVisible(true);
+          }
         }
       },
       icon: faPlusCircle,
@@ -138,17 +116,6 @@ const ThemeToolbox = ({ activeThemeId }) => {
           ))}
         </ul>
       </ThemeToolboxStyled>
-      {isEmpty(userData) && (
-        <ThemeToolboxInfoMessage>
-          *In order to create more than one theme, you must be logged in.
-        </ThemeToolboxInfoMessage>
-      )}
-      {Object.values(store.themes || {}).length <= 1 && (
-        <ThemeToolboxInfoMessage>
-          *ForumUi requires one theme to be present at all times. If the delete
-          button is disabled, it is because only one theme currently exists.
-        </ThemeToolboxInfoMessage>
-      )}
       <Modal
         visible={modalVisible}
         handleOnClose={value => toggleModalVisible(value)}

@@ -1,11 +1,22 @@
 import styled, { css } from "styled-components";
-import styleMap from "../../../helpers/styleMap";
+import styleMap from "../../helpers/styleMap";
+import DEFAULT_THEME from "../../constants";
+import { checkColorObj } from "../../helpers/checkThemeObjects";
+import buildColorPalette from "../../helpers/buildColorPalette";
 
 export const ToggleContainer = styled.span`
   ${props => {
-    const { small, large } = props;
+    const { theme = {}, small, large } = props;
+    const { colors = {} } = theme;
 
-    // const colorObj = buildColorValuesObj(props);
+    const { neutral } = DEFAULT_THEME.colors;
+    let color = checkColorObj(colors)
+      ? styleMap({
+          ...colors,
+          default: neutral
+        })(props)[400]
+      : neutral[400];
+    color = buildColorPalette(color);
 
     let width = 42;
     let height = 16;
@@ -33,9 +44,9 @@ export const ToggleContainer = styled.span`
           opacity: 1;
         }
         &:checked + .forum-ui-toggle-label {
-          /* background-color: ${colorObj.disabled}; */
+          background-color: ${color[200]};
           .forum-ui-toggle-span {
-            /* background-color: ${colorObj.base}; */
+            background-color: ${color[400]};
             transform: translateX(${checkedPos}px);
           }
           .forum-ui-toggle-icon.times-icon {
@@ -48,9 +59,9 @@ export const ToggleContainer = styled.span`
 
         &:disabled + .forum-ui-toggle-label {
           cursor: not-allowed;
-          /* background-color: ${NEUTRAL_COLORS[100]}; */
+          background-color: ${neutral[100]};
           .forum-ui-toggle-span {
-            /* background-color: ${NEUTRAL_COLORS[200]}; */
+            background-color: ${neutral[200]};
           }
           /* Keep dot from transitioning on disabled hover */
           &:hover {
@@ -63,7 +74,7 @@ export const ToggleContainer = styled.span`
 
       .forum-ui-toggle-label {
         transition: all 200ms ease-in-out;
-        /* background-color: ${NEUTRAL_COLORS[200]}; */
+        background-color: ${neutral[200]};
         display: inline-block;
         cursor: pointer;
         width: ${styleMap({
@@ -79,9 +90,9 @@ export const ToggleContainer = styled.span`
         border-radius: 20px;
         position: relative;
         &:hover {
-          /* background-color: ${colorObj.disabled}; */
+          background-color: ${color[200]};
           .forum-ui-toggle-span {
-            /* background-color: ${colorObj.base}; */
+            background-color: ${color[400]};
             transform: translateX(5px);
           }
         }
@@ -105,13 +116,13 @@ export const ToggleContainer = styled.span`
           })};
           border-radius: 20px;
           background-color: transparent;
-          /* box-shadow: 0 0 3px ${colorObj.base}; */
+          box-shadow: 0 0 3px ${color[400]};
         }
       }
 
       .forum-ui-toggle-span {
         transition: all 200ms ease-in-out;
-        /* background-color: ${NEUTRAL_COLORS[400]}; */
+        background-color: ${neutral[400]};
         position: absolute;
         display: flex;
         justify-content: center;
@@ -139,7 +150,7 @@ export const ToggleContainer = styled.span`
         transition: all 200ms ease-in-out;
         position: absolute;
         path {
-          /* fill: ${NEUTRAL_COLORS[100]}; */
+          fill: ${neutral[100]};
         }
       }
       .forum-ui-toggle-icon.times-icon {

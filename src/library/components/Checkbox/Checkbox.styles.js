@@ -1,9 +1,23 @@
 import styled, { css } from "styled-components";
+import styleMap from "../../helpers/styleMap";
+import DEFAULT_THEME from "../../constants";
+import { checkColorObj } from "../../helpers/checkThemeObjects";
+import buildColorPalette from "../../helpers/buildColorPalette";
 
 export const CheckboxStyled = styled.label`
   ${props => {
-    const { focused, hovered } = props;
-    // const colorObj = buildColorValuesObj(props);
+    const { theme = {}, focused = false, hovered = false } = props;
+
+    const { colors = {} } = theme;
+    const { neutral } = DEFAULT_THEME.colors;
+    let color = checkColorObj(colors)
+      ? styleMap({
+          ...colors,
+          default: neutral
+        })(props)[400]
+      : neutral[400];
+    color = buildColorPalette(color);
+
     return css`
       position: relative;
       cursor: pointer;
@@ -18,7 +32,7 @@ export const CheckboxStyled = styled.label`
         align-items: center;
         justify-content: center;
         background-color: #ffffff;
-        /* border: 2px solid ${NEUTRAL_COLORS[400]}; */
+        border: 2px solid ${neutral[400]};
         border-radius: 6px;
         width: 25px;
         height: 25px;
@@ -26,7 +40,7 @@ export const CheckboxStyled = styled.label`
           transition: all 100ms ease-in-out;
           opacity: 0;
           path {
-            /* fill: ${colorObj.base}; */
+            fill: ${color[400]};
           }
         }
 
@@ -43,7 +57,7 @@ export const CheckboxStyled = styled.label`
           height: calc(100% + 2px);
           border-radius: 6px;
           background-color: transparent;
-          /* box-shadow: 0 0 3px ${colorObj.base}, 0 0 5px ${colorObj.base}; */
+          box-shadow: 0 0 3px ${color[400]}, 0 0 5px ${color[400]};
         }
       }
 
@@ -67,7 +81,7 @@ export const CheckboxStyled = styled.label`
 
       /* Checked Styles */
       input:checked + span {
-        /* border-color: ${colorObj.base}; */
+        border-color: ${color[400]};
         svg {
           opacity: 1;
         }
@@ -76,8 +90,8 @@ export const CheckboxStyled = styled.label`
       /* Disabled Styles */
       input:disabled + span {
         cursor: not-allowed;
-        /* border-color: ${NEUTRAL_COLORS[400]}; */
-        /* background-color: ${NEUTRAL_COLORS[200]}; */
+        border-color: ${neutral[400]};
+        background-color: ${neutral[200]};
         svg {
           opacity: 0;
         }

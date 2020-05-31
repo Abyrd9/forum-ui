@@ -71,3 +71,8 @@ export const INITIAL_SPACING = {
   lowerRatio: 1,
   upperRatio: 4
 };
+
+export const ACTION_CODE_SETTINGS = {
+  url: "localhost:3000",
+  handleCodeInApp: true
+};

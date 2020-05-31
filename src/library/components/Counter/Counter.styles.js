@@ -1,9 +1,21 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
+import styleMap from "../../helpers/styleMap";
+import DEFAULT_THEME from "../../constants";
+import { checkColorObj } from "../../helpers/checkThemeObjects";
+import buildColorPalette from "../../helpers/buildColorPalette";
 
 export const CounterContainer = styled.div`
   ${props => {
     const { theme = {} } = props;
-    const { colors = {}, spacing = {} } = theme;
+    const { colors = {} } = theme;
+    const { neutral } = DEFAULT_THEME.colors;
+    let color = checkColorObj(colors)
+      ? styleMap({
+          ...colors,
+          default: neutral
+        })(props)[400]
+      : neutral[400];
+    color = buildColorPalette(color);
 
     return css`
       display: flex;
@@ -15,32 +27,34 @@ export const CounterContainer = styled.div`
         width: 40px;
         border-radius: 100%;
         padding: 0;
-        border: 2px solid ${colors.neutral[200]};
-        background-color: ${colors.white};
+        border: 2px solid ${neutral[200]};
+        background-color: #ffffff;
         display: flex;
         justify-content: center;
         align-items: center;
         svg {
           width: 12px;
           path {
-            fill: ${colors.neutral[600]};
+            fill: ${neutral[600]};
           }
         }
         &:focus,
         &:hover {
-          box-shadow: 0 1px 5px rgba(0, 0, 0, 0.14), 0 1px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1px 5px rgba(0, 0, 0, 0.14),
+            0 1px 5px rgba(0, 0, 0, 0.2);
           outline: none;
         }
         &:active {
-          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12),
+            0 1px 4px rgba(0, 0, 0, 0.1);
         }
         &:disabled {
           cursor: default;
           box-shadow: none;
-          border: 2px solid ${colors.neutral[300]};
-          background-color: ${colors.neutral[200]};
+          border: 2px solid ${neutral[300]};
+          background-color: ${neutral[200]};
           svg path {
-            fill: ${colors.neutral[300]};
+            fill: ${neutral[300]};
           }
         }
       }
@@ -49,20 +63,20 @@ export const CounterContainer = styled.div`
         position: relative;
         display: inline-block;
         box-sizing: border-box;
-        margin: 0px ${spacing[100]};
+        margin: 0px 10px;
         width: 65px;
         height: 55px;
         border-radius: 15px;
-        border: 2px solid ${colors.neutral[200]};
-        background-color: ${colors.white};
+        border: 2px solid ${neutral[200]};
+        background-color: #ffffff;
         box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
         display: flex;
         justify: center;
         align-items: center;
         &--is-disabled {
           cursor: default;
-          border: 2px solid ${colors.neutral[300]};
-          background-color: ${colors.neutral[200]};
+          border: 2px solid ${neutral[300]};
+          background-color: ${neutral[100]};
           box-shadow: none;
         }
         &--read-only {
@@ -80,7 +94,7 @@ export const CounterContainer = styled.div`
           transition: all 200ms ease-in-out;
           opacity: 0;
           display: inline-block;
-          content: '';
+          content: "";
           position: absolute;
           top: -3px;
           left: -3px;
@@ -88,7 +102,7 @@ export const CounterContainer = styled.div`
           height: 58px;
           border-radius: 15px;
           background-color: transparent;
-          box-shadow: 0 0 5px ${colors.primary[400]};
+          box-shadow: 0 0 5px ${color[400]};
         }
       }
       .forum-ui-counter-input {
@@ -96,7 +110,7 @@ export const CounterContainer = styled.div`
         width: 100%;
         text-align: center;
         &:disabled {
-          color: ${colors.neutral[300]};
+          color: ${neutral[300]};
         }
       }
     `;

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { storiesOf } from "@storybook/react";
 import { StoryContainer, StoryBlock } from "../../../../.storybook/config";
 import Checkbox from "./Checkbox";

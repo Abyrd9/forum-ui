@@ -1,12 +1,29 @@
 import styled, { css } from "styled-components";
-import styleMap from "../../../helpers/styleMap";
-// import buildColorValuesObj from "../../helpers/buildColorValuesObj";
+import chroma from "chroma-js";
+import styleMap from "../../helpers/styleMap";
+import DEFAULT_THEME from "../../constants";
+import { checkColorObj } from "../../helpers/checkThemeObjects";
+import buildColorPalette from "../../helpers/buildColorPalette";
 
 export const DropdownStyled = styled.div`
   ${props => {
     const { theme = {} } = props;
-    const { font = {} } = theme;
-    // const colorObj = buildColorValuesObj(props);
+    const { colors = {}, font = {} } = theme;
+
+    const { neutral } = DEFAULT_THEME.colors;
+    let color = checkColorObj(colors)
+      ? styleMap({
+          ...colors,
+          default: neutral
+        })(props)[400]
+      : neutral[400];
+    color = buildColorPalette(color);
+
+    const textcolor =
+      chroma.valid(color[400]) && chroma.contrast("#ffffff", color[400]) < 4.5
+        ? "#ffffff"
+        : "#000000";
+
     return css`
       .dropdown-button {
         /* Base Styles */
@@ -23,23 +40,23 @@ export const DropdownStyled = styled.div`
         font-size: ${font[400]};
         border-radius: 4px;
         padding: 16px 24px;
-        /* color: ${colorObj.text}; */
-        /* background-color: ${colorObj.base}; */
+        color: ${textcolor};
+        background-color: ${color[400]};
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
         &:hover:not(:disabled) {
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16),
             0 2px 3px rgba(0, 0, 0, 0.23);
         }
         &:active {
-          /* background-color: ${colorObj.active}; */
+          background-color: ${color[300]};
         }
         &:disabled {
           cursor: not-allowed;
           box-shadow: none;
-          /* color: ${colorObj.base}; */
-          /* background-color: ${colorObj.disabled}; */
+          color: ${color[400]};
+          background-color: ${color[100]};
           .chevron path {
-            /* fill: ${colorObj.text}; */
+            fill: ${textcolor};
           }
         }
 
@@ -56,7 +73,7 @@ export const DropdownStyled = styled.div`
           height: calc(100% + 4px);
           border-radius: 4px;
           background-color: transparent;
-          /* box-shadow: 0 0 3px ${colorObj.base}, 0 0 5px ${colorObj.base}; */
+          box-shadow: 0 0 3px ${color[400]}, 0 0 5px ${color[400]};
         }
         &:focus:before {
           opacity: 1;
@@ -84,7 +101,7 @@ export const DropdownStyled = styled.div`
             `
           })}
           path {
-            /* fill: ${colorObj.text}; */
+            fill: ${textcolor};
           }
         }
       }

@@ -27,7 +27,9 @@ export const ACTION_TYPES = {
   ADD_COLOR_ITEM: "ADD_COLOR_ITEM",
   REMOVE_COLOR_ITEM: "REMOVE_COLOR_ITEM",
   UPDATE_TYPOGRAPHY: "UPDATE_TYPOGRAPHY",
-  UPDATE_SPACING: "UPDATE_SPACING"
+  UPDATE_SPACING: "UPDATE_SPACING",
+  ADD_NOTIFICATION: "ADD_NOTIFICATION",
+  REMOVE_NOTIFICATION: "REMOVE_NOTIFICATION"
 };
 
 export const StoreContext = React.createContext({});
@@ -52,6 +54,19 @@ const reducer = (draft, action) => {
     }
     case ACTION_TYPES.SET_ACTIVE_THEME: {
       draft.activeThemeId = action.themeId;
+      return draft;
+    }
+    case ACTION_TYPES.ADD_NOTIFICATION: {
+      const notifications = draft.notifications || [];
+      if (!notifications.some(mssg => mssg === action.payload)) {
+        draft.notifications = [...notifications, action.payload];
+      }
+      return draft;
+    }
+    case ACTION_TYPES.REMOVE_NOTIFICATION: {
+      let notifications = draft.notifications || [];
+      notifications = notifications.splice(action.index, 0);
+      draft.notifications = notifications;
       return draft;
     }
     case ACTION_TYPES.SET_THEME_TITLE: {

@@ -30,85 +30,55 @@ const ProfilePage = () => {
     <>
       <Divider spacing={800} />
       <SectionTitle title="Profile Info" description="" />
-      {isEmpty(userData) ? (
-        <>
-          <h4>Looks like you're not registered.</h4>
-          <Divider spacing={300} />
-          <Row fillGrid>
-            <Column shrink autoGutter>
-              <Button
-                primary
-                large
-                outline
-                icon={<FontAwesomeIcon icon={faSignIn} />}
-                onClick={() => push("/authentication?auth_type=sign-in")}
-              >
-                Sign in
-              </Button>
-            </Column>
-            <Column shrink autoGutter>
-              <Button
-                primary
-                large
-                icon={<FontAwesomeIcon icon={faSignIn} />}
-                onClick={() => push("/authentication?auth_type=sign-up")}
-              >
-                Sign up
-              </Button>
-            </Column>
-          </Row>
-        </>
-      ) : (
-        <>
-          <h4>Email:</h4>
-          <p>{userData && userData.email}</p>
-          <Divider spacing={400} />
-          <h4># of Themes:</h4>
-          <p>{!isEmpty(themes) && Object.values(themes).length}</p>
-          <Divider spacing={500} upperSpacing={500} show />
-          <Row fillGrid>
-            <Column shrink autoGutter>
-              <Button
-                secondary
-                large
-                colorWhite
-                icon={<FontAwesomeIcon icon={faHome} />}
-                onClick={() => push("/")}
-              >
-                Home
-              </Button>
-            </Column>
-            <Column shrink autoGutter>
-              <Button
-                error
-                large
-                colorWhite
-                icon={<FontAwesomeIcon icon={faSignOut} />}
-                onClick={() => toggleSignOutModalVisible(true)}
-              >
-                Sign out
-              </Button>
-            </Column>
-          </Row>
-          <Modal
-            visible={signOutModalVisible}
-            handleOnClose={value => toggleSignOutModalVisible(value)}
+      <h4>Email:</h4>
+      <p>{userData && userData.email}</p>
+      <Divider spacing={400} />
+      <h4># of Themes:</h4>
+      <p>{!isEmpty(themes) && Object.values(themes).length}</p>
+      <Divider spacing={500} upperSpacing={500} show />
+      <Row fillGrid>
+        <Column shrink autoGutter>
+          <Button
+            secondary
+            large
+            colorWhite
+            icon={<FontAwesomeIcon icon={faHome} />}
+            onClick={() => push("/")}
           >
-            <ToolboxModalContent
-              title="Are you sure?"
-              description="If you sign out, you will be automatically kicked to the sign in page."
-              leftText="Sign out"
-              rightText="Cancel"
-              toggleModalVisible={toggleSignOutModalVisible}
-              handleOnClick={() => {
-                firebase.auth().signOut();
-                push("/authentication?auth_type=sign-in");
-              }}
-              error
-            />
-          </Modal>
-        </>
-      )}
+            Home
+          </Button>
+        </Column>
+        <Column shrink autoGutter>
+          <Button
+            error
+            large
+            colorWhite
+            icon={<FontAwesomeIcon icon={faSignOut} />}
+            onClick={() => toggleSignOutModalVisible(true)}
+          >
+            Sign out
+          </Button>
+        </Column>
+      </Row>
+      <Modal
+        visible={signOutModalVisible}
+        handleOnClose={value => toggleSignOutModalVisible(value)}
+      >
+        <ToolboxModalContent
+          title="Are you sure?"
+          description="If you sign out, you will be automatically kicked to the sign in page."
+          leftText="Sign out"
+          rightText="Cancel"
+          toggleModalVisible={toggleSignOutModalVisible}
+          handleOnClick={() => {
+            firebase
+              .auth()
+              .signOut()
+              .then(() => push("/register"));
+          }}
+          error
+        />
+      </Modal>
     </>
   );
 };

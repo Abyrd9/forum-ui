@@ -14,6 +14,7 @@ import TypographySize from "../components/TypographySize/TypographySize";
 import SpacingColumn from "../components/SpacingColumn/SpacingColumn";
 import { getSizingVariations } from "../helpers/buildTheme";
 import SpacingExampleCard from "../components/SpacingExampleCard";
+import CopyCodeConfigure from "../components/CopyCodeConfigure";
 
 const HomePage = () => {
   const { store = {} } = useContext(StoreContext);
@@ -117,6 +118,13 @@ const HomePage = () => {
           />
         </Column>
       </Row>
+      <Divider spacing={700} />
+      <SectionTitle
+        title="Copy Theme"
+        description="Here is your theme in JSON format to copy and place where you please. Choose to copy the whole theme or tab through the different options."
+      />
+      <CopyCodeConfigure />
+      <Divider spacing={800} />
     </>
   );
 };

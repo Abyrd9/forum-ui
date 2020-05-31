@@ -96,17 +96,3 @@ export const ToolboxModalContentStyled = styled.div`
     `;
   }}
 `;
-
-export const ThemeToolboxInfoMessage = styled.p`
-  ${({ theme = {} }) => {
-    const { colors = {}, spacing = {} } = theme;
-    return css`
-      white-space: pre-wrap;
-      max-width: 400px;
-      color: ${colors.neutral[800]};
-      font-size: 12px;
-      font-weight: bold;
-      margin-top: ${spacing[200]};
-    `;
-  }}
-`;
