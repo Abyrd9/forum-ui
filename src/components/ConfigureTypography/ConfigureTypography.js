@@ -16,7 +16,6 @@ import TypographyParagraph from "../TypographyParagraph";
 import TypographyWeights from "../TypographyWeights";
 import ConfigValueConfigureBlock from "../ConfigValueConfigureBlock";
 import TypographySize from "../TypographySize/TypographySize";
-import TypographyFamily from "../TypographyFamily/TypographyFamily";
 
 const ConfigureTypography = ({ typography }) => {
   const { dispatch } = useContext(StoreContext);
