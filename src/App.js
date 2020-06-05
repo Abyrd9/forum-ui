@@ -67,17 +67,26 @@ const App = () => {
       </Grid>
       <Footer />
       {notifications.length > 0 &&
-        notifications.map((message, index) => (
-          <Notification
-            key={`notification-${index}`}
-            duration={5000}
-            handleRemoveNotification={() => {
-              dispatch({ type: ACTION_TYPES.REMOVE_NOTIFICATION, index });
-            }}
-          >
-            <p>{message}</p>
-          </Notification>
-        ))}
+        notifications.map((message, index) => {
+          const key =
+            typeof message === "string"
+              ? message
+                  .toLowerCase()
+                  .split(" ")
+                  .join("-")
+              : `popup-${index}`;
+          return (
+            <Notification
+              key={key}
+              duration={5000}
+              handleRemoveNotification={() => {
+                dispatch({ type: ACTION_TYPES.REMOVE_NOTIFICATION, index });
+              }}
+            >
+              <p>{message}</p>
+            </Notification>
+          );
+        })}
     </AppContainer>
   );
 };

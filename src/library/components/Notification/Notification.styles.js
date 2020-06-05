@@ -26,7 +26,7 @@ export const NotificationStyled = styled.div`
   ${({ theme = {} }) => {
     return css`
       animation: ${({ show }) => (show ? start : end)} 1s
-        cubic-bezier(0.1, 0.65, 0.45, 1);
+        cubic-bezier(0.1, 0.65, 0.45, 1) forwards;
       position: fixed;
       bottom: ${({ bottom }) => bottom || "24px"};
       right: 24px;
