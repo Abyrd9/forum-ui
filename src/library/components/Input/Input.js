@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { InputStyled } from './Input.styles';
+import React from "react";
+import PropTypes from "prop-types";
+import { InputStyled } from "./Input.styles";
 
 const Input = ({
   autoComplete,
@@ -24,11 +24,11 @@ const Input = ({
 }) => {
   /* class variables */
   const classNames = {
-    label: 'forum-ui-input-label',
-    input: 'forum-ui-input',
-    icon: 'forum-ui-input-icon',
-    placeholder: 'forum-ui-input-placeholder',
-    info: 'forum-ui-input-info',
+    label: "forum-ui-input-label",
+    input: "forum-ui-input",
+    icon: "forum-ui-input-icon",
+    placeholder: "forum-ui-input-placeholder",
+    info: "forum-ui-input-info"
   };
 
   // building class names based on props
@@ -53,7 +53,11 @@ const Input = ({
     <>
       <InputStyled
         className={className}
-        info={{ hasMssg: infoMssg, show: infoShow && !disabled, color: infoMssg.color }}
+        info={{
+          hasMssg: infoMssg,
+          show: infoShow && !disabled,
+          color: infoMssg.color
+        }}
         {...props}
       >
         <label className={classNames.label}>
@@ -73,7 +77,9 @@ const Input = ({
             onBlur={handleOnBlur}
           />
           {Icon && <span className={classNames.icon}>{Icon}</span>}
-          {placeholder && <span className={classNames.placeholder}>{placeholder}</span>}
+          {placeholder && (
+            <span className={classNames.placeholder}>{placeholder}</span>
+          )}
         </label>
       </InputStyled>
       {infoMssg && <p className={classNames.info}>{infoMssg.message}</p>}
@@ -85,23 +91,23 @@ Input.defaultProps = {
   autoComplete: true,
   disabled: false,
   form: null,
-  name: 'select',
+  name: "select",
   readOnly: false,
   required: false,
-  placeholder: '',
-  pattern: '',
-  value: '',
-  type: 'text',
-  className: '',
+  placeholder: "",
+  pattern: "",
+  value: "",
+  type: "text",
+  className: "",
   infoShow: false,
   infoMssg: {
-    message: '',
-    color: '',
+    message: "",
+    color: ""
   },
   handleOnChange: () => {},
   handleOnFocus: () => {},
   handleOnBlur: () => {},
-  Icon: null,
+  Icon: null
 };
 
 Input.propTypes = {
@@ -119,12 +125,12 @@ Input.propTypes = {
   infoShow: PropTypes.bool,
   infoMssg: PropTypes.shape({
     message: PropTypes.string,
-    color: PropTypes.string,
+    color: PropTypes.string
   }),
   handleOnChange: PropTypes.func,
   handleOnFocus: PropTypes.func,
   handleOnBlur: PropTypes.func,
-  Icon: PropTypes.node,
+  Icon: PropTypes.node
 };
 
 export default Input;

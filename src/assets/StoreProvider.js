@@ -157,7 +157,8 @@ const reducer = (draft, action) => {
           const { code, message } = error;
           const notifications = draft.notifications || [];
           if (!notifications.some(mssg => mssg === action.payload)) {
-            draft.notifications = [...notifications, `${code}: ${message}`];
+            console.error(code, message);
+            draft.notifications = [...notifications, message];
           }
         });
       }
@@ -280,8 +281,8 @@ const StoreProvider = ({ children }) => {
           .doc(activeThemeId);
         ThemeRef.set(themes[activeThemeId]).catch(error => {
           const { code, message } = error;
-          const payload = `${code}: ${message}`;
-          dispatch({ type: ACTION_TYPES.ADD_NOTIFICATION, payload });
+          console.error(code, message);
+          dispatch({ type: ACTION_TYPES.ADD_NOTIFICATION, payload: message });
         });
       }
     },

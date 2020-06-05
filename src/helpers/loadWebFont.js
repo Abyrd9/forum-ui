@@ -4,18 +4,20 @@ const wait = () =>
   new Promise(resolve => {
     setTimeout(() => {
       resolve();
-    }, 500);
+    }, 1000);
   });
 
 const webFont = config =>
   new Promise((resolve, reject) => {
     WebFont.load({
       ...config,
-      active: () => {
-        resolve();
-      },
-      inactive: () => {
+      timeout: 2000,
+      classes: false,
+      fontinactive: () => {
         reject();
+      },
+      fontactive: () => {
+        resolve();
       }
     });
   });

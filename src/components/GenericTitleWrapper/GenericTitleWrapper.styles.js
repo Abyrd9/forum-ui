@@ -12,3 +12,16 @@ export const GenericTitleWrapperStyled = styled.div`
     `;
   }}
 `;
+
+export const LoadingState = styled.div`
+  ${({ theme = {}, minHeight = 0 }) => {
+    const { spacing = {} } = theme;
+    return css`
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: ${spacing[400]};
+      ${minHeight && `min-height: ${minHeight}px;`}
+    `;
+  }}
+`;

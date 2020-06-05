@@ -20,8 +20,11 @@ import TypographyFamily from "../TypographyFamily/TypographyFamily";
 
 const ConfigureTypography = ({ typography }) => {
   const { dispatch } = useContext(StoreContext);
-  const [fontSearchValue, setFontSearchValue] = useState("");
+  const [fontSearchValue, setFontSearchValue] = useState(
+    typography.family || ""
+  );
   const { raw, formatted } = useGoogleFonts();
+  const [fontsLoading, toggleFontsLoading] = useState();
 
   // Watch the typography object passed in and loadWebFonts accordingly,
   // This could be run in the handleOnFamilyChange but we don't want the
@@ -31,10 +34,18 @@ const ConfigureTypography = ({ typography }) => {
       // load the new webfont on the page
       const url = buildGoogleFontsUrl(typography.family, typography.variants);
       const config = {
-        google: { families: [url] },
-        classes: false
+        google: { families: [url] }
       };
-      loadWebFont(config);
+      toggleFontsLoading(true);
+      loadWebFont(config, status => {
+        if (status === "errored") {
+          dispatch({
+            type: ACTION_TYPES.ADD_COLOR_ITEM,
+            payload: "Looks like there was a problem loading this web font."
+          });
+        }
+        toggleFontsLoading(false);
+      });
     }
   }, [typography.family, typography.variants]);
 
@@ -72,26 +83,14 @@ const ConfigureTypography = ({ typography }) => {
 
       <Row fillGrid>
         <Column autoGutter xsUp={12} mdUp={7}>
-          <GenericTitleWrapper title="Paragraph">
+          <GenericTitleWrapper
+            title="Paragraph"
+            loading={fontsLoading}
+            minHeight={200}
+          >
             <TypographyParagraph fontFamily={typography.family || ""} />
           </GenericTitleWrapper>
-        </Column>
-        <Column autoGutter xsUp={12} mdUp={5}>
-          <TypographyFamily
-            title="Current Font Family:"
-            fontFamily={typography.family || ""}
-          />
-          <GenericTitleWrapper title="Font Weights">
-            <TypographyWeights
-              fontFamily={typography.family || ""}
-              fontVariants={typography.variants || []}
-            />
-          </GenericTitleWrapper>
-        </Column>
-      </Row>
-      <Divider spacing={300} />
-      <Row fillGrid>
-        <Column autoGutter xsUp={12} lg={7}>
+          <Divider spacing={600} />
           <GenericTitleWrapper title="Variable Font Sizing">
             <ConfigValueConfigureBlock
               actionType={ACTION_TYPES.UPDATE_TYPOGRAPHY}
@@ -101,8 +100,25 @@ const ConfigureTypography = ({ typography }) => {
             />
           </GenericTitleWrapper>
         </Column>
-        <Column autoGutter xsUp={12} lg={5}>
-          <GenericTitleWrapper title="Font Sizing">
+        <Column autoGutter xsUp={12} mdUp={5}>
+          <GenericTitleWrapper
+            title="Font Family and Weights"
+            loading={fontsLoading}
+            minHeight={85}
+          >
+            <h4>{typography.family},</h4>
+            <Divider spacing={100} />
+            <TypographyWeights
+              fontFamily={typography.family || ""}
+              fontVariants={typography.variants || []}
+            />
+          </GenericTitleWrapper>
+          <Divider spacing={600} />
+          <GenericTitleWrapper
+            title="Font Sizing"
+            loading={fontsLoading}
+            minHeight={300}
+          >
             <TypographySize
               fontFamily={typography.family || ""}
               baseSize={typography.baseSize || 16}

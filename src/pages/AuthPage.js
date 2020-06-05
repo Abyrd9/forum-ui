@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import firebase from "firebase";
 import { faSignInAlt } from "@fortawesome/pro-duotone-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import isEmpty from "lodash.isempty";
 import Row from "../library/components/ForumGrid/Row";
 import Column from "../library/components/ForumGrid/Column";
 import Divider from "../components/Divider";
@@ -17,6 +18,7 @@ const GITHUB_PROVIDER = new firebase.auth.GithubAuthProvider();
 
 const AuthPage = () => {
   const [email, setEmail] = useState("");
+  const [inputInfo, setInputInfo] = useState({});
   const { dispatch } = useContext(StoreContext);
 
   const handleEmailAuth = () => {
@@ -25,13 +27,15 @@ const AuthPage = () => {
       .sendSignInLinkToEmail(email, ACTION_CODE_SETTINGS)
       .then(response => {
         console.log(response);
-        const payload = "A verification link was sent to your email!";
-        dispatch({ type: ACTION_TYPES.ADD_NOTIFICATION, payload });
+        setInputInfo({
+          message: "A verification link was sent to your email!",
+          color: "#A5D836"
+        });
       })
       .catch(error => {
         const { code, message } = error;
-        const payload = `${code}: ${message}`;
-        dispatch({ type: ACTION_TYPES.ADD_NOTIFICATION, payload });
+        console.error(code, message);
+        dispatch({ type: ACTION_TYPES.ADD_NOTIFICATION, payload: message });
       });
   };
 
@@ -55,6 +59,8 @@ const AuthPage = () => {
             name="email"
             value={email}
             handleOnChange={({ target }) => setEmail(target.value)}
+            infoShow={!isEmpty(inputInfo)}
+            infoMssg={inputInfo}
           />
         </Column>
       </Row>

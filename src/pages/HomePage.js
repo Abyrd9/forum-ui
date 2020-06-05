@@ -65,22 +65,21 @@ const HomePage = () => {
         title="Typography"
         description="A ForumUi Typography system has eight levels of font sizing."
       />
-      <Row>
-        <Column>
-          <TypographyFamily
-            title="Current Font Family:"
-            fontFamily={typography.family || ""}
-          />
-        </Column>
-      </Row>
-      <Row>
-        <Column shrink gutterRight={32}>
-          <GenericTitleWrapper title="Font Weights">
+      <Row fillGrid>
+        <Column autoGutter>
+          <GenericTitleWrapper title="Font Family and Weights">
+            <h4>{typography.family},</h4>
+            <Divider spacing={100} />
             <TypographyWeights
               fontFamily={typography.family || ""}
               fontVariants={typography.variants || []}
             />
           </GenericTitleWrapper>
+          <GenericTitleWrapper title="Paragraph">
+            <TypographyParagraph fontFamily={typography.family || ""} />
+          </GenericTitleWrapper>
+        </Column>
+        <Column autoGutter>
           <GenericTitleWrapper title="Font Sizing">
             <TypographySize
               fontFamily={typography.family || ""}
@@ -88,11 +87,6 @@ const HomePage = () => {
               upperRatio={typography.upperRatio || 1}
               lowerRatio={typography.lowerRatio || 1}
             />
-          </GenericTitleWrapper>
-        </Column>
-        <Column lg={5}>
-          <GenericTitleWrapper title="Paragraph">
-            <TypographyParagraph fontFamily={typography.family || ""} />
           </GenericTitleWrapper>
         </Column>
       </Row>

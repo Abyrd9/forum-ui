@@ -1,6 +1,7 @@
 const buildGoogleFontsUrl = (family, variants, fullUrl = false) => {
   let url = [];
-  url.push(family.replace(/ /g, "+"));
+  const baseFamily = family.split(",")[0];
+  url.push(fullUrl ? baseFamily.replace(/ /g, "+") : baseFamily);
   if (variants.length > 0) {
     variants.forEach((weight, index) => {
       let string = "";

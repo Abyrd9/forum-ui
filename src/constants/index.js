@@ -73,6 +73,6 @@ export const INITIAL_SPACING = {
 };
 
 export const ACTION_CODE_SETTINGS = {
-  url: "localhost:3000",
+  url: "http://localhost:3000",
   handleCodeInApp: true
 };
