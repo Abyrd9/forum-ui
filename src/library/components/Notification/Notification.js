@@ -1,15 +1,29 @@
 /* eslint-disable no-plusplus */
-import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import { NotificationStyled } from "./Notification.styles";
 import CloseIcon from "./CloseIcon";
+import useClassNameObserver from "./useClassNameObserver";
 
 const getNodeElements = () => {
   // get all popup notification elements on the dom
   const popupNodeList = document.getElementsByClassName("pop-up-notification");
   return [...popupNodeList];
 };
+
+/**
+ * Notifications should be mounted based on the existence of their children, for example:
+ * (example: return {messages.map(message => <Notification>{message}</Notification>)}).
+ *
+ * But we can't remove a message from that array until all notifications on the page are "done".
+ * Because changing that array would mess up how the notifications are positioned on the page.
+ * With that in mind, we manage the visible and hidden state of the notification based on classes
+ * and observe changes to those classes to reposition Notification elements on the page.
+ *
+ * We also wait until all live notifications on the page have a "hidden" class before running the
+ * `handleRemoveNotification` function for each Notification.
+ */
 
 const Notification = ({ handleRemoveNotification, duration, children }) => {
   const NotificationRef = useRef();
@@ -42,11 +56,6 @@ const Notification = ({ handleRemoveNotification, duration, children }) => {
         return element.isSameNode(node);
       });
       if (currentIndex >= 0) {
-        console.log(
-          children.props.children,
-          currentIndex,
-          24 * (currentIndex + 1)
-        );
         const gaps = 24 * (currentIndex + 1);
         let bottomValue = 0;
         for (let i = 0; i < currentIndex; i++) {
@@ -69,6 +78,13 @@ const Notification = ({ handleRemoveNotification, duration, children }) => {
       }, duration);
     }
   }, []);
+
+  useClassNameObserver(([{ attributeName }]) => {
+    if (attributeName === "class") {
+      const elements = getNodeElements();
+      setPosition(elements);
+    }
+  }, getNodeElements());
 
   return ReactDOM.createPortal(
     <NotificationStyled

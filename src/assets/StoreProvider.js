@@ -154,8 +154,11 @@ const reducer = (draft, action) => {
           batch.set(ThemesRef.doc(theme.themeId), theme);
         });
         batch.commit().catch(error => {
-          console.error(error.code);
-          console.error(error.message);
+          const { code, message } = error;
+          const notifications = draft.notifications || [];
+          if (!notifications.some(mssg => mssg === action.payload)) {
+            draft.notifications = [...notifications, `${code}: ${message}`];
+          }
         });
       }
       return draft;
@@ -276,8 +279,9 @@ const StoreProvider = ({ children }) => {
           .collection("themes")
           .doc(activeThemeId);
         ThemeRef.set(themes[activeThemeId]).catch(error => {
-          console.error(error.code);
-          console.error(error.message);
+          const { code, message } = error;
+          const payload = `${code}: ${message}`;
+          dispatch({ type: ACTION_TYPES.ADD_NOTIFICATION, payload });
         });
       }
     },

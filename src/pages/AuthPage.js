@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import firebase from "firebase";
 import { faSignInAlt } from "@fortawesome/pro-duotone-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,19 +10,29 @@ import Input from "../library/components/Input";
 import Button from "../library/components/Button";
 import SocialAuthBlock from "../components/SocialAuthBlock";
 import { ACTION_CODE_SETTINGS } from "../constants";
+import { StoreContext, ACTION_TYPES } from "../assets/StoreProvider";
 
 const GOOGLE_PROVIDER = new firebase.auth.GoogleAuthProvider();
 const GITHUB_PROVIDER = new firebase.auth.GithubAuthProvider();
 
 const AuthPage = () => {
   const [email, setEmail] = useState("");
+  const { dispatch } = useContext(StoreContext);
 
   const handleEmailAuth = () => {
     firebase
       .auth()
       .sendSignInLinkToEmail(email, ACTION_CODE_SETTINGS)
-      .then(() => console.log("It was sent."))
-      .catch(error => console.error(error.code, error.message));
+      .then(response => {
+        console.log(response);
+        const payload = "A verification link was sent to your email!";
+        dispatch({ type: ACTION_TYPES.ADD_NOTIFICATION, payload });
+      })
+      .catch(error => {
+        const { code, message } = error;
+        const payload = `${code}: ${message}`;
+        dispatch({ type: ACTION_TYPES.ADD_NOTIFICATION, payload });
+      });
   };
 
   const handleGoogleSignIn = () => {
