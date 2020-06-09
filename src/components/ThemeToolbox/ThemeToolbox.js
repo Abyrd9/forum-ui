@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import { useHistory, useLocation } from "react-router-dom";
 import {
-  faTools,
   faEdit,
   faTrashAlt,
   faPlusCircle
@@ -89,8 +88,6 @@ const ThemeToolbox = ({ activeThemeId }) => {
   return (
     <>
       <ThemeToolboxStyled>
-        <FontAwesomeIcon icon={faTools} className="toolbox__tool-icon" />
-        <span className="toolbox__divider" />
         <ul className="toolbox-list">
           {tools.map(({ toolProps, icon, classAppendix, tooltip }) => (
             <li className="toolbox-list__item">

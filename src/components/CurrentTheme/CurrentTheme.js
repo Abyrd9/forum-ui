@@ -5,6 +5,7 @@ import { CurrentThemeStyled } from "./CurrentTheme.styles";
 import { StoreContext, ACTION_TYPES } from "../../assets/StoreProvider";
 import Divider from "../Divider";
 import ThemeToolbox from "../ThemeToolbox/ThemeToolbox";
+import ToolboxContainer from "../ToolboxContainer";
 
 const CurrentTheme = ({ themeName }) => {
   const { pathname = "" } = useLocation();
@@ -29,7 +30,9 @@ const CurrentTheme = ({ themeName }) => {
       ) : (
         <h3 className="theme-name">{themeName}</h3>
       )}
-      <ThemeToolbox activeThemeId={currentTheme.themeId || ""} />
+      <ToolboxContainer>
+        <ThemeToolbox activeThemeId={currentTheme.themeId || ""} />
+      </ToolboxContainer>
       <Divider spacing={600} />
       <span className="divider-line" />
     </CurrentThemeStyled>

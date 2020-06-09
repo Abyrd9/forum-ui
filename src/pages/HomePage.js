@@ -9,7 +9,6 @@ import ColorsVisualBlock from "../components/ColorsVisualBlock";
 import GenericTitleWrapper from "../components/GenericTitleWrapper";
 import TypographyParagraph from "../components/TypographyParagraph";
 import TypographyWeights from "../components/TypographyWeights";
-import TypographyFamily from "../components/TypographyFamily/TypographyFamily";
 import TypographySize from "../components/TypographySize/TypographySize";
 import SpacingColumn from "../components/SpacingColumn/SpacingColumn";
 import { getSizingVariations } from "../helpers/buildTheme";
