@@ -30,7 +30,7 @@ const end = keyframes`
 export const NotificationStyled = styled.div`
   ${props => {
     const { theme = {} } = props;
-    const { colors = {} } = theme;
+    const { colors = {}, media = {} } = theme;
 
     const { error } = DEFAULT_THEME.colors;
     let color = checkColorObj(colors)
@@ -58,6 +58,11 @@ export const NotificationStyled = styled.div`
       border-radius: 4px;
       background-color: ${color[400]};
       color: ${textcolor};
+      ${media.mobile.down} {
+        right: 0px;
+        width: calc(100% - 24px);
+        right: calc(24px / 2);
+      }
       p {
         color: ${textcolor};
       }

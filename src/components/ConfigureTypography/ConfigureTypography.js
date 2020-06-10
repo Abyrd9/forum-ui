@@ -106,7 +106,7 @@ const ConfigureTypography = ({ typography }) => {
             minHeight={85}
           >
             <h4>{typography.family},</h4>
-            <Divider spacing={100} />
+            <Divider show shorten spacing={100} upperSpacing={100} />
             <TypographyWeights
               fontFamily={typography.family || ""}
               fontVariants={typography.variants || []}

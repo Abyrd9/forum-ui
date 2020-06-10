@@ -1,6 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useContext, useEffect } from "react";
-import firebase from "firebase";
+import React, { useContext } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -35,28 +34,6 @@ const App = () => {
   const { userData = {} } = useContext(FirebaseContext);
   const { store = {}, dispatch } = useContext(StoreContext);
   const { notifications = [] } = store;
-
-  // Handle logic for new users who hit the page from email validation
-  useEffect(() => {
-    if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
-      let email = window.localStorage.getItem("emailForSignIn");
-      if (!email) {
-        // Open with modal, not prompt
-        email = window.prompt("Please provide your email for confirmation");
-      }
-      firebase
-        .auth()
-        .signInWithEmailLink(email, window.location.href)
-        .then(() => {
-          window.localStorage.removeItem("emailForSignIn");
-        })
-        .catch(function(error) {
-          const { code, message } = error;
-          console.error(code, message);
-          dispatch({ type: ACTION_TYPES.ADD_NOTIFICATION, payload: message });
-        });
-    }
-  }, []);
 
   return (
     <AppContainer>
