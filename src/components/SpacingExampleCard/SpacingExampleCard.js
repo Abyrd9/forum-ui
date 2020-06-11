@@ -1,7 +1,8 @@
 import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faImage } from "@fortawesome/pro-duotone-svg-icons";
 import { SpacingExampleCardStyled } from "./SpacingExampleCard.styles";
-import WalterWhite from "../../assets/img/WalterWhite.png";
 import Facebook from "../Utilities/Icons/Facebook";
 import Twitter from "../Utilities/Icons/Twitter";
 import Menu from "../Utilities/Icons/Menu";
@@ -24,7 +25,7 @@ const SpacingExampleCard = ({ spacing }) => {
       />
       <SpacingExampleCardStyled ref={ContainerRef}>
         <div className="image-container">
-          <img src={WalterWhite} alt="Walter White" className="image" />
+          <FontAwesomeIcon icon={faImage} className="icon" />
         </div>
         <div className="main-content-block">
           <SpacingExampleCardLegend

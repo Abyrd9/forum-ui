@@ -65,7 +65,7 @@ const HomePage = () => {
         description="A ForumUi Typography system has eight levels of font sizing."
       />
       <Row fillGrid>
-        <Column xsUp={12} mdUp={6} autoGutter>
+        <Column smDown={12} autoGutter>
           <GenericTitleWrapper title="Font Family and Weights">
             <h4>{typography.family},</h4>
             <Divider show shorten spacing={100} upperSpacing={100} />
@@ -78,8 +78,7 @@ const HomePage = () => {
             <TypographyParagraph fontFamily={typography.family || ""} />
           </GenericTitleWrapper>
         </Column>
-        <Divider spacing={400} />
-        <Column xsUp={12} mdUp={6} autoGutter>
+        <Column smDown={12} autoGutter>
           <GenericTitleWrapper title="Font Sizing">
             <TypographySize
               fontFamily={typography.family || ""}
