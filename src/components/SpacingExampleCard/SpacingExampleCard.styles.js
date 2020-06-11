@@ -3,11 +3,8 @@ import chroma from "chroma-js";
 
 export const SpacingExampleCardStyled = styled.div`
   ${({ theme = {} }) => {
-    const { media = {}, zIndex = {} } = theme;
-    const colors = {
-      primary: "#FDFDFD",
-      black: "#0A090C"
-    };
+    const { media = {}, colors = {}, zIndex = {} } = theme;
+
     return css`
       width: 90%;
       position: relative;
@@ -25,21 +22,19 @@ export const SpacingExampleCardStyled = styled.div`
         width: 100%;
       }
       .image-container {
-        display: block;
-        position: relative;
-        flex: 1;
-        overflow: hidden;
-        margin-right: -100%;
-        max-width: 1340px;
+        margin: 25px auto;
+        width: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: ${colors.neutral[100]};
         ${media.tablet.down} {
           display: none;
         }
-        .image {
-          position: absolute;
-          top: -50px;
-          left: -150px;
-          height: calc(100% + 100px);
-          z-index: ${zIndex[100]};
+        .icon {
+          height: 85px;
+          width: 85px;
+          color: ${colors.neutral[400]};
         }
       }
       .social-content-block {

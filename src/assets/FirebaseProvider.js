@@ -42,6 +42,25 @@ const FirebaseProvider = ({ children }) => {
 
   // Authentication state change listener
   useEffect(() => {
+    if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
+      toggleAppLoading(true);
+      let email = window.localStorage.getItem("emailForSignIn");
+      if (!email) {
+        // Open with modal, not prompt
+        email = window.prompt("Please provide your email for confirmation");
+      }
+      firebase
+        .auth()
+        .signInWithEmailLink(email, window.location.href)
+        .then(() => {
+          window.localStorage.removeItem("emailForSignIn");
+        })
+        .catch(function(error) {
+          const { code, message } = error;
+          console.error(code, message);
+        });
+    }
+
     toggleAppLoading(true);
     const unlisten = auth.onAuthStateChanged(authUser => {
       const userPayload = authUser || null;

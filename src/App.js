@@ -1,6 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useContext, useEffect } from "react";
-import firebase from "firebase";
+import React, { useContext } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,11 +15,16 @@ import Navigation from "./components/Navigation";
 import PageTitle from "./components/PageTitle";
 import Footer from "./components/Footer";
 
-import AuthPage from "./pages/AuthPage";
 import HomePage from "./pages/HomePage";
-import EditThemePage from "./pages/EditThemePage";
-import ChooseThemePage from "./pages/ChooseThemePage";
-import ProfilePage from "./pages/ProfilePage";
+const AuthPage = React.lazy(() => import('./pages/AuthPage'));
+const ProfilePage = React.lazy(() => import('./pages/ProfilePage'));
+const EditThemePage = React.lazy(() => import('./pages/EditThemePage'));
+const ChooseThemePage = React.lazy(() => import('./pages/ChooseThemePage'));
+
+// import AuthPage from "./pages/AuthPage";
+// import ProfilePage from "./pages/ProfilePage";
+// import EditThemePage from "./pages/EditThemePage";
+// import ChooseThemePage from "./pages/ChooseThemePage";
 import { FirebaseContext } from "./assets/FirebaseProvider";
 import { StoreContext, ACTION_TYPES } from "./assets/StoreProvider";
 import Notification from "./library/components/Notification";
@@ -35,28 +39,6 @@ const App = () => {
   const { userData = {} } = useContext(FirebaseContext);
   const { store = {}, dispatch } = useContext(StoreContext);
   const { notifications = [] } = store;
-
-  // Handle logic for new users who hit the page from email validation
-  useEffect(() => {
-    if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
-      let email = window.localStorage.getItem("emailForSignIn");
-      if (!email) {
-        // Open with modal, not prompt
-        email = window.prompt("Please provide your email for confirmation");
-      }
-      firebase
-        .auth()
-        .signInWithEmailLink(email, window.location.href)
-        .then(() => {
-          window.localStorage.removeItem("emailForSignIn");
-        })
-        .catch(function(error) {
-          const { code, message } = error;
-          console.error(code, message);
-          dispatch({ type: ACTION_TYPES.ADD_NOTIFICATION, payload: message });
-        });
-    }
-  }, []);
 
   return (
     <AppContainer>

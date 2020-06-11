@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const TabsContainer = styled.div`
   ${props => {
     const { theme = {} } = props;
-    const { colors = {} } = theme;
+    const { colors = {}, media = {} } = theme;
     return css`
       .forum-ui-tabs-list {
         width: fit-content;
@@ -89,6 +89,56 @@ export const TabsContainer = styled.div`
             }
             &:after {
               border-bottom-right-radius: 4px;
+            }
+          }
+        }
+      }
+
+      ${media.mobile.down} {
+        .forum-ui-tabs-list {
+          width: 100%;
+          overflow-x: scroll;
+          background: transparent;
+          border-radius: 0px;
+          box-shadow: none;
+        }
+        .forum-ui-tabs-list-item {
+          margin: 0px 8px;
+          &:first-child,
+          &:last-child {
+            button {
+              border-top-left-radius: 0px;
+              border-top-right-radius: 0px;
+              border-bottom-left-radius: 0px;
+              border-bottom-right-radius: 0px;
+              &:before,
+              &:after {
+                border-top-left-radius: 0px;
+                border-top-right-radius: 0px;
+                border-bottom-left-radius: 0px;
+                border-bottom-right-radius: 0px;
+              }
+            }
+          }
+          &-button {
+            min-height: auto;
+            padding: 16px 32px;
+            border: 2px solid #f1f1f0 !important;
+            border-radius: 45px !important;
+            &:after {
+              display: none;
+            }
+            &:before {
+              display: none;
+            }
+            &:focus,
+            &:hover,
+            &:active,
+            &--is-active {
+              outline: none;
+              border: 2px solid ${colors.primary[400]} !important;
+              color: ${colors.primary[400]};
+              background: transparent;
             }
           }
         }
