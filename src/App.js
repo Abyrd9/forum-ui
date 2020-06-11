@@ -16,18 +16,14 @@ import PageTitle from "./components/PageTitle";
 import Footer from "./components/Footer";
 
 import HomePage from "./pages/HomePage";
-const AuthPage = React.lazy(() => import('./pages/AuthPage'));
-const ProfilePage = React.lazy(() => import('./pages/ProfilePage'));
-const EditThemePage = React.lazy(() => import('./pages/EditThemePage'));
-const ChooseThemePage = React.lazy(() => import('./pages/ChooseThemePage'));
-
-// import AuthPage from "./pages/AuthPage";
-// import ProfilePage from "./pages/ProfilePage";
-// import EditThemePage from "./pages/EditThemePage";
-// import ChooseThemePage from "./pages/ChooseThemePage";
 import { FirebaseContext } from "./assets/FirebaseProvider";
 import { StoreContext, ACTION_TYPES } from "./assets/StoreProvider";
 import Notification from "./library/components/Notification";
+
+const AuthPage = React.lazy(() => import("./pages/AuthPage"));
+const ProfilePage = React.lazy(() => import("./pages/ProfilePage"));
+const EditThemePage = React.lazy(() => import("./pages/EditThemePage"));
+const ChooseThemePage = React.lazy(() => import("./pages/ChooseThemePage"));
 
 const AppContainer = styled.div`
   position: relative;
