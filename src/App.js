@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useContext } from "react";
+import React, { useContext, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -19,6 +19,7 @@ import HomePage from "./pages/HomePage";
 import { FirebaseContext } from "./assets/FirebaseProvider";
 import { StoreContext, ACTION_TYPES } from "./assets/StoreProvider";
 import Notification from "./library/components/Notification";
+import Loading from "./components/Utilities/Loading";
 
 const AuthPage = React.lazy(() => import("./pages/AuthPage"));
 const ProfilePage = React.lazy(() => import("./pages/ProfilePage"));
@@ -49,16 +50,24 @@ const App = () => {
           />
           <Switch>
             <Route exact path="/edit-theme">
-              <EditThemePage />
+              <Suspense fallback={<Loading />}>
+                <EditThemePage />
+              </Suspense>
             </Route>
             <Route exact path="/choose-theme">
-              <ChooseThemePage />
+              <Suspense fallback={<Loading />}>
+                <ChooseThemePage />
+              </Suspense>
             </Route>
             <Route exact path="/register">
-              {isEmpty(userData) ? <AuthPage /> : <Redirect to="/" />}
+              <Suspense fallback={<Loading />}>
+                {isEmpty(userData) ? <AuthPage /> : <Redirect to="/" />}
+              </Suspense>
             </Route>
             <Route exact path="/profile">
-              <ProfilePage />
+              <Suspense fallback={<Loading />}>
+                <ProfilePage />
+              </Suspense>
             </Route>
             <Route path="/">
               <HomePage />
