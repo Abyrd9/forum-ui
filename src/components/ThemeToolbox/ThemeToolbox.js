@@ -102,6 +102,7 @@ const ThemeToolbox = ({ activeThemeId }) => {
                   colorWhite
                   {...toolProps}
                   className="toolbox-list__button"
+                  aria-label={classAppendix.replace("-", "")}
                 >
                   <FontAwesomeIcon
                     icon={icon}
