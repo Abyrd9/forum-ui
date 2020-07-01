@@ -20,7 +20,8 @@ const Button = ({ children, disabled, loading, icon, ...props }) => {
 Button.defaultProps = {
   children: "Button",
   disabled: false,
-  loading: false
+  loading: false,
+  icon: null
 };
 
 Button.propTypes = {
@@ -31,7 +32,7 @@ Button.propTypes = {
   ]),
   disabled: PropTypes.bool,
   loading: PropTypes.bool,
-  icon: PropTypes.node
+  icon: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
 };
 
 export default Button;
