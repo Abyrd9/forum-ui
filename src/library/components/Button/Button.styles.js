@@ -12,7 +12,8 @@ export const ButtonContainer = styled.button`
       outline = false,
       loading = false,
       colorWhite = false,
-      colorBlack = false
+      colorBlack = false,
+      grow = false
     } = props;
     const { colors = {}, font = {} } = theme;
 
@@ -34,7 +35,7 @@ export const ButtonContainer = styled.button`
       /* Base Styles */
       transition: all 100ms cubic-bezier(0, 0, 0.2, 1);
       cursor: ${loading ? "not-allowed" : "pointer"};
-      width: ${props.grow ? "100%" : "auto"};
+      width: ${grow ? "100%" : "auto"};
       outline: none;
       border: none;
       display: flex;
@@ -56,7 +57,7 @@ export const ButtonContainer = styled.button`
         cursor: not-allowed;
         box-shadow: none;
         color: ${loading ? textcolor : color[300]};
-        background-color: ${loading ? color[400] : color[100]};
+        background-color: ${loading ? color[400] : color[200]};
       }
       ${styleMap({
         small: css`

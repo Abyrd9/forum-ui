@@ -65,7 +65,7 @@ const FirebaseProvider = ({ children }) => {
     const unlisten = auth.onAuthStateChanged(authUser => {
       const userPayload = authUser || null;
       setUserData(userPayload);
-      toggleAppLoading(false);
+      if (!userPayload) toggleAppLoading(false);
     });
     return () => {
       unlisten();
@@ -86,6 +86,7 @@ const FirebaseProvider = ({ children }) => {
           themesRef.set(theme);
 
           setUserThemes({ [themesRef.id]: theme });
+          toggleAppLoading(false);
         } else {
           userRef
             .collection("themes")
@@ -102,6 +103,7 @@ const FirebaseProvider = ({ children }) => {
                     return acc;
                   }, {});
                 setUserThemes(themes);
+                toggleAppLoading(false);
               }
             });
         }

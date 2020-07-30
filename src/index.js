@@ -11,7 +11,7 @@ import ForumUiProvider from "./assets/ForumUiProvider";
  *
  * Once Firebase initializes, we should be checking for a user. If a user exists,
  * pull down their data and place it on the redux store. If a user doesn't exist,
- * Then we disallow certain functionality on the site, and the use may interact with
+ * Then we disallow certain functionality on the site, and the user may interact with
  * only one non-saved theme. (In the future, save through local storage or cookie)
  *
  * We don't want to have a barrier to entry with authentication, anyone should be
