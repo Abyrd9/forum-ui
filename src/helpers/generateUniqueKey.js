@@ -1,8 +1,11 @@
+/* eslint-disable no-plusplus */
+
 const generateUniqueKey = (arr = []) => {
   const keyList = arr.length > 0 ? arr.filter(item => item.key) : [];
 
-  let text = '';
-  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let text = "";
+  const possible =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   const generator = () => {
     for (let i = 0; i < 5; i++)
       text += possible.charAt(Math.floor(Math.random() * possible.length));

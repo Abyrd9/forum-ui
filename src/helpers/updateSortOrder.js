@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 
 // Pass in an object with a key/value pair where the value has a
-// sortOrder key, this will order them correctly if on was deleted
+// sortOrder key, this will order them correctly if one was deleted
 const updateSortOrder = obj => {
   return Object.entries(obj)
     .sort((a, b) => {

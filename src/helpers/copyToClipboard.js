@@ -4,8 +4,8 @@ const fallback = element => {
   const oldEditable = element.contentEditable;
   const oldReadyOnly = element.readOnly;
   try {
-    element.contentEditable = 'true';
-    element.readOnly = 'false';
+    element.contentEditable = "true";
+    element.readOnly = "false";
     const range = document.createRange();
     const selection = window.getSelection();
     range.selectNodeContents(element);
@@ -14,7 +14,7 @@ const fallback = element => {
     selection.addRange(range);
     element.setSelectionRange(0, 999999);
 
-    document.execCommand('copy');
+    document.execCommand("copy");
   } finally {
     element.contentEditable = oldEditable;
     element.readOnly = oldReadyOnly;
@@ -22,19 +22,19 @@ const fallback = element => {
 };
 
 const copyToClipboard = element => {
-  let message = '';
+  let message = "";
   try {
     if (navigator.clipboard) {
       navigator.clipboard.writeText(element.value);
     } else if (window.clipboardData) {
-      window.clipboardData.setData('text', element.value);
+      window.clipboardData.setData("text", element.value);
     } else {
       fallback(element);
     }
-    message = 'Copied to clipboard!';
+    message = "Copied to clipboard!";
   } catch (e) {
-    message = 'Error: Please copy manually.';
-    throw new Error('Please copy manually.');
+    message = "Error: Please copy manually.";
+    throw new Error("Please copy manually.");
   } finally {
     // eslint-disable-next-line no-unsafe-finally
     return message;
